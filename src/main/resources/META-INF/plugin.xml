@@ -36,6 +36,10 @@
                 fileNamesCaseInsensitive="config.cpp"
                 extensions="cpp;rvmat"
         />
+        <lang.parserDefinition
+                language="Param"
+                implementationClass="com.flipperplz.enfusionWorkbench.languages.param.parser.ParamParserDefinition"
+        />
 
     </extensions>
 </idea-plugin>

@@ -35,21 +35,22 @@ statement ::=
     classDeclaration | deleteStatement | assignmentStatement { recoverWhile="statementRecover" };
 
 enumDeclaration ::= 'enum' '{' enumValue* '}' ';' { pin=2 }
-private arrayAssignment ::= '[' ']' (
-    '='  |
-    '+=' |
-    '-='
-) literalArray { pin=3 };
-private valueAssignment ::= '=' literal { pin=1 };
-private enumValue ::= ABS_IDENTIFIER ('=' ABS_NUMERIC)? { pin=1 }
 
+private arrayAssignment ::= '[' ']' (
+        '='  |
+        '+=' |
+        '-='
+    ) literalArray { pin=3 };
+
+private valueAssignment ::= '=' literal { pin=1 };
+
+private enumValue ::= ABS_IDENTIFIER ('=' ABS_NUMERIC)? { pin=1 }
 
 private arrayElement ::= literal | literalArray;
 
-
 private statementRecover ::= !(';' | ABS_IDENTIFIER)
 
-inner regularClassDecl ::= (':' ABS_IDENTIFIER)? '{' statement* '}' { pin=2 }
+private inner regularClassDecl ::= (':' ABS_IDENTIFIER)? '{' statement* '}' { pin=2 }
 
 
 
