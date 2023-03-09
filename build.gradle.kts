@@ -32,9 +32,16 @@ intellij {
     plugins.set(listOf(/* Plugin Dependencies */))
 }
 
+idea {
+    module {
+        generatedSourceDirs.add(file("src/${sourceBranch}/main/gen"))
+    }
+}
+
 sourceSets {
     main {
         java.srcDirs("src/${sourceBranch}/main/gen")
+        resources.srcDirs("src/${sourceBranch}/main/resources")
     }
 }
 
@@ -70,22 +77,18 @@ tasks {
         purgeOldFiles.set(true)
     }
 
-    val generateLexers = register("generateLexers") {
-        dependsOn(generateParamLexer)
-    }
+
     val generateParsers = register("generateParsers") {
         dependsOn(generateParamParser)
+    }
+    val generateLexers = register("generateLexers") {
+        dependsOn(generateParamLexer)
+        dependsOn(generateParsers)
     }
 
     // Set the JVM compatibility versions
     withType<JavaCompile> {
-//        sourceCompatibility = "11"
-//        targetCompatibility = "11"
-        dependsOn(generateLexers, generateParsers)
-
-    }
-    withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
-//        kotlinOptions.jvmTarget = "11"
+        sourceCompatibility = "11"
     }
 
     patchPluginXml {
@@ -101,5 +104,9 @@ tasks {
 
     publishPlugin {
         token.set(System.getenv("PUBLISH_TOKEN"))
+    }
+
+    clean {
+        delete(file("/src/${sourceBranch}/main/gen"))
     }
 }
