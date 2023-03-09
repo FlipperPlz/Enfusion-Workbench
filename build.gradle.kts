@@ -1,11 +1,17 @@
+import org.jetbrains.grammarkit.tasks.GenerateLexerTask
+import org.jetbrains.grammarkit.tasks.GenerateParserTask
+
+val sourceBranch = "beta"
+
 plugins {
     id("java")
     id("org.jetbrains.kotlin.jvm") version "1.7.20"
     id("org.jetbrains.intellij") version "1.10.1"
+    id("org.jetbrains.grammarkit") version "2022.3.1"
 }
 
 group = "com.flipperplz"
-version = "1.0-SNAPSHOT"
+version = "1.0-${sourceBranch}"
 
 repositories {
     mavenCentral()
@@ -28,24 +34,58 @@ intellij {
 
 sourceSets {
     main {
-        java.srcDirs("src/main/gen")
+        java.srcDirs("src/${sourceBranch}/main/gen")
+    }
+}
+
+kotlin {
+    sourceSets {
+        main {
+            kotlin.srcDirs("src/${sourceBranch}/main/kotlin")
+        }
     }
 }
 
 idea {
     module {
-        generatedSourceDirs.add(file("src/main/gen"))
+        generatedSourceDirs.add(file("src/${sourceBranch}/main/gen"))
     }
 }
 
 tasks {
+
+
+    val generateParamParser = register<GenerateParserTask>("generateParamParser") {
+        sourceFile.set(file("src/${sourceBranch}/main/grammars/param/Param.bnf"))
+        targetRoot.set("src/${sourceBranch}/main/gen/")
+        pathToParser.set("/com/flipperplz/enfusionWorkbench/languages/param/parser/ParamParser.java")
+        pathToPsiRoot.set("/com/flipperplz/enfusionWorkbench/languages/param/psi/")
+        purgeOldFiles.set(true)
+    }
+
+    val generateParamLexer = register<GenerateLexerTask>("generateParamLexer") {
+        sourceFile.set(file("src/${sourceBranch}/main/grammars/param/Param.flex"))
+        targetDir.set("src/${sourceBranch}/main/gen/com/flipperplz/enfusionWorkbench/languages/param/lexer/")
+        targetClass.set("ParamLexer")
+        purgeOldFiles.set(true)
+    }
+
+    val generateLexers = register("generateLexers") {
+        dependsOn(generateParamLexer)
+    }
+    val generateParsers = register("generateParsers") {
+        dependsOn(generateParamParser)
+    }
+
     // Set the JVM compatibility versions
     withType<JavaCompile> {
-        sourceCompatibility = "11"
-        targetCompatibility = "11"
+//        sourceCompatibility = "11"
+//        targetCompatibility = "11"
+        dependsOn(generateLexers, generateParsers)
+
     }
     withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
-        kotlinOptions.jvmTarget = "11"
+//        kotlinOptions.jvmTarget = "11"
     }
 
     patchPluginXml {
