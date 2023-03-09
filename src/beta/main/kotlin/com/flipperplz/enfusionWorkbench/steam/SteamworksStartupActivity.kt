@@ -34,11 +34,11 @@ class SteamworksStartupActivity : StartupActivity {
         }
 
         override fun onThrowable(error: Throwable) {
-            Notifications.Bus.notify(Notification(
-                "Enfusion-Workbench", "Task failed",
-                "An error occurred while running my task: ${error.message}",
-                NotificationType.ERROR
-            ))
+//            Notifications.Bus.notify(Notification(
+//                "Enfusion-Workbench", "Task failed",
+//                "An error occurred while running my task: ${error.message}",
+//                NotificationType.ERROR
+//            ))
         }
     }
 
