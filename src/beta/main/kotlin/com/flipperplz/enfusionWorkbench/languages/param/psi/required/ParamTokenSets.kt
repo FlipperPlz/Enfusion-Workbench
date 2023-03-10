@@ -8,6 +8,7 @@ interface ParamTokenSets {
         val IDENTIFIERS: TokenSet = TokenSet.create(ParamTypes.ABS_IDENTIFIER)
         val STRINGS: TokenSet = TokenSet.create(ParamTypes.ABS_STRING)
         val NUMBERS: TokenSet = TokenSet.create(ParamTypes.ABS_NUMERIC)
+        val COMMENTS: TokenSet = TokenSet.create(ParamTypes.DELIMITED_COMMENT, ParamTypes.EMPTY_DELIMITED_COMMENT, ParamTypes.SINGLE_LINE_COMMENT)
 
     }
 }

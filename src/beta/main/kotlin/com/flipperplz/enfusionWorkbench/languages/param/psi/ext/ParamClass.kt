@@ -1,10 +1,12 @@
 package com.flipperplz.enfusionWorkbench.languages.param.psi.ext
 
-import com.flipperplz.enfusionWorkbench.languages.param.psi.ast.ParamScopeComponent
+import com.flipperplz.enfusionWorkbench.languages.param.psi.ast.ParamStatementHolder
 
-interface ParamClass : ParamScopeComponent, ParamStatement {
+interface ParamClass : ParamStatementHolder, ParamStatement {
     val className: ParamIdentifier
     val isExternal: Boolean
     val superClass: ParamClass?
-    val statements: List<ParamStatement>
+    val subclasses: List<ParamClass>
+        get() = childScopes.filterIsInstance<ParamClass>()
+
 }

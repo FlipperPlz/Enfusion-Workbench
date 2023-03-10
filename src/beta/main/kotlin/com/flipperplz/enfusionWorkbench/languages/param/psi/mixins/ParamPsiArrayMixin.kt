@@ -21,6 +21,8 @@ abstract class ParamPsiArrayMixin(node: ASTNode) : ParamCompositeElementImpl(nod
         return true
     }
 
+    override fun writeAsParam(): String = ParamArray.formattedArray(arrayChildren)
+
     override val size: Int = Short.MAX_VALUE.toInt()
 
     override fun indexOf(element: ParamArrayElement): Int = arrayChildren.indexOf(element)

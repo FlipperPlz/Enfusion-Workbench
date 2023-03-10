@@ -27,7 +27,7 @@ class ParamParserDefinition : ParserDefinition {
 
     override fun getFileNodeType(): IFileElementType = FILE
 
-    override fun getCommentTokens(): TokenSet = TokenSet.EMPTY
+    override fun getCommentTokens(): TokenSet = ParamTokenSets.COMMENTS
 
     override fun getStringLiteralElements(): TokenSet = ParamTokenSets.STRINGS
 

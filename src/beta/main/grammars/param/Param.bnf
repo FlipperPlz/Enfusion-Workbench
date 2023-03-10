@@ -53,13 +53,13 @@ private literal ::= paramString | paramNumeric //| '__FILE__' | '__LINE__'
 
 paramNumeric ::= ABS_NUMERIC
 {
-   implements="com.flipperplz.enfusionWorkbench.languages.param.psi.ext.ParamLiteral"
-   mixin="com.flipperplz.enfusionWorkbench.languages.param.psi.mixins.ParamPsiStringMixin"
+   implements="com.flipperplz.enfusionWorkbench.languages.param.psi.ext.ParamNumber"
+   mixin="com.flipperplz.enfusionWorkbench.languages.param.psi.mixins.ParamPsiNumericMixin"
 }
 
 paramString ::= ABS_STRING
 {
-   implements="com.flipperplz.enfusionWorkbench.languages.param.psi.ext.ParamLiteral"
+   implements="com.flipperplz.enfusionWorkbench.languages.param.psi.ext.ParamString"
    mixin="com.flipperplz.enfusionWorkbench.languages.param.psi.mixins.ParamPsiStringMixin"
 };
 
@@ -100,7 +100,6 @@ private enumValue ::= identifier ('=' ABS_NUMERIC)?
 private arrayElement ::= literal | literalArray
 {
     implements="com.flipperplz.enfusionWorkbench.languages.param.psi.ext.ParamArrayElement"
-
 }
 
 private statementRecover ::= !(';' | identifier)
