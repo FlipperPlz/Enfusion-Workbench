@@ -1,4 +1,4 @@
-package com.flipperplz.enfusionWorkbench.languages.param.psi
+package com.flipperplz.enfusionWorkbench.languages.param.psi.required
 
 import com.flipperplz.enfusionWorkbench.languages.param.ParamLanguage
 import com.intellij.psi.tree.IElementType

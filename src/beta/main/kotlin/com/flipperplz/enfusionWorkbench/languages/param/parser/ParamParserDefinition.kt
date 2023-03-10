@@ -3,7 +3,7 @@ package com.flipperplz.enfusionWorkbench.languages.param.parser
 import com.flipperplz.enfusionWorkbench.languages.param.ParamLanguage
 import com.flipperplz.enfusionWorkbench.languages.param.lexer.ParamLexerAdapter
 import com.flipperplz.enfusionWorkbench.languages.param.psi.ParamPsiFile
-import com.flipperplz.enfusionWorkbench.languages.param.psi.ParamTokenSets
+import com.flipperplz.enfusionWorkbench.languages.param.psi.required.ParamTokenSets
 import com.flipperplz.enfusionWorkbench.languages.param.psi.ParamTypes
 import com.intellij.lang.ASTNode
 import com.intellij.lang.ParserDefinition
