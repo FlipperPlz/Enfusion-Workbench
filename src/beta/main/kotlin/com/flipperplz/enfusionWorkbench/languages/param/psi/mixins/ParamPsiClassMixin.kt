@@ -5,6 +5,7 @@ import com.flipperplz.enfusionWorkbench.languages.param.psi.GeneratedParamRegula
 import com.flipperplz.enfusionWorkbench.languages.param.psi.ast.ParamScopeComponent
 import com.flipperplz.enfusionWorkbench.languages.param.psi.ext.ParamClass
 import com.flipperplz.enfusionWorkbench.languages.param.psi.ext.ParamIdentifier
+import com.flipperplz.enfusionWorkbench.languages.param.psi.ext.ParamStatement
 import com.flipperplz.enfusionWorkbench.languages.param.psi.impl.ParamScopeComponentImpl
 import com.intellij.lang.ASTNode
 import com.intellij.psi.util.PsiTreeUtil
@@ -15,4 +16,5 @@ abstract class ParamPsiClassMixin(node: ASTNode) : ParamClass, ParamScopeCompone
     override val superClass: ParamClass? = null
     override val previousScope: ParamScopeComponent? = PsiTreeUtil.findFirstParent(this) { it is ParamScopeComponent } as ParamScopeComponent
     override val paramComponentName: ParamIdentifier get() = className
+    override val statements: List<ParamStatement> get() = children.filterIsInstance<ParamStatement>()
 }

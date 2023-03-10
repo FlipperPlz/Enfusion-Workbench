@@ -6,4 +6,5 @@ interface ParamClass : ParamScopeComponent, ParamStatement {
     val className: ParamIdentifier
     val isExternal: Boolean
     val superClass: ParamClass?
+    val statements: List<ParamStatement>
 }

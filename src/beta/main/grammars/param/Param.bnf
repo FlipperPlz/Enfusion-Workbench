@@ -49,10 +49,25 @@ deleteStatement ::= 'delete' identifier ';'
 {
     pin=1
 }
-literal ::= ABS_STRING | ABS_NUMERIC | '__FILE__' | '__LINE__';
+private literal ::= paramString | paramNumeric //| '__FILE__' | '__LINE__'
+
+paramNumeric ::= ABS_NUMERIC
+{
+   implements="com.flipperplz.enfusionWorkbench.languages.param.psi.ext.ParamLiteral"
+   mixin="com.flipperplz.enfusionWorkbench.languages.param.psi.mixins.ParamPsiStringMixin"
+}
+
+paramString ::= ABS_STRING
+{
+   implements="com.flipperplz.enfusionWorkbench.languages.param.psi.ext.ParamLiteral"
+   mixin="com.flipperplz.enfusionWorkbench.languages.param.psi.mixins.ParamPsiStringMixin"
+};
+
 literalArray ::= '{' arrayElement (',' (arrayElement | &'}'))* '}'
 {
     pin(".*")=1
+    implements="com.flipperplz.enfusionWorkbench.languages.param.psi.ext.ParamArray"
+    mixin="com.flipperplz.enfusionWorkbench.languages.param.psi.mixins.ParamPsiArrayMixin"
 };
 
 private statement ::=
@@ -82,7 +97,11 @@ private enumValue ::= identifier ('=' ABS_NUMERIC)?
     pin=1
 }
 
-private arrayElement ::= literal | literalArray;
+private arrayElement ::= literal | literalArray
+{
+    implements="com.flipperplz.enfusionWorkbench.languages.param.psi.ext.ParamArrayElement"
+
+}
 
 private statementRecover ::= !(';' | identifier)
 
