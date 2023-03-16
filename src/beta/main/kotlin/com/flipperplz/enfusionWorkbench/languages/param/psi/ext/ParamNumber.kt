@@ -1,27 +1,13 @@
 package com.flipperplz.enfusionWorkbench.languages.param.psi.ext
 
-import kotlin.math.abs
+import com.flipperplz.enfusionWorkbench.languages.param.psi.contexts.ParamNumericLiteralContext
+import com.flipperplz.enfusionWorkbench.languages.param.psi.impl.ParamCompositeElementImpl
+import com.intellij.lang.ASTNode
 
-interface ParamNumber : ParamLiteral {
-    val value: Double
-    override val isNumeric: Boolean get() = true
-
-    fun toFloatOrNull(): Float? = text.toFloatOrNull()
-    fun toDoubleOrNull(): Double? = text.toDoubleOrNull()
-    fun toIntOrNull(): Int? = text.toIntOrNull()
-
-    fun asNumber(): Number {
-        val doubleValue = toDoubleOrNull()
-        val floatValue = toFloatOrNull()
-        val intValue = toIntOrNull()
-
-        if (doubleValue != null && abs(doubleValue) <= Float.MAX_VALUE) {
-            return if (abs(doubleValue) <= Int.MAX_VALUE) {
-                doubleValue.toInt()
-            } else {
-                doubleValue.toFloat()
-            }
-        }
-        throw Exception("Failed to parse param number to datatype")
+open class ParamNumber(node: ASTNode) : ParamCompositeElementImpl(node), ParamNumericLiteralContext {
+    override fun asKotlinNumber(): Number {
+        return text.toIntOrNull() ?: text.toFloatOrNull() ?: text.toDoubleOrNull() ?: throw Exception("Failed to parse ParamNumber.")
     }
+
+    override fun asKotlinString(): String = text
 }

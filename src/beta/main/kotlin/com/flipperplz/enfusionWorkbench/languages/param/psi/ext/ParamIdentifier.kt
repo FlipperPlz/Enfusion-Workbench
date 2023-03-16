@@ -1,7 +1,9 @@
 package com.flipperplz.enfusionWorkbench.languages.param.psi.ext
 
-import com.flipperplz.enfusionWorkbench.languages.param.psi.ast.ParamComponent
+import com.flipperplz.enfusionWorkbench.languages.param.psi.contexts.ParamIdentifierContext
+import com.flipperplz.enfusionWorkbench.languages.param.psi.impl.ParamCompositeElementImpl
+import com.intellij.lang.ASTNode
 
-interface ParamIdentifier : ParamComponent {
-    val identifierName: String
+class ParamIdentifier(node: ASTNode) : ParamCompositeElementImpl(node), ParamIdentifierContext {
+    override val identifierName: String = text.toLowerCase()
 }

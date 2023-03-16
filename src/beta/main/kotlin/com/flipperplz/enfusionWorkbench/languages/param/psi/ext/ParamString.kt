@@ -1,30 +1,12 @@
 package com.flipperplz.enfusionWorkbench.languages.param.psi.ext
 
-interface ParamString : ParamLiteral {
-    override val isNumeric: Boolean get() = false
-    val quotationType: ParamStringQuoteType?
-        get() = ParamStringQuoteType.getStringType(text)
+import com.flipperplz.enfusionWorkbench.languages.param.psi.contexts.ParamStringLiteralContext
+import com.flipperplz.enfusionWorkbench.languages.param.psi.impl.ParamCompositeElementImpl
+import com.intellij.lang.ASTNode
 
-    enum class ParamStringQuoteType(
-        val escapeString: String,
-        val quoteChar: Char
-    ) {
-        SINGLE("''", '\''),
-        DOUBLE("\"\"", '"');
-
-        fun asUnquotedString(string: String): String = string.removePrefix(quoteChar.toString()).removeSuffix(quoteChar.toString())
-
-        fun asUnquotedEscaped(string: String): String = escapeString(asUnquotedString(string))
-
-        fun escapeString(string: String): String = string.replace(escapeString, quoteChar.toString())
-
-        companion object {
-            fun getStringType(string: String): ParamStringQuoteType? {
-                for(type in ParamStringQuoteType.values()) {
-                    if(string.startsWith(type.quoteChar) && string.endsWith(type.quoteChar)) return type
-                }
-                return null
-            }
-        }
+class ParamString(node: ASTNode) : ParamCompositeElementImpl(node), ParamStringLiteralContext {
+    override fun asKotlinString(returnQuoted: Boolean): String {
+        val string = text.removePrefix("\"").removeSuffix("\"").replace("\"\"", "\"")
+        return if(returnQuoted) "\"${string.replace("\"", "\"\"")}\"" else string
     }
 }

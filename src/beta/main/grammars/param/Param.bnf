@@ -24,8 +24,7 @@
     ]
     generate=[tokenAccessors="yes"]
 
-    extends(".*Statement")="com.flipperplz.enfusionWorkbench.languages.param.psi.impl.ParamStatementImpl"
-    implements(".*Statement")="com.flipperplz.enfusionWorkbench.languages.param.psi.ext.ParamStatement"
+    implements(".*Statement")="com.flipperplz.enfusionWorkbench.languages.param.psi.ast.ParamStatement"
 
 }
 
@@ -37,49 +36,53 @@ file ::= statement* enumDeclaration?
 classDeclaration ::= 'class' identifier regularClassDecl? ';'
 {
     pin=2
-    extends="com.flipperplz.enfusionWorkbench.languages.param.psi.impl.ParamStatementImpl"
-    implements="com.flipperplz.enfusionWorkbench.languages.param.psi.ext.ParamClass"
-    mixin="com.flipperplz.enfusionWorkbench.languages.param.psi.mixins.ParamPsiClassMixin"
+    implements="com.flipperplz.enfusionWorkbench.languages.param.psi.contexts.ParamClassContext"
+    extends="com.flipperplz.enfusionWorkbench.languages.param.psi.ext.ParamClass"
 }
+
 assignmentStatement ::= identifier (arrayAssignment | valueAssignment) ';'
 {
     pin=1
+    implements="com.flipperplz.enfusionWorkbench.languages.param.psi.contexts.ParamAssignmentContext"
+    extends="com.flipperplz.enfusionWorkbench.languages.param.psi.ext.ParamAssignment"
 };
+
 deleteStatement ::= 'delete' identifier ';'
 {
     pin=1
 }
-private literal ::= paramString | paramNumeric //| '__FILE__' | '__LINE__'
 
 paramNumeric ::= ABS_NUMERIC
 {
-   implements="com.flipperplz.enfusionWorkbench.languages.param.psi.ext.ParamNumber"
-   mixin="com.flipperplz.enfusionWorkbench.languages.param.psi.mixins.ParamPsiNumericMixin"
+    implements="com.flipperplz.enfusionWorkbench.languages.param.psi.contexts.ParamNumericLiteralContext"
+    extends="com.flipperplz.enfusionWorkbench.languages.param.psi.ext.ParamNumber"
 }
 
 paramString ::= ABS_STRING
 {
-   implements="com.flipperplz.enfusionWorkbench.languages.param.psi.ext.ParamString"
-   mixin="com.flipperplz.enfusionWorkbench.languages.param.psi.mixins.ParamPsiStringMixin"
+    implements="com.flipperplz.enfusionWorkbench.languages.param.psi.contexts.ParamStringLiteralContext"
+    extends="com.flipperplz.enfusionWorkbench.languages.param.psi.ext.ParamString"
 };
 
 literalArray ::= '{' arrayElement (',' (arrayElement | &'}'))* '}'
 {
     pin(".*")=1
-    implements="com.flipperplz.enfusionWorkbench.languages.param.psi.ext.ParamArray"
-    mixin="com.flipperplz.enfusionWorkbench.languages.param.psi.mixins.ParamPsiArrayMixin"
-};
-
-private statement ::=
-    classDeclaration | deleteStatement | assignmentStatement
-{
-    recoverWhile="statementRecover"
+    implements="com.flipperplz.enfusionWorkbench.languages.param.psi.contexts.ParamArrayContext"
+    extends="com.flipperplz.enfusionWorkbench.languages.param.psi.ext.ParamArray"
 };
 
 enumDeclaration ::= 'enum' '{' enumValue* '}' ';'
 {
     pin=2
 }
+
+private literal ::= paramString | paramNumeric //| '__FILE__' | '__LINE__'
+
+private statement ::=
+    classDeclaration | deleteStatement | assignmentStatement
+{
+    recoverWhile="statementRecover"
+};
 
 private arrayAssignment ::= '[' ']' (
         '='  |
@@ -99,7 +102,7 @@ private enumValue ::= identifier ('=' ABS_NUMERIC)?
 
 private arrayElement ::= literal | literalArray
 {
-    implements="com.flipperplz.enfusionWorkbench.languages.param.psi.ext.ParamArrayElement"
+//    implements="com.flipperplz.enfusionWorkbench.languages.param.psi.ext.ParamArrayElement"
 }
 
 private statementRecover ::= !(';' | identifier)
@@ -111,8 +114,8 @@ inner regularClassDecl ::= (':' identifier)? '{' statement* '}'
 
 identifier ::= ABS_IDENTIFIER
 {
-    mixin="com.flipperplz.enfusionWorkbench.languages.param.psi.mixins.ParamPsiIdentifierMixin"
-    implements="com.flipperplz.enfusionWorkbench.languages.param.psi.ext.ParamIdentifier"
+    extends="com.flipperplz.enfusionWorkbench.languages.param.psi.ext.ParamIdentifier"
+    implements="com.flipperplz.enfusionWorkbench.languages.param.psi.contexts.ParamIdentifierContext"
 }
 
 

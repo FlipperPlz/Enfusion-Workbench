@@ -1,10 +1,13 @@
 package com.flipperplz.enfusionWorkbench.languages.param.psi.ext
 
-interface ParamArray : ParamArrayElement {
-    companion object {
-        fun formattedArray(element: List<ParamArrayElement>): String = "{${element.joinToString(", ") { it.writeAsParam() }}}"
+import com.flipperplz.enfusionWorkbench.languages.param.psi.ast.ParamArrayElement
+import com.flipperplz.enfusionWorkbench.languages.param.psi.contexts.ParamArrayContext
+import com.flipperplz.enfusionWorkbench.languages.param.psi.impl.ParamCompositeElementImpl
+import com.intellij.lang.ASTNode
 
-        fun formattedArray(element: List<String>): String = "{${element.joinToString(", ")}}"
-    }
+class ParamArray(node: ASTNode) : ParamCompositeElementImpl(node), ParamArrayContext {
+    override val arrayElements: List<ParamArrayElement>
+        get() = children.filterIsInstance<ParamArrayElement>()
 
+    override fun iterator(): Iterator<ParamArrayElement> = arrayElements.iterator()
 }

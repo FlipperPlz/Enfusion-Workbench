@@ -2,6 +2,7 @@ package com.flipperplz.enfusionWorkbench.languages.param.psi
 
 import com.flipperplz.enfusionWorkbench.languages.param.ParamFileType
 import com.flipperplz.enfusionWorkbench.languages.param.ParamLanguage
+import com.flipperplz.enfusionWorkbench.languages.param.psi.ast.ParamArrayElement
 import com.flipperplz.enfusionWorkbench.languages.param.psi.ext.*
 import com.intellij.openapi.project.Project
 import com.intellij.psi.PsiFile
@@ -52,17 +53,17 @@ object ParamElementGenerator {
         ),
         ParamNumber::class.java
     )!!
-
-    fun createArray(project: Project, vararg elements: ParamArrayElement): ParamArray = PsiTreeUtil.getChildOfType(
-        createDummyFile(
-            project,
-            buildString {
-                append("dummyIdentifiers[]=")
-                append(ParamArray.formattedArray(elements.toList()))
-                append(';')
-            }
-        ), ParamArray::class.java
-    )!!
+//
+//    fun createArray(project: Project, vararg elements: ParamArrayElement): ParamArray = PsiTreeUtil.getChildOfType(
+//        createDummyFile(
+//            project,
+//            buildString {
+//                append("dummyIdentifiers[]=")
+//                append(ParamArray.formattedArray(elements.toList().joinToString { it. }))
+//                append(';')
+//            }
+//        ), ParamArray::class.java
+//    )!!
 
 
     private fun createDummyFile(myProject: Project, text: String): PsiFile {
