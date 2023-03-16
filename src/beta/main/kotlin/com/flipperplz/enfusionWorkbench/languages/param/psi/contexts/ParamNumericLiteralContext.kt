@@ -1,6 +1,8 @@
 package com.flipperplz.enfusionWorkbench.languages.param.psi.contexts
 
-interface ParamNumericLiteralContext {
+import com.flipperplz.enfusionWorkbench.languages.param.psi.ast.ParamLiteral
+
+interface ParamNumericLiteralContext : ParamLiteral {
     fun asKotlinNumber(): Number
     fun asKotlinString(): String
 }

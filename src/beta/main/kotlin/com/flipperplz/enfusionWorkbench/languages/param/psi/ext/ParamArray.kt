@@ -5,7 +5,7 @@ import com.flipperplz.enfusionWorkbench.languages.param.psi.contexts.ParamArrayC
 import com.flipperplz.enfusionWorkbench.languages.param.psi.impl.ParamCompositeElementImpl
 import com.intellij.lang.ASTNode
 
-class ParamArray(node: ASTNode) : ParamCompositeElementImpl(node), ParamArrayContext {
+open class ParamArray(node: ASTNode) : ParamCompositeElementImpl(node), ParamArrayContext {
     override val arrayElements: List<ParamArrayElement>
         get() = children.filterIsInstance<ParamArrayElement>()
 

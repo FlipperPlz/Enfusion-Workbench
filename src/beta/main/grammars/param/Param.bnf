@@ -49,6 +49,8 @@ assignmentStatement ::= identifier (arrayAssignment | valueAssignment) ';'
 
 deleteStatement ::= 'delete' identifier ';'
 {
+    implements="com.flipperplz.enfusionWorkbench.languages.param.psi.contexts.ParamDeleteContext"
+    extends="com.flipperplz.enfusionWorkbench.languages.param.psi.ext.ParamDelete"
     pin=1
 }
 

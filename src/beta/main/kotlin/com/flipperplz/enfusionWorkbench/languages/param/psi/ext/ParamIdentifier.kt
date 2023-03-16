@@ -4,6 +4,6 @@ import com.flipperplz.enfusionWorkbench.languages.param.psi.contexts.ParamIdenti
 import com.flipperplz.enfusionWorkbench.languages.param.psi.impl.ParamCompositeElementImpl
 import com.intellij.lang.ASTNode
 
-class ParamIdentifier(node: ASTNode) : ParamCompositeElementImpl(node), ParamIdentifierContext {
-    override val identifierName: String = text.toLowerCase()
+open class ParamIdentifier(node: ASTNode) : ParamCompositeElementImpl(node), ParamIdentifierContext {
+    override val identifierName: String = text.lowercase()
 }

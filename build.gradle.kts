@@ -1,5 +1,6 @@
 import org.jetbrains.grammarkit.tasks.GenerateLexerTask
 import org.jetbrains.grammarkit.tasks.GenerateParserTask
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 val sourceBranch = "beta"
 
@@ -19,7 +20,7 @@ repositories {
 }
 
 dependencies {
-    implementation("com.code-disaster.steamworks4j:steamworks4j:1.9.0-SNAPSHOT");
+    implementation("com.code-disaster.steamworks4j:steamworks4j:1.9.0-SNAPSHOT")
     implementation("com.code-disaster.steamworks4j:steamworks4j-server:1.9.0-SNAPSHOT")
 }
 
@@ -75,20 +76,20 @@ tasks {
         targetDir.set("src/${sourceBranch}/main/gen/com/flipperplz/enfusionWorkbench/languages/param/lexer/")
         targetClass.set("ParamLexer")
         purgeOldFiles.set(true)
-    }
-
-
-    val generateParsers = register("generateParsers") {
         dependsOn(generateParamParser)
     }
-    val generateLexers = register("generateLexers") {
-        dependsOn(generateParamLexer)
-        dependsOn(generateParsers)
-    }
+
 
     // Set the JVM compatibility versions
     withType<JavaCompile> {
         sourceCompatibility = "11"
+        dependsOn(generateParamLexer)
+    }
+
+    withType<KotlinCompile>().configureEach {
+        kotlinOptions {
+            jvmTarget = "11"
+        }
     }
 
     patchPluginXml {
