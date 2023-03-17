@@ -76,17 +76,19 @@ tasks {
         targetDir.set("src/${sourceBranch}/main/gen/com/flipperplz/enfusionWorkbench/languages/param/lexer/")
         targetClass.set("ParamLexer")
         purgeOldFiles.set(true)
-        dependsOn(generateParamParser)
     }
 
 
     // Set the JVM compatibility versions
-    withType<JavaCompile> {
+    val javaCompile = withType<JavaCompile> {
         sourceCompatibility = "11"
         dependsOn(generateParamLexer)
+        dependsOn(generateParamParser)
     }
 
-    withType<KotlinCompile>().configureEach {
+    val kotlinCompile = withType<KotlinCompile>().configureEach {
+        dependsOn(generateParamLexer)
+        dependsOn(generateParamParser)
         kotlinOptions {
             jvmTarget = "11"
         }
