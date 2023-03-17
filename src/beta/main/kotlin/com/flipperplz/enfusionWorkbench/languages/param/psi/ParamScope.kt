@@ -30,4 +30,6 @@ interface ParamScope : ParamNamedElement {
         return if(paramName == null) null else
             statements.filterIsInstance<ParamAssignment>().firstOrNull { it.name.equals(paramName, true) && it.isArrayAssignment()}
     }
+
+
 }
