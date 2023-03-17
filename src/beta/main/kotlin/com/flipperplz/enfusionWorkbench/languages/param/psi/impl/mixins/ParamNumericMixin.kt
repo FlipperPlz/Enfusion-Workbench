@@ -5,9 +5,13 @@ import com.flipperplz.enfusionWorkbench.languages.param.psi.impl.ParamLiteralImp
 import com.intellij.lang.ASTNode
 
 abstract class ParamNumericMixin(node: ASTNode) : ParamLiteralImpl(node), ParamNumeric {
-    override fun asKtNumber(): Number {
-        TODO("Not yet implemented")
-    }
+    override fun asKtNumber(): Number = text.toDoubleOrNull()?.let {
+        when {
+            it.isFinite() && it.toLong().toDouble() == it -> it.toLong()
+            it.isFinite() && it.toFloat().toDouble() == it -> it.toFloat()
+            else -> it
+        }
+    } ?: throw NumberFormatException("Invalid number format: ${this.text}")
 
     override fun asKtString(): String = text
 }
