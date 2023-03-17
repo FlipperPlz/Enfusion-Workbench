@@ -26,20 +26,19 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <notificationGroup
-                displayType="BALLOON"
-                id="Enfusion-Workbench"
+            displayType="BALLOON"
+            id="Enfusion-Workbench"
         />
         <fileType
-                name="Param File"
-                implementationClass="com.flipperplz.enfusionWorkbench.languages.param.ParamFileType"
-                language="Param"
-                fileNamesCaseInsensitive="config.cpp"
-                extensions="cpp;rvmat"
+            name="Param File"
+            implementationClass="com.flipperplz.enfusionWorkbench.languages.param.ParamFileType"
+            language="Param"
+            fileNamesCaseInsensitive="config.cpp"
+            extensions="cpp;rvmat"
         />
         <lang.parserDefinition
-                language="Param"
-                implementationClass="com.flipperplz.enfusionWorkbench.languages.param.parser.ParamParserDefinition"
+            language="Param"
+            implementationClass="com.flipperplz.enfusionWorkbench.languages.param.parser.ParamParserDefinition"
         />
-
     </extensions>
 </idea-plugin>
