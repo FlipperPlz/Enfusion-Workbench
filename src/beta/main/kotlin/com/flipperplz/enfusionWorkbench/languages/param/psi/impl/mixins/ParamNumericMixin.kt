@@ -1,5 +1,6 @@
 package com.flipperplz.enfusionWorkbench.languages.param.psi.impl.mixins
 
+import com.flipperplz.enfusionWorkbench.languages.param.ParamLiteralType
 import com.flipperplz.enfusionWorkbench.languages.param.psi.ParamNumeric
 import com.flipperplz.enfusionWorkbench.languages.param.psi.impl.ParamLiteralImpl
 import com.intellij.lang.ASTNode
@@ -12,6 +13,9 @@ abstract class ParamNumericMixin(node: ASTNode) : ParamLiteralImpl(node), ParamN
             else -> it
         }
     } ?: throw NumberFormatException("Invalid number format: ${this.text}")
+
+    override val valueType: ParamLiteralType
+        get() = ParamLiteralType.typeFromNumber(asKtNumber())
 
     override fun asKtString(): String = text
 }

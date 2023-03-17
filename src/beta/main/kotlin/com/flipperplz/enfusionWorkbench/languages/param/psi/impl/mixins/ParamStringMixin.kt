@@ -1,6 +1,7 @@
 package com.flipperplz.enfusionWorkbench.languages.param.psi.impl.mixins
 
 import com.flipperplz.enfusionWorkbench.languages.param.ParamElementFactory
+import com.flipperplz.enfusionWorkbench.languages.param.ParamLiteralType
 import com.flipperplz.enfusionWorkbench.languages.param.psi.ParamString
 import com.flipperplz.enfusionWorkbench.languages.param.psi.impl.ParamLiteralImpl
 import com.intellij.lang.ASTNode
@@ -9,6 +10,9 @@ abstract class ParamStringMixin(node: ASTNode) : ParamLiteralImpl(node), ParamSt
     override fun asKtString(): String = if(quoted)
         text.removePrefix("\"").removeSuffix("\"").replace("\"\"", "\"") else
         text
+
+    override val valueType: ParamLiteralType
+        get() = super<ParamLiteralImpl>.valueType
 
     override var quoted: Boolean
         get() = text.startsWith("\"") && text.endsWith("\"")
