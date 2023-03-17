@@ -31,15 +31,17 @@
 
     implements('classDeclaration|file')='com.flipperplz.enfusionWorkbench.languages.param.psi.ParamScope'
     implements('classDeclaration|assignmentStatement|deleteStatement')='com.flipperplz.enfusionWorkbench.languages.param.psi.ParamStatement'
+    implements('paramString|paramNumeric')='com.flipperplz.enfusionWorkbench.languages.param.psi.ParamLiteral'
+    implements('literal|literalArray')='com.flipperplz.enfusionWorkbench.languages.param.psi.ParamArrayElement'
 
-    mixin('deleteStatement')='com.flipperplz.enfusionWorkbench.languages.param.psi.impl.mixins.ParamStatementMixin'
-    mixin('classDeclaration')='com.flipperplz.enfusionWorkbench.languages.param.psi.impl.mixins.ParamClassMixin'
+
+    mixin('literalArray')='com.flipperplz.enfusionWorkbench.languages.param.psi.impl.mixins.ParamArrayMixin'
     mixin('assignmentStatement')='com.flipperplz.enfusionWorkbench.languages.param.psi.impl.mixins.ParamAssignmentMixin'
+    mixin('classDeclaration')='com.flipperplz.enfusionWorkbench.languages.param.psi.impl.mixins.ParamClassMixin'
+    mixin('deleteStatement')='com.flipperplz.enfusionWorkbench.languages.param.psi.impl.mixins.ParamDeleteMixin'
     mixin('identifier')='com.flipperplz.enfusionWorkbench.languages.param.psi.impl.mixins.ParamIdentifierMixin'
-
-    extends('classDeclaration|assignmentStatement|deleteStatement')=statement
-    extends('literal|literalArray')=arrayElement
-    extends('paramString|paramNumeric')=literal
+    mixin('paramNumeric')='com.flipperplz.enfusionWorkbench.languages.param.psi.impl.mixins.ParamNumericMixin'
+    mixin('paramString')='com.flipperplz.enfusionWorkbench.languages.param.psi.impl.mixins.ParamStringMixin'
 
 }
 
@@ -59,11 +61,11 @@ literalArray ::= '{' arrayElement (',' (arrayElement | &'}'))* '}' { pin(".*")=1
 
 enumDeclaration ::= 'enum' '{' enumValue* '}' ';' { pin=2 }
 
-literal ::= paramString | paramNumeric
+private literal ::= paramString | paramNumeric
 
-arrayElement ::= literal | literalArray
+private arrayElement ::= literal | literalArray
 
-statement ::= classDeclaration | deleteStatement | assignmentStatement { recoverWhile="statementRecover" }
+private statement ::= classDeclaration | deleteStatement | assignmentStatement { recoverWhile="statementRecover" }
 
 private arrayAssignment ::= '[' ']' (
         OP_ASSIGN  |

@@ -4,6 +4,4 @@ interface ParamClass : ParamNamedStatement, ParamScope {
     val className: ParamIdentifier
     val superClass: ParamClass?
     val isExternalClass: Boolean get() = !node.textContains('{')
-
-
 }

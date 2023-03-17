@@ -9,5 +9,6 @@ import com.intellij.psi.util.findParentOfType
 abstract class ParamStatementMixin(
     node: ASTNode
 ): ParamElementImpl(node), ParamStatement {
-    override fun getParentScope(): ParamScope = findParentOfType<ParamScope>(false)!!
+    override val parentScope: ParamScope
+        get() =  findParentOfType(false)!!
 }
