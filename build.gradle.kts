@@ -81,7 +81,7 @@ tasks {
 
     // Set the JVM compatibility versions
     val javaCompile = withType<JavaCompile> {
-        sourceCompatibility = "11"
+        sourceCompatibility = "18"
         dependsOn(generateParamLexer)
         dependsOn(generateParamParser)
     }
@@ -90,7 +90,7 @@ tasks {
         dependsOn(generateParamLexer)
         dependsOn(generateParamParser)
         kotlinOptions {
-            jvmTarget = "11"
+            jvmTarget = "18"
         }
     }
 
