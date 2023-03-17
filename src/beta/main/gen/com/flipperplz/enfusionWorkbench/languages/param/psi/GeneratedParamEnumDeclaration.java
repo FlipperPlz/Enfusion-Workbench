@@ -10,4 +10,16 @@ public interface GeneratedParamEnumDeclaration extends ParamElement {
   @NotNull
   List<GeneratedParamIdentifier> getIdentifierList();
 
+  @NotNull
+  PsiElement getKeywordEnum();
+
+  @NotNull
+  PsiElement getSymLbracket();
+
+  @Nullable
+  PsiElement getSymRbracket();
+
+  @Nullable
+  PsiElement getSymSemicolon();
+
 }

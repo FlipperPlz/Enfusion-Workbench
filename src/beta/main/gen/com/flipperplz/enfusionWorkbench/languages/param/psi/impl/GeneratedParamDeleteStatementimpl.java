@@ -13,7 +13,7 @@ import com.flipperplz.enfusionWorkbench.languages.param.psi.*;
 
 public class GeneratedParamDeleteStatementimpl extends ParamDeleteMixin implements GeneratedParamDeleteStatement {
 
-  public GeneratedParamDeleteStatementimpl(ASTNode node) {
+  public GeneratedParamDeleteStatementimpl(@NotNull ASTNode node) {
     super(node);
   }
 
@@ -31,6 +31,18 @@ public class GeneratedParamDeleteStatementimpl extends ParamDeleteMixin implemen
   @Nullable
   public GeneratedParamIdentifier getIdentifier() {
     return findChildByClass(GeneratedParamIdentifier.class);
+  }
+
+  @Override
+  @NotNull
+  public PsiElement getKeywordDelete() {
+    return findNotNullChildByType(KEYWORD_DELETE);
+  }
+
+  @Override
+  @Nullable
+  public PsiElement getSymSemicolon() {
+    return findChildByType(SYM_SEMICOLON);
   }
 
 }

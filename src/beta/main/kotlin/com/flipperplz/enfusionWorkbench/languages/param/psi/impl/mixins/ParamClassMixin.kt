@@ -11,7 +11,7 @@ abstract class ParamClassMixin(
     node: ASTNode
 ) : ParamStatementMixin(node), ParamClass {
     override val className: ParamIdentifier get() = childrenOfType<ParamIdentifier>().first()
-    override val superClass: ParamClass? = previousScope!! getChildExternalClass childrenOfType<ParamIdentifier>()[1].name
+    override val superClass: ParamClass? get() = previousScope!! getChildExternalClass childrenOfType<ParamIdentifier>()[1].name
 
     override val statements: List<ParamStatement>
         get() = childrenOfType()

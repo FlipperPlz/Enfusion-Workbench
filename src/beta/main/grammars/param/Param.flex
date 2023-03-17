@@ -25,35 +25,39 @@ import static com.flipperplz.enfusionWorkbench.languages.param.psi.ParamTypes.*;
 %type IElementType
 %unicode
 
-EOL=\R
+WHITE_SPACE=[\s\t]+
 
-SINGLE_LINE_COMMENT="//".*
+SINGLE_LINE_COMMENT="//".*[\r\n]
 EMPTY_DELIMITED_COMMENT="/"\*\*?"/"
 DELIMITED_COMMENT="/"\*([^*]|[\r\n]|(\*+([^*/]|[\r\n])))*\*+"/"
 ABS_IDENTIFIER=[a-zA-Z_][a-zA-Z0-9_]*
-ABS_WHITE_SPACE=[\r\n\t\s]+
-
-ABS_STRING_CONTENT=('""' | ~('\"'))
-ABS_DIGITS=[0-9]+;
-ABS_NEGATIVE_NUMBER='-'{ABS_DIGITS}
-ABS_GENERIC_NUMBER={ABS_NEGATIVE_NUMBER} | {ABS_DIGITS};
-ABS_FRACTIONAL_NUMBER={ABS_GENERIC_NUMBER} '.' {ABS_GENERIC_NUMBER};
-ABS_HEX_CHAR=[a-fA-F0-9]+;
-ABS_SCIENTIFIC_NUMBER={ABS_SIMPLE_NUMBER} [eE] [+-] {ABS_SIMPLE_NUMBER};
-ABS_HEX_NUMBER='0x' {ABS_HEX_CHAR}+;
-ABS_SIMPLE_NUMBER={ABS_GENERIC_NUMBER} | {ABS_FRACTIONAL_NUMBER};
-ABS_ANY_NUMBER={ABS_SCIENTIFIC_NUMBER} | {ABS_SIMPLE_NUMBER} | {ABS_HEX_CHAR};
+ABS_NUMERIC=(-?[0-9]+(.[0-9]+)?([eE][-+]?[0-9]+)?|0x[a-fA-F0-9]+)
+ABS_STRING=\"((\"\"|[^\"])+)\"
 
 %%
 <YYINITIAL> {
-  {ABS_WHITE_SPACE}              { return WHITE_SPACE; }
+
+  {WHITE_SPACE}                  { return WHITE_SPACE; }
+
+  "class"                        { return KEYWORD_CLASS; }
+  "enum"                         { return KEYWORD_ENUM; }
+  "delete"                       { return KEYWORD_DELETE; }
+  "{"                            { return SYM_LBRACKET; }
+  "}"                            { return SYM_RBRACKET; }
+  ";"                            { return SYM_SEMICOLON; }
+  ":"                            { return SYM_COLON; }
+  "["                            { return SYM_LSBRACKET; }
+  "]"                            { return SYM_RSBRACKET; }
+  "="                            { return OP_ASSIGN; }
+  "+="                           { return OP_ADD_ASSIGN; }
+  "-="                           { return OP_SUB_ASSIGN; }
+
   {SINGLE_LINE_COMMENT}          { return SINGLE_LINE_COMMENT; }
   {EMPTY_DELIMITED_COMMENT}      { return EMPTY_DELIMITED_COMMENT; }
   {DELIMITED_COMMENT}            { return DELIMITED_COMMENT; }
   {ABS_IDENTIFIER}               { return ABS_IDENTIFIER; }
-  \"{ABS_STRING_CONTENT}\"       { return ABS_STRING; }
-  {ABS_ANY_NUMBER}               { return ABS_NUMERIC; }
-
+  {ABS_STRING}                   { return ABS_STRING; }
+  {ABS_NUMERIC}                  { return ABS_NUMERIC; }
 }
 
 [^] { return BAD_CHARACTER; }

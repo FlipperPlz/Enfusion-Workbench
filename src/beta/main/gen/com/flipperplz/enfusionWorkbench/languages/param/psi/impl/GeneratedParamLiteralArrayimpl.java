@@ -13,7 +13,7 @@ import com.flipperplz.enfusionWorkbench.languages.param.psi.*;
 
 public class GeneratedParamLiteralArrayimpl extends ParamArrayMixin implements GeneratedParamLiteralArray {
 
-  public GeneratedParamLiteralArrayimpl(ASTNode node) {
+  public GeneratedParamLiteralArrayimpl(@NotNull ASTNode node) {
     super(node);
   }
 
@@ -43,6 +43,18 @@ public class GeneratedParamLiteralArrayimpl extends ParamArrayMixin implements G
   @NotNull
   public List<GeneratedParamParamString> getParamStringList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, GeneratedParamParamString.class);
+  }
+
+  @Override
+  @NotNull
+  public PsiElement getSymLbracket() {
+    return findNotNullChildByType(SYM_LBRACKET);
+  }
+
+  @Override
+  @Nullable
+  public PsiElement getSymRbracket() {
+    return findChildByType(SYM_RBRACKET);
   }
 
 }

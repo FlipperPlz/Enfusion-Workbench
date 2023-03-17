@@ -13,7 +13,7 @@ import com.flipperplz.enfusionWorkbench.languages.param.psi.*;
 
 public class GeneratedParamClassDeclarationimpl extends ParamClassMixin implements GeneratedParamClassDeclaration {
 
-  public GeneratedParamClassDeclarationimpl(ASTNode node) {
+  public GeneratedParamClassDeclarationimpl(@NotNull ASTNode node) {
     super(node);
   }
 
@@ -49,6 +49,36 @@ public class GeneratedParamClassDeclarationimpl extends ParamClassMixin implemen
   @NotNull
   public List<GeneratedParamIdentifier> getIdentifierList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, GeneratedParamIdentifier.class);
+  }
+
+  @Override
+  @NotNull
+  public PsiElement getKeywordClass() {
+    return findNotNullChildByType(KEYWORD_CLASS);
+  }
+
+  @Override
+  @Nullable
+  public PsiElement getSymColon() {
+    return findChildByType(SYM_COLON);
+  }
+
+  @Override
+  @Nullable
+  public PsiElement getSymLbracket() {
+    return findChildByType(SYM_LBRACKET);
+  }
+
+  @Override
+  @Nullable
+  public PsiElement getSymRbracket() {
+    return findChildByType(SYM_RBRACKET);
+  }
+
+  @Override
+  @Nullable
+  public PsiElement getSymSemicolon() {
+    return findChildByType(SYM_SEMICOLON);
   }
 
 }

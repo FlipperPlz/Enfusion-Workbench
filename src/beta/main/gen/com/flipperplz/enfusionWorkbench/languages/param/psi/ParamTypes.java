@@ -24,10 +24,19 @@ public interface ParamTypes {
   IElementType ABS_STRING = new ParamTokenType("ABS_STRING");
   IElementType DELIMITED_COMMENT = new ParamTokenType("DELIMITED_COMMENT");
   IElementType EMPTY_DELIMITED_COMMENT = new ParamTokenType("EMPTY_DELIMITED_COMMENT");
+  IElementType KEYWORD_CLASS = new ParamTokenType("class");
+  IElementType KEYWORD_DELETE = new ParamTokenType("delete");
+  IElementType KEYWORD_ENUM = new ParamTokenType("enum");
   IElementType OP_ADD_ASSIGN = new ParamTokenType("OP_ADD_ASSIGN");
   IElementType OP_ASSIGN = new ParamTokenType("OP_ASSIGN");
   IElementType OP_SUB_ASSIGN = new ParamTokenType("OP_SUB_ASSIGN");
   IElementType SINGLE_LINE_COMMENT = new ParamTokenType("SINGLE_LINE_COMMENT");
+  IElementType SYM_COLON = new ParamTokenType(":");
+  IElementType SYM_LBRACKET = new ParamTokenType("{");
+  IElementType SYM_LSBRACKET = new ParamTokenType("[");
+  IElementType SYM_RBRACKET = new ParamTokenType("}");
+  IElementType SYM_RSBRACKET = new ParamTokenType("]");
+  IElementType SYM_SEMICOLON = new ParamTokenType(";");
 
   class Factory {
     public static PsiElement createElement(ASTNode node) {

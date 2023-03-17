@@ -16,4 +16,10 @@ public interface GeneratedParamLiteralArray extends ParamArrayElement {
   @NotNull
   List<GeneratedParamParamString> getParamStringList();
 
+  @NotNull
+  PsiElement getSymLbracket();
+
+  @Nullable
+  PsiElement getSymRbracket();
+
 }

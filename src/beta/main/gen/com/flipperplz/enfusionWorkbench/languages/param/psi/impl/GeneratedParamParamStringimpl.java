@@ -13,7 +13,7 @@ import com.flipperplz.enfusionWorkbench.languages.param.psi.*;
 
 public class GeneratedParamParamStringimpl extends ParamStringMixin implements GeneratedParamParamString {
 
-  public GeneratedParamParamStringimpl(ASTNode node) {
+  public GeneratedParamParamStringimpl(@NotNull ASTNode node) {
     super(node);
   }
 

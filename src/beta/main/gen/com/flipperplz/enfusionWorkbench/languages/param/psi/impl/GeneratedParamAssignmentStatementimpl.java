@@ -13,7 +13,7 @@ import com.flipperplz.enfusionWorkbench.languages.param.psi.*;
 
 public class GeneratedParamAssignmentStatementimpl extends ParamAssignmentMixin implements GeneratedParamAssignmentStatement {
 
-  public GeneratedParamAssignmentStatementimpl(ASTNode node) {
+  public GeneratedParamAssignmentStatementimpl(@NotNull ASTNode node) {
     super(node);
   }
 
@@ -67,6 +67,24 @@ public class GeneratedParamAssignmentStatementimpl extends ParamAssignmentMixin 
   @Nullable
   public PsiElement getOpSubAssign() {
     return findChildByType(OP_SUB_ASSIGN);
+  }
+
+  @Override
+  @Nullable
+  public PsiElement getSymLsbracket() {
+    return findChildByType(SYM_LSBRACKET);
+  }
+
+  @Override
+  @Nullable
+  public PsiElement getSymRsbracket() {
+    return findChildByType(SYM_RSBRACKET);
+  }
+
+  @Override
+  @Nullable
+  public PsiElement getSymSemicolon() {
+    return findChildByType(SYM_SEMICOLON);
   }
 
 }

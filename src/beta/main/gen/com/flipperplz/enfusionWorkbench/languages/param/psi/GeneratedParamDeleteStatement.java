@@ -10,4 +10,10 @@ public interface GeneratedParamDeleteStatement extends ParamStatement {
   @Nullable
   GeneratedParamIdentifier getIdentifier();
 
+  @NotNull
+  PsiElement getKeywordDelete();
+
+  @Nullable
+  PsiElement getSymSemicolon();
+
 }

@@ -19,4 +19,19 @@ public interface GeneratedParamClassDeclaration extends ParamScope, ParamStateme
   @NotNull
   List<GeneratedParamIdentifier> getIdentifierList();
 
+  @NotNull
+  PsiElement getKeywordClass();
+
+  @Nullable
+  PsiElement getSymColon();
+
+  @Nullable
+  PsiElement getSymLbracket();
+
+  @Nullable
+  PsiElement getSymRbracket();
+
+  @Nullable
+  PsiElement getSymSemicolon();
+
 }

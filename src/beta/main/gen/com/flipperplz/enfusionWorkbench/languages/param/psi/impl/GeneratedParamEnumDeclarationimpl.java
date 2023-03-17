@@ -12,7 +12,7 @@ import com.flipperplz.enfusionWorkbench.languages.param.psi.*;
 
 public class GeneratedParamEnumDeclarationimpl extends ParamElementImpl implements GeneratedParamEnumDeclaration {
 
-  public GeneratedParamEnumDeclarationimpl(ASTNode node) {
+  public GeneratedParamEnumDeclarationimpl(@NotNull ASTNode node) {
     super(node);
   }
 
@@ -30,6 +30,30 @@ public class GeneratedParamEnumDeclarationimpl extends ParamElementImpl implemen
   @NotNull
   public List<GeneratedParamIdentifier> getIdentifierList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, GeneratedParamIdentifier.class);
+  }
+
+  @Override
+  @NotNull
+  public PsiElement getKeywordEnum() {
+    return findNotNullChildByType(KEYWORD_ENUM);
+  }
+
+  @Override
+  @NotNull
+  public PsiElement getSymLbracket() {
+    return findNotNullChildByType(SYM_LBRACKET);
+  }
+
+  @Override
+  @Nullable
+  public PsiElement getSymRbracket() {
+    return findChildByType(SYM_RBRACKET);
+  }
+
+  @Override
+  @Nullable
+  public PsiElement getSymSemicolon() {
+    return findChildByType(SYM_SEMICOLON);
   }
 
 }
