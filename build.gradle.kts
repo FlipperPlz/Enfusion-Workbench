@@ -1,15 +1,20 @@
-import org.jetbrains.grammarkit.tasks.GenerateLexerTask
-import org.jetbrains.grammarkit.tasks.GenerateParserTask
+//import org.jetbrains.grammarkit.tasks.GenerateLexerTask
+//import org.jetbrains.grammarkit.tasks.GenerateParserTask
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 val sourceBranch = "beta"
 
 plugins {
-    id("java")
-    id("org.jetbrains.kotlin.jvm") version "1.7.20"
+    kotlin("jvm") version "1.8.10"
     id("org.jetbrains.intellij") version "1.10.1"
-    id("org.jetbrains.grammarkit") version "2022.3.1"
 }
+
+apply {
+    plugin("kotlin")
+}
+
+java.targetCompatibility=JavaVersion.VERSION_11
+java.sourceCompatibility=JavaVersion.VERSION_11
 
 group = "com.flipperplz"
 version = "1.0-${sourceBranch}"
@@ -60,40 +65,20 @@ idea {
     }
 }
 
+
 tasks {
 
 
-    val generateParamParser = register<GenerateParserTask>("generateParamParser") {
-        sourceFile.set(file("src/${sourceBranch}/main/grammars/param/Param.bnf"))
-        targetRoot.set("src/${sourceBranch}/main/gen/")
-        pathToParser.set("/com/flipperplz/enfusionWorkbench/languages/param/parser/ParamParser.java")
-        pathToPsiRoot.set("/com/flipperplz/enfusionWorkbench/languages/param/psi/")
-        purgeOldFiles.set(true)
-    }
-
-    val generateParamLexer = register<GenerateLexerTask>("generateParamLexer") {
-        sourceFile.set(file("src/${sourceBranch}/main/grammars/param/Param.flex"))
-        targetDir.set("src/${sourceBranch}/main/gen/com/flipperplz/enfusionWorkbench/languages/param/lexer/")
-        targetClass.set("ParamLexer")
-        purgeOldFiles.set(true)
-    }
-
-
-    // Set the JVM compatibility versions
-    val javaCompile = withType<JavaCompile> {
-        sourceCompatibility = "17"
-        targetCompatibility = "17"
-        dependsOn(generateParamLexer)
-        dependsOn(generateParamParser)
-    }
-
-    val kotlinCompile = withType<KotlinCompile>().configureEach {
-        dependsOn(generateParamLexer)
-        dependsOn(generateParamParser)
+    withType<KotlinCompile>().configureEach {
         kotlinOptions {
             jvmTarget = "11"
+            languageVersion = "1.8"
+            // see https://plugins.jetbrains.com/docs/intellij/using-kotlin.html#kotlin-standard-library
+            apiVersion = "1.7"
+            freeCompilerArgs = listOf("-Xjvm-default=all")
         }
     }
+
 
     patchPluginXml {
         sinceBuild.set("221")
