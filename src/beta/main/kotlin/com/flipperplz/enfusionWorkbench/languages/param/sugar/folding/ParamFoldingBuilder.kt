@@ -1,4 +1,4 @@
-package com.flipperplz.enfusionWorkbench.languages.param.folding
+package com.flipperplz.enfusionWorkbench.languages.param.sugar.folding
 
 import com.flipperplz.enfusionWorkbench.languages.param.psi.ParamArray
 import com.flipperplz.enfusionWorkbench.languages.param.psi.ParamClass

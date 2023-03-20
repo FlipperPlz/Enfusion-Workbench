@@ -42,7 +42,11 @@
         />
         <lang.foldingBuilder
             language="Param"
-            implementationClass="com.flipperplz.enfusionWorkbench.languages.param.folding.ParamFoldingBuilder"
+            implementationClass="com.flipperplz.enfusionWorkbench.languages.param.sugar.folding.ParamFoldingBuilder"
+        />
+        <lang.syntaxHighlighterFactory
+            language="Param"
+            implementationClass="com.flipperplz.enfusionWorkbench.languages.param.sugar.highlighting.ParamSyntaxHighlighterFactory"
         />
     </extensions>
 </idea-plugin>
