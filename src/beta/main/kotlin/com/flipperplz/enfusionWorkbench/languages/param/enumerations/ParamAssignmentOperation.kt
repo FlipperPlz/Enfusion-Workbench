@@ -2,14 +2,13 @@ package com.flipperplz.enfusionWorkbench.languages.param.enumerations
 
 import com.flipperplz.enfusionWorkbench.languages.param.psi.ParamAssignment
 import com.flipperplz.enfusionWorkbench.languages.param.psi.ParamTypes
-import com.flipperplz.enfusionWorkbench.languages.param.psi.required.ParamElementType
 import com.intellij.lang.ASTFactory
 import com.intellij.lang.ASTNode
 import com.intellij.psi.tree.IElementType
 
 enum class ParamAssignmentOperation(
     private val operator: IElementType?,
-    private val operatorText: String
+    val operatorText: String
 ) {
     ASSIGN(null, "="),
     SUB_ASSIGN(ParamTypes.OP_SUBASSIGN, "-="),

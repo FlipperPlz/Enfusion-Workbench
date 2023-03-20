@@ -3,6 +3,8 @@ package com.flipperplz.enfusionWorkbench.languages.param.psi
 import com.intellij.psi.util.parentOfType
 
 interface ParamScope : ParamNamedElement {
+    val scope: Int
+        get() = (previousScope?.scope ?: 0) + 1
     val previousScope: ParamScope?
         get() = parentOfType(false)
     val statements: List<ParamStatement>
@@ -26,10 +28,9 @@ interface ParamScope : ParamNamedElement {
         return if(paramName == null) null else
             statements.filterIsInstance<ParamAssignment>().firstOrNull { it.name.equals(paramName, true) && !it.isArrayAssignment()}
     }
+
     infix fun getArrayParam(paramName: String?): ParamAssignment? {
         return if(paramName == null) null else
             statements.filterIsInstance<ParamAssignment>().firstOrNull { it.name.equals(paramName, true) && it.isArrayAssignment()}
     }
-
-
 }
