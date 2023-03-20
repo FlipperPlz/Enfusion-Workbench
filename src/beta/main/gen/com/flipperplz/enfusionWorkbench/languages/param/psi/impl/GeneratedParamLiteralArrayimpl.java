@@ -13,7 +13,7 @@ import com.flipperplz.enfusionWorkbench.languages.param.psi.*;
 
 public class GeneratedParamLiteralArrayimpl extends ParamArrayMixin implements GeneratedParamLiteralArray {
 
-  public GeneratedParamLiteralArrayimpl(@NotNull ASTNode node) {
+  public GeneratedParamLiteralArrayimpl(ASTNode node) {
     super(node);
   }
 

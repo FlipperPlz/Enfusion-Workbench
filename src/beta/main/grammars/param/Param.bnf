@@ -28,7 +28,6 @@
     ]
     generate=[tokenAccessors="yes"]
 
-    extends('classDeclaration|assignmentStatement|deleteStatement')=statement
     extends('paramString|paramNumeric')=literal
     extends('literal|literalArray')=arrayElement
 
@@ -76,7 +75,7 @@ private arrayAssignment ::= '[' ']' (
 
 private valueAssignment ::= OP_ASSIGN literal { pin=1 };
 
-private regularClassDecl ::= (':' identifier)? '{' statement '}' {pin=2 }
+private regularClassDecl ::= (':' identifier)? '{' statement* '}' {pin=2 }
 
 
 

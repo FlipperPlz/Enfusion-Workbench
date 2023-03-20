@@ -5,7 +5,7 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface GeneratedParamAssignmentStatement extends GeneratedParamStatement, ParamStatement {
+public interface GeneratedParamAssignmentStatement extends ParamStatement {
 
   @Nullable
   GeneratedParamArrayElement getArrayElement();

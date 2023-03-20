@@ -13,7 +13,7 @@ import com.flipperplz.enfusionWorkbench.languages.param.psi.*;
 
 public class GeneratedParamIdentifierimpl extends ParamIdentifierMixin implements GeneratedParamIdentifier {
 
-  public GeneratedParamIdentifierimpl(@NotNull ASTNode node) {
+  public GeneratedParamIdentifierimpl(ASTNode node) {
     super(node);
   }
 

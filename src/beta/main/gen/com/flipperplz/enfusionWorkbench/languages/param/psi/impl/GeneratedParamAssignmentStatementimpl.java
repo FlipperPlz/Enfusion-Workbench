@@ -13,7 +13,7 @@ import com.flipperplz.enfusionWorkbench.languages.param.psi.*;
 
 public class GeneratedParamAssignmentStatementimpl extends ParamAssignmentMixin implements GeneratedParamAssignmentStatement {
 
-  public GeneratedParamAssignmentStatementimpl(@NotNull ASTNode node) {
+  public GeneratedParamAssignmentStatementimpl(ASTNode node) {
     super(node);
   }
 

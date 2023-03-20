@@ -5,12 +5,12 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface GeneratedParamClassDeclaration extends GeneratedParamStatement, ParamScope, ParamStatement {
+public interface GeneratedParamClassDeclaration extends ParamScope, ParamStatement {
 
   @NotNull
   List<GeneratedParamIdentifier> getIdentifierList();
 
-  @Nullable
-  GeneratedParamStatement getStatement();
+  @NotNull
+  List<GeneratedParamStatement> getStatementList();
 
 }

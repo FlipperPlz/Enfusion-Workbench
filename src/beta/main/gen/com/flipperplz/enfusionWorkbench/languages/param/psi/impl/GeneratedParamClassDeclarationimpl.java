@@ -13,7 +13,7 @@ import com.flipperplz.enfusionWorkbench.languages.param.psi.*;
 
 public class GeneratedParamClassDeclarationimpl extends ParamClassMixin implements GeneratedParamClassDeclaration {
 
-  public GeneratedParamClassDeclarationimpl(@NotNull ASTNode node) {
+  public GeneratedParamClassDeclarationimpl(ASTNode node) {
     super(node);
   }
 
@@ -34,9 +34,9 @@ public class GeneratedParamClassDeclarationimpl extends ParamClassMixin implemen
   }
 
   @Override
-  @Nullable
-  public GeneratedParamStatement getStatement() {
-    return findChildByClass(GeneratedParamStatement.class);
+  @NotNull
+  public List<GeneratedParamStatement> getStatementList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, GeneratedParamStatement.class);
   }
 
 }

@@ -7,7 +7,13 @@ import com.intellij.psi.PsiElement;
 
 public interface GeneratedParamStatement extends ParamElement {
 
-  @NotNull
-  GeneratedParamStatement getStatement();
+  @Nullable
+  GeneratedParamAssignmentStatement getAssignmentStatement();
+
+  @Nullable
+  GeneratedParamClassDeclaration getClassDeclaration();
+
+  @Nullable
+  GeneratedParamDeleteStatement getDeleteStatement();
 
 }

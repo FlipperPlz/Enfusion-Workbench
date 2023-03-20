@@ -13,7 +13,7 @@ import com.flipperplz.enfusionWorkbench.languages.param.psi.*;
 
 public class GeneratedParamDeleteStatementimpl extends ParamDeleteMixin implements GeneratedParamDeleteStatement {
 
-  public GeneratedParamDeleteStatementimpl(@NotNull ASTNode node) {
+  public GeneratedParamDeleteStatementimpl(ASTNode node) {
     super(node);
   }
 

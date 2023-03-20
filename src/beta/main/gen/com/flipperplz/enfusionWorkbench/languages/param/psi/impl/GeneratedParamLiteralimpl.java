@@ -12,7 +12,7 @@ import com.flipperplz.enfusionWorkbench.languages.param.psi.*;
 
 public abstract class GeneratedParamLiteralimpl extends GeneratedParamArrayElementimpl implements GeneratedParamLiteral {
 
-  public GeneratedParamLiteralimpl(@NotNull ASTNode node) {
+  public GeneratedParamLiteralimpl(ASTNode node) {
     super(node);
   }
 

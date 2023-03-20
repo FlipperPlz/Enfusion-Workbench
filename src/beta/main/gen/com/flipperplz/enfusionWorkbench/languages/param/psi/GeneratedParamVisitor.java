@@ -11,19 +11,16 @@ public class GeneratedParamVisitor extends PsiElementVisitor {
   }
 
   public void visitAssignmentStatement(@NotNull GeneratedParamAssignmentStatement o) {
-    visitStatement(o);
-    // visitParamStatement(o);
+    visitParamStatement(o);
   }
 
   public void visitClassDeclaration(@NotNull GeneratedParamClassDeclaration o) {
-    visitStatement(o);
-    // visitParamScope(o);
+    visitParamScope(o);
     // visitParamStatement(o);
   }
 
   public void visitDeleteStatement(@NotNull GeneratedParamDeleteStatement o) {
-    visitStatement(o);
-    // visitParamStatement(o);
+    visitParamStatement(o);
   }
 
   public void visitEnumDeclaration(@NotNull GeneratedParamEnumDeclaration o) {
@@ -60,6 +57,14 @@ public class GeneratedParamVisitor extends PsiElementVisitor {
 
   public void visitStatement(@NotNull GeneratedParamStatement o) {
     visitParamElement(o);
+  }
+
+  public void visitParamScope(@NotNull ParamScope o) {
+    visitElement(o);
+  }
+
+  public void visitParamStatement(@NotNull ParamStatement o) {
+    visitElement(o);
   }
 
   public void visitParamElement(@NotNull ParamElement o) {

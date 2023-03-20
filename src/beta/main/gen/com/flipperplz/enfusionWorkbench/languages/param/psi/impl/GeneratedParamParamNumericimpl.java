@@ -13,7 +13,7 @@ import com.flipperplz.enfusionWorkbench.languages.param.psi.*;
 
 public class GeneratedParamParamNumericimpl extends ParamNumericMixin implements GeneratedParamParamNumeric {
 
-  public GeneratedParamParamNumericimpl(@NotNull ASTNode node) {
+  public GeneratedParamParamNumericimpl(ASTNode node) {
     super(node);
   }
 

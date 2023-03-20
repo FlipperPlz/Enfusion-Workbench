@@ -12,7 +12,7 @@ import com.flipperplz.enfusionWorkbench.languages.param.psi.*;
 
 public class GeneratedParamStatementimpl extends ParamElementImpl implements GeneratedParamStatement {
 
-  public GeneratedParamStatementimpl(@NotNull ASTNode node) {
+  public GeneratedParamStatementimpl(ASTNode node) {
     super(node);
   }
 
@@ -27,9 +27,21 @@ public class GeneratedParamStatementimpl extends ParamElementImpl implements Gen
   }
 
   @Override
-  @NotNull
-  public GeneratedParamStatement getStatement() {
-    return findNotNullChildByClass(GeneratedParamStatement.class);
+  @Nullable
+  public GeneratedParamAssignmentStatement getAssignmentStatement() {
+    return findChildByClass(GeneratedParamAssignmentStatement.class);
+  }
+
+  @Override
+  @Nullable
+  public GeneratedParamClassDeclaration getClassDeclaration() {
+    return findChildByClass(GeneratedParamClassDeclaration.class);
+  }
+
+  @Override
+  @Nullable
+  public GeneratedParamDeleteStatement getDeleteStatement() {
+    return findChildByClass(GeneratedParamDeleteStatement.class);
   }
 
 }
