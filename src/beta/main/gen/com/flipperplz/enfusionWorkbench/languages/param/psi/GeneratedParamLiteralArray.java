@@ -10,4 +10,10 @@ public interface GeneratedParamLiteralArray extends GeneratedParamArrayElement, 
   @NotNull
   List<GeneratedParamArrayElement> getArrayElementList();
 
+  @NotNull
+  PsiElement getSymLcurly();
+
+  @Nullable
+  PsiElement getSymRcurly();
+
 }

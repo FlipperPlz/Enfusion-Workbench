@@ -44,4 +44,10 @@ public class GeneratedParamStatementimpl extends ParamElementImpl implements Gen
     return findChildByClass(GeneratedParamDeleteStatement.class);
   }
 
+  @Override
+  @Nullable
+  public PsiElement getSymSemi() {
+    return findChildByType(SYM_SEMI);
+  }
+
 }

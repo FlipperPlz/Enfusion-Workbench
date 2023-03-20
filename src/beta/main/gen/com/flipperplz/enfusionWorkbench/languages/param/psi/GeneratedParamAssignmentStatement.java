@@ -22,4 +22,10 @@ public interface GeneratedParamAssignmentStatement extends ParamStatement {
   @Nullable
   PsiElement getOpSubassign();
 
+  @Nullable
+  PsiElement getSymLsquare();
+
+  @Nullable
+  PsiElement getSymRsquare();
+
 }

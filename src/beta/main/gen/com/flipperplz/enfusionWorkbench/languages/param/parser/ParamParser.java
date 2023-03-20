@@ -41,17 +41,17 @@ public class ParamParser implements PsiParser, LightPsiParser {
   };
 
   /* ********************************************************** */
-  // '[' ']' (
+  // SYM_LSQUARE SYM_RSQUARE (
   //         OP_ASSIGN  |
   //         OP_ADDASSIGN |
   //         OP_SUBASSIGN
   //     ) literalArray
   static boolean arrayAssignment(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "arrayAssignment")) return false;
+    if (!nextTokenIs(builder_, SYM_LSQUARE)) return false;
     boolean result_, pinned_;
     Marker marker_ = enter_section_(builder_, level_, _NONE_);
-    result_ = consumeToken(builder_, "[");
-    result_ = result_ && consumeToken(builder_, "]");
+    result_ = consumeTokens(builder_, 0, SYM_LSQUARE, SYM_RSQUARE);
     result_ = result_ && arrayAssignment_2(builder_, level_ + 1);
     pinned_ = result_; // pin = 3
     result_ = result_ && literalArray(builder_, level_ + 1);
@@ -107,12 +107,13 @@ public class ParamParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // 'class' identifier regularClassDecl?
+  // KW_CLASS identifier regularClassDecl?
   public static boolean classDeclaration(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "classDeclaration")) return false;
+    if (!nextTokenIs(builder_, KW_CLASS)) return false;
     boolean result_, pinned_;
-    Marker marker_ = enter_section_(builder_, level_, _NONE_, CLASS_DECLARATION, "<class declaration>");
-    result_ = consumeToken(builder_, "class");
+    Marker marker_ = enter_section_(builder_, level_, _NONE_, CLASS_DECLARATION, null);
+    result_ = consumeToken(builder_, KW_CLASS);
     result_ = result_ && identifier(builder_, level_ + 1);
     pinned_ = result_; // pin = 2
     result_ = result_ && classDeclaration_2(builder_, level_ + 1);
@@ -128,29 +129,29 @@ public class ParamParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // 'delete' identifier
+  // KW_DELETE identifier
   public static boolean deleteStatement(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "deleteStatement")) return false;
+    if (!nextTokenIs(builder_, KW_DELETE)) return false;
     boolean result_;
-    Marker marker_ = enter_section_(builder_, level_, _NONE_, DELETE_STATEMENT, "<delete statement>");
-    result_ = consumeToken(builder_, "delete");
+    Marker marker_ = enter_section_(builder_);
+    result_ = consumeToken(builder_, KW_DELETE);
     result_ = result_ && identifier(builder_, level_ + 1);
-    exit_section_(builder_, level_, marker_, result_, false, null);
+    exit_section_(builder_, marker_, DELETE_STATEMENT, result_);
     return result_;
   }
 
   /* ********************************************************** */
-  // 'enum' '{' [enumValue+] '}' ';'
+  // KW_DELETE SYM_LCURLY [enumValue+] SYM_RCURLY SYM_SEMI
   public static boolean enumDeclaration(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "enumDeclaration")) return false;
+    if (!nextTokenIs(builder_, KW_DELETE)) return false;
     boolean result_, pinned_;
-    Marker marker_ = enter_section_(builder_, level_, _NONE_, ENUM_DECLARATION, "<enum declaration>");
-    result_ = consumeToken(builder_, "enum");
-    result_ = result_ && consumeToken(builder_, "{");
+    Marker marker_ = enter_section_(builder_, level_, _NONE_, ENUM_DECLARATION, null);
+    result_ = consumeTokens(builder_, 2, KW_DELETE, SYM_LCURLY);
     pinned_ = result_; // pin = 2
     result_ = result_ && report_error_(builder_, enumDeclaration_2(builder_, level_ + 1));
-    result_ = pinned_ && report_error_(builder_, consumeToken(builder_, "}")) && result_;
-    result_ = pinned_ && consumeToken(builder_, ";") && result_;
+    result_ = pinned_ && report_error_(builder_, consumeTokens(builder_, -1, SYM_RCURLY, SYM_SEMI)) && result_;
     exit_section_(builder_, level_, marker_, result_, pinned_, null);
     return result_ || pinned_;
   }
@@ -178,7 +179,7 @@ public class ParamParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // identifier ('=' paramNumeric)?
+  // identifier (OP_ASSIGN paramNumeric)?
   public static boolean enumValue(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "enumValue")) return false;
     if (!nextTokenIs(builder_, ABS_IDENTIFIER)) return false;
@@ -191,14 +192,14 @@ public class ParamParser implements PsiParser, LightPsiParser {
     return result_ || pinned_;
   }
 
-  // ('=' paramNumeric)?
+  // (OP_ASSIGN paramNumeric)?
   private static boolean enumValue_1(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "enumValue_1")) return false;
     enumValue_1_0(builder_, level_ + 1);
     return true;
   }
 
-  // '=' paramNumeric
+  // OP_ASSIGN paramNumeric
   private static boolean enumValue_1_0(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "enumValue_1_0")) return false;
     boolean result_;
@@ -266,60 +267,79 @@ public class ParamParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // '{' arrayElement (',' (arrayElement | &'}'))* '}'
+  // SYM_LCURLY (arrayElement (SYM_COMMA (arrayElement | &SYM_RCURLY))*)? SYM_RCURLY
   public static boolean literalArray(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "literalArray")) return false;
+    if (!nextTokenIs(builder_, SYM_LCURLY)) return false;
     boolean result_, pinned_;
-    Marker marker_ = enter_section_(builder_, level_, _NONE_, LITERAL_ARRAY, "<literal array>");
-    result_ = consumeToken(builder_, "{");
+    Marker marker_ = enter_section_(builder_, level_, _NONE_, LITERAL_ARRAY, null);
+    result_ = consumeToken(builder_, SYM_LCURLY);
     pinned_ = result_; // pin = 1
-    result_ = result_ && report_error_(builder_, arrayElement(builder_, level_ + 1));
-    result_ = pinned_ && report_error_(builder_, literalArray_2(builder_, level_ + 1)) && result_;
-    result_ = pinned_ && consumeToken(builder_, "}") && result_;
+    result_ = result_ && report_error_(builder_, literalArray_1(builder_, level_ + 1));
+    result_ = pinned_ && consumeToken(builder_, SYM_RCURLY) && result_;
     exit_section_(builder_, level_, marker_, result_, pinned_, null);
     return result_ || pinned_;
   }
 
-  // (',' (arrayElement | &'}'))*
-  private static boolean literalArray_2(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "literalArray_2")) return false;
+  // (arrayElement (SYM_COMMA (arrayElement | &SYM_RCURLY))*)?
+  private static boolean literalArray_1(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "literalArray_1")) return false;
+    literalArray_1_0(builder_, level_ + 1);
+    return true;
+  }
+
+  // arrayElement (SYM_COMMA (arrayElement | &SYM_RCURLY))*
+  private static boolean literalArray_1_0(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "literalArray_1_0")) return false;
+    boolean result_, pinned_;
+    Marker marker_ = enter_section_(builder_, level_, _NONE_);
+    result_ = arrayElement(builder_, level_ + 1);
+    pinned_ = result_; // pin = 1
+    result_ = result_ && literalArray_1_0_1(builder_, level_ + 1);
+    exit_section_(builder_, level_, marker_, result_, pinned_, null);
+    return result_ || pinned_;
+  }
+
+  // (SYM_COMMA (arrayElement | &SYM_RCURLY))*
+  private static boolean literalArray_1_0_1(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "literalArray_1_0_1")) return false;
     while (true) {
       int pos_ = current_position_(builder_);
-      if (!literalArray_2_0(builder_, level_ + 1)) break;
-      if (!empty_element_parsed_guard_(builder_, "literalArray_2", pos_)) break;
+      if (!literalArray_1_0_1_0(builder_, level_ + 1)) break;
+      if (!empty_element_parsed_guard_(builder_, "literalArray_1_0_1", pos_)) break;
     }
     return true;
   }
 
-  // ',' (arrayElement | &'}')
-  private static boolean literalArray_2_0(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "literalArray_2_0")) return false;
+  // SYM_COMMA (arrayElement | &SYM_RCURLY)
+  private static boolean literalArray_1_0_1_0(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "literalArray_1_0_1_0")) return false;
     boolean result_, pinned_;
     Marker marker_ = enter_section_(builder_, level_, _NONE_);
-    result_ = consumeToken(builder_, ",");
+    result_ = consumeToken(builder_, SYM_COMMA);
     pinned_ = result_; // pin = 1
-    result_ = result_ && literalArray_2_0_1(builder_, level_ + 1);
+    result_ = result_ && literalArray_1_0_1_0_1(builder_, level_ + 1);
     exit_section_(builder_, level_, marker_, result_, pinned_, null);
     return result_ || pinned_;
   }
 
-  // arrayElement | &'}'
-  private static boolean literalArray_2_0_1(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "literalArray_2_0_1")) return false;
+  // arrayElement | &SYM_RCURLY
+  private static boolean literalArray_1_0_1_0_1(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "literalArray_1_0_1_0_1")) return false;
     boolean result_;
     Marker marker_ = enter_section_(builder_);
     result_ = arrayElement(builder_, level_ + 1);
-    if (!result_) result_ = literalArray_2_0_1_1(builder_, level_ + 1);
+    if (!result_) result_ = literalArray_1_0_1_0_1_1(builder_, level_ + 1);
     exit_section_(builder_, marker_, null, result_);
     return result_;
   }
 
-  // &'}'
-  private static boolean literalArray_2_0_1_1(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "literalArray_2_0_1_1")) return false;
+  // &SYM_RCURLY
+  private static boolean literalArray_1_0_1_0_1_1(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "literalArray_1_0_1_0_1_1")) return false;
     boolean result_;
     Marker marker_ = enter_section_(builder_, level_, _AND_);
-    result_ = consumeToken(builder_, "}");
+    result_ = consumeToken(builder_, SYM_RCURLY);
     exit_section_(builder_, level_, marker_, result_, false, null);
     return result_;
   }
@@ -349,33 +369,34 @@ public class ParamParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // (':' identifier)? '{' statement* '}'
+  // (SYM_COLON identifier)? SYM_LCURLY statement* SYM_RCURLY
   static boolean regularClassDecl(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "regularClassDecl")) return false;
+    if (!nextTokenIs(builder_, "", SYM_COLON, SYM_LCURLY)) return false;
     boolean result_, pinned_;
     Marker marker_ = enter_section_(builder_, level_, _NONE_);
     result_ = regularClassDecl_0(builder_, level_ + 1);
-    result_ = result_ && consumeToken(builder_, "{");
+    result_ = result_ && consumeToken(builder_, SYM_LCURLY);
     pinned_ = result_; // pin = 2
     result_ = result_ && report_error_(builder_, regularClassDecl_2(builder_, level_ + 1));
-    result_ = pinned_ && consumeToken(builder_, "}") && result_;
+    result_ = pinned_ && consumeToken(builder_, SYM_RCURLY) && result_;
     exit_section_(builder_, level_, marker_, result_, pinned_, null);
     return result_ || pinned_;
   }
 
-  // (':' identifier)?
+  // (SYM_COLON identifier)?
   private static boolean regularClassDecl_0(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "regularClassDecl_0")) return false;
     regularClassDecl_0_0(builder_, level_ + 1);
     return true;
   }
 
-  // ':' identifier
+  // SYM_COLON identifier
   private static boolean regularClassDecl_0_0(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "regularClassDecl_0_0")) return false;
     boolean result_;
     Marker marker_ = enter_section_(builder_);
-    result_ = consumeToken(builder_, ":");
+    result_ = consumeToken(builder_, SYM_COLON);
     result_ = result_ && identifier(builder_, level_ + 1);
     exit_section_(builder_, marker_, null, result_);
     return result_;
@@ -393,14 +414,14 @@ public class ParamParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // (classDeclaration | deleteStatement | assignmentStatement) ';'
+  // (classDeclaration | deleteStatement | assignmentStatement) SYM_SEMI
   public static boolean statement(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "statement")) return false;
     boolean result_, pinned_;
     Marker marker_ = enter_section_(builder_, level_, _NONE_, STATEMENT, "<statement>");
     result_ = statement_0(builder_, level_ + 1);
     pinned_ = result_; // pin = 1
-    result_ = result_ && consumeToken(builder_, ";");
+    result_ = result_ && consumeToken(builder_, SYM_SEMI);
     exit_section_(builder_, level_, marker_, result_, pinned_, null);
     return result_ || pinned_;
   }

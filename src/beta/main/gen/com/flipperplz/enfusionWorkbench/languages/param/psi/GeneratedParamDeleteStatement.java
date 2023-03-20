@@ -10,4 +10,7 @@ public interface GeneratedParamDeleteStatement extends ParamStatement {
   @NotNull
   GeneratedParamIdentifier getIdentifier();
 
+  @NotNull
+  PsiElement getKwDelete();
+
 }

@@ -16,4 +16,7 @@ public interface GeneratedParamStatement extends ParamElement {
   @Nullable
   GeneratedParamDeleteStatement getDeleteStatement();
 
+  @Nullable
+  PsiElement getSymSemi();
+
 }

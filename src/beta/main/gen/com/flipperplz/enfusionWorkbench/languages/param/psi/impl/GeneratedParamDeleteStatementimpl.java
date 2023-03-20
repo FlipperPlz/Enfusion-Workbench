@@ -33,4 +33,10 @@ public class GeneratedParamDeleteStatementimpl extends ParamDeleteMixin implemen
     return findNotNullChildByClass(GeneratedParamIdentifier.class);
   }
 
+  @Override
+  @NotNull
+  public PsiElement getKwDelete() {
+    return findNotNullChildByType(KW_DELETE);
+  }
+
 }

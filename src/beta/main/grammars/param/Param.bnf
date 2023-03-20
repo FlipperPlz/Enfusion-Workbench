@@ -20,6 +20,17 @@
         OP_ASSIGN                = '=';
         OP_ADDASSIGN             = '+=';
         OP_SUBASSIGN             = '-=';
+        KW_CLASS                 = 'class';
+        KW_DELETE                = 'delete';
+        KW_ENUM                  = 'enum';
+        SYM_LCURLY               = '{';
+        SYM_RCURLY               = '}';
+        SYM_LSQUARE              = '[';
+        SYM_RSQUARE              = ']';
+        SYM_SEMI                 = ';';
+        SYM_COLON                = ':';
+        SYM_COMMA                = ',';
+
         ABS_IDENTIFIER           = 'regexp:[a-zA-Z_][a-zA-Z0-9_]*';
         ABS_STRING               = 'regexp:^"(?:[^"]|"")*"$';
         ABS_NUMERIC              = 'regexp:(-?[0-9]+(.[0-9]+)?([eE][-+]?[0-9]+)?|0x[a-fA-F0-9]+)';
@@ -47,27 +58,27 @@
 
 file ::= statement* enumDeclaration? { pin=1 }
 
-classDeclaration ::= 'class' identifier regularClassDecl? { pin=2 }
+classDeclaration ::= KW_CLASS identifier regularClassDecl? { pin=2 }
 
 assignmentStatement ::= identifier (arrayAssignment | valueAssignment) { pin=1 }
 
-deleteStatement ::= 'delete' identifier  { pin=2 }
+deleteStatement ::= KW_DELETE identifier  { pin=2 }
 
 paramNumeric ::= ABS_NUMERIC
 paramString ::= ABS_STRING
 identifier ::= ABS_IDENTIFIER
 
-literalArray ::= '{' arrayElement (',' (arrayElement | &'}'))* '}' { pin(".*")=1 }
+literalArray ::= SYM_LCURLY (arrayElement (SYM_COMMA (arrayElement | &SYM_RCURLY))*)? SYM_RCURLY { pin(".*")=1 }
 
-enumDeclaration ::= 'enum' '{' [enumValue+] '}' ';' { pin=2 }
-statement ::= (classDeclaration | deleteStatement | assignmentStatement) ';' {  pin=1 }
-enumValue ::= identifier ('=' paramNumeric)? { pin=1 }
+enumDeclaration ::= KW_DELETE SYM_LCURLY [enumValue+] SYM_RCURLY SYM_SEMI { pin=2 }
+statement ::= (classDeclaration | deleteStatement | assignmentStatement) SYM_SEMI {  pin=1 }
+enumValue ::= identifier (OP_ASSIGN paramNumeric)? { pin=1 }
 
 literal ::= paramString | paramNumeric
 
 arrayElement ::= literal | literalArray
 
-private arrayAssignment ::= '[' ']' (
+private arrayAssignment ::= SYM_LSQUARE SYM_RSQUARE (
         OP_ASSIGN  |
         OP_ADDASSIGN |
         OP_SUBASSIGN
@@ -75,7 +86,7 @@ private arrayAssignment ::= '[' ']' (
 
 private valueAssignment ::= OP_ASSIGN literal { pin=1 };
 
-private regularClassDecl ::= (':' identifier)? '{' statement* '}' {pin=2 }
+private regularClassDecl ::= (SYM_COLON identifier)? SYM_LCURLY statement* SYM_RCURLY {pin=2 }
 
 
 

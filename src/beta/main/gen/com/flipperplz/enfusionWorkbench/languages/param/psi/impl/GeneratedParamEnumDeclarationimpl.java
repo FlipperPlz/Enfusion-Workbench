@@ -32,4 +32,28 @@ public class GeneratedParamEnumDeclarationimpl extends ParamElementImpl implemen
     return PsiTreeUtil.getChildrenOfTypeAsList(this, GeneratedParamEnumValue.class);
   }
 
+  @Override
+  @NotNull
+  public PsiElement getKwDelete() {
+    return findNotNullChildByType(KW_DELETE);
+  }
+
+  @Override
+  @NotNull
+  public PsiElement getSymLcurly() {
+    return findNotNullChildByType(SYM_LCURLY);
+  }
+
+  @Override
+  @Nullable
+  public PsiElement getSymRcurly() {
+    return findChildByType(SYM_RCURLY);
+  }
+
+  @Override
+  @Nullable
+  public PsiElement getSymSemi() {
+    return findChildByType(SYM_SEMI);
+  }
+
 }

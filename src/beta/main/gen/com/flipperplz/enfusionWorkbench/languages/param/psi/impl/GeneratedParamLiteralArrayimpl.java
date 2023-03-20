@@ -33,4 +33,16 @@ public class GeneratedParamLiteralArrayimpl extends ParamArrayMixin implements G
     return PsiTreeUtil.getChildrenOfTypeAsList(this, GeneratedParamArrayElement.class);
   }
 
+  @Override
+  @NotNull
+  public PsiElement getSymLcurly() {
+    return findNotNullChildByType(SYM_LCURLY);
+  }
+
+  @Override
+  @Nullable
+  public PsiElement getSymRcurly() {
+    return findChildByType(SYM_RCURLY);
+  }
+
 }

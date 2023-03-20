@@ -31,23 +31,32 @@ SINGLE_LINE_COMMENT="//".*\r\n
 EMPTY_DELIMITED_COMMENT="/"\*\*?"/"
 DELIMITED_COMMENT="/"\*([^*]|[\r\n]|(\*+([^*/]|[\r\n])))*\*+"/"
 ABS_IDENTIFIER=[a-zA-Z_][a-zA-Z0-9_]*
-SCHAR=[^\"] | """"
+ABS_STRING = \"([^\"]|\"\")*\"
 ABS_NUMERIC=(-?[0-9]+(.[0-9]+)?([eE][-+]?[0-9]+)?|0x[a-fA-F0-9]+)
 ABS_WHITESPACE=[\s\t\r\n]
 
 %%
 <YYINITIAL> {
-  {ABS_WHITESPACE}                  { return WHITE_SPACE; }
-
+  {ABS_WHITESPACE}               { return WHITE_SPACE; }
 
   {SINGLE_LINE_COMMENT}          { return ParamTypes.SINGLE_LINE_COMMENT; }
   {EMPTY_DELIMITED_COMMENT}      { return ParamTypes.EMPTY_DELIMITED_COMMENT; }
   {DELIMITED_COMMENT}            { return ParamTypes.DELIMITED_COMMENT; }
+  "class"                        { return ParamTypes.KW_CLASS; }
+  "delete"                       { return ParamTypes.KW_DELETE; }
+  "enum"                         { return ParamTypes.KW_ENUM; }
+  "{"                            { return ParamTypes.SYM_LCURLY; }
+  "}"                            { return ParamTypes.SYM_RCURLY; }
+  "["                            { return ParamTypes.SYM_LSQUARE; }
+  "]"                            { return ParamTypes.SYM_RSQUARE; }
+  ";"                            { return ParamTypes.SYM_SEMI; }
+  ":"                            { return ParamTypes.SYM_COLON; }
+  ","                            { return ParamTypes.SYM_COMMA; }
   "="                            { return ParamTypes.OP_ASSIGN; }
   "+="                           { return ParamTypes.OP_ADDASSIGN; }
   "-="                           { return ParamTypes.OP_SUBASSIGN; }
   {ABS_IDENTIFIER}               { return ParamTypes.ABS_IDENTIFIER; }
-  \"{SCHAR}*\"                   { return ParamTypes.ABS_STRING; }
+  {ABS_STRING}                   { return ParamTypes.ABS_STRING; }
   {ABS_NUMERIC}                  { return ParamTypes.ABS_NUMERIC; }
 
 }

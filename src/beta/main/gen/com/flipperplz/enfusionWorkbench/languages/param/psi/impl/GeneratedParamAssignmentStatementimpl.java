@@ -57,4 +57,16 @@ public class GeneratedParamAssignmentStatementimpl extends ParamAssignmentMixin 
     return findChildByType(OP_SUBASSIGN);
   }
 
+  @Override
+  @Nullable
+  public PsiElement getSymLsquare() {
+    return findChildByType(SYM_LSQUARE);
+  }
+
+  @Override
+  @Nullable
+  public PsiElement getSymRsquare() {
+    return findChildByType(SYM_RSQUARE);
+  }
+
 }

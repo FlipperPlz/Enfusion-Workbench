@@ -39,4 +39,28 @@ public class GeneratedParamClassDeclarationimpl extends ParamClassMixin implemen
     return PsiTreeUtil.getChildrenOfTypeAsList(this, GeneratedParamStatement.class);
   }
 
+  @Override
+  @NotNull
+  public PsiElement getKwClass() {
+    return findNotNullChildByType(KW_CLASS);
+  }
+
+  @Override
+  @Nullable
+  public PsiElement getSymColon() {
+    return findChildByType(SYM_COLON);
+  }
+
+  @Override
+  @Nullable
+  public PsiElement getSymLcurly() {
+    return findChildByType(SYM_LCURLY);
+  }
+
+  @Override
+  @Nullable
+  public PsiElement getSymRcurly() {
+    return findChildByType(SYM_RCURLY);
+  }
+
 }
