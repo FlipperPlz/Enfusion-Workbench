@@ -18,19 +18,19 @@ class ParamFoldingBuilder : FoldingBuilderEx(), DumbAware {
         for (clazz in PsiTreeUtil.findChildrenOfType(root, ParamClass::class.java)) {
             val lCurly = clazz.node.findChildByType(ParamTypes.SYM_LCURLY) ?: continue
             val rCurly = clazz.node.findChildByType(ParamTypes.SYM_RCURLY) ?: continue
-            descriptors.add(FoldingDescriptor(clazz, TextRange.create(lCurly.startOffset, rCurly.startOffset + 2)))
+            descriptors.add(FoldingDescriptor(clazz, TextRange.create(lCurly.startOffset, rCurly.startOffset + 1)))
         }
 
         for(array in PsiTreeUtil.findChildrenOfType(root, ParamArray::class.java)) {
             val lCurly = array.node.findChildByType(ParamTypes.SYM_LCURLY) ?: continue
             val rCurly = array.node.findChildByType(ParamTypes.SYM_RCURLY) ?: continue
-            descriptors.add(FoldingDescriptor(array, TextRange.create(lCurly.startOffset, rCurly.startOffset + 2)))
+            descriptors.add(FoldingDescriptor(array, TextRange.create(lCurly.startOffset, rCurly.startOffset + 1)))
         }
 
         return descriptors.toTypedArray()
     }
 
-    override fun getPlaceholderText(node: ASTNode): String = "{...};"
+    override fun getPlaceholderText(node: ASTNode): String = "{...}"
 
     override fun isCollapsedByDefault(node: ASTNode): Boolean = false
 }
