@@ -58,10 +58,10 @@ public class ParamLexer implements FlexLexer {
 
   /* The ZZ_CMAP_A table has 640 entries */
   static final char ZZ_CMAP_A[] = zzUnpackCMap(
-    "\11\0\1\4\1\2\2\1\1\3\22\0\1\4\1\0\1\11\7\0\1\6\1\14\1\0\1\12\1\0\1\5\1\15"+
-    "\11\10\3\0\1\20\3\0\4\17\1\13\1\17\24\7\4\0\1\7\1\0\4\17\1\13\1\17\21\7\1"+
-    "\16\2\7\12\0\1\1\32\0\1\4\337\0\1\4\177\0\13\4\35\0\2\1\5\0\1\4\57\0\1\4\40"+
-    "\0");
+    "\11\0\1\17\1\2\2\1\1\3\22\0\1\17\1\0\1\10\7\0\1\5\1\13\1\0\1\11\1\0\1\4\1"+
+    "\14\11\7\3\0\1\20\3\0\4\16\1\12\1\16\24\6\4\0\1\6\1\0\4\16\1\12\1\16\21\6"+
+    "\1\15\2\6\12\0\1\1\32\0\1\17\337\0\1\17\177\0\13\17\35\0\2\1\5\0\1\17\57\0"+
+    "\1\17\40\0");
 
   /** 
    * Translates DFA states to action switch labels.
@@ -70,12 +70,12 @@ public class ParamLexer implements FlexLexer {
 
   private static final String ZZ_ACTION_PACKED_0 =
     "\1\0\1\1\1\2\1\1\1\3\1\4\3\1\1\4"+
-    "\1\5\6\0\1\6\1\7\3\0\1\10\1\0\1\4"+
-    "\1\0\2\11\2\4\1\12\1\0\1\10\1\0\2\4"+
+    "\1\5\5\0\1\6\1\7\1\10\3\0\1\11\1\0"+
+    "\1\4\1\0\2\4\1\12\1\0\1\11\1\0\2\4"+
     "\1\13";
 
   private static int [] zzUnpackAction() {
-    int [] result = new int[37];
+    int [] result = new int[35];
     int offset = 0;
     offset = zzUnpackAction(ZZ_ACTION_PACKED_0, offset, result);
     return result;
@@ -100,14 +100,14 @@ public class ParamLexer implements FlexLexer {
   private static final int [] ZZ_ROWMAP = zzUnpackRowMap();
 
   private static final String ZZ_ROWMAP_PACKED_0 =
-    "\0\0\0\21\0\42\0\63\0\104\0\125\0\146\0\167"+
-    "\0\210\0\231\0\21\0\252\0\273\0\314\0\335\0\356"+
-    "\0\377\0\21\0\21\0\u0110\0\u0121\0\u0132\0\u0132\0\u0143"+
-    "\0\u0154\0\u0165\0\21\0\356\0\u0176\0\u0187\0\21\0\u0198"+
-    "\0\21\0\u01a9\0\u0165\0\u01ba\0\21";
+    "\0\0\0\21\0\21\0\42\0\63\0\104\0\125\0\146"+
+    "\0\167\0\210\0\21\0\231\0\252\0\273\0\314\0\125"+
+    "\0\21\0\21\0\21\0\335\0\356\0\377\0\377\0\u0110"+
+    "\0\u0121\0\u0132\0\u0143\0\u0154\0\21\0\u0165\0\21\0\u0176"+
+    "\0\u0132\0\u0187\0\21";
 
   private static int [] zzUnpackRowMap() {
-    int [] result = new int[37];
+    int [] result = new int[35];
     int offset = 0;
     offset = zzUnpackRowMap(ZZ_ROWMAP_PACKED_0, offset, result);
     return result;
@@ -130,28 +130,27 @@ public class ParamLexer implements FlexLexer {
   private static final int [] ZZ_TRANS = zzUnpackTrans();
 
   private static final String ZZ_TRANS_PACKED_0 =
-    "\1\2\4\3\1\4\1\2\1\5\1\6\1\7\1\10"+
-    "\1\5\1\11\1\12\2\5\1\13\22\0\4\3\21\0"+
-    "\1\14\1\15\21\0\2\5\2\0\1\5\1\0\3\5"+
-    "\1\0\1\16\3\0\4\16\1\6\2\16\1\17\1\16"+
-    "\1\6\3\16\1\20\3\0\5\20\1\21\7\20\10\0"+
-    "\1\6\4\0\1\6\2\0\1\22\20\0\1\23\1\16"+
-    "\3\0\4\16\1\6\2\16\1\17\1\16\1\6\1\24"+
-    "\2\16\1\14\2\0\1\25\15\14\5\26\1\27\1\30"+
-    "\12\26\10\0\1\31\4\0\1\31\13\0\1\31\1\0"+
-    "\1\32\1\0\1\32\1\31\14\0\1\33\20\0\1\34"+
-    "\17\0\1\35\2\0\1\36\1\0\1\35\1\0\1\36"+
-    "\3\0\1\37\16\0\6\26\1\40\17\26\1\41\1\40"+
-    "\12\26\10\0\1\31\2\0\1\42\1\0\1\31\13\0"+
-    "\1\43\4\0\1\43\13\0\1\35\2\0\1\44\1\0"+
-    "\1\35\1\0\1\36\11\0\1\36\2\0\1\36\1\0"+
-    "\1\36\1\0\1\36\1\0\5\26\1\45\1\40\12\26"+
-    "\10\0\1\43\1\0\1\32\1\0\1\32\1\43\13\0"+
-    "\1\36\1\0\1\32\1\36\1\32\1\36\1\0\1\36"+
-    "\1\0";
+    "\1\2\3\3\1\4\1\2\1\5\1\6\1\7\1\10"+
+    "\1\5\1\11\1\12\2\5\1\3\1\13\25\0\1\14"+
+    "\1\15\21\0\2\5\2\0\1\5\1\0\3\5\2\0"+
+    "\1\16\3\0\3\16\1\6\2\16\1\17\1\16\1\6"+
+    "\4\16\10\20\1\21\10\20\7\0\1\6\4\0\1\6"+
+    "\3\0\1\22\20\0\1\23\1\16\3\0\3\16\1\6"+
+    "\2\16\1\17\1\16\1\6\1\24\3\16\1\14\2\0"+
+    "\1\25\15\14\4\26\1\27\1\30\13\26\7\0\1\31"+
+    "\4\0\1\31\13\0\1\31\1\0\1\32\1\0\1\32"+
+    "\1\31\13\0\1\33\2\0\1\34\1\0\1\33\1\0"+
+    "\1\34\4\0\1\35\16\0\5\26\1\36\17\26\1\37"+
+    "\1\36\13\26\7\0\1\31\2\0\1\40\1\0\1\31"+
+    "\13\0\1\41\4\0\1\41\13\0\1\33\2\0\1\42"+
+    "\1\0\1\33\1\0\1\34\11\0\1\34\2\0\1\34"+
+    "\1\0\1\34\1\0\1\34\2\0\4\26\1\43\1\36"+
+    "\13\26\7\0\1\41\1\0\1\32\1\0\1\32\1\41"+
+    "\13\0\1\34\1\0\1\32\1\34\1\32\1\34\1\0"+
+    "\1\34\2\0";
 
   private static int [] zzUnpackTrans() {
-    int [] result = new int[459];
+    int [] result = new int[408];
     int offset = 0;
     offset = zzUnpackTrans(ZZ_TRANS_PACKED_0, offset, result);
     return result;
@@ -189,12 +188,12 @@ public class ParamLexer implements FlexLexer {
   private static final int [] ZZ_ATTRIBUTE = zzUnpackAttribute();
 
   private static final String ZZ_ATTRIBUTE_PACKED_0 =
-    "\1\0\1\11\10\1\1\11\6\0\2\11\3\0\1\1"+
-    "\1\0\1\1\1\0\1\11\3\1\1\11\1\0\1\11"+
-    "\1\0\2\1\1\11";
+    "\1\0\2\11\7\1\1\11\5\0\3\11\3\0\1\1"+
+    "\1\0\1\1\1\0\2\1\1\11\1\0\1\11\1\0"+
+    "\2\1\1\11";
 
   private static int [] zzUnpackAttribute() {
-    int [] result = new int[37];
+    int [] result = new int[35];
     int offset = 0;
     offset = zzUnpackAttribute(ZZ_ATTRIBUTE_PACKED_0, offset, result);
     return result;
@@ -525,22 +524,22 @@ public class ParamLexer implements FlexLexer {
             // fall through
           case 16: break;
           case 6: 
-            { return ParamTypes.OP_SUBASSIGN;
+            { return ParamTypes.ABS_STRING;
             } 
             // fall through
           case 17: break;
           case 7: 
-            { return ParamTypes.OP_ADDASSIGN;
+            { return ParamTypes.OP_SUBASSIGN;
             } 
             // fall through
           case 18: break;
           case 8: 
-            { return ParamTypes.EMPTY_DELIMITED_COMMENT;
+            { return ParamTypes.OP_ADDASSIGN;
             } 
             // fall through
           case 19: break;
           case 9: 
-            { return ParamTypes.ABS_STRING;
+            { return ParamTypes.EMPTY_DELIMITED_COMMENT;
             } 
             // fall through
           case 20: break;

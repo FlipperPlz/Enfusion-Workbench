@@ -26,19 +26,18 @@ import static com.flipperplz.enfusionWorkbench.languages.param.psi.ParamTypes.*;
 %unicode
 
 EOL=\R
-WHITE_SPACE=\s+
 
 SINGLE_LINE_COMMENT="//".*\r\n
 EMPTY_DELIMITED_COMMENT="/"\*\*?"/"
 DELIMITED_COMMENT="/"\*([^*]|[\r\n]|(\*+([^*/]|[\r\n])))*\*+"/"
 ABS_IDENTIFIER=[a-zA-Z_][a-zA-Z0-9_]*
-ABS_STRING=\"(\"\" | .)\"
+SCHAR=[^\"] | """"
 ABS_NUMERIC=(-?[0-9]+(.[0-9]+)?([eE][-+]?[0-9]+)?|0x[a-fA-F0-9]+)
 ABS_WHITESPACE=[\s\t\r\n]
 
 %%
 <YYINITIAL> {
-  {WHITE_SPACE}                  { return WHITE_SPACE; }
+  {ABS_WHITESPACE}                  { return WHITE_SPACE; }
 
 
   {SINGLE_LINE_COMMENT}          { return ParamTypes.SINGLE_LINE_COMMENT; }
@@ -48,9 +47,8 @@ ABS_WHITESPACE=[\s\t\r\n]
   "+="                           { return ParamTypes.OP_ADDASSIGN; }
   "-="                           { return ParamTypes.OP_SUBASSIGN; }
   {ABS_IDENTIFIER}               { return ParamTypes.ABS_IDENTIFIER; }
-  {ABS_STRING}                   { return ParamTypes.ABS_STRING; }
+  \"{SCHAR}*\"                   { return ParamTypes.ABS_STRING; }
   {ABS_NUMERIC}                  { return ParamTypes.ABS_NUMERIC; }
-  {ABS_WHITESPACE}               { return ParamTypes.ABS_WHITESPACE; }
 
 }
 
