@@ -1,4 +1,4 @@
-package com.flipperplz.enfusionWorkbench.languages.param
+package com.flipperplz.enfusionWorkbench.languages.param.enumerations
 
 import kotlin.reflect.KType
 import kotlin.reflect.full.starProjectedType

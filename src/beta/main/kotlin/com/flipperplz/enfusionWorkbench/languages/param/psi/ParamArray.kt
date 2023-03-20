@@ -1,6 +1,6 @@
 package com.flipperplz.enfusionWorkbench.languages.param.psi
 
-import com.flipperplz.enfusionWorkbench.languages.param.ParamLiteralType
+import com.flipperplz.enfusionWorkbench.languages.param.enumerations.ParamLiteralType
 
 
 interface ParamArray : ParamArrayElement, Iterable<ParamArrayElement> {

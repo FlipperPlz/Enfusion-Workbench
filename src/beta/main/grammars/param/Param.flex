@@ -1,6 +1,6 @@
 package com.flipperplz.enfusionWorkbench.languages.param.lexer;
 
-import com.intellij.lexer.FlexLexer;
+import com.flipperplz.enfusionWorkbench.languages.param.psi.ParamTypes;import com.intellij.lexer.FlexLexer;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.lexer.FlexLexer;
 import com.intellij.psi.tree.IElementType;
@@ -41,13 +41,16 @@ ABS_WHITESPACE=[\s\t\r\n]
   {WHITE_SPACE}                  { return WHITE_SPACE; }
 
 
-  {SINGLE_LINE_COMMENT}          { return SINGLE_LINE_COMMENT; }
-  {EMPTY_DELIMITED_COMMENT}      { return EMPTY_DELIMITED_COMMENT; }
-  {DELIMITED_COMMENT}            { return DELIMITED_COMMENT; }
-  {ABS_IDENTIFIER}               { return ABS_IDENTIFIER; }
-  {ABS_STRING}                   { return ABS_STRING; }
-  {ABS_NUMERIC}                  { return ABS_NUMERIC; }
-  {ABS_WHITESPACE}               { return ABS_WHITESPACE; }
+  {SINGLE_LINE_COMMENT}          { return ParamTypes.SINGLE_LINE_COMMENT; }
+  {EMPTY_DELIMITED_COMMENT}      { return ParamTypes.EMPTY_DELIMITED_COMMENT; }
+  {DELIMITED_COMMENT}            { return ParamTypes.DELIMITED_COMMENT; }
+  "="                            { return ParamTypes.OP_ASSIGN; }
+  "+="                           { return ParamTypes.OP_ADDASSIGN; }
+  "-="                           { return ParamTypes.OP_SUBASSIGN; }
+  {ABS_IDENTIFIER}               { return ParamTypes.ABS_IDENTIFIER; }
+  {ABS_STRING}                   { return ParamTypes.ABS_STRING; }
+  {ABS_NUMERIC}                  { return ParamTypes.ABS_NUMERIC; }
+  {ABS_WHITESPACE}               { return ParamTypes.ABS_WHITESPACE; }
 
 }
 

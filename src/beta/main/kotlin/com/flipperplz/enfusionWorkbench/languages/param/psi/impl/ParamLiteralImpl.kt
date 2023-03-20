@@ -1,6 +1,6 @@
 package com.flipperplz.enfusionWorkbench.languages.param.psi.impl
 
-import com.flipperplz.enfusionWorkbench.languages.param.ParamLiteralType
+import com.flipperplz.enfusionWorkbench.languages.param.enumerations.ParamLiteralType
 import com.flipperplz.enfusionWorkbench.languages.param.psi.ParamLiteral
 import com.intellij.lang.ASTNode
 
