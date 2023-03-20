@@ -7,7 +7,7 @@ import com.intellij.psi.PsiElement;
 
 public interface GeneratedParamDeleteStatement extends GeneratedParamStatement, ParamStatement {
 
-  @Nullable
+  @NotNull
   GeneratedParamIdentifier getIdentifier();
 
 }

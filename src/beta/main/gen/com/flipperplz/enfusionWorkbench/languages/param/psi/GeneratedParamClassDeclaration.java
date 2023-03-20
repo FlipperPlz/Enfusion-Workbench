@@ -10,7 +10,7 @@ public interface GeneratedParamClassDeclaration extends GeneratedParamStatement,
   @NotNull
   List<GeneratedParamIdentifier> getIdentifierList();
 
-  @NotNull
-  List<GeneratedParamStatement> getStatementList();
+  @Nullable
+  GeneratedParamStatement getStatement();
 
 }

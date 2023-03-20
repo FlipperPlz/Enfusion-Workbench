@@ -48,11 +48,11 @@
 
 file ::= statement* enumDeclaration? { pin=1 }
 
-classDeclaration ::= 'class' identifier regularClassDecl? ';' { pin=1 }
+classDeclaration ::= 'class' identifier regularClassDecl? { pin=2 }
 
-assignmentStatement ::= identifier (arrayAssignment | valueAssignment) ';' { pin=1 }
+assignmentStatement ::= identifier (arrayAssignment | valueAssignment) { pin=1 }
 
-deleteStatement ::= 'delete' identifier ';' { pin=1 }
+deleteStatement ::= 'delete' identifier  { pin=2 }
 
 paramNumeric ::= ABS_NUMERIC
 paramString ::= ABS_STRING
@@ -61,7 +61,7 @@ identifier ::= ABS_IDENTIFIER
 literalArray ::= '{' arrayElement (',' (arrayElement | &'}'))* '}' { pin(".*")=1 }
 
 enumDeclaration ::= 'enum' '{' [enumValue+] '}' ';' { pin=2 }
-statement ::= classDeclaration | deleteStatement | assignmentStatement { recoverWhile="statementRecover" }
+statement ::= (classDeclaration | deleteStatement | assignmentStatement) ';' {  pin=1 }
 enumValue ::= identifier ('=' paramNumeric)? { pin=1 }
 
 literal ::= paramString | paramNumeric
@@ -72,17 +72,11 @@ private arrayAssignment ::= '[' ']' (
         OP_ASSIGN  |
         OP_ADDASSIGN |
         OP_SUBASSIGN
-    ) literalArray
-{
-    pin=3
-};
+    ) literalArray { pin=3 };
 
 private valueAssignment ::= OP_ASSIGN literal { pin=1 };
 
-
-private statementRecover ::= !(';' | identifier)
-
-private regularClassDecl ::= (':' identifier)? '{' [statement+] '}'
+private regularClassDecl ::= (':' identifier)? '{' statement '}' {pin=2 }
 
 
 

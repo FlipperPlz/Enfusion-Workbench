@@ -85,7 +85,7 @@ public class ParamParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // identifier (arrayAssignment | valueAssignment) ';'
+  // identifier (arrayAssignment | valueAssignment)
   public static boolean assignmentStatement(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "assignmentStatement")) return false;
     if (!nextTokenIs(b, ABS_IDENTIFIER)) return false;
@@ -93,8 +93,7 @@ public class ParamParser implements PsiParser, LightPsiParser {
     Marker m = enter_section_(b, l, _NONE_, ASSIGNMENT_STATEMENT, null);
     r = identifier(b, l + 1);
     p = r; // pin = 1
-    r = r && report_error_(b, assignmentStatement_1(b, l + 1));
-    r = p && consumeToken(b, ";") && r;
+    r = r && assignmentStatement_1(b, l + 1);
     exit_section_(b, l, m, r, p, null);
     return r || p;
   }
@@ -109,16 +108,15 @@ public class ParamParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // 'class' identifier regularClassDecl? ';'
+  // 'class' identifier regularClassDecl?
   public static boolean classDeclaration(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "classDeclaration")) return false;
     boolean r, p;
     Marker m = enter_section_(b, l, _NONE_, CLASS_DECLARATION, "<class declaration>");
     r = consumeToken(b, "class");
-    p = r; // pin = 1
-    r = r && report_error_(b, identifier(b, l + 1));
-    r = p && report_error_(b, classDeclaration_2(b, l + 1)) && r;
-    r = p && consumeToken(b, ";") && r;
+    r = r && identifier(b, l + 1);
+    p = r; // pin = 2
+    r = r && classDeclaration_2(b, l + 1);
     exit_section_(b, l, m, r, p, null);
     return r || p;
   }
@@ -131,17 +129,15 @@ public class ParamParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // 'delete' identifier ';'
+  // 'delete' identifier
   public static boolean deleteStatement(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "deleteStatement")) return false;
-    boolean r, p;
+    boolean r;
     Marker m = enter_section_(b, l, _NONE_, DELETE_STATEMENT, "<delete statement>");
     r = consumeToken(b, "delete");
-    p = r; // pin = 1
-    r = r && report_error_(b, identifier(b, l + 1));
-    r = p && consumeToken(b, ";") && r;
-    exit_section_(b, l, m, r, p, null);
-    return r || p;
+    r = r && identifier(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
+    return r;
   }
 
   /* ********************************************************** */
@@ -354,17 +350,18 @@ public class ParamParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // (':' identifier)? '{' [statement+] '}'
+  // (':' identifier)? '{' statement '}'
   static boolean regularClassDecl(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "regularClassDecl")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_);
     r = regularClassDecl_0(b, l + 1);
     r = r && consumeToken(b, "{");
-    r = r && regularClassDecl_2(b, l + 1);
-    r = r && consumeToken(b, "}");
-    exit_section_(b, m, null, r);
-    return r;
+    p = r; // pin = 2
+    r = r && report_error_(b, statement(b, l + 1));
+    r = p && consumeToken(b, "}") && r;
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
   }
 
   // (':' identifier)?
@@ -385,58 +382,26 @@ public class ParamParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // [statement+]
-  private static boolean regularClassDecl_2(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "regularClassDecl_2")) return false;
-    regularClassDecl_2_0(b, l + 1);
-    return true;
-  }
-
-  // statement+
-  private static boolean regularClassDecl_2_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "regularClassDecl_2_0")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = statement(b, l + 1);
-    while (r) {
-      int c = current_position_(b);
-      if (!statement(b, l + 1)) break;
-      if (!empty_element_parsed_guard_(b, "regularClassDecl_2_0", c)) break;
-    }
-    exit_section_(b, m, null, r);
-    return r;
-  }
-
   /* ********************************************************** */
-  // classDeclaration | deleteStatement | assignmentStatement
+  // (classDeclaration | deleteStatement | assignmentStatement) ';'
   public static boolean statement(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "statement")) return false;
-    boolean r;
+    boolean r, p;
     Marker m = enter_section_(b, l, _COLLAPSE_, STATEMENT, "<statement>");
+    r = statement_0(b, l + 1);
+    p = r; // pin = 1
+    r = r && consumeToken(b, ";");
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
+  }
+
+  // classDeclaration | deleteStatement | assignmentStatement
+  private static boolean statement_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "statement_0")) return false;
+    boolean r;
     r = classDeclaration(b, l + 1);
     if (!r) r = deleteStatement(b, l + 1);
     if (!r) r = assignmentStatement(b, l + 1);
-    exit_section_(b, l, m, r, false, ParamParser::statementRecover);
-    return r;
-  }
-
-  /* ********************************************************** */
-  // !(';' | identifier)
-  static boolean statementRecover(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "statementRecover")) return false;
-    boolean r;
-    Marker m = enter_section_(b, l, _NOT_);
-    r = !statementRecover_0(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
-    return r;
-  }
-
-  // ';' | identifier
-  private static boolean statementRecover_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "statementRecover_0")) return false;
-    boolean r;
-    r = consumeToken(b, ";");
-    if (!r) r = identifier(b, l + 1);
     return r;
   }
 

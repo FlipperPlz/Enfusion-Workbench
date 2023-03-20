@@ -34,9 +34,9 @@ public class GeneratedParamClassDeclarationimpl extends ParamClassMixin implemen
   }
 
   @Override
-  @NotNull
-  public List<GeneratedParamStatement> getStatementList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, GeneratedParamStatement.class);
+  @Nullable
+  public GeneratedParamStatement getStatement() {
+    return findChildByClass(GeneratedParamStatement.class);
   }
 
 }

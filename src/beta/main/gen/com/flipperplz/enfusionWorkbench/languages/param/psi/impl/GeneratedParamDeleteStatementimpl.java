@@ -28,9 +28,9 @@ public class GeneratedParamDeleteStatementimpl extends ParamDeleteMixin implemen
   }
 
   @Override
-  @Nullable
+  @NotNull
   public GeneratedParamIdentifier getIdentifier() {
-    return findChildByClass(GeneratedParamIdentifier.class);
+    return findNotNullChildByClass(GeneratedParamIdentifier.class);
   }
 
 }

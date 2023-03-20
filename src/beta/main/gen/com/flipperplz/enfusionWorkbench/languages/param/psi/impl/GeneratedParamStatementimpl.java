@@ -26,4 +26,10 @@ public class GeneratedParamStatementimpl extends ParamElementImpl implements Gen
     else super.accept(visitor);
   }
 
+  @Override
+  @NotNull
+  public GeneratedParamStatement getStatement() {
+    return findNotNullChildByClass(GeneratedParamStatement.class);
+  }
+
 }
