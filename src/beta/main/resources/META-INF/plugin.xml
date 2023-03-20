@@ -30,7 +30,7 @@
             id="Enfusion-Workbench"
         />
         <fileType
-            name="Param File"
+            name="Param"
             implementationClass="com.flipperplz.enfusionWorkbench.languages.param.ParamFileType"
             language="Param"
             fileNamesCaseInsensitive="config.cpp"
@@ -39,6 +39,10 @@
         <lang.parserDefinition
             language="Param"
             implementationClass="com.flipperplz.enfusionWorkbench.languages.param.parser.ParamParserDefinition"
+        />
+        <lang.foldingBuilder
+            language="Param"
+            implementationClass="com.flipperplz.enfusionWorkbench.languages.param.folding.ParamFoldingBuilder"
         />
     </extensions>
 </idea-plugin>
