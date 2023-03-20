@@ -17,32 +17,21 @@
         SINGLE_LINE_COMMENT      = 'regexp://.*$';
         EMPTY_DELIMITED_COMMENT  = 'regexp:/\*\*?/';
         DELIMITED_COMMENT        = 'regexp:/\*([^*]|[\r\n]|(\*+([^*/]|[\r\n])))*\*+/'
-        ABS_IDENTIFIER           =  'regexp:[a-zA-Z_][a-zA-Z0-9_]*';
-        ABS_STRING               =  'regexp:"(""|.)*"';
-        ABS_NUMERIC              =  'regexp:(-?[0-9]+(.[0-9]+)?([eE][-+]?[0-9]+)?|0x[a-fA-F0-9]+)';
-
-        OP_ASSIGN                = 'regexp:='
-        OP_ADD_ASSIGN            = 'regexp:/+='
-        OP_SUB_ASSIGN            = 'regexp:-='
-
-        KEYWORD_CLASS            = 'class'
-        KEYWORD_ENUM             = 'enum'
-        KEYWORD_DELETE           = 'delete'
-        SYM_LBRACKET             = '{'
-        SYM_RBRACKET             = '}'
-        SYM_SEMICOLON            = ';'
-        SYM_COLON                = ':'
-        SYM_LSBRACKET            = '['
-        SYM_RSBRACKET            = ']'
-
+        ABS_IDENTIFIER           = 'regexp:[a-zA-Z_][a-zA-Z0-9_]*';
+        ABS_STRING               = 'regexp:^"(?:[^"]|"")*"$';
+        ABS_NUMERIC              = 'regexp:(-?[0-9]+(.[0-9]+)?([eE][-+]?[0-9]+)?|0x[a-fA-F0-9]+)';
+        ABS_WHITESPACE           = 'regexp:[\s\t\r\n]';
     ]
     generate=[tokenAccessors="yes"]
+
+    extends('classDeclaration|assignmentStatement|deleteStatement')=statement
+    extends('paramString|paramNumeric')=literal
+    extends('literal|literalArray')=arrayElement
 
     implements('classDeclaration|file')='com.flipperplz.enfusionWorkbench.languages.param.psi.ParamScope'
     implements('classDeclaration|assignmentStatement|deleteStatement')='com.flipperplz.enfusionWorkbench.languages.param.psi.ParamStatement'
     implements('paramString|paramNumeric')='com.flipperplz.enfusionWorkbench.languages.param.psi.ParamLiteral'
     implements('literal|literalArray')='com.flipperplz.enfusionWorkbench.languages.param.psi.ParamArrayElement'
-
 
     mixin('literalArray')='com.flipperplz.enfusionWorkbench.languages.param.psi.impl.mixins.ParamArrayMixin'
     mixin('assignmentStatement')='com.flipperplz.enfusionWorkbench.languages.param.psi.impl.mixins.ParamAssignmentMixin'
@@ -51,47 +40,47 @@
     mixin('identifier')='com.flipperplz.enfusionWorkbench.languages.param.psi.impl.mixins.ParamIdentifierMixin'
     mixin('paramNumeric')='com.flipperplz.enfusionWorkbench.languages.param.psi.impl.mixins.ParamNumericMixin'
     mixin('paramString')='com.flipperplz.enfusionWorkbench.languages.param.psi.impl.mixins.ParamStringMixin'
-
 }
 
 file ::= statement* enumDeclaration? { pin=1 }
 
-classDeclaration ::= KEYWORD_CLASS identifier regularClassDecl? SYM_SEMICOLON { pin=1 }
+classDeclaration ::= 'class' identifier regularClassDecl? ';' { pin=1 }
 
-assignmentStatement ::= identifier (arrayAssignment | valueAssignment) SYM_SEMICOLON { pin=1 }
+assignmentStatement ::= identifier (arrayAssignment | valueAssignment) ';' { pin=1 }
 
-deleteStatement ::= KEYWORD_DELETE identifier SYM_SEMICOLON { pin=1 }
+deleteStatement ::= 'delete' identifier ';' { pin=1 }
 
 paramNumeric ::= ABS_NUMERIC
 paramString ::= ABS_STRING
 identifier ::= ABS_IDENTIFIER
 
-literalArray ::= SYM_LBRACKET arrayElement (',' (arrayElement | &SYM_RBRACKET))* SYM_RBRACKET { pin(".*")=1 }
+literalArray ::= '{' arrayElement (',' (arrayElement | &'}'))* '}' { pin(".*")=1 }
 
-enumDeclaration ::= KEYWORD_ENUM SYM_LBRACKET enumValue* SYM_RBRACKET SYM_SEMICOLON { pin=2 }
+enumDeclaration ::= 'enum' '{' [enumValue+] '}' ';' { pin=2 }
+statement ::= classDeclaration | deleteStatement | assignmentStatement { recoverWhile="statementRecover" }
+enumValue ::= identifier ('=' paramNumeric)? { pin=1 }
 
-private literal ::= paramString | paramNumeric
+literal ::= paramString | paramNumeric
 
-private arrayElement ::= literal | literalArray
+arrayElement ::= literal | literalArray
 
-private statement ::= classDeclaration | deleteStatement | assignmentStatement { recoverWhile="statementRecover" }
 
-private arrayAssignment ::= SYM_LSBRACKET SYM_RSBRACKET (
-        OP_ASSIGN  |
-        OP_ADD_ASSIGN |
-        OP_SUB_ASSIGN
+
+private arrayAssignment ::= '[' ']' (
+        '='  |
+        '+=' |
+        '-='
     ) literalArray
 {
     pin=3
 };
 
-private valueAssignment ::= OP_ASSIGN literal { pin=1 };
+private valueAssignment ::= '=' literal { pin=1 };
 
-private enumValue ::= identifier (OP_ASSIGN ABS_NUMERIC)? { pin=1 }
 
-private statementRecover ::= !(SYM_SEMICOLON | identifier)
+private statementRecover ::= !(';' | identifier)
 
-private regularClassDecl ::= (SYM_COLON identifier)? SYM_LBRACKET statement* SYM_RBRACKET { pin=2 }
+private regularClassDecl ::= (':' identifier)? '{' [statement+] '}'
 
 
 

@@ -25,32 +25,21 @@ import static com.flipperplz.enfusionWorkbench.languages.param.psi.ParamTypes.*;
 %type IElementType
 %unicode
 
-WHITE_SPACE=[\s\t]+
+EOL=\R
+WHITE_SPACE=\s+
 
-SINGLE_LINE_COMMENT="//".*[\r\n]
+SINGLE_LINE_COMMENT="//".*\r\n
 EMPTY_DELIMITED_COMMENT="/"\*\*?"/"
 DELIMITED_COMMENT="/"\*([^*]|[\r\n]|(\*+([^*/]|[\r\n])))*\*+"/"
 ABS_IDENTIFIER=[a-zA-Z_][a-zA-Z0-9_]*
+ABS_STRING=\"(\"\" | .)\"
 ABS_NUMERIC=(-?[0-9]+(.[0-9]+)?([eE][-+]?[0-9]+)?|0x[a-fA-F0-9]+)
-ABS_STRING=\"((\"\"|[^\"])+)\"
+ABS_WHITESPACE=[\s\t\r\n]
 
 %%
 <YYINITIAL> {
-
   {WHITE_SPACE}                  { return WHITE_SPACE; }
 
-  "class"                        { return KEYWORD_CLASS; }
-  "enum"                         { return KEYWORD_ENUM; }
-  "delete"                       { return KEYWORD_DELETE; }
-  "{"                            { return SYM_LBRACKET; }
-  "}"                            { return SYM_RBRACKET; }
-  ";"                            { return SYM_SEMICOLON; }
-  ":"                            { return SYM_COLON; }
-  "["                            { return SYM_LSBRACKET; }
-  "]"                            { return SYM_RSBRACKET; }
-  "="                            { return OP_ASSIGN; }
-  "+="                           { return OP_ADD_ASSIGN; }
-  "-="                           { return OP_SUB_ASSIGN; }
 
   {SINGLE_LINE_COMMENT}          { return SINGLE_LINE_COMMENT; }
   {EMPTY_DELIMITED_COMMENT}      { return EMPTY_DELIMITED_COMMENT; }
@@ -58,6 +47,8 @@ ABS_STRING=\"((\"\"|[^\"])+)\"
   {ABS_IDENTIFIER}               { return ABS_IDENTIFIER; }
   {ABS_STRING}                   { return ABS_STRING; }
   {ABS_NUMERIC}                  { return ABS_NUMERIC; }
+  {ABS_WHITESPACE}               { return ABS_WHITESPACE; }
+
 }
 
 [^] { return BAD_CHARACTER; }
