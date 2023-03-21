@@ -8,4 +8,6 @@ open class ParamLiteralImpl(node: ASTNode) : ParamElementImpl(node), ParamLitera
     override fun asKtString(): String = "__Dummy__Literal__"
     override val valueType: ParamLiteralType
         get() = ParamLiteralType.ParamUnknown
+
+    override fun asParsableText(): String = text
 }

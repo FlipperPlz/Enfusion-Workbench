@@ -23,11 +23,22 @@ object ParamElementFactory {
     fun createArray(project: Project, elements: List<ParamArrayElement>): ParamArray =
         (createDummyFile(project, "dummyIdentifier=${elements.asParamArrayString()};") as ParamAssignment).paramValue as ParamArray
 
-    fun createAssignment(project: Project, tokenName: String, value: ParamArrayElement, operation: ParamAssignmentOperation = ParamAssignmentOperation.ASSIGN): ParamAssignment =
-        (createDummyFile(project, "${if(value is ParamArray && !tokenName.contains("\\[\\s*]\\s*")) "${tokenName}[]" else tokenName}${operation.operatorText}${value.asKtString()}") as ParamAssignment)
+    fun createArrayAssignment(project: Project, tokenName: String, value: ParamArray, operation: ParamAssignmentOperation = ParamAssignmentOperation.ASSIGN): ParamAssignment =
+        (createDummyFile(project, "${if(!tokenName.contains("\\[\\s*]\\s*")) "${tokenName}[]" else tokenName}${operation.operatorText}${value.asKtString()};") as ParamAssignment)
+
+    fun createAssignment(project: Project, tokenName: String, value: ParamLiteral): ParamAssignment =
+        (createDummyFile(project, "${tokenName}=${value.asKtString()};") as ParamAssignment)
 
     fun createDelete(project: Project, deleting: String): ParamDelete =
         (createDummyFile(project, "delete ${deleting};") as ParamDelete)
+
+    fun createExternalClass(project: Project, classname: String): ParamClass =  (createDummyFile(project, "class ${classname};") as ParamClass)
+
+    fun createClass(project: Project, classname: String, superClass: String? = null, statements: List<ParamStatement>): ParamClass =
+        (createDummyFile(project, "class $classname ${if(superClass != null) ": $superClass" else ""} {\n" +
+                statements.joinToString("\n") { it.asParsableText() } +
+                "\n};") as ParamClass)
+
 
     private fun createDummyFile(project: Project, content: String): PsiFile =
         PsiFileFactory.getInstance(project).createFileFromText("__dummy-script__.c", ParamLanguage, content)

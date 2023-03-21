@@ -20,4 +20,8 @@ interface ParamAssignment: ParamNamedStatement {
 
 
     override fun setName(name: String): PsiElement = paramAssignee.setName(name)
+
+    override fun asParsableText(): String {
+        TODO("Not yet implemented")
+    }
 }

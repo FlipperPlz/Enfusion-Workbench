@@ -8,4 +8,5 @@ interface ParamArray : ParamArrayElement, Iterable<ParamArrayElement> {
         get() = ParamLiteralType.ParamArray
     val arrayElements: List<ParamArrayElement>
 
+    override fun asParsableText(): String = arrayElements.asParamArrayString()
 }

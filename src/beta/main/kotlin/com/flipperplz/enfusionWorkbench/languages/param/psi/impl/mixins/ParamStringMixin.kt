@@ -21,4 +21,6 @@ abstract class ParamStringMixin(node: ASTNode) : ParamLiteralImpl(node), ParamSt
             if(quoted) replace(ParamElementFactory.createString(project, text.replace("\"\"","\"").removeSuffix("\"").removePrefix("\"")))
             else replace(ParamElementFactory.createString(project, "\"${text.replace("\"", "\"\"")}\""))
         }
+
+    override fun asParsableText(): String = asKtString()
 }

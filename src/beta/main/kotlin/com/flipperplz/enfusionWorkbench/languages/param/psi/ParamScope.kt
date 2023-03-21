@@ -8,6 +8,8 @@ interface ParamScope : ParamNamedElement {
     val previousScope: ParamScope?
         get() = parentOfType(false)
     val statements: List<ParamStatement>
+    override val binarizable: Boolean
+        get() = true
 
     infix fun getChildClass(className: String?): ParamClass? {
         return if(className == null) null else

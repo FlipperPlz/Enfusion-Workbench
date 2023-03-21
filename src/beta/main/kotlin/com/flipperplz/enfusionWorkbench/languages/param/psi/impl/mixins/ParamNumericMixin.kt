@@ -14,8 +14,11 @@ abstract class ParamNumericMixin(node: ASTNode) : ParamLiteralImpl(node), ParamN
         }
     } ?: throw NumberFormatException("Invalid number format: ${this.text}")
 
+
     override val valueType: ParamLiteralType
         get() = ParamLiteralType.typeFromNumber(asKtNumber())
+
+    override fun asParsableText(): String = asKtString()
 
     override fun asKtString(): String = text
 }
