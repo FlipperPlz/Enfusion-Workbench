@@ -15,7 +15,7 @@ import com.intellij.psi.tree.IElementType
 class ParamSyntaxHighlighter : SyntaxHighlighterBase() {
 
     companion object {
-        private val OPERATOR: TextAttributesKey = createTextAttributesKey("PARAM_OPERATOR", DefaultLanguageHighlighterColors.OPERATION_SIGN)
+        val OPERATOR: TextAttributesKey = createTextAttributesKey("PARAM_OPERATOR", DefaultLanguageHighlighterColors.OPERATION_SIGN)
         val KEYWORD: TextAttributesKey = createTextAttributesKey("PARAM_KEYWORD", DefaultLanguageHighlighterColors.KEYWORD)
         val STRING: TextAttributesKey = createTextAttributesKey("PARAM_STRING", DefaultLanguageHighlighterColors.STRING)
         val LINE_COMMENT: TextAttributesKey = createTextAttributesKey("PARAM_LINE_COMMENT", DefaultLanguageHighlighterColors.LINE_COMMENT)

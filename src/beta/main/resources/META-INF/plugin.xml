@@ -48,6 +48,9 @@
             language="Param"
             implementationClass="com.flipperplz.enfusionWorkbench.languages.param.sugar.highlighting.ParamSyntaxHighlighterFactory"
         />
+        <colorSettingsPage
+            implementation="com.flipperplz.enfusionWorkbench.languages.param.sugar.highlighting.settings.ParamColorSettingsPage"
+        />
         <codeStyleSettingsProvider
             implementation="com.flipperplz.enfusionWorkbench.languages.param.sugar.codeStyle.ParamCodeStyleSettingsProvider"
         />
