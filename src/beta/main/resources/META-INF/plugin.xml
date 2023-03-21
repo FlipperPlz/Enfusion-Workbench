@@ -36,6 +36,12 @@
             fileNamesCaseInsensitive="config.cpp"
             extensions="cpp;rvmat"
         />
+        <fileType
+                name="ParamC"
+                implementationClass="com.flipperplz.enfusionWorkbench.languages.param.binarization.ParamBinFileType"
+                language="Param"
+                extensions="bin;cpp;rvmat"
+        />
         <lang.parserDefinition
             language="Param"
             implementationClass="com.flipperplz.enfusionWorkbench.languages.param.parser.ParamParserDefinition"

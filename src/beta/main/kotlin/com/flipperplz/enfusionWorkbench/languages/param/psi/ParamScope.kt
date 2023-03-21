@@ -16,6 +16,8 @@ interface ParamScope : ParamNamedElement {
             statements.filterIsInstance<ParamClass>().firstOrNull { className.equals(it.className.name, true) && !it.isExternalClass }
     }
 
+    infix fun append(paramStatement: ParamStatement) = node.addChild(paramStatement.node, statements.last().node)
+
     infix fun getChildExternalClass(className: String?): ParamClass? {
         return if(className == null) null else
             statements.filterIsInstance<ParamClass>().firstOrNull { className.equals(it.className.name, true) && it.isExternalClass }

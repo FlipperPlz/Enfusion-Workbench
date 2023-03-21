@@ -39,7 +39,6 @@ object ParamElementFactory {
                 statements.joinToString("\n") { it.asParsableText() } +
                 "\n};") as ParamClass)
 
-
     private fun createDummyFile(project: Project, content: String): PsiFile =
         PsiFileFactory.getInstance(project).createFileFromText("__dummy-script__.c", ParamLanguage, content)
 
