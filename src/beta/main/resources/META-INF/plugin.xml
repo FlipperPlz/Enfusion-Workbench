@@ -51,8 +51,8 @@
         <colorSettingsPage
             implementation="com.flipperplz.enfusionWorkbench.languages.param.sugar.highlighting.settings.ParamColorSettingsPage"
         />
-        <codeStyleSettingsProvider
-            implementation="com.flipperplz.enfusionWorkbench.languages.param.sugar.codeStyle.ParamCodeStyleSettingsProvider"
-        />
+<!--        <codeStyleSettingsProvider-->
+<!--            implementation="com.flipperplz.enfusionWorkbench.languages.param.sugar.codeStyle.ParamCodeStyleSettingsProvider"-->
+<!--        />-->
     </extensions>
 </idea-plugin>
