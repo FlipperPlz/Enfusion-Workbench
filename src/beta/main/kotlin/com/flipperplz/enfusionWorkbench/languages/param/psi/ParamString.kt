@@ -6,4 +6,6 @@ interface ParamString : ParamLiteral {
     override val valueType: ParamLiteralType
         get() = ParamLiteralType.ParamString
     var quoted: Boolean
+
+    override fun asParsableText(): String = text
 }
