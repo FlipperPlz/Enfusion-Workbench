@@ -1,7 +1,7 @@
 package com.flipperplz.enfusionWorkbench.languages.param
 
-import com.intellij.lang.Language
+import com.flipperplz.enfusionWorkbench.languages.EnfusionLanguage
 
-object ParamLanguage : Language("Param") {
+object ParamLanguage : EnfusionLanguage("Param") {
 
 }

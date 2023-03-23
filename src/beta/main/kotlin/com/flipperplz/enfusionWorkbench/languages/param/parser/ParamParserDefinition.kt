@@ -2,9 +2,9 @@ package com.flipperplz.enfusionWorkbench.languages.param.parser
 
 import com.flipperplz.enfusionWorkbench.languages.param.ParamLanguage
 import com.flipperplz.enfusionWorkbench.languages.param.lexer.ParamLexerAdapter
-import com.flipperplz.enfusionWorkbench.languages.param.psi.required.ParamTokenSets
 import com.flipperplz.enfusionWorkbench.languages.param.psi.ParamTypes
 import com.flipperplz.enfusionWorkbench.languages.param.psi.impl.ParamFileImpl
+import com.flipperplz.enfusionWorkbench.psi.sets.ParamTokenSets
 import com.intellij.lang.ASTNode
 import com.intellij.lang.ParserDefinition
 import com.intellij.lang.PsiParser

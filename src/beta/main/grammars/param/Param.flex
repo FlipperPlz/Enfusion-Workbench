@@ -34,10 +34,12 @@ ABS_IDENTIFIER=[a-zA-Z_][a-zA-Z0-9_]*
 ABS_STRING = \"([^\"]|\"\")*\"
 ABS_NUMERIC=(-?[0-9]+(.[0-9]+)?([eE][-+]?[0-9]+)?|0x[a-fA-F0-9]+)
 ABS_WHITESPACE=[\s\t\r\n]
+ABS_WHITESPACE=[\s\t\r\n]
+ABS_INCLUDE_STRING=\<([^\"]|\"\")*\>
+ABS_DEFINE_VALUE=([^\n]|\\\n)*
 
 %%
 <YYINITIAL> {
-  {ABS_WHITESPACE}               { return WHITE_SPACE; }
 
   {SINGLE_LINE_COMMENT}          { return ParamTypes.SINGLE_LINE_COMMENT; }
   {EMPTY_DELIMITED_COMMENT}      { return ParamTypes.EMPTY_DELIMITED_COMMENT; }
@@ -45,6 +47,15 @@ ABS_WHITESPACE=[\s\t\r\n]
   "class"                        { return ParamTypes.KW_CLASS; }
   "delete"                       { return ParamTypes.KW_DELETE; }
   "enum"                         { return ParamTypes.KW_ENUM; }
+  "EVAL"                         { return ParamTypes.MACRO_EVAL; }
+  "EXEC"                         { return ParamTypes.MACRO_EXEC; }
+  "LINE"                         { return ParamTypes.MACRO_LINE; }
+  "("                            { return ParamTypes.SYM_LPARENTHESIS; }
+  ")"                            { return ParamTypes.SYM_RPARENTHESIS; }
+  "@"                            { return ParamTypes.REFERENCE_MODE; }
+  "("                            { return ParamTypes.SYM_LPARENTHESIS; }
+
+
   "{"                            { return ParamTypes.SYM_LCURLY; }
   "}"                            { return ParamTypes.SYM_RCURLY; }
   "["                            { return ParamTypes.SYM_LSQUARE; }
@@ -55,9 +66,11 @@ ABS_WHITESPACE=[\s\t\r\n]
   "="                            { return ParamTypes.OP_ASSIGN; }
   "+="                           { return ParamTypes.OP_ADDASSIGN; }
   "-="                           { return ParamTypes.OP_SUBASSIGN; }
+  {ABS_DEFINE_VALUE}             { return ParamTypes.ABS_DEFINE_VALUE; }
   {ABS_IDENTIFIER}               { return ParamTypes.ABS_IDENTIFIER; }
   {ABS_STRING}                   { return ParamTypes.ABS_STRING; }
   {ABS_NUMERIC}                  { return ParamTypes.ABS_NUMERIC; }
+  {ABS_INCLUDE_STRING}           { return ParamTypes.ABS_INCLUDE_STRING; }
 
 }
 

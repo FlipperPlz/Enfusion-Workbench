@@ -1,10 +1,9 @@
 {
     parserClass="com.flipperplz.enfusionWorkbench.languages.param.parser.ParamParser"
+    extends="com.flipperplz.enfusionWorkbench.languages.param.psi.impl.ParamPsiElementImpl"
+    implements="com.flipperplz.enfusionWorkbench.languages.param.psi.ParamPsiElement"
 
-    extends="com.flipperplz.enfusionWorkbench.languages.param.psi.impl.ParamElementImpl"
-    implements="com.flipperplz.enfusionWorkbench.languages.param.psi.ParamElement"
-
-    psiClassPrefix="GeneratedParam"
+    psiClassPrefix="Param"
     psiImplClassSuffix="impl"
     psiPackage="com.flipperplz.enfusionWorkbench.languages.param.psi"
     psiImplPackage="com.flipperplz.enfusionWorkbench.languages.param.psi.impl"
@@ -23,6 +22,15 @@
         KW_CLASS                 = 'class';
         KW_DELETE                = 'delete';
         KW_ENUM                  = 'enum';
+        KW_INCLUDE               = 'include';
+        KW_DEFINE                = 'define';
+        KW_UNDEF                 = 'undef';
+        KW_IF                    = 'if';
+        KW_IFDEF                 = 'ifdef';
+        KW_IFNDEF                = 'ifndef';
+
+        KW_ENDIF                 = 'endif';
+        KW_ELSE                  = 'else';
         SYM_LCURLY               = '{';
         SYM_RCURLY               = '}';
         SYM_LSQUARE              = '[';
@@ -30,65 +38,199 @@
         SYM_SEMI                 = ';';
         SYM_COLON                = ':';
         SYM_COMMA                = ',';
-
+        SYM_LPARENTHESIS         = '(';
+        SYM_RPARENTHESIS         = ')';
+        MACRO_LINE               = 'LINE';
+        MACRO_FILE               = 'FILE';
+        MACRO_EXEC               = 'EXEC'
+        MACRO_EVAL               = 'EVAL';
+        MACRO_MODE               = '__';
+        DIRECTIVE_MODE           = '#';
+        DIRECTIVE_CONCAT         = '##';
+        REFERENCE_MODE           = '@';
         ABS_IDENTIFIER           = 'regexp:[a-zA-Z_][a-zA-Z0-9_]*';
         ABS_STRING               = 'regexp:^"(?:[^"]|"")*"$';
+        ABS_INCLUDE_STRING       = 'regexp:^<(?:[^>]|>>)*>$';
         ABS_NUMERIC              = 'regexp:(-?[0-9]+(.[0-9]+)?([eE][-+]?[0-9]+)?|0x[a-fA-F0-9]+)';
-        ABS_WHITESPACE           = 'regexp:[\s\t\r\n]';
-
+        ABS_DEFINE_VALUE         = 'regexp:^(?:.*\\\n?)+.*$';
     ]
     generate=[tokenAccessors="yes"]
 
-    extends('paramString|paramNumeric')=literal
-    extends('literal|literalArray')=arrayElement
+    extends("classDeclaration|variableDeclaration|comment|.*Statement")=statement
+    extends("string|number|macroLiteral")=literal
+    extends("literal|array")=arrayElement
+    extends("fileMacro|lineMacro")=macro
+    extends(".*Directive")=directive
 
-    implements('classDeclaration|file')='com.flipperplz.enfusionWorkbench.languages.param.psi.ParamScope'
-    implements('classDeclaration|assignmentStatement|deleteStatement')='com.flipperplz.enfusionWorkbench.languages.param.psi.ParamStatement'
-    implements('paramString|paramNumeric')='com.flipperplz.enfusionWorkbench.languages.param.psi.ParamLiteral'
-    implements('literal|literalArray')='com.flipperplz.enfusionWorkbench.languages.param.psi.ParamArrayElement'
+    pin(".*Declaration|.*Directive|directive|.*Macro|classDeclaration|classExtension|macro|arraySquare|statementWithSemicolon|enumValue|.*Assignment")=1
+    recoverWhile("directive|statementWithSemicolon|enumDeclaration")=statementRecover
 
-    mixin('literalArray')='com.flipperplz.enfusionWorkbench.languages.param.psi.impl.mixins.ParamArrayMixin'
-    mixin('assignmentStatement')='com.flipperplz.enfusionWorkbench.languages.param.psi.impl.mixins.ParamAssignmentMixin'
-    mixin('classDeclaration')='com.flipperplz.enfusionWorkbench.languages.param.psi.impl.mixins.ParamClassMixin'
-    mixin('deleteStatement')='com.flipperplz.enfusionWorkbench.languages.param.psi.impl.mixins.ParamDeleteMixin'
-    mixin('identifier')='com.flipperplz.enfusionWorkbench.languages.param.psi.impl.mixins.ParamIdentifierMixin'
-    mixin('paramNumeric')='com.flipperplz.enfusionWorkbench.languages.param.psi.impl.mixins.ParamNumericMixin'
-    mixin('paramString')='com.flipperplz.enfusionWorkbench.languages.param.psi.impl.mixins.ParamStringMixin'
+    implements("classDeclaration|variableDeclaration|deleteStatement|identifier")="com.flipperplz.enfusionWorkbench.languages.param.psi.ParamNamedPsiElement"
+    elementTypeFactory("classDeclaration|variableDeclaration|deleteStatement|identifier|macro|string|array|number|comment")="com.flipperplz.enfusionWorkbench.languages.param.psi.ParamElementFactoryKt.factory"
+
+    mixin("classDeclaration")="com.flipperplz.enfusionWorkbench.languages.param.psi.mixins.impl.ParamClassDeclarationMixinImpl"
+    mixin("variableDeclaration")="com.flipperplz.enfusionWorkbench.languages.param.psi.mixins.impl.ParamVariableDeclarationMixinImpl"
+    mixin("deleteStatement")="com.flipperplz.enfusionWorkbench.languages.param.psi.mixins.impl.ParamDeleteStatementMixinImpl"
+    mixin(".*Macro|macro|directive|abstractDefineValue|concatenateDirective|reference|includeString|.*Directive")="com.flipperplz.enfusionWorkbench.languages.param.psi.mixins.impl.ParamNonBinaraizableMixinImpl"
 }
 
-file ::= statement* enumDeclaration? { pin=1 }
+file ::= [statements] [enumDeclaration]
 
-classDeclaration ::= KW_CLASS identifier regularClassDecl? { pin=2 }
+statement ::= (
+     classDeclaration
+   | deleteStatement
+   | variableDeclaration
+   | comment
+   | directive
+   | executeMacro
+   | customMacro
+)
 
-assignmentStatement ::= identifier (arrayAssignment | valueAssignment) { pin=1 }
-
-deleteStatement ::= KW_DELETE identifier  { pin=2 }
-
-paramNumeric ::= ABS_NUMERIC
-paramString ::= ABS_STRING
-identifier ::= ABS_IDENTIFIER
-
-literalArray ::= SYM_LCURLY (arrayElement (SYM_COMMA (arrayElement | &SYM_RCURLY))*)? SYM_RCURLY { pin(".*")=1 }
-
-enumDeclaration ::= KW_DELETE SYM_LCURLY [enumValue+] SYM_RCURLY SYM_SEMI { pin=2 }
-statement ::= (classDeclaration | deleteStatement | assignmentStatement) SYM_SEMI {  pin=1 }
-enumValue ::= identifier (OP_ASSIGN paramNumeric)? { pin=1 }
-
-literal ::= paramString | paramNumeric
-
-arrayElement ::= literal | literalArray
-
-private arrayAssignment ::= SYM_LSQUARE SYM_RSQUARE (
-        OP_ASSIGN  |
-        OP_ADDASSIGN |
-        OP_SUBASSIGN
-    ) literalArray { pin=3 };
-
-private valueAssignment ::= OP_ASSIGN literal { pin=1 };
-
-private regularClassDecl ::= (SYM_COLON identifier)? SYM_LCURLY statement* SYM_RCURLY {pin=2 }
+literal ::= (
+     string
+   | number
+   | macro
+   | reference
+)
 
 
+arrayElement ::= (
+     literal
+   | array
+)
+
+comment ::= (
+     SINGLE_LINE_COMMENT
+   | delimitedComment
+)
+
+reference ::= REFERENCE_MODE identifier
+
+macro ::= defaultMacro | customMacro
+
+directive ::= EOL DIRECTIVE_MODE directiveType commentWs* EOL { pin=2 }
+
+classDeclaration ::= KW_CLASS forceWs identifier forceWs [classExtension] SYM_LCURLY [statements] SYM_RCURLY
+
+enumDeclaration ::= KW_ENUM commentWs* SYM_LCURLY enumValueOrComment* SYM_RCURLY commentWs* SYM_SEMI commentWs* { pin=1 }
+
+variableDeclaration ::= identifier commentWs* (arrayAssignment | valueAssignment) { pin=1 }
+
+deleteStatement ::= KW_DELETE forceWs identifier  { pin=1 }
+
+enumValue ::= identifier commentWs* [OP_ASSIGN commentWs* number] { pin=1 }
+
+array ::= SYM_LCURLY commentWs* (arrayElement (commentWs* SYM_COMMA commentWs* (arrayElement | &(SYM_RCURLY | commentWs)))* commentWs*)? SYM_RCURLY commentWs SYM_SEMI { pin(".*")=1 }
+
+number ::= ABS_NUMERIC
+
+string ::= ABS_STRING
+
+abstractDefineValue ::= ABS_DEFINE_VALUE
+
+includeString ::= ABS_INCLUDE_STRING | ABS_STRING
+
+identifier ::= ABS_IDENTIFIER [concatenateDirective]
+
+lineMacro ::= MACRO_LINE MACRO_MODE
+
+fileMacro ::= MACRO_FILE MACRO_MODE
+
+executeMacro ::= MACRO_EXEC sqfMacroTail
+
+evaluateMacro ::= MACRO_EVAL sqfMacroTail
+
+includeDirective ::= KW_INCLUDE forceWs includeString
+
+defineDirective ::= KW_DEFINE forceWs ABS_IDENTIFIER [argumentativeDefine] forceWs abstractDefineValue
+
+concatenateDirective ::= DIRECTIVE_CONCAT identifier
+
+undefineDirective ::= KW_UNDEF forceWs ABS_IDENTIFIER
+
+ifDirective ::= ifDirectiveType forceWs ABS_IDENTIFIER EOL (
+    statement*
+) elseOrEndIfDirective
+
+elseDirective ::= KW_ELSE commentWs* EOL
+
+customMacro::= identifier [SYM_LPARENTHESIS [abstractDefineValue (SYM_COMMA abstractDefineValue)*] SYM_RPARENTHESIS]
+
+private elseOrEndIfDirective ::= EOL DIRECTIVE_MODE (endIfDirective | elseDirective)
+
+private ifDirectiveType ::= KW_IF | KW_IFDEF | KW_IFNDEF
+
+private endIfDirective ::= KW_ENDIF commentWs* EOL
+
+private argumentativeDefine ::= SYM_LPARENTHESIS [defineArguments] SYM_RPARENTHESIS
+
+private defineArguments ::= ABS_IDENTIFIER (SYM_COMMA ABS_IDENTIFIER)*
+
+private arrayAssignment ::= arraySquare delimitedComment* arrayOperator delimitedComment* array
+
+private delimitedComment ::= (
+     EMPTY_DELIMITED_COMMENT
+   | DELIMITED_COMMENT
+)
+
+private directiveType ::=(
+     includeDirective
+   | defineDirective
+   | undefineDirective
+   | ifDirective
+)
+
+private sqfMacroTail ::= SYM_LPARENTHESIS (!(SYM_RPARENTHESIS))* SYM_RPARENTHESIS
+
+private valueAssignment ::= normalOperator commentWs* literal { pin=1 }
+
+private classExtension ::= SYM_COLON commentWs* identifier commentWs*
+
+private statements ::= statementWithSemicolon+
+
+private statementWithSemicolon ::= statement commentWs* (SYM_SEMI|&SYM_RCURLY) commentWs* { pin=1 }
+
+private statementRecover ::= !(
+     SYM_SEMI
+   | SYM_COLON
+   | SYM_LCURLY
+   | SYM_LSQUARE
+   | SYM_RCURLY
+   | SYM_RSQUARE
+   | ABS_IDENTIFIER
+   | ABS_STRING
+   | ABS_NUMERIC
+   | KW_DELETE
+   | KW_CLASS
+   | SYM_COMMA
+   | OP_ASSIGN
+   | OP_ADDASSIGN
+   | OP_SUBASSIGN
+   | DIRECTIVE_MODE
+   | DIRECTIVE_CONCAT
+   | comment
+   | directive
+   | macro
+   | statement
+)
+
+private enumValueOrComment ::= commentWs | enumValue
+
+private normalOperator ::= OP_ASSIGN
+
+private arrayOperator ::= normalOperator | OP_ADDASSIGN | OP_SUBASSIGN
+
+private arraySquare ::= SYM_LSQUARE commentWs* SYM_RSQUARE
+
+private commentWs ::= comment | WHITE_SPACE
+
+private forceWs ::= commentWs* WHITE_SPACE commentWs*
+
+private defaultMacro ::= MACRO_MODE (
+     lineMacro
+   | fileMacro
+   | evaluateMacro
+)
 
 
 
