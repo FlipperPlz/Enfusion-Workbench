@@ -28,7 +28,6 @@
         KW_IF                    = 'if';
         KW_IFDEF                 = 'ifdef';
         KW_IFNDEF                = 'ifndef';
-
         KW_ENDIF                 = 'endif';
         KW_ELSE                  = 'else';
         SYM_LCURLY               = '{';
@@ -40,6 +39,10 @@
         SYM_COMMA                = ',';
         SYM_LPARENTHESIS         = '(';
         SYM_RPARENTHESIS         = ')';
+        SYM_BACKSLASH            = '\';
+        SYM_DQUOTE               = '"';
+        SYM_LANGLE               = "<";
+        SYM_RANGLE               = '>';
         MACRO_LINE               = 'LINE';
         MACRO_FILE               = 'FILE';
         MACRO_EXEC               = 'EXEC'
@@ -50,9 +53,8 @@
         REFERENCE_MODE           = '@';
         ABS_IDENTIFIER           = 'regexp:[a-zA-Z_][a-zA-Z0-9_]*';
         ABS_STRING               = 'regexp:^"(?:[^"]|"")*"$';
-        ABS_INCLUDE_STRING       = 'regexp:^<(?:[^>]|>>)*>$';
         ABS_NUMERIC              = 'regexp:(-?[0-9]+(.[0-9]+)?([eE][-+]?[0-9]+)?|0x[a-fA-F0-9]+)';
-        ABS_DEFINE_VALUE         = 'regexp:^(?:.*\\\n?)+.*$';
+        SPACE                    = 'regexp:\s+'
     ]
     generate=[tokenAccessors="yes"]
 
@@ -77,11 +79,11 @@
 file ::= [statements] [enumDeclaration]
 
 statement ::= (
-     classDeclaration
+     directive
+   | classDeclaration
    | deleteStatement
    | variableDeclaration
    | comment
-   | directive
    | executeMacro
    | customMacro
 )
@@ -92,7 +94,6 @@ literal ::= (
    | macro
    | reference
 )
-
 
 arrayElement ::= (
      literal
@@ -108,15 +109,15 @@ reference ::= REFERENCE_MODE identifier
 
 macro ::= defaultMacro | customMacro
 
-directive ::= EOL DIRECTIVE_MODE directiveType commentWs* EOL { pin=2 }
+directive ::= DIRECTIVE_MODE directiveType { pin=2 }
 
-classDeclaration ::= KW_CLASS forceWs identifier forceWs [classExtension] SYM_LCURLY [statements] SYM_RCURLY
+classDeclaration ::= KW_CLASS commentWs identifier commentWs* [[classExtension] SYM_LCURLY commentWs* statementWithSemicolon* SYM_RCURLY]
 
 enumDeclaration ::= KW_ENUM commentWs* SYM_LCURLY enumValueOrComment* SYM_RCURLY commentWs* SYM_SEMI commentWs* { pin=1 }
 
 variableDeclaration ::= identifier commentWs* (arrayAssignment | valueAssignment) { pin=1 }
 
-deleteStatement ::= KW_DELETE forceWs identifier  { pin=1 }
+deleteStatement ::= KW_DELETE commentWs identifier  { pin=1 }
 
 enumValue ::= identifier commentWs* [OP_ASSIGN commentWs* number] { pin=1 }
 
@@ -126,9 +127,7 @@ number ::= ABS_NUMERIC
 
 string ::= ABS_STRING
 
-abstractDefineValue ::= ABS_DEFINE_VALUE
-
-includeString ::= ABS_INCLUDE_STRING | ABS_STRING
+defineValue ::= (SYM_BACKSLASH EOL|literal|!EOL)
 
 identifier ::= ABS_IDENTIFIER [concatenateDirective]
 
@@ -140,21 +139,21 @@ executeMacro ::= MACRO_EXEC sqfMacroTail
 
 evaluateMacro ::= MACRO_EVAL sqfMacroTail
 
-includeDirective ::= KW_INCLUDE forceWs includeString
+includeDirective ::= KW_INCLUDE commentWs* (string | includeString)
 
-defineDirective ::= KW_DEFINE forceWs ABS_IDENTIFIER [argumentativeDefine] forceWs abstractDefineValue
+defineDirective ::= KW_DEFINE commentWs ABS_IDENTIFIER [argumentativeDefine] commentWs defineValue
 
 concatenateDirective ::= DIRECTIVE_CONCAT identifier
 
-undefineDirective ::= KW_UNDEF forceWs ABS_IDENTIFIER
+undefineDirective ::= KW_UNDEF commentWs ABS_IDENTIFIER
 
-ifDirective ::= ifDirectiveType forceWs ABS_IDENTIFIER EOL (
+ifDirective ::= ifDirectiveType commentWs ABS_IDENTIFIER EOL (
     statement*
 ) elseOrEndIfDirective
 
 elseDirective ::= KW_ELSE commentWs* EOL
 
-customMacro::= identifier [SYM_LPARENTHESIS [abstractDefineValue (SYM_COMMA abstractDefineValue)*] SYM_RPARENTHESIS]
+customMacro::= identifier [SYM_LPARENTHESIS [defineValue (SYM_COMMA defineValue)*] SYM_RPARENTHESIS]
 
 private elseOrEndIfDirective ::= EOL DIRECTIVE_MODE (endIfDirective | elseDirective)
 
@@ -188,7 +187,9 @@ private classExtension ::= SYM_COLON commentWs* identifier commentWs*
 
 private statements ::= statementWithSemicolon+
 
-private statementWithSemicolon ::= statement commentWs* (SYM_SEMI|&SYM_RCURLY) commentWs* { pin=1 }
+private statementWithSemicolon ::= statement commentWs* SYM_SEMI commentWs* { pin=1 }
+
+private includeString ::= SYM_LANGLE (!SYM_RANGLE)* SYM_RANGLE
 
 private statementRecover ::= !(
      SYM_SEMI
@@ -222,9 +223,7 @@ private arrayOperator ::= normalOperator | OP_ADDASSIGN | OP_SUBASSIGN
 
 private arraySquare ::= SYM_LSQUARE commentWs* SYM_RSQUARE
 
-private commentWs ::= comment | WHITE_SPACE
-
-private forceWs ::= commentWs* WHITE_SPACE commentWs*
+private commentWs ::= comment | SPACE
 
 private defaultMacro ::= MACRO_MODE (
      lineMacro
