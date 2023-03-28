@@ -58,22 +58,13 @@
     ]
     generate=[tokenAccessors="yes"]
 
-    extends("classDeclaration|variableDeclaration|comment|.*Statement")=statement
-    extends("string|number|macroLiteral")=literal
+    extends("classDeclaration|variableDeclaration|deleteStatement|comment|executeMacro|customMacro")=statement
     extends("literal|array")=arrayElement
-    extends("fileMacro|lineMacro")=macro
-    extends(".*Directive")=directive
+    extends("string|number|macro|reference")=literal
+    extends("lineComment|delimitedComment")=comment
 
     pin(".*Declaration|.*Directive|directive|.*Macro|classDeclaration|classExtension|macro|arraySquare|statementWithSemicolon|enumValue|.*Assignment")=1
     recoverWhile("directive|statementWithSemicolon|enumDeclaration")=statementRecover
-
-    implements("classDeclaration|variableDeclaration|deleteStatement|identifier")="com.flipperplz.enfusionWorkbench.languages.param.psi.ParamNamedPsiElement"
-    elementTypeFactory("classDeclaration|variableDeclaration|deleteStatement|identifier|macro|string|array|number|comment")="com.flipperplz.enfusionWorkbench.languages.param.psi.ParamElementFactoryKt.factory"
-
-    mixin("classDeclaration")="com.flipperplz.enfusionWorkbench.languages.param.psi.mixins.impl.ParamClassDeclarationMixinImpl"
-    mixin("variableDeclaration")="com.flipperplz.enfusionWorkbench.languages.param.psi.mixins.impl.ParamVariableDeclarationMixinImpl"
-    mixin("deleteStatement")="com.flipperplz.enfusionWorkbench.languages.param.psi.mixins.impl.ParamDeleteStatementMixinImpl"
-    mixin(".*Macro|macro|directive|abstractDefineValue|concatenateDirective|reference|includeString|.*Directive")="com.flipperplz.enfusionWorkbench.languages.param.psi.mixins.impl.ParamNonBinaraizableMixinImpl"
 }
 
 file ::= [statements] [enumDeclaration]
@@ -101,7 +92,7 @@ arrayElement ::= (
 )
 
 comment ::= (
-     SINGLE_LINE_COMMENT
+     lineComment
    | delimitedComment
 )
 
@@ -127,8 +118,6 @@ number ::= ABS_NUMERIC
 
 string ::= ABS_STRING
 
-defineValue ::= (SYM_BACKSLASH EOL|literal|!EOL)
-
 identifier ::= ABS_IDENTIFIER [concatenateDirective]
 
 lineMacro ::= MACRO_LINE MACRO_MODE
@@ -151,15 +140,19 @@ ifDirective ::= ifDirectiveType commentWs ABS_IDENTIFIER EXIT_DIRECTIVE (
     statement*
 ) elseOrEndIfDirective
 
-elseDirective ::= KW_ELSE commentWs* EXIT_DIRECTIVE
+lineComment ::= SINGLE_LINE_COMMENT
 
-customMacro::= identifier [SYM_LPARENTHESIS [defineValue (SYM_COMMA defineValue)*] SYM_RPARENTHESIS]
+private elseDirective ::= KW_ELSE commentWs* EXIT_DIRECTIVE
 
-private elseOrEndIfDirective ::= EOL DIRECTIVE_MODE (endIfDirective | elseDirective)
+private customMacro ::= identifier [SYM_LPARENTHESIS [defineValue (SYM_COMMA defineValue)*] SYM_RPARENTHESIS]
+
+private defineValue ::= DIRECTIVE_TAIL EXIT_DIRECTIVE
+
+private elseOrEndIfDirective ::= DIRECTIVE_MODE (endIfDirective | elseDirective)
 
 private ifDirectiveType ::= KW_IF | KW_IFDEF | KW_IFNDEF
 
-private endIfDirective ::= KW_ENDIF commentWs* EOL
+private endIfDirective ::= KW_ENDIF commentWs* EXIT_DIRECTIVE
 
 private argumentativeDefine ::= SYM_LPARENTHESIS [defineArguments] SYM_RPARENTHESIS
 
