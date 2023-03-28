@@ -100,7 +100,7 @@ tasks {
             apiVersion = "1.7"
             freeCompilerArgs = listOf("-Xjvm-default=all")
         }
-        dependsOn(generateParamParser, generateParamLexer)
+        //dependsOn(generateParamParser, generateParamLexer)
     }
 
     patchPluginXml {

@@ -14,11 +14,11 @@ import static com.flipperplz.enfusionWorkbench.languages.param.psi.ParamTypes.*;
 %%
 
 %{
-  byte stringMode = null; // 1 = Double Quoted, 2 = Single Quoted, 3 = Not Quoted
+  byte stringMode = -1; // 1 = Double Quoted, 2 = Single Quoted, 3 = Not Quoted
   int stringPreviousState = YYINITIAL;
   int directivePreviousState = YYINITIAL;
   int macroPreviousState = YYINITIAL;
-  int macroPreviousState = YYINITIAL;
+  int concatPreviousState = YYINITIAL;
   int currentScope = 1;
 
 
@@ -29,23 +29,25 @@ import static com.flipperplz.enfusionWorkbench.languages.param.psi.ParamTypes.*;
 
   private boolean tryCloseUnquoted() {
       if(this.stringMode == 3) {
-          this.stringMode = null; //leaving string
+          this.stringMode = -1; //leaving string
           this.yybegin(this.stringPreviousState);
           return true;
       }
       return false;
   }
 
-  private IElementType startStringMode(byte mode) {
-      this.stringMode = mode;
+  private IElementType startStringMode(int mode) {
+      this.stringMode = (byte) mode;
       this.stringPreviousState = this.yystate();
       this.yybegin(this.STRING_MODE);
       return ParamTypes.STRING_START;
   }
 
-
-
-
+  private void leaveStringMode() {
+      if(this.stringMode == -1) return;
+      this.stringMode = -1; //leaving string
+      this.yybegin(this.stringPreviousState);
+  }
 %}
 
 %public
@@ -56,10 +58,10 @@ import static com.flipperplz.enfusionWorkbench.languages.param.psi.ParamTypes.*;
 %unicode
 
 LINE_TERMINATOR=\r?\n
-SPACE=\s
-WHITE_SPACES=([{SPACE}\t\f])
+WHITE_SPACES=([\s\t\f])
 
-COMMENT={SINGLE_LINE_COMMENT}|{DELIMITED_COMMENT}
+SPACE=\s
+
 SINGLE_LINE_COMMENT="//".*{LINE_TERMINATOR}?
 DELIMITED_COMMENT= {NORMAL_DELIMITED_COMMENT} | {EMPTY_DELIMITED_COMMENT}
 EMPTY_DELIMITED_COMMENT="/"\*\*?"/"
@@ -101,7 +103,7 @@ EXIT_CONCAT={ SYM_SHARPSHARP } | { SYM_SEMICOLON } | { SPACE }
       }
 //Enter Concatenation Mode
 { SYM_SHARPSHARP }               {
-          this.macroPreviousState = this.yystate();
+          this.concatPreviousState = this.yystate();
           this.yybegin(this.DIRECTIVE_CONCAT_MODE);
           return ParamTypes.CONCAT_MODE;
       }
@@ -113,16 +115,21 @@ EXIT_CONCAT={ SYM_SHARPSHARP } | { SYM_SEMICOLON } | { SPACE }
 { SINGLE_LINE_COMMENT }          { return ParamTypes.SINGLE_LINE_COMMENT; }
 { EMPTY_DELIMITED_COMMENT }      { return ParamTypes.EMPTY_DELIMITED_COMMENT; }
 { DELIMITED_COMMENT }            { return ParamTypes.DELIMITED_COMMENT; }
-{ SYM_LPAREN }                   { return ParamTypes.SYM_LPARENTHESIS; }
-{ SYM_RPAREN }                   { return ParamTypes.SYM_RPARENTHESIS; }
+
 
 <YYINITIAL> {
   "class"                        { return ParamTypes.KW_CLASS; }
   "delete"                       { return ParamTypes.KW_DELETE; }
   "enum"                         { return ParamTypes.KW_ENUM; }
   "@"                            { return ParamTypes.REFERENCE_MODE; }
-  "{"                            { this.currentScope++; return ParamTypes.SYM_LCURLY; }
-  "}"                            { this.currentScope--; return ParamTypes.SYM_RCURLY; }
+  "{"                            {
+          this.currentScope++;
+          return ParamTypes.SYM_LCURLY;
+      }
+  "}"                            {
+          this.currentScope--;
+          return ParamTypes.SYM_RCURLY;
+      }
   "["                            { return ParamTypes.SYM_LSQUARE; }
   "]"                            { return ParamTypes.SYM_RSQUARE; }
   { SYM_SEMICOLON }              { return ParamTypes.SYM_SEMI; }
@@ -133,6 +140,8 @@ EXIT_CONCAT={ SYM_SHARPSHARP } | { SYM_SEMICOLON } | { SPACE }
   { SYM_DQUOTE }                 { return this.startStringMode(1); }
   { SYM_SQUOTE }                 { return this.startStringMode(2); }
   { ABS_NUMERIC }                { return ParamTypes.ABS_NUMERIC; }
+  { SYM_LPAREN }                 { return ParamTypes.SYM_LPARENTHESIS; }
+  { SYM_RPAREN }                 { return ParamTypes.SYM_RPARENTHESIS; }
 }
 
 <STRING_MODE> {
@@ -140,8 +149,7 @@ EXIT_CONCAT={ SYM_SHARPSHARP } | { SYM_SEMICOLON } | { SPACE }
   { SYM_CASH }                   { this.yybegin(this.LOCALIZATION_MODE); }
   { SYM_DQUOTE }                 {
         if(this.stringMode == 1) { /*Only double quoted strings*/
-            this.stringMode = null; //leaving string
-            this.yybegin(this.stringPreviousState);
+            leaveStringMode();
             return ParamTypes.STRING_END;
         } else if(this.stringMode == 2) {
             return ParamTypes.STRING_CONTENT;
@@ -152,28 +160,39 @@ EXIT_CONCAT={ SYM_SHARPSHARP } | { SYM_SEMICOLON } | { SPACE }
   { SYM_SQUOTE }                 {
          if(this.stringMode == 1) {
              return ParamTypes.STRING_CONTENT;
-         } else if(this.stringMode == 2) { /*Only single quoted strings*/
-             this.stringMode = null; //leaving string
-             this.yybegin(this.stringPreviousState);
+         } else if(this.stringMode == 2) {
+             leaveStringMode();
              return ParamTypes.STRING_END;
          } else if(this.stringMode == 3) {
              return TokenType.BAD_CHARACTER;
          }
     }
-  { SYM_SEMICOLON }              { if(tryCloseUnquoted()) return ParamTypes.STRING_END; }
-  { LINE_TERMINATOR }            { return tryCloseUnquoted() ? ParamTypes.STRING_END : TokenType.BAD_CHARACTER; }
-  [^]                            { return ParamTypes.STRING_CONTENT; }
+  { SYM_SEMICOLON }              {
+          if(tryCloseUnquoted()) return ParamTypes.STRING_END;
+      }
+  { LINE_TERMINATOR }            {
+          return tryCloseUnquoted() ? ParamTypes.STRING_END : TokenType.BAD_CHARACTER;
+      }
+  [^]+                           { return ParamTypes.STRING_CONTENT; }
 }
 
 <LOCALIZATION_MODE> {
   { ABS_IDENTIFIER }             { }
-  { SPACE }                      { this.yybegin(this.STRING_MODE); return ParamTypes.LOCALIZED_STRING; }
-  [^]                            { this.yybegin(this.STRING_MODE); return TokenType.BAD_CHARACTER;}
+  { SPACE }                      {
+          this.yybegin(this.STRING_MODE);
+          return ParamTypes.LOCALIZED_STRING;
+      }
+  [^]                            {
+          this.yybegin(this.STRING_MODE);
+          return TokenType.BAD_CHARACTER;
+      }
 }
 
 <DIRECTIVE_CONCAT_MODE> {
-  { EXIT_CONCAT }             {
-          this.yybegin(macroPreviousState);
+  { SYM_LPAREN }                   { return ParamTypes.SYM_LPARENTHESIS; }
+  { SYM_RPAREN }                   { return ParamTypes.SYM_RPARENTHESIS; }
+  { EXIT_CONCAT }                  {
+          this.yybegin(concatPreviousState);
           return ParamTypes.EXIT_CONCAT;
       }
 }
@@ -183,32 +202,47 @@ EXIT_CONCAT={ SYM_SHARPSHARP } | { SYM_SEMICOLON } | { SPACE }
   "ifdef"                        { return ParamTypes.KW_IFDEF; }
   "ifndef"                       { return ParamTypes.KW_IFNDEF; }
   "include"                      { return ParamTypes.KW_INCLUDE; }
-  "define"                        { return ParamTypes.KW_DEFINE; }
+  "define"                       { return ParamTypes.KW_DEFINE; }
   "line"                         { return ParamTypes.KW_LINE; }
   "else"                         { return ParamTypes.KW_ELSE; }
-  "endif"                        { this.yybegin(this.directivePreviousState); return ParamTypes.KW_ENDIF; }
+  "endif"                        {
+          this.yybegin(this.directivePreviousState);
+          return ParamTypes.KW_ENDIF;
+      }
   "undef"                        { return ParamTypes.KW_UNDEF; }
   "#"                            { return ParamTypes.SYM_HASH; }
   { SYM_LPAREN }                 { return ParamTypes.SYM_LPARENTHESIS; }
   { SYM_RPAREN }                 { return ParamTypes.SYM_RPARENTHESIS; }
   { ABS_IDENTIFIER }             { return ParamTypes.ABS_IDENTIFIER; }
   { DIRECTIVE_NEWLINE }          { return ParamTypes.DIRECTIVE_NEWLINE; }
-  { LINE_TERMINATOR }            { this.yybegin(directivePreviousState); return ParamTypes.EXIT_DIRECTIVE; }
+  { LINE_TERMINATOR }            {
+          this.yybegin(directivePreviousState);
+          return ParamTypes.EXIT_DIRECTIVE;
+      }
   [^]+                           { return ParamTypes.DIRECTIVE_TAIL; }
 }
 
 <MACRO_MODE> {
   "LINE"                         { return ParamTypes.MACRO_LINE; }
   "FILE"                         { return ParamTypes.MACRO_FILE; }
-  "EXEC"                         { this.yybegin(this.SQF_MODE); return ParamTypes.MACRO_EXEC; }
-  "EVAL"                         { this.yybegin(this.SQF_MODE); return ParamTypes.MACRO_EVAL; }
+  "EXEC"                         {
+          this.yybegin(this.SQF_MODE);
+          return ParamTypes.MACRO_EXEC;
+      }
+  "EVAL"                         {
+          this.yybegin(this.SQF_MODE);
+          return ParamTypes.MACRO_EVAL;
+      }
   "__"                           { return ParamTypes.EXIT_MACRO; }
   [^]                            { return TokenType.BAD_CHARACTER; }
 }
 
 <SQF_MODE> {
   { SYM_LPAREN }                 { return ParamTypes.SYM_LPARENTHESIS; }
-  { SYM_RPAREN }                 { this.yybegin(this.macroPreviousState); return ParamTypes.SYM_RPARENTHESIS; }
+  { SYM_RPAREN }                 {
+          this.yybegin(this.macroPreviousState);
+          return ParamTypes.SYM_RPARENTHESIS;
+      }
   [^]+                           { return ParamTypes.SQF_STATEMENT; }
 }
 
