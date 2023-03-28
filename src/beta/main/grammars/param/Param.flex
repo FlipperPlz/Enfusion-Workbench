@@ -14,15 +14,36 @@ import static com.flipperplz.enfusionWorkbench.languages.param.psi.ParamTypes.*;
 %%
 
 %{
+  byte stringMode = null; // 1 = Double Quoted, 2 = Single Quoted, 3 = Not Quoted
   int stringPreviousState = YYINITIAL;
   int directivePreviousState = YYINITIAL;
   int macroPreviousState = YYINITIAL;
+  int macroPreviousState = YYINITIAL;
   int currentScope = 1;
+
 
 
   public ParamLexer() {
     this((java.io.Reader)null);
   }
+
+  private boolean tryCloseUnquoted() {
+      if(this.stringMode == 3) {
+          this.stringMode = null; //leaving string
+          this.yybegin(this.stringPreviousState);
+          return true;
+      }
+      return false;
+  }
+
+  private IElementType startStringMode(byte mode) {
+      this.stringMode = mode;
+      this.stringPreviousState = this.yystate();
+      this.yybegin(this.STRING_MODE);
+      return ParamTypes.STRING_START;
+  }
+
+
 
 
 %}
@@ -35,7 +56,8 @@ import static com.flipperplz.enfusionWorkbench.languages.param.psi.ParamTypes.*;
 %unicode
 
 LINE_TERMINATOR=\r?\n
-WHITE_SPACES=([\s\t\f])
+SPACE=\s
+WHITE_SPACES=([{SPACE}\t\f])
 
 COMMENT={SINGLE_LINE_COMMENT}|{DELIMITED_COMMENT}
 SINGLE_LINE_COMMENT="//".*{LINE_TERMINATOR}?
@@ -44,36 +66,55 @@ EMPTY_DELIMITED_COMMENT="/"\*\*?"/"
 NORMAL_DELIMITED_COMMENT="/"\*([^*]|[\r\n]|(\*+([^*/]|[\r\n])))*\*+"/"
 SYM_BACKSLASH=\
 SYM_DQUOTE=\"
-STRING_ESCAPE=\"\"
+SYM_SQUOTE=\'
+ESCAPE_DQUOTE=\"\"
+ESCAPE_SQUOTE=\'\'
+ESCAPES={ESCAPE_DQUOTE}|{ESCAPE_SQUOTE}
 SYM_SHARP=#
 SYM_LINE='__'
 SYM_COMMA=,
 SYM_SHARPSHARP=##
 SYM_LPAREN=\(
 SYM_RPAREN=\)
+SYM_CASH=\$
 DIRECTIVE_NEWLINE={SYM_BACKSLASH}{LINE_TERMINATOR}
 ABS_IDENTIFIER=[a-zA-Z_][a-zA-Z0-9_]*
-ABS_STRING = \"([^\"]|\"\")*\"
 ABS_NUMERIC=(-?[0-9]+(.[0-9]+)?([eE][-+]?[0-9]+)?|0x[a-fA-F0-9]+)
+SYM_SEMICOLON=;
+EXIT_CONCAT={ SYM_SHARPSHARP } | { SYM_SEMICOLON } | { SPACE }
 
-%state DIRECTIVE_MODE, MACRO_MODE, SQF_MODE, DIRECTIVE_CONCAT_MODE, STRING_MODE
+%state DIRECTIVE_MODE, MACRO_MODE, SQF_MODE, LOCALIZATION_MODE, DIRECTIVE_CONCAT_MODE, STRING_MODE
 
 %%
 
 //Enter Directive Mode
-{ SYM_SHARP }                    { this.directivePreviousState = this.yystate(); this.yybegin(this.DIRECTIVE_MODE); return ParamTypes.DIRECTIVE_MODE; } //Directive Mode
+{ SYM_SHARP }                    {
+          this.directivePreviousState = this.yystate();
+          this.yybegin(this.DIRECTIVE_MODE);
+          return ParamTypes.DIRECTIVE_MODE;
+      }
 //Enter Macro Mode
-{ SYM_LINE }                     { this.macroPreviousState = this.yystate(); this.yybegin(this.MACRO_MODE); return ParamTypes.MACRO_MODE; } //Macro Mode
+{ SYM_LINE }                     {
+          this.macroPreviousState = this.yystate();
+          this.yybegin(this.MACRO_MODE);
+          return ParamTypes.MACRO_MODE;
+      }
 //Enter Concatenation Mode
-{ SYM_SHARPSHARP }               { this.yybegin(this.DIRECTIVE_CONCAT_MODE); return ParamTypes.DIRECTIVE_CONCAT; } //Concat Mode
+{ SYM_SHARPSHARP }               {
+          this.macroPreviousState = this.yystate();
+          this.yybegin(this.DIRECTIVE_CONCAT_MODE);
+          return ParamTypes.CONCAT_MODE;
+      }
 
 
 { ABS_IDENTIFIER }               { return ParamTypes.ABS_IDENTIFIER; }
-{ WHITE_SPACES }                 { return ParamTypes.SPACE; }
+{ WHITE_SPACES }                 { return TokenType.WHITE_SPACE; }
 { SYM_COMMA }                    { return ParamTypes.SYM_COMMA; }
 { SINGLE_LINE_COMMENT }          { return ParamTypes.SINGLE_LINE_COMMENT; }
 { EMPTY_DELIMITED_COMMENT }      { return ParamTypes.EMPTY_DELIMITED_COMMENT; }
 { DELIMITED_COMMENT }            { return ParamTypes.DELIMITED_COMMENT; }
+{ SYM_LPAREN }                   { return ParamTypes.SYM_LPARENTHESIS; }
+{ SYM_RPAREN }                   { return ParamTypes.SYM_RPARENTHESIS; }
 
 <YYINITIAL> {
   "class"                        { return ParamTypes.KW_CLASS; }
@@ -84,23 +125,58 @@ ABS_NUMERIC=(-?[0-9]+(.[0-9]+)?([eE][-+]?[0-9]+)?|0x[a-fA-F0-9]+)
   "}"                            { this.currentScope--; return ParamTypes.SYM_RCURLY; }
   "["                            { return ParamTypes.SYM_LSQUARE; }
   "]"                            { return ParamTypes.SYM_RSQUARE; }
-  ";"                            { return ParamTypes.SYM_SEMI; }
+  { SYM_SEMICOLON }              { return ParamTypes.SYM_SEMI; }
   ":"                            { return ParamTypes.SYM_COLON; }
   "="                            { return ParamTypes.OP_ASSIGN; }
   "+="                           { return ParamTypes.OP_ADDASSIGN; }
   "-="                           { return ParamTypes.OP_SUBASSIGN; }
-  {SYM_DQUOTE}                   { this.stringPreviousState = this.yystate(); this.yybegin(this.STRING_MODE); }
-  {ABS_STRING}                   { return ParamTypes.ABS_STRING; }
-  {ABS_NUMERIC}                  { return ParamTypes.ABS_NUMERIC; }
+  { SYM_DQUOTE }                 { return this.startStringMode(1); }
+  { SYM_SQUOTE }                 { return this.startStringMode(2); }
+  { ABS_NUMERIC }                { return ParamTypes.ABS_NUMERIC; }
 }
 
 <STRING_MODE> {
-  { STRING_ESCAPE }              { }
-  { SYM_DQUOTE }                 { this.yybegin(this.stringPreviousState); return ParamTypes.ABS_STRING; }
-  { LINE_TERMINATOR }            { return BAD_CHARACTER; }
-  [^]                            { }
+  { ESCAPES }                    { return ParamTypes.STRING_CONTENT; }
+  { SYM_CASH }                   { this.yybegin(this.LOCALIZATION_MODE); }
+  { SYM_DQUOTE }                 {
+        if(this.stringMode == 1) { /*Only double quoted strings*/
+            this.stringMode = null; //leaving string
+            this.yybegin(this.stringPreviousState);
+            return ParamTypes.STRING_END;
+        } else if(this.stringMode == 2) {
+            return ParamTypes.STRING_CONTENT;
+        } else if(this.stringMode == 3) {
+            return TokenType.BAD_CHARACTER;
+        }
+    }
+  { SYM_SQUOTE }                 {
+         if(this.stringMode == 1) {
+             return ParamTypes.STRING_CONTENT;
+         } else if(this.stringMode == 2) { /*Only single quoted strings*/
+             this.stringMode = null; //leaving string
+             this.yybegin(this.stringPreviousState);
+             return ParamTypes.STRING_END;
+         } else if(this.stringMode == 3) {
+             return TokenType.BAD_CHARACTER;
+         }
+    }
+  { SYM_SEMICOLON }              { if(tryCloseUnquoted()) return ParamTypes.STRING_END; }
+  { LINE_TERMINATOR }            { return tryCloseUnquoted() ? ParamTypes.STRING_END : TokenType.BAD_CHARACTER; }
+  [^]                            { return ParamTypes.STRING_CONTENT; }
 }
 
+<LOCALIZATION_MODE> {
+  { ABS_IDENTIFIER }             { }
+  { SPACE }                      { this.yybegin(this.STRING_MODE); return ParamTypes.LOCALIZED_STRING; }
+  [^]                            { this.yybegin(this.STRING_MODE); return TokenType.BAD_CHARACTER;}
+}
+
+<DIRECTIVE_CONCAT_MODE> {
+  { EXIT_CONCAT }             {
+          this.yybegin(macroPreviousState);
+          return ParamTypes.EXIT_CONCAT;
+      }
+}
 
 <DIRECTIVE_MODE> {
   "if"                           { return ParamTypes.KW_IF; }
@@ -112,6 +188,7 @@ ABS_NUMERIC=(-?[0-9]+(.[0-9]+)?([eE][-+]?[0-9]+)?|0x[a-fA-F0-9]+)
   "else"                         { return ParamTypes.KW_ELSE; }
   "endif"                        { this.yybegin(this.directivePreviousState); return ParamTypes.KW_ENDIF; }
   "undef"                        { return ParamTypes.KW_UNDEF; }
+  "#"                            { return ParamTypes.SYM_HASH; }
   { SYM_LPAREN }                 { return ParamTypes.SYM_LPARENTHESIS; }
   { SYM_RPAREN }                 { return ParamTypes.SYM_RPARENTHESIS; }
   { ABS_IDENTIFIER }             { return ParamTypes.ABS_IDENTIFIER; }
@@ -125,8 +202,8 @@ ABS_NUMERIC=(-?[0-9]+(.[0-9]+)?([eE][-+]?[0-9]+)?|0x[a-fA-F0-9]+)
   "FILE"                         { return ParamTypes.MACRO_FILE; }
   "EXEC"                         { this.yybegin(this.SQF_MODE); return ParamTypes.MACRO_EXEC; }
   "EVAL"                         { this.yybegin(this.SQF_MODE); return ParamTypes.MACRO_EVAL; }
-  "__"                           { return ParamTypes.MACRO_MODE; }
-  [^]                            { return BAD_CHARACTER; }
+  "__"                           { return ParamTypes.EXIT_MACRO; }
+  [^]                            { return TokenType.BAD_CHARACTER; }
 }
 
 <SQF_MODE> {
@@ -135,4 +212,4 @@ ABS_NUMERIC=(-?[0-9]+(.[0-9]+)?([eE][-+]?[0-9]+)?|0x[a-fA-F0-9]+)
   [^]+                           { return ParamTypes.SQF_STATEMENT; }
 }
 
-[^] { return BAD_CHARACTER; }
+[^] { return TokenType.BAD_CHARACTER; }
