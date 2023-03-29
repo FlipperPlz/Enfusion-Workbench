@@ -6,7 +6,7 @@ val sourceBranch = "beta"
 
 plugins {
     id("org.jetbrains.kotlin.jvm") version "1.8.10"
-    id("org.jetbrains.intellij") version "1.10.1"
+    id("org.jetbrains.intellij") version "1.13.2"
     id("org.jetbrains.grammarkit") version "2022.3.1"
 }
 
@@ -25,8 +25,8 @@ dependencies {
     implementation("com.code-disaster.steamworks4j:steamworks4j-server:1.9.0-SNAPSHOT")
 }
 
-java.targetCompatibility=JavaVersion.VERSION_11
-java.sourceCompatibility=JavaVersion.VERSION_11
+java.targetCompatibility=JavaVersion.VERSION_17
+java.sourceCompatibility=JavaVersion.VERSION_17
 
 group = "com.flipperplz"
 version = "1.0-${sourceBranch}"
@@ -36,7 +36,7 @@ version = "1.0-${sourceBranch}"
 // Configure Gradle IntelliJ Plugin
 // Read more: https://plugins.jetbrains.com/docs/intellij/tools-gradle-intellij-plugin.html
 intellij {
-    version.set("2022.1.4")
+    version.set("2022.3.3")
     type.set("IC") // Target IDE Platform
 
     plugins.set(listOf(/* Plugin Dependencies */))
@@ -94,13 +94,13 @@ tasks {
 
     withType<KotlinCompile>().configureEach {
         kotlinOptions {
-            jvmTarget = JavaVersion.VERSION_17.toString()
+            jvmTarget = JavaVersion.VERSION_11.toString()
             languageVersion = "1.8"
             // see https://plugins.jetbrains.com/docs/intellij/using-kotlin.html#kotlin-standard-library
             apiVersion = "1.7"
             freeCompilerArgs = listOf("-Xjvm-default=all")
         }
-        //dependsOn(generateParamParser, generateParamLexer)
+        dependsOn(generateParamParser, generateParamLexer)
     }
 
     patchPluginXml {

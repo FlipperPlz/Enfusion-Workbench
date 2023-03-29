@@ -8,7 +8,6 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.TokenType;
 
 import static com.intellij.psi.TokenType.BAD_CHARACTER;
-import static com.intellij.psi.TokenType.WHITE_SPACE;
 import static com.flipperplz.enfusionWorkbench.languages.param.psi.ParamTypes.*;
 
 %%
@@ -88,30 +87,6 @@ EXIT_CONCAT={ SYM_SHARPSHARP } | { SYM_SEMICOLON } | { SPACE }
 %state DIRECTIVE_MODE, MACRO_MODE, SQF_MODE, LOCALIZATION_MODE, DIRECTIVE_CONCAT_MODE, STRING_MODE
 
 %%
-
-//Enter Directive Mode
-{ SYM_SHARP }                    {
-          this.directivePreviousState = this.yystate();
-          this.yybegin(this.DIRECTIVE_MODE);
-          return ParamTypes.DIRECTIVE_MODE;
-      }
-//Enter Macro Mode
-{ SYM_LINE }                     {
-          this.macroPreviousState = this.yystate();
-          this.yybegin(this.MACRO_MODE);
-          return ParamTypes.MACRO_MODE;
-      }
-//Enter Concatenation Mode
-{ SYM_SHARPSHARP }               {
-          this.concatPreviousState = this.yystate();
-          this.yybegin(this.DIRECTIVE_CONCAT_MODE);
-          return ParamTypes.CONCAT_MODE;
-      }
-
-
-{ ABS_IDENTIFIER }               { return ParamTypes.ABS_IDENTIFIER; }
-{ WHITE_SPACES }                 { return TokenType.WHITE_SPACE; }
-{ SYM_COMMA }                    { return ParamTypes.SYM_COMMA; }
 { SINGLE_LINE_COMMENT }          { return ParamTypes.SINGLE_LINE_COMMENT; }
 { EMPTY_DELIMITED_COMMENT }      { return ParamTypes.EMPTY_DELIMITED_COMMENT; }
 { DELIMITED_COMMENT }            { return ParamTypes.DELIMITED_COMMENT; }
@@ -132,6 +107,8 @@ EXIT_CONCAT={ SYM_SHARPSHARP } | { SYM_SEMICOLON } | { SPACE }
       }
   "["                            { return ParamTypes.SYM_LSQUARE; }
   "]"                            { return ParamTypes.SYM_RSQUARE; }
+  { WHITE_SPACES }               { return ParamTypes.WHITE_SPACE; }
+  { LINE_TERMINATOR }            { return ParamTypes.WHITE_SPACE; }
   { SYM_SEMICOLON }              { return ParamTypes.SYM_SEMI; }
   ":"                            { return ParamTypes.SYM_COLON; }
   "="                            { return ParamTypes.OP_ASSIGN; }
@@ -142,10 +119,30 @@ EXIT_CONCAT={ SYM_SHARPSHARP } | { SYM_SEMICOLON } | { SPACE }
   { ABS_NUMERIC }                { return ParamTypes.ABS_NUMERIC; }
   { SYM_LPAREN }                 { return ParamTypes.SYM_LPARENTHESIS; }
   { SYM_RPAREN }                 { return ParamTypes.SYM_RPARENTHESIS; }
+  { ABS_IDENTIFIER }             { return ParamTypes.ABS_IDENTIFIER; }
+  { SYM_COMMA }                  { return ParamTypes.SYM_COMMA; }
+  //Enter Directive Mode
+  { SYM_SHARP }                    {
+            this.directivePreviousState = this.yystate();
+            this.yybegin(this.DIRECTIVE_MODE);
+            return ParamTypes.DIRECTIVE_MODE;
+        }
+  //Enter Macro Mode
+  { SYM_LINE }                     {
+            this.macroPreviousState = this.yystate();
+            this.yybegin(this.MACRO_MODE);
+            return ParamTypes.MACRO_MODE;
+        }
+  //Enter Concatenation Mode
+  { SYM_SHARPSHARP }               {
+            this.concatPreviousState = this.yystate();
+            this.yybegin(this.DIRECTIVE_CONCAT_MODE);
+            return ParamTypes.CONCAT_MODE;
+        }
 }
 
 <STRING_MODE> {
-  { ESCAPES }                    { return ParamTypes.STRING_CONTENT; }
+  { ESCAPES }                    { return ParamTypes.STRING_ESCAPE; }
   { SYM_CASH }                   { this.yybegin(this.LOCALIZATION_MODE); }
   { SYM_DQUOTE }                 {
         if(this.stringMode == 1) { /*Only double quoted strings*/
@@ -203,7 +200,7 @@ EXIT_CONCAT={ SYM_SHARPSHARP } | { SYM_SEMICOLON } | { SPACE }
   "ifndef"                       { return ParamTypes.KW_IFNDEF; }
   "include"                      { return ParamTypes.KW_INCLUDE; }
   "define"                       { return ParamTypes.KW_DEFINE; }
-  "line"                         { return ParamTypes.KW_LINE; }
+//  "line"                         { return ParamTypes.KW_LINE; }
   "else"                         { return ParamTypes.KW_ELSE; }
   "endif"                        {
           this.yybegin(this.directivePreviousState);
@@ -219,6 +216,7 @@ EXIT_CONCAT={ SYM_SHARPSHARP } | { SYM_SEMICOLON } | { SPACE }
           this.yybegin(directivePreviousState);
           return ParamTypes.EXIT_DIRECTIVE;
       }
+  { SYM_COMMA }                  { return ParamTypes.SYM_COMMA; }
   [^]+                           { return ParamTypes.DIRECTIVE_TAIL; }
 }
 

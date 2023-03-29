@@ -36,16 +36,17 @@
             fileNamesCaseInsensitive="config.cpp"
             extensions="cpp;rvmat"
         />
-        <fileType
+        <lang.parserDefinition
+                language="Param"
+                implementationClass="com.flipperplz.enfusionWorkbench.languages.param.parser.ParamParserDefinition"
+        />
+        <!--<fileType
                 name="ParamC"
                 implementationClass="com.flipperplz.enfusionWorkbench.languages.param.binarization.ParamBinFileType"
                 language="Param"
                 extensions="bin;cpp;rvmat"
         />
-        <lang.parserDefinition
-            language="Param"
-            implementationClass="com.flipperplz.enfusionWorkbench.languages.param.parser.ParamParserDefinition"
-        />
+
         <lang.foldingBuilder
             language="Param"
             implementationClass="com.flipperplz.enfusionWorkbench.languages.param.sugar.folding.ParamFoldingBuilder"
@@ -56,7 +57,7 @@
         />
         <colorSettingsPage
             implementation="com.flipperplz.enfusionWorkbench.languages.param.sugar.highlighting.settings.ParamColorSettingsPage"
-        />
+        />-->
 <!--        <codeStyleSettingsProvider-->
 <!--            implementation="com.flipperplz.enfusionWorkbench.languages.param.sugar.codeStyle.ParamCodeStyleSettingsProvider"-->
 <!--        />-->

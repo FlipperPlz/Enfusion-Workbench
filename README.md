@@ -16,7 +16,7 @@ This plugin will act as a reasonable alternative to the workbench application th
 - [RVHost and his exelent BFF fork](https://github.com/rvost?tab=repositories)
 - [Enfusion Modders Discord](https://discord.gg/enfusionmodders)
 - [@LBMaster](https://github.com/LBmaster001) (Previous Contributer)
-
+- [@simonvic](https://github.com/simonvic)
 ## Contributing
 
 Contributions are always encuraged!

@@ -54,10 +54,11 @@
         ABS_STRING               = 'regexp:^"(?:[^"]|"")*"$';
         ABS_NUMERIC              = 'regexp:(-?[0-9]+(.[0-9]+)?([eE][-+]?[0-9]+)?|0x[a-fA-F0-9]+)';
         DIRECTIVE_NEWLINE        = 'regexp:\\(\r)?\n';
+        WHITE_SPACE              = 'regexp:\s'
     ]
     generate=[tokenAccessors="yes"]
 
-    extends("classDeclaration|directive|variableDeclaration|deleteStatement|comment|executeMacro|customMacro")=statement
+    extends("classDeclaration|directive|variableDeclaration|deleteStatement|executeMacro|customMacro")=statement
     extends("literal|array")=arrayElement
     extends("string|number|macro|reference")=literal
     extends("comment(Line|Delimited)")=comment
@@ -90,7 +91,6 @@ statement ::= (
    | classDeclaration
    | deleteStatement
    | variableDeclaration
-   | comment
    | executeMacro
    | customMacro
 )
@@ -163,11 +163,11 @@ commentDelimited ::= (
    | DELIMITED_COMMENT
 )
 
-private stringContent ::= STRING_CONTENT | LOCALIZED_STRING;
+customMacro ::= ABS_IDENTIFIER [SYM_LPARENTHESIS [ABS_IDENTIFIER (SYM_COMMA ABS_IDENTIFIER)*] SYM_RPARENTHESIS]
+
+private stringContent ::= STRING_CONTENT | LOCALIZED_STRING | STRING_ESCAPE;
 
 private elseDirective ::= KW_ELSE commentWs* EXIT_DIRECTIVE
-
-private customMacro ::= ABS_IDENTIFIER [SYM_LPARENTHESIS [ABS_IDENTIFIER (SYM_COMMA ABS_IDENTIFIER)*] SYM_RPARENTHESIS]
 
 private elseOrEndIfDirective ::= DIRECTIVE_MODE (endIfDirective | elseDirective)
 
