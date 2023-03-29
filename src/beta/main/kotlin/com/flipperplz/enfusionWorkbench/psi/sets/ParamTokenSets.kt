@@ -4,7 +4,6 @@ import com.flipperplz.enfusionWorkbench.languages.param.psi.ParamTypes
 import com.intellij.psi.tree.TokenSet
 
 object ParamTokenSets {
-    val WHITESPACES: TokenSet = TokenSet.create(ParamTypes.WHITE_SPACE)
     val IDENTIFIERS: TokenSet = TokenSet.create(ParamTypes.ABS_IDENTIFIER)
     val STRINGS: TokenSet = TokenSet.create(ParamTypes.ABS_STRING)
     val NUMBERS: TokenSet = TokenSet.create(ParamTypes.ABS_NUMERIC)

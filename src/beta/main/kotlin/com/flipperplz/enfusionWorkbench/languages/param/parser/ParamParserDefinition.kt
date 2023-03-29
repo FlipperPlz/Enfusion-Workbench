@@ -29,8 +29,6 @@ class ParamParserDefinition : ParserDefinition {
 
     override fun getCommentTokens(): TokenSet = ParamTokenSets.COMMENTS
 
-    override fun getWhitespaceTokens(): TokenSet = ParamTokenSets.WHITESPACES
-
     override fun getStringLiteralElements(): TokenSet = ParamTokenSets.STRINGS
 
     override fun createElement(node: ASTNode?): PsiElement = ParamTypes.Factory.createElement(node)
