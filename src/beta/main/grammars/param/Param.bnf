@@ -61,7 +61,6 @@
     extends("classDeclaration|directive|variableDeclaration|deleteStatement|executeMacro|customMacro")=statement
     extends("literal|array")=arrayElement
     extends("string|number|macro|reference")=literal
-    extends("comment(Line|Delimited)")=comment
 
     implements("classDeclaration|variableDeclaration|deleteStatement|identifier")="com.flipperplz.enfusionWorkbench.languages.param.psi.ParamNamedPsiElement"
 
@@ -81,6 +80,7 @@
     pin("variableDeclaration|valueAssignment|(execute|default|evaluate|line|file)Macro")=1
     pin("(concatenate|include|(und|d)efine|if)Directive|enumValue|identifier|string")=1
     pin("reference|deleteStatement|directive|classDeclaration|classExtension|arraySquare")=1
+    pin("statementWithSemicolon|enumDeclaration")=1
     recoverWhile("directive|statementWithSemicolon|enumDeclaration")=statementRecover
 }
 
@@ -107,28 +107,23 @@ arrayElement ::= (
    | array
 )
 
-comment ::= (
-     commentLine
-   | commentDelimited
-)
-
 reference ::= REFERENCE_MODE identifier
 
 macro ::= defaultMacro | customMacro
 
 directive ::= DIRECTIVE_MODE directiveType { pin=2 }
 
-classDeclaration ::= KW_CLASS commentWs identifier commentWs* [[classExtension] SYM_LCURLY commentWs* statementWithSemicolon* SYM_RCURLY]
+classDeclaration ::= KW_CLASS  identifier [[classExtension] SYM_LCURLY statementWithSemicolon* SYM_RCURLY]
 
-enumDeclaration ::= KW_ENUM commentWs* SYM_LCURLY enumValueOrComment* SYM_RCURLY commentWs* SYM_SEMI commentWs* { pin=1 }
+enumDeclaration ::= KW_ENUM SYM_LCURLY enumValue* SYM_RCURLY SYM_SEMI
 
-variableDeclaration ::= identifier commentWs* (arrayAssignment | valueAssignment)
+variableDeclaration ::= identifier (arrayAssignment | valueAssignment)
 
-deleteStatement ::= KW_DELETE commentWs identifier
+deleteStatement ::= KW_DELETE identifier
 
-enumValue ::= identifier commentWs* [OP_ASSIGN commentWs* number]
+enumValue ::= identifier [OP_ASSIGN number]
 
-array ::= SYM_LCURLY commentWs* (arrayElement (commentWs* SYM_COMMA commentWs* (arrayElement | &(SYM_RCURLY | commentWs)))* commentWs*)? SYM_RCURLY commentWs SYM_SEMI { pin(".*")=1 }
+array ::= SYM_LCURLY (arrayElement (SYM_COMMA (arrayElement | &(SYM_RCURLY)))*)? SYM_RCURLY SYM_SEMI { pin(".*")=1 }
 
 number ::= ABS_NUMERIC
 
@@ -144,42 +139,35 @@ executeMacro ::= MACRO_EXEC sqfMacroTail
 
 evaluateMacro ::= MACRO_EVAL sqfMacroTail
 
-includeDirective ::= KW_INCLUDE commentWs* (string | includeString)
+includeDirective ::= KW_INCLUDE (string | includeString)
 
-defineDirective ::= KW_DEFINE commentWs ABS_IDENTIFIER [argumentativeDefine] (commentWs | SYM_HASH) DIRECTIVE_TAIL
+defineDirective ::= KW_DEFINE ABS_IDENTIFIER [argumentativeDefine] [SYM_HASH] DIRECTIVE_TAIL
 
 concatenateDirective ::= CONCAT_MODE customMacro EXIT_CONCAT
 
-undefineDirective ::= KW_UNDEF commentWs ABS_IDENTIFIER EXIT_DIRECTIVE
+undefineDirective ::= KW_UNDEF ABS_IDENTIFIER EXIT_DIRECTIVE
 
-ifDirective ::= ifDirectiveType commentWs ABS_IDENTIFIER EXIT_DIRECTIVE (
+ifDirective ::= ifDirectiveType ABS_IDENTIFIER EXIT_DIRECTIVE (
     statement*
 ) elseOrEndIfDirective
-
-commentLine ::= SINGLE_LINE_COMMENT
-
-commentDelimited ::= (
-     EMPTY_DELIMITED_COMMENT
-   | DELIMITED_COMMENT
-)
 
 customMacro ::= ABS_IDENTIFIER [SYM_LPARENTHESIS [ABS_IDENTIFIER (SYM_COMMA ABS_IDENTIFIER)*] SYM_RPARENTHESIS]
 
 private stringContent ::= STRING_CONTENT | LOCALIZED_STRING | STRING_ESCAPE;
 
-private elseDirective ::= KW_ELSE commentWs* EXIT_DIRECTIVE
+private elseDirective ::= KW_ELSE EXIT_DIRECTIVE
 
 private elseOrEndIfDirective ::= DIRECTIVE_MODE (endIfDirective | elseDirective)
 
 private ifDirectiveType ::= KW_IF | KW_IFDEF | KW_IFNDEF
 
-private endIfDirective ::= KW_ENDIF commentWs* EXIT_DIRECTIVE
+private endIfDirective ::= KW_ENDIF EXIT_DIRECTIVE
 
 private argumentativeDefine ::= SYM_LPARENTHESIS [defineArguments] SYM_RPARENTHESIS
 
 private defineArguments ::= ABS_IDENTIFIER (SYM_COMMA ABS_IDENTIFIER)*
 
-private arrayAssignment ::= arraySquare commentDelimited* arrayOperator commentDelimited* array
+private arrayAssignment ::= arraySquare arrayOperator array
 
 private directiveType ::=(
      includeDirective
@@ -190,15 +178,15 @@ private directiveType ::=(
 
 private sqfMacroTail ::= SYM_LPARENTHESIS [SQF_STATEMENT] SYM_RPARENTHESIS
 
-private valueAssignment ::= normalOperator commentWs* literal { pin=1 }
+private valueAssignment ::= normalOperator literal
 
-private classExtension ::= SYM_COLON commentWs* identifier commentWs*
+private classExtension ::= SYM_COLON identifier
 
 private statements ::= statementWithSemicolon+
 
-private statementWithSemicolon ::= statement commentWs* SYM_SEMI commentWs* { pin=1 }
+private statementWithSemicolon ::= statement SYM_SEMI
 
-private includeString ::= SYM_LANGLE (!SYM_RANGLE)* SYM_RANGLE
+private includeString ::= INCLUDE_START stringContent* INCLUDE_END
 
 private statementRecover ::= !(
      SYM_SEMI
@@ -224,15 +212,12 @@ private statementRecover ::= !(
    | statement
 )
 
-private enumValueOrComment ::= commentWs | enumValue
 
 private normalOperator ::= OP_ASSIGN
 
 private arrayOperator ::= normalOperator | OP_ADDASSIGN | OP_SUBASSIGN
 
-private arraySquare ::= SYM_LSQUARE commentWs* SYM_RSQUARE
-
-private commentWs ::= comment | WHITE_SPACE
+private arraySquare ::= SYM_LSQUARE SYM_RSQUARE
 
 private defaultMacro ::= MACRO_MODE (
      lineMacro
