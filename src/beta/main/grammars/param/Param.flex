@@ -141,7 +141,7 @@ EXIT_CONCAT={ SYM_SHARPSHARP } | { SYM_SEMICOLON } | { SPACE }
 
   { LINE_TERMINATOR }            { return this.currentState.handleStringEnd(ParamStringType.NOT_STRING); }
 
-  [^]                            { return ParamTypes.STRING_CONTENT; }
+  [^\"]                          { return ParamTypes.STRING_CONTENT; }
 }
 
 <LOCALIZATION_MODE> {
@@ -169,7 +169,7 @@ EXIT_CONCAT={ SYM_SHARPSHARP } | { SYM_SEMICOLON } | { SPACE }
 
   "include"                      { return ParamTypes.KW_INCLUDE; }
 
-  "define"                       { return ParamTypes.KW_DEFINE; }
+  "define"                    m   { return ParamTypes.KW_DEFINE; }
 
 //  "line"                         { return ParamTypes.KW_LINE; }
 
@@ -212,7 +212,7 @@ EXIT_CONCAT={ SYM_SHARPSHARP } | { SYM_SEMICOLON } | { SPACE }
 
 <SQF_MODE> {
   { SYM_LPAREN }                 { return ParamTypes.SYM_LPARENTHESIS; }
-                                    // pops first to leave sqf-mode then pops again to leave string mode
+                                    // pops first to leave sqf-mode then pops again to leave macro mode
   { SYM_RPAREN }                 { return this.currentState.popStateAndReturn(ParamTypes.MACRO, 2); }
 
   [^]+                           { return ParamTypes.SQF_STATEMENT; }

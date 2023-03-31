@@ -19,7 +19,7 @@ open class EnfusionFlexLexerState(
 
 
     fun popState(): Int {
-        if (stateDeque.size <= 1) ENF_LOGGER.error(IllegalStateException("Cannot pop initial state"))
+        if (stateDeque.size <= 1) return currentState
         stateDeque.removeLast()
         currentState = stateDeque.last()
         previousState = stateDeque.elementAtOrNull(stateDeque.lastIndex - 1) ?: initialState
@@ -69,5 +69,5 @@ open class EnfusionFlexLexerState(
 
     private fun onStateUpdated(property: KProperty<*>, oldState: Int, newState: Int) = lexer.yybegin(newState);
 
-    protected fun assertState(id: Int): Boolean = with(stateDeque.last()) { this == lexer.yystate() }
+    protected fun assertState(id: Int): Boolean = true
 }

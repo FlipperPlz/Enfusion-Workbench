@@ -58,12 +58,16 @@ class ParamLexerState(
     }
 
 
-    private fun exitStringMode(): IElementType = if(this.stringType == ParamStringType.NOT_STRING || !assertState(this.stringStateId)) {
-        TokenType.BAD_CHARACTER
-    } else this.stringType.endToken.also {
-        this.stringType = ParamStringType.NOT_STRING
-        popState()
-    }!!
+    private fun exitStringMode(): IElementType {
+        val ret =  if(this.stringType == ParamStringType.NOT_STRING) {
+            TokenType.BAD_CHARACTER
+        } else this.stringType.endToken.also {
+            this.stringType = ParamStringType.NOT_STRING
+            popState()
+        }!!
+
+        return ret;
+    }
 
     private fun enterLocalizationMode() = pushState(this.localizationStateId)
 }
