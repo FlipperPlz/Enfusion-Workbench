@@ -3,7 +3,7 @@ package com.flipperplz.enfusionWorkbench.psi.lexer.states
 import com.intellij.lexer.FlexLexer
 import com.intellij.psi.TokenType
 import com.intellij.psi.tree.IElementType
-import com.flipperplz.enfusionWorkbench.utils.EnfLoggableObject;
+import com.flipperplz.enfusionWorkbench.utils.EnfLoggableObject
 import kotlin.properties.Delegates
 import kotlin.reflect.KProperty
 
@@ -36,12 +36,12 @@ open class EnfusionFlexLexerState(
 
     fun popStateAndReturn(ret: IElementType): IElementType {
         popState()
-        return ret;
+        return ret
     }
 
     fun popStateAndReturn(ret: IElementType, popCount: Int): IElementType {
         repeat(popCount) { popState() }
-        return ret;
+        return ret
     }
 
     fun pushStateAndReturn(id: Int, ret: IElementType): IElementType = pushStateAndReturn<IElementType>(id, ret)
@@ -54,20 +54,23 @@ open class EnfusionFlexLexerState(
 
     inline fun <T> pushStateAndReturn(id: Int, ret: () -> T): T {
         pushState(id)
-        return ret.invoke();
+        return ret.invoke()
     }
 
     inline fun <T> popStateAndReturn(ret: () -> T): T {
         popState()
-        return ret.invoke();
+        return ret.invoke()
     }
 
-    fun <T> pushStateAndReturn(id: Int, ret: T): T {
+    private fun <T> pushStateAndReturn(id: Int, ret: T): T {
         pushState(id)
-        return ret;
+        return ret
     }
 
-    private fun onStateUpdated(property: KProperty<*>, oldState: Int, newState: Int) = lexer.yybegin(newState);
+    private fun onStateUpdated(property: KProperty<*>, oldState: Int, newState: Int) {
+        lexer.yybegin(newState)
+        stateDeque.addLast(newState)
+    }
 
     protected fun assertState(id: Int): Boolean = true
 }

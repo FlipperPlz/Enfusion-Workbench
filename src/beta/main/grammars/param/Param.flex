@@ -12,8 +12,7 @@ import static com.flipperplz.enfusionWorkbench.languages.param.psi.ParamTypes.*;
     private final @NotNull ParamLexerState currentState = new ParamLexerState(
         this,
         this.YYINITIAL,
-        this.STRING_MODE,
-        this.LOCALIZATION_MODE
+        this.STRING_MODE
     );
 
     public ParamLexer() { this((java.io.Reader)null); }
@@ -59,7 +58,7 @@ ABS_NUMERIC=(-?[0-9]+(.[0-9]+)?([eE][-+]?[0-9]+)?|0x[a-fA-F0-9]+)
 SYM_SEMICOLON=;
 EXIT_CONCAT={ SYM_SHARPSHARP } | { SYM_SEMICOLON } | { SPACE }
 
-%state DIRECTIVE_MODE, MACRO_MODE, SQF_MODE, LOCALIZATION_MODE, DIRECTIVE_CONCAT_MODE, STRING_MODE
+%state DIRECTIVE_MODE, MACRO_MODE, SQF_MODE, DIRECTIVE_CONCAT_MODE, STRING_MODE
 
 %%
 { SINGLE_LINE_COMMENT }          { return ParamTypes.SINGLE_LINE_COMMENT; }
@@ -81,15 +80,9 @@ EXIT_CONCAT={ SYM_SHARPSHARP } | { SYM_SEMICOLON } | { SPACE }
 
   "@"                            { return ParamTypes.REFERENCE_MODE; }
 
-  "{"                            {
-      this.currentState.pushBraceLevel();
-      return ParamTypes.SYM_LCURLY;
-  }
+  "{"                            { return this.currentState.enterLeftCurly(); }
 
-  "}"                            {
-      this.currentState.popBraceLevel();
-      return ParamTypes.SYM_RCURLY;
-  }
+  "}"                            { return this.currentState.enterRightCurly(); }
 
   "["                            { return ParamTypes.SYM_LSQUARE; }
 
@@ -129,7 +122,7 @@ EXIT_CONCAT={ SYM_SHARPSHARP } | { SYM_SEMICOLON } | { SPACE }
 <STRING_MODE> {
   { ESCAPES }                    { return ParamTypes.STRING_ESCAPE; }
 
-  { SYM_CASH }                   { if(!this.currentState.handleLocalizationMode()) return ParamTypes.STRING_CONTENT; }
+  { SYM_CASH }{ABS_IDENTIFIER}   { return LOCALIZED_STRING; }
 
   { SYM_DQUOTE }                 { return this.currentState.handleStringEnd(ParamStringType.DOUBLE); }
 
@@ -142,14 +135,6 @@ EXIT_CONCAT={ SYM_SHARPSHARP } | { SYM_SEMICOLON } | { SPACE }
   { LINE_TERMINATOR }            { return this.currentState.handleStringEnd(ParamStringType.NOT_STRING); }
 
   [^\"]                          { return ParamTypes.STRING_CONTENT; }
-}
-
-<LOCALIZATION_MODE> {
-  { ABS_IDENTIFIER }             { }
-
-  { SPACE }                      { return this.currentState.exitLocalizationMode(); }
-
-  [^]                            { return this.currentState.popStateAndReturnBad(); }
 }
 
 <DIRECTIVE_CONCAT_MODE> {
