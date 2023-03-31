@@ -4,30 +4,34 @@ import com.intellij.lexer.FlexLexer
 import com.intellij.psi.TokenType
 import com.intellij.psi.tree.IElementType
 import com.flipperplz.enfusionWorkbench.utils.EnfLoggableObject;
+import kotlin.properties.Delegates
+import kotlin.reflect.KProperty
 
 open class EnfusionFlexLexerState(
     lexer: FlexLexer,
     private var initialState: Int,
 ) : EnfusionLexerState<FlexLexer>(lexer) {
+    companion object : EnfLoggableObject(EnfusionFlexLexerState::class.java)
+
     private val stateDeque = ArrayDeque<Int>(elements = listOf(initialState))
     private var previousState: Int = initialState
-    companion object : EnfLoggableObject(EnfusionFlexLexerState::class.java)
+    private var currentState: Int by Delegates.observable(initialState, ::onStateUpdated)
+
 
     fun popState(): Int {
         if (stateDeque.size <= 1) ENF_LOGGER.error(IllegalStateException("Cannot pop initial state"))
         stateDeque.removeLast()
-        previousState = stateDeque.last()
-        lexer.yybegin(previousState)
-        return previousState
+        currentState = stateDeque.last()
+        previousState = stateDeque.elementAtOrNull(stateDeque.lastIndex - 1) ?: initialState
+
+        return currentState
     }
 
-    fun pushState(id: Int): Int = with(id) {
-        if(assertState(this)) return id
+    fun pushState(id: Int): Int {
+        previousState = currentState
+        currentState = id
 
-        stateDeque.addLast(id)
-        previousState = stateDeque.elementAt(stateDeque.lastIndex - 1)
-        lexer.yybegin(id)
-        return id
+        return currentState
     }
 
     fun popStateAndReturn(ret: IElementType): IElementType {
@@ -63,7 +67,7 @@ open class EnfusionFlexLexerState(
         return ret;
     }
 
-    protected fun assertState(id: Int): Boolean = with(stateDeque.last()) {
-        this == id ||this == lexer.yystate()
-    }
+    private fun onStateUpdated(property: KProperty<*>, oldState: Int, newState: Int) = lexer.yybegin(newState);
+
+    protected fun assertState(id: Int): Boolean = with(stateDeque.last()) { this == lexer.yystate() }
 }

@@ -27,17 +27,9 @@ class ParamLexerState(
 
     fun pushBraceLevel(): Int = this.currentBraceLevel++;
 
-    fun exitStringMode(): IElementType = if(this.stringType == ParamStringType.NOT_STRING || !assertState(this.stringStateId)) {
-        TokenType.BAD_CHARACTER
-    } else this.stringType.endToken.also {
-        this.stringType = ParamStringType.NOT_STRING
-        popState()
-    }!!
-
     fun enterStringMode(type: ParamStringType): IElementType {
-        if(type == ParamStringType.NOT_STRING) return exitStringMode();
-        if(this.stringType != ParamStringType.NOT_STRING  || assertState(this.stringStateId))
-            return TokenType.BAD_CHARACTER
+        if(stringType == type || type == ParamStringType.NOT_STRING) return handleStringEnd(type)
+        if(this.stringType != ParamStringType.NOT_STRING  ) return TokenType.BAD_CHARACTER
         this.stringType = type
         pushState(this.stringStateId)
 
@@ -45,11 +37,11 @@ class ParamLexerState(
     }
 
     fun handleStringEnd(type: ParamStringType): IElementType = when(type) {
-        ParamStringType.DOUBLE -> if (this.stringType != ParamStringType.DOUBLE) ParamTypes.STRING_CONTENT else ParamTypes.STRING_END
-        ParamStringType.SINGLE -> if (this.stringType != ParamStringType.SINGLE) ParamTypes.STRING_CONTENT else ParamTypes.STRING_END
-        ParamStringType.INCLUDE -> if(this.stringType != ParamStringType.INCLUDE) ParamTypes.STRING_CONTENT else ParamTypes.INCLUDE_END
-        ParamStringType.NONE -> if(this.stringType == ParamStringType.NONE) ParamTypes.STRING_END else ParamTypes.STRING_CONTENT
-        ParamStringType.NOT_STRING -> if(this.stringType == ParamStringType.NONE) ParamTypes.STRING_END else TokenType.BAD_CHARACTER
+        ParamStringType.DOUBLE -> if (this.stringType != ParamStringType.DOUBLE) ParamTypes.STRING_CONTENT else exitStringMode()
+        ParamStringType.SINGLE -> if (this.stringType != ParamStringType.SINGLE) ParamTypes.STRING_CONTENT else exitStringMode()
+        ParamStringType.INCLUDE -> if(this.stringType != ParamStringType.INCLUDE) ParamTypes.STRING_CONTENT else exitStringMode()
+        ParamStringType.NONE -> if(this.stringType == ParamStringType.NONE) exitStringMode() else ParamTypes.STRING_CONTENT
+        ParamStringType.NOT_STRING -> if(this.stringType == ParamStringType.NONE) exitStringMode() else TokenType.BAD_CHARACTER
         else -> TokenType.BAD_CHARACTER
     }
 
@@ -66,6 +58,12 @@ class ParamLexerState(
     }
 
 
+    private fun exitStringMode(): IElementType = if(this.stringType == ParamStringType.NOT_STRING || !assertState(this.stringStateId)) {
+        TokenType.BAD_CHARACTER
+    } else this.stringType.endToken.also {
+        this.stringType = ParamStringType.NOT_STRING
+        popState()
+    }!!
 
     private fun enterLocalizationMode() = pushState(this.localizationStateId)
 }
