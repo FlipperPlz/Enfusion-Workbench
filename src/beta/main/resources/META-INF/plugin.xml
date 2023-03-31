@@ -40,6 +40,10 @@
                 language="Param"
                 implementationClass="com.flipperplz.enfusionWorkbench.languages.param.parser.ParamParserDefinition"
         />
+        <lang.syntaxHighlighterFactory
+                language="Param"
+                implementationClass="com.flipperplz.enfusionWorkbench.languages.param.highlighting.ParamSyntaxHighlighterFactory"
+        />
         <!--<fileType
                 name="ParamC"
                 implementationClass="com.flipperplz.enfusionWorkbench.languages.param.binarization.ParamBinFileType"
