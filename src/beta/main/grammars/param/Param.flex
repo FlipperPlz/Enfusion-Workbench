@@ -68,6 +68,8 @@ EXIT_CONCAT={ SYM_SHARPSHARP } | { SYM_SEMICOLON } | { SPACE }
 
 { DELIMITED_COMMENT }            { return ParamTypes.DELIMITED_COMMENT; }
 
+{ DIRECTIVE_NEWLINE }            {  }
+
 <YYINITIAL> {
   { WHITE_SPACES }               { return TokenType.WHITE_SPACE; }
 
@@ -127,7 +129,7 @@ EXIT_CONCAT={ SYM_SHARPSHARP } | { SYM_SEMICOLON } | { SPACE }
 <STRING_MODE> {
   { ESCAPES }                    { return ParamTypes.STRING_ESCAPE; }
 
-  { SYM_CASH }                   { if(!this.currentState.handleLocalizationMode()) return STRING_CONTENT; }
+  { SYM_CASH }                   { if(!this.currentState.handleLocalizationMode()) return ParamTypes.STRING_CONTENT; }
 
   { SYM_DQUOTE }                 { return this.currentState.handleStringEnd(ParamStringType.DOUBLE); }
 
@@ -139,7 +141,7 @@ EXIT_CONCAT={ SYM_SHARPSHARP } | { SYM_SEMICOLON } | { SPACE }
 
   { LINE_TERMINATOR }            { return this.currentState.handleStringEnd(ParamStringType.NOT_STRING); }
 
-  [^]+                           { return ParamTypes.STRING_CONTENT; }
+  [^]                            { return ParamTypes.STRING_CONTENT; }
 }
 
 <LOCALIZATION_MODE> {
@@ -186,8 +188,6 @@ EXIT_CONCAT={ SYM_SHARPSHARP } | { SYM_SEMICOLON } | { SPACE }
   { SYM_RPAREN }                 { return ParamTypes.SYM_RPARENTHESIS; }
 
   { ABS_IDENTIFIER }             { return ParamTypes.ABS_IDENTIFIER; }
-
-  { DIRECTIVE_NEWLINE }          { return ParamTypes.DIRECTIVE_NEWLINE; }
 
   { LINE_TERMINATOR }            { return this.currentState.popStateAndReturn(EXIT_DIRECTIVE); }
 
