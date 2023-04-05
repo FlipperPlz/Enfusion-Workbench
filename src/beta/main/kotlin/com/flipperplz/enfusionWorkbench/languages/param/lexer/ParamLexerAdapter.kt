@@ -1,5 +1,6 @@
 package com.flipperplz.enfusionWorkbench.languages.param.lexer
 
-import com.intellij.lexer.FlexAdapter
+import com.flipperplz.enfusionWorkbench.languages.param.utils.ParamLexerState
+import com.flipperplz.enfusionWorkbench.psi.lexer.EnfusionFlexLexerAdapter
 
-class ParamLexerAdapter : FlexAdapter(ParamLexer())
+class ParamLexerAdapter : EnfusionFlexLexerAdapter<ParamLexerState>(ParamLexer())

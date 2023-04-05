@@ -1,4 +1,4 @@
-package com.flipperplz.enfusionWorkbench.languages.param.lexer.states
+package com.flipperplz.enfusionWorkbench.languages.param.utils
 
 import com.flipperplz.enfusionWorkbench.languages.param.psi.ParamTypes
 import com.intellij.psi.tree.IElementType

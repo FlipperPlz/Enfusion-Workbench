@@ -1,4 +1,4 @@
-package com.flipperplz.enfusionWorkbench.languages.param.lexer.states
+package com.flipperplz.enfusionWorkbench.languages.param.utils
 
 import com.flipperplz.enfusionWorkbench.languages.param.lexer.ParamLexer
 import com.flipperplz.enfusionWorkbench.languages.param.psi.ParamTypes
@@ -41,7 +41,7 @@ class ParamLexerState(
 
     fun enterStringMode(type: ParamStringType): IElementType {
         if(stringType == type || type == ParamStringType.NOT_STRING) return handleStringEnd(type)
-        if(this.stringType != ParamStringType.NOT_STRING  ) return TokenType.BAD_CHARACTER
+        if(this.stringType != ParamStringType.NOT_STRING) return TokenType.BAD_CHARACTER
         this.stringType = type
 
         return type.startToken!!

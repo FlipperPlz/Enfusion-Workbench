@@ -1,8 +1,10 @@
 package com.flipperplz.enfusionWorkbench.languages.param.lexer;
 
-import com.flipperplz.enfusionWorkbench.languages.param.lexer.states.ParamLexerState;import com.flipperplz.enfusionWorkbench.languages.param.lexer.states.ParamStringType;import com.flipperplz.enfusionWorkbench.languages.param.psi.ParamTypes;
+import com.flipperplz.enfusionWorkbench.languages.param.psi.ParamTypes;
+import com.flipperplz.enfusionWorkbench.languages.param.utils.ParamLexerState;import com.flipperplz.enfusionWorkbench.languages.param.utils.ParamStringType;
 import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.TokenType;import org.jetbrains.annotations.NotNull;
+import com.intellij.psi.TokenType;
+import org.jetbrains.annotations.NotNull;
 
 import static com.flipperplz.enfusionWorkbench.languages.param.psi.ParamTypes.*;
 
@@ -10,20 +12,20 @@ import static com.flipperplz.enfusionWorkbench.languages.param.psi.ParamTypes.*;
 
 %{
     private final @NotNull ParamLexerState currentState = new ParamLexerState(
-        this,
-        this.YYINITIAL,
-        this.STRING_MODE
-    );
+            this,
+            this.YYINITIAL,
+            this.STRING_MODE
+        );
 
-    public ParamLexer() { this((java.io.Reader)null); }
+        public ParamLexer() { this((java.io.Reader)null); }
 
-    @Override
-    public @NotNull ParamLexerState getLexerState() { return this.currentState; }
+        @Override
+        public @NotNull ParamLexerState getLexerState() { return this.currentState; }
 %}
 
 %public
 %class ParamLexer
-%implements ParamLexerImpl
+%implements EnfusionFlexLexer<ParamLexerState>
 %function advance
 %type IElementType
 %unicode
@@ -143,42 +145,6 @@ EXIT_CONCAT={ SYM_SHARPSHARP } | { SYM_SEMICOLON } | { SPACE }
   { SYM_RPAREN }                 { return ParamTypes.SYM_RPARENTHESIS; }
 
   { EXIT_CONCAT }                { return this.currentState.popStateAndReturn(ParamTypes.EXIT_CONCAT); }
-}
-
-<DIRECTIVE_MODE> {
-  "if"                           { return ParamTypes.KW_IF; }
-
-  "ifdef"                        { return ParamTypes.KW_IFDEF; }
-
-  "ifndef"                       { return ParamTypes.KW_IFNDEF; }
-
-  "include"                      { return ParamTypes.KW_INCLUDE; }
-
-  "define"                    m   { return ParamTypes.KW_DEFINE; }
-
-//  "line"                         { return ParamTypes.KW_LINE; }
-
-  "else"                         { return ParamTypes.KW_ELSE; }
-
-  "endif"                        { return ParamTypes.KW_ENDIF; }
-
-  "undef"                        { return ParamTypes.KW_UNDEF; }
-
-  "#"                            { return ParamTypes.SYM_HASH; }
-
-  { SYM_LANGLE }                 { return this.currentState.enterStringMode(ParamStringType.INCLUDE); }
-
-  { SYM_LPAREN }                 { return ParamTypes.SYM_LPARENTHESIS; }
-
-  { SYM_RPAREN }                 { return ParamTypes.SYM_RPARENTHESIS; }
-
-  { ABS_IDENTIFIER }             { return ParamTypes.ABS_IDENTIFIER; }
-
-  { LINE_TERMINATOR }            { return this.currentState.popStateAndReturn(EXIT_DIRECTIVE); }
-
-  { SYM_COMMA }                  { return ParamTypes.SYM_COMMA; }
-
-  [^]+                           { return ParamTypes.DIRECTIVE_TAIL; }
 }
 
 <MACRO_MODE> {
