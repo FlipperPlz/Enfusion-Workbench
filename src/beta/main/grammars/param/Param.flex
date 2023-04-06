@@ -1,12 +1,12 @@
 package com.flipperplz.enfusionWorkbench.languages.param.lexer;
 
 import com.flipperplz.enfusionWorkbench.languages.param.psi.ParamTypes;
-import com.flipperplz.enfusionWorkbench.languages.param.utils.ParamLexerState;import com.flipperplz.enfusionWorkbench.languages.param.utils.ParamStringType;
+import com.flipperplz.enfusionWorkbench.languages.param.utils.ParamLexerState;
+import com.flipperplz.enfusionWorkbench.languages.param.utils.ParamStringType;
+import com.flipperplz.enfusionWorkbench.psi.lexer.EnfusionFlexLexer;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.TokenType;
 import org.jetbrains.annotations.NotNull;
-
-import static com.flipperplz.enfusionWorkbench.languages.param.psi.ParamTypes.*;
 
 %%
 
@@ -31,36 +31,25 @@ import static com.flipperplz.enfusionWorkbench.languages.param.psi.ParamTypes.*;
 %unicode
 
 LINE_TERMINATOR=\r?\n
-WHITE_SPACES=[\s\t\r\n]
-
-SPACE=\s
-
+WHITE_SPACES=[\s\t]
 SINGLE_LINE_COMMENT="//".*{LINE_TERMINATOR}?
 DELIMITED_COMMENT= {NORMAL_DELIMITED_COMMENT} | {EMPTY_DELIMITED_COMMENT}
 EMPTY_DELIMITED_COMMENT="/"\*\*?"/"
 NORMAL_DELIMITED_COMMENT="/"\*([^*]|[\r\n]|(\*+([^*/]|[\r\n])))*\*+"/"
 SYM_BACKSLASH=\
-SYM_DQUOTE=\"
-SYM_SQUOTE=\'
 ESCAPE_DQUOTE=\"\"
 ESCAPE_SQUOTE=\'\'
 ESCAPES={ESCAPE_DQUOTE}|{ESCAPE_SQUOTE}
 SYM_SHARP=#
-SYM_LINE='__'
-SYM_COMMA=,
 SYM_SHARPSHARP=##
-SYM_LPAREN=\(
-SYM_RPAREN=\)
 SYM_CASH=\$
-SYM_RANGLE=>
-SYM_LANGLE=<
+LOCALIZED_STRING={SYM_CASH}{ABS_IDENTIFIER}
 DIRECTIVE_NEWLINE={SYM_BACKSLASH}{LINE_TERMINATOR}
 ABS_IDENTIFIER=[a-zA-Z_][a-zA-Z0-9_]*
+ABS_STRING=\"((\"\"|[^\"])+)\"
 ABS_NUMERIC=(-?[0-9]+(.[0-9]+)?([eE][-+]?[0-9]+)?|0x[a-fA-F0-9]+)
-SYM_SEMICOLON=;
-EXIT_CONCAT={ SYM_SHARPSHARP } | { SYM_SEMICOLON } | { SPACE }
-
-%state DIRECTIVE_MODE, MACRO_MODE, SQF_MODE, DIRECTIVE_CONCAT_MODE, STRING_MODE
+SIMPLE_NUMERIC=(0|[1-9]\d*)(\.\d+)?
+%state STRING_MODE, PROCEDURAL_TEXTURE_MODE
 
 %%
 { SINGLE_LINE_COMMENT }          { return ParamTypes.SINGLE_LINE_COMMENT; }
@@ -72,6 +61,8 @@ EXIT_CONCAT={ SYM_SHARPSHARP } | { SYM_SEMICOLON } | { SPACE }
 { DIRECTIVE_NEWLINE }            {  }
 
 <YYINITIAL> {
+  { LINE_TERMINATOR }            { return TokenType.WHITE_SPACE; }
+
   { WHITE_SPACES }               { return TokenType.WHITE_SPACE; }
 
   "class"                        { return ParamTypes.KW_CLASS; }
@@ -82,6 +73,12 @@ EXIT_CONCAT={ SYM_SHARPSHARP } | { SYM_SEMICOLON } | { SPACE }
 
   "@"                            { return ParamTypes.REFERENCE_MODE; }
 
+  "<"                            { this.currentState.enterStringMode(ParamStringType.INCLUDE); }
+
+  "__LINE__"                     { return ParamTypes.MACRO_LINE; }
+
+  "__FILE__"                     { return ParamTypes.MACRO_FILE; }
+
   "{"                            { return this.currentState.enterLeftCurly(); }
 
   "}"                            { return this.currentState.enterRightCurly(); }
@@ -90,83 +87,102 @@ EXIT_CONCAT={ SYM_SHARPSHARP } | { SYM_SEMICOLON } | { SPACE }
 
   "]"                            { return ParamTypes.SYM_RSQUARE; }
 
-  { SYM_SEMICOLON }              { return ParamTypes.SYM_SEMI; }
+  ";"                            {
+          this.currentState.setAssumeInProperty(false);
+          return ParamTypes.SYM_SEMI;
+      }
 
   ":"                            { return ParamTypes.SYM_COLON; }
 
-  "="                            { return ParamTypes.OP_ASSIGN; }
+  "="                            {
+          this.currentState.setAssumeInProperty(true);
+          return ParamTypes.OP_ASSIGN;
+      }
 
-  "+="                           { return ParamTypes.OP_ADDASSIGN; }
+  "+="                           {
+          this.currentState.setAssumeInProperty(true);
+          return ParamTypes.OP_ADDASSIGN;
+      }
 
-  "-="                           { return ParamTypes.OP_SUBASSIGN; }
+  "-="                           {
+          this.currentState.setAssumeInProperty(true);
+          return ParamTypes.OP_SUBASSIGN;
+      }
 
-  { SYM_DQUOTE }                 { return this.currentState.enterStringMode(ParamStringType.DOUBLE); }
+  "\""                           { return this.currentState.enterStringMode(ParamStringType.DOUBLE); }
 
-  { SYM_SQUOTE }                 { return this.currentState.enterStringMode(ParamStringType.SINGLE); }
+  "'"                            { return this.currentState.enterStringMode(ParamStringType.SINGLE); }
 
-  { ABS_NUMERIC }                { return ParamTypes.ABS_NUMERIC; }
+  "("                            { return ParamTypes.SYM_LPARENTHESIS; }
 
-  { SYM_LPAREN }                 { return ParamTypes.SYM_LPARENTHESIS; }
+  ")"                            { return ParamTypes.SYM_RPARENTHESIS; }
 
-  { SYM_RPAREN }                 { return ParamTypes.SYM_RPARENTHESIS; }
+  ","                            { return ParamTypes.SYM_COMMA; }
 
   { ABS_IDENTIFIER }             { return ParamTypes.ABS_IDENTIFIER; }
 
-  { SYM_COMMA }                  { return ParamTypes.SYM_COMMA; }
+  { ABS_NUMERIC }                { return ParamTypes.ABS_NUMERIC; }
 
   { SYM_SHARP }                  { /*return this.enterDirectiveMode();*/}
 
-  { SYM_LINE }                   { /*return this.enterMacroMode();*/ }
-
   { SYM_SHARPSHARP }             { /*return this.enterConcatMode();*/ }
+
+  [^]                            { return this.currentState.enterStringMode(ParamStringType.SINGLE); }
 }
 
 <STRING_MODE> {
   { ESCAPES }                    { return ParamTypes.STRING_ESCAPE; }
 
-  { SYM_CASH }{ABS_IDENTIFIER}   { return LOCALIZED_STRING; }
+  { LOCALIZED_STRING }           { return ParamTypes.LOCALIZED_STRING; }
 
-  { SYM_DQUOTE }                 { return this.currentState.handleStringEnd(ParamStringType.DOUBLE); }
+  "#("                           {
+          this.currentState.setCurrentParenthesisLevel(2);
+          this.yypushback(1);
+          return this.currentState.pushStateAndReturn(this.PROCEDURAL_TEXTURE_MODE, ParamTypes.PROCEDURAL_TEXTURE_START);
+      }
 
-  { SYM_SQUOTE }                 { return this.currentState.handleStringEnd(ParamStringType.SINGLE); }
+  "\""                           { return this.currentState.handleStringEnd(ParamStringType.DOUBLE); }
 
-  { SYM_RANGLE }                 { return this.currentState.handleStringEnd(ParamStringType.INCLUDE); }
+  "'"                            { return this.currentState.handleStringEnd(ParamStringType.SINGLE); }
 
-  { SYM_SEMICOLON }              { return this.currentState.handleStringEnd(ParamStringType.NONE); }
+  ">"                            { return this.currentState.handleStringEnd(ParamStringType.INCLUDE); }
 
-  { LINE_TERMINATOR }            { return this.currentState.handleStringEnd(ParamStringType.NOT_STRING); }
+  ";"                            { return this.currentState.handleStringEnd(ParamStringType.AMBIGUOUS); }
 
-  [^\"]                          { return ParamTypes.STRING_CONTENT; }
+  ","                            { return this.currentState.handleStringEnd(ParamStringType.AMBIGUOUS); }
+
+  "}"                            { return this.currentState.handleStringEnd(ParamStringType.AMBIGUOUS); }
+
+  { LINE_TERMINATOR }            { return this.currentState.handleStringEnd(ParamStringType.AMBIGUOUS); }
+
+  [^\"]                          { return ParamTypes.STRING_CONTENTS; }
 }
 
-<DIRECTIVE_CONCAT_MODE> {
-  { SYM_LPAREN }                 { return ParamTypes.SYM_LPARENTHESIS; }
+<PROCEDURAL_TEXTURE_MODE> {
+    ")"                          {
+          this.currentState.popParenthesisLevel();
+          if(this.currentState.getCurrentParenthesisLevel() == 0) this.currentState.popState();
 
-  { SYM_RPAREN }                 { return ParamTypes.SYM_RPARENTHESIS; }
+          return ParamTypes.SYM_RPARENTHESIS;
+          }
+    "("                          { return ParamTypes.SYM_LPARENTHESIS; }
 
-  { EXIT_CONCAT }                { return this.currentState.popStateAndReturn(ParamTypes.EXIT_CONCAT); }
+    "rgb"|"argb"|"ai"|"a"|"i"    { return ParamTypes.PROCEDURAL_TEXTURE_FILTER; }
+
+    "color"|"r2t"|"perlinNoise"|"irradiance"|"Fresnel"|"fresnelGlass"|"text"|
+    "waterIrradiance"|"treeCrown"|"treeCrownAmb"|"point"|"dither"|"ui"   {
+          return ParamTypes.PROCEDURAL_FUNCTION_TYPE;
+    }
+
+    ","                          { return ParamTypes.SYM_COMMA; }
+
+    { WHITE_SPACES }             { return TokenType.BAD_CHARACTER; }
+
+    { SIMPLE_NUMERIC }           { return ParamTypes.ABS_NUMERIC; }
+
+    { ABS_STRING }               { return ParamTypes.STRING_LITERAL; }
+
+    { ABS_IDENTIFIER }           { return ParamTypes.ABS_IDENTIFIER; }
+
+    [^]                          { return this.currentState.popStateAndReturn(ParamTypes.STRING_CONTENT); }
 }
-
-<MACRO_MODE> {
-  "LINE"                         { return ParamTypes.MACRO_LINE; }
-
-  "FILE"                         { return ParamTypes.MACRO_FILE; }
-
-  "EXEC"                         { return this.currentState.pushStateAndReturn(this.SQF_MODE, ParamTypes.MACRO_EXEC); }
-
-  "EVAL"                         { return this.currentState.pushStateAndReturn(this.SQF_MODE, MACRO_EVAL);}
-
-  "__"                           { return ParamTypes.EXIT_MACRO; }
-
-  [^]                            { return TokenType.BAD_CHARACTER; }
-}
-
-<SQF_MODE> {
-  { SYM_LPAREN }                 { return ParamTypes.SYM_LPARENTHESIS; }
-                                    // pops first to leave sqf-mode then pops again to leave macro mode
-  { SYM_RPAREN }                 { return this.currentState.popStateAndReturn(ParamTypes.MACRO, 2); }
-
-  [^]+                           { return ParamTypes.SQF_STATEMENT; }
-}
-
-[^] { return TokenType.BAD_CHARACTER; }

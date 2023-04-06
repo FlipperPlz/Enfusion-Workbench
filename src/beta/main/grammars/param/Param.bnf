@@ -39,192 +39,110 @@
         SYM_COMMA                = ',';
         SYM_LPARENTHESIS         = '(';
         SYM_RPARENTHESIS         = ')';
-        SYM_DQUOTE               = '"';
-        SYM_LANGLE               = "<";
-        SYM_RANGLE               = '>';
-        MACRO_LINE               = 'LINE';
-        MACRO_FILE               = 'FILE';
-        MACRO_EXEC               = 'EXEC'
-        MACRO_EVAL               = 'EVAL';
-        MACRO_MODE               = '__';
+        ESC_DQUOTE               = "\"\"";
+        ESC_SQUOTE               = "\'"
+        STRING_DOUBLE_START      = '"';
+        STRING_DOUBLE_END        = '"';
+        STRING_SINGLE_START      = "\'"
+        STRING_SINGLE_END        = "\'"
+        STRING_INCLUDE_START     = "<";
+        STRING_INCLUDE_END       = '>';
+        MACRO_LINE               = '__LINE__';
+        MACRO_FILE               = '__FILE__';
+        MACRO_EXEC               = '__EXEC'
+        MACRO_EVAL               = '__EVAL';
         DIRECTIVE_MODE           = '#';
         DIRECTIVE_CONCAT         = '##';
         REFERENCE_MODE           = '@';
         ABS_IDENTIFIER           = 'regexp:[a-zA-Z_][a-zA-Z0-9_]*';
-        ABS_STRING               = 'regexp:^"(?:[^"]|"")*"$';
         ABS_NUMERIC              = 'regexp:(-?[0-9]+(.[0-9]+)?([eE][-+]?[0-9]+)?|0x[a-fA-F0-9]+)';
-        DIRECTIVE_NEWLINE        = 'regexp:\\(\r)?\n';
+        NEWLINE                  = 'regexp:(\r)?\n';
         WHITE_SPACE              = 'regexp:\s'
     ]
     generate=[tokenAccessors="yes"]
 
-    extends("classDeclaration|directive|variableDeclaration|deleteStatement|executeMacro|customMacro")=statement
-    extends("literal|array")=arrayElement
-    extends("string|number|macro|reference")=literal
+    extends("numericLiteral|macro|parameterReference|stringLiteral")=literal
+    extends("literal|arrayLiteral")=arrayElement
+    extends(".*Statement|universalMacro")=statement
+    extends("proceduralTexture")=stringContent
+    extends("lineMacro|fileMacro|evaluateMacro|customMacro|executeMacro")=macro
 
-    implements("classDeclaration|variableDeclaration|deleteStatement|identifier")="com.flipperplz.enfusionWorkbench.languages.param.psi.ParamNamedPsiElement"
-
-    mixin("classDeclaration")="com.flipperplz.enfusionWorkbench.languages.param.psi.mixins.impl.ParamClassDeclarationMixinImpl"
-    mixin("variableDeclaration")="com.flipperplz.enfusionWorkbench.languages.param.psi.mixins.impl.ParamVariableDeclarationMixinImpl"
-    mixin("deleteStatement")="com.flipperplz.enfusionWorkbench.languages.param.psi.mixins.impl.ParamDeleteStatementMixinImpl"
-    mixin("identifier")="com.flipperplz.enfusionWorkbench.languages.param.psi.mixins.impl.ParamIdentifierMixinImpl"
-
-    //Non Binarizables
-    mixin("directive")="com.flipperplz.enfusionWorkbench.languages.param.psi.mixins.impl.ParamNonBinaraizableMixinImpl"
-    mixin("executeMacro")="com.flipperplz.enfusionWorkbench.languages.param.psi.mixins.impl.ParamNonBinaraizableMixinImpl"
-    mixin("macro")="com.flipperplz.enfusionWorkbench.languages.param.psi.mixins.impl.ParamNonBinaraizableMixinImpl"
-    mixin("reference")="com.flipperplz.enfusionWorkbench.languages.param.psi.mixins.impl.ParamNonBinaraizableMixinImpl"
-    mixin("concatenateDirective")="com.flipperplz.enfusionWorkbench.languages.param.psi.mixins.impl.ParamNonBinaraizableMixinImpl"
-
-    //Error Correction
-    pin("variableDeclaration|valueAssignment|(execute|default|evaluate|line|file)Macro")=1
-    pin("(concatenate|include|(und|d)efine|if)Directive|enumValue|identifier|string")=1
-    pin("reference|deleteStatement|directive|classDeclaration|classExtension|arraySquare")=1
-    pin("statementWithSemicolon|enumDeclaration")=1
-    recoverWhile("directive|statementWithSemicolon|enumDeclaration")=statementRecover
+    mixin("stringLiteral")="com.flipperplz.enfusionWorkbench.languages.param.psi.mixins.ParamStringMixin"
+    mixin(".*Macro")="com.flipperplz.enfusionWorkbench.languages.param.psi.mixins.ParamNonBinaraizableMixin"
+    mixin("parameterReference")="com.flipperplz.enfusionWorkbench.languages.param.psi.mixins.ParamNonBinaraizableMixin"
 }
 
-file ::= [statements] [enumDeclaration]
+file ::= statement+ enumDeclaration?
 
-statement ::= (
-     directive
-   | classDeclaration
-   | deleteStatement
-   | variableDeclaration
-   | executeMacro
-   | customMacro
+statement ::= ((
+    deleteStatement |
+    classStatement |
+    parameterStatement //VERY AMBIGUOUS (STRING) LEAVE LAST
+)   SYM_SEMI) | (universalMacro [SYM_SEMI]) {pin(".*")=1};
+
+literal ::= {
+    numericLiteral |
+    macro |
+    parameterReference |
+    stringLiteral //VERY AMBIGUOUS LEAVE LAST
+}
+
+macro ::= (
+    lineMacro |
+    fileMacro |
+    evaluateMacro |
+    universalMacro
 )
 
-literal ::= (
-     string
-   | number
-   | macro
-   | reference
-)
+proceduralTexture ::= PROCEDURAL_TEXTURE_START proceduralTextureRightArgs proceduralTextureFunction {pin=1};
+proceduralTextureFunction ::=
+    PROCEDURAL_FUNCTION_TYPE SYM_LPARENTHESIS [literal (SYM_COMMA literal)*] SYM_RPARENTHESIS
+ {pin(".*")=1};
 
-arrayElement ::= (
-     literal
-   | array
-)
+arrayElement ::= arrayLiteral | literal
 
-reference ::= REFERENCE_MODE identifier
+arrayLiteral ::= SYM_LCURLY (arrayElement (SYM_COMMA arrayElement)*)? SYM_RCURLY {pin(".*")=1}
 
-macro ::= defaultMacro | customMacro
+stringLiteral ::= (STRING_DOUBLE_START stringContent STRING_DOUBLE_END) |
+                  (STRING_SINGLE_START stringContent STRING_SINGLE_END) |
+                  (STRING_AMBIGUOUS_START stringContent STRING_AMBIGUOUS_END) {pin(".*")=1}
 
-directive ::= DIRECTIVE_MODE directiveType { pin=2 }
+evaluateMacro ::= MACRO_EVAL sqfTail {pin=1}
 
-classDeclaration ::= KW_CLASS  identifier [[classExtension] SYM_LCURLY statementWithSemicolon* SYM_RCURLY]
+executeMacro ::= MACRO_EXEC sqfTail {pin=1}
 
-enumDeclaration ::= KW_ENUM SYM_LCURLY enumValue* SYM_RCURLY SYM_SEMI
+classStatement ::= KW_CLASS identifier [[SYM_COLON identifier] SYM_LCURLY statement* SYM_RCURLY] {pin=1}
 
-variableDeclaration ::= identifier (arrayAssignment | valueAssignment)
+deleteStatement ::= KW_DELETE identifier {pin=1}
 
-deleteStatement ::= KW_DELETE identifier
+parameterReference ::= REFERENCE_MODE stringLiteral {pin=1}
 
-enumValue ::= identifier [OP_ASSIGN number]
+parameterStatement ::= identifier (
+    (arraySquare arrayOperator arrayLiteral) |
+    (normalOperator literal)
+) {pin=1}
 
-array ::= SYM_LCURLY (arrayElement (SYM_COMMA (arrayElement | &(SYM_RCURLY)))*)? SYM_RCURLY SYM_SEMI { pin(".*")=1 }
+enumDeclaration ::= KW_ENUM SYM_LCURLY (enumValue ((SYM_COMMA | NEWLINE | SYM_SEMI) enumValue)*) SYM_RCURLY SYM_SEMI {pin(".*")=1}
+//helpers
+enumValue ::= identifier [OP_ASSIGN numericLiteral] {pin=1}
+identifier ::= ABS_IDENTIFIER
+stringContent ::= proceduralTexture | (STRING_CONTENTS | LOCALIZED_STRING | STRING_ESCAPE)*;
 
-number ::= ABS_NUMERIC
+numericLiteral ::= ABS_NUMERIC
+lineMacro ::= MACRO_LINE
+fileMacro ::= MACRO_FILE
+customMacro ::= identifier [SYM_LPARENTHESIS macroArgument (SYM_COMMA macroArgument)* SYM_RPARENTHESIS] {pin(".*")=1}
 
-string ::= STRING_START stringContent* STRING_END
-
-identifier ::= ABS_IDENTIFIER [concatenateDirective]
-
-lineMacro ::= MACRO_LINE EXIT_MACRO
-
-fileMacro ::= MACRO_FILE EXIT_MACRO
-
-executeMacro ::= MACRO_EXEC sqfMacroTail
-
-evaluateMacro ::= MACRO_EVAL sqfMacroTail
-
-includeDirective ::= KW_INCLUDE (string | includeString)
-
-defineDirective ::= KW_DEFINE ABS_IDENTIFIER [argumentativeDefine] [SYM_HASH] DIRECTIVE_TAIL
-
-concatenateDirective ::= CONCAT_MODE customMacro EXIT_CONCAT
-
-undefineDirective ::= KW_UNDEF ABS_IDENTIFIER EXIT_DIRECTIVE
-
-ifDirective ::= ifDirectiveType ABS_IDENTIFIER EXIT_DIRECTIVE (
-    statement*
-) elseOrEndIfDirective
-
-customMacro ::= ABS_IDENTIFIER [SYM_LPARENTHESIS [ABS_IDENTIFIER (SYM_COMMA ABS_IDENTIFIER)*] SYM_RPARENTHESIS]
-
-private stringContent ::= STRING_CONTENT | LOCALIZED_STRING | STRING_ESCAPE;
-
-private elseDirective ::= KW_ELSE EXIT_DIRECTIVE
-
-private elseOrEndIfDirective ::= DIRECTIVE_MODE (endIfDirective | elseDirective)
-
-private ifDirectiveType ::= KW_IF | KW_IFDEF | KW_IFNDEF
-
-private endIfDirective ::= KW_ENDIF EXIT_DIRECTIVE
-
-private argumentativeDefine ::= SYM_LPARENTHESIS [defineArguments] SYM_RPARENTHESIS
-
-private defineArguments ::= ABS_IDENTIFIER (SYM_COMMA ABS_IDENTIFIER)*
-
-private arrayAssignment ::= arraySquare arrayOperator array
-
-private directiveType ::=(
-     includeDirective
-   | defineDirective
-   | undefineDirective
-   | ifDirective
-)
-
-private sqfMacroTail ::= SYM_LPARENTHESIS [SQF_STATEMENT] SYM_RPARENTHESIS
-
-private valueAssignment ::= normalOperator literal
-
-private classExtension ::= SYM_COLON identifier
-
-private statements ::= statementWithSemicolon+
-
-private statementWithSemicolon ::= statement SYM_SEMI
-
-private includeString ::= INCLUDE_START stringContent* INCLUDE_END
-
-private statementRecover ::= !(
-     SYM_SEMI
-   | SYM_COLON
-   | SYM_LCURLY
-   | SYM_LSQUARE
-   | SYM_RCURLY
-   | SYM_RSQUARE
-   | ABS_IDENTIFIER
-   | ABS_STRING
-   | ABS_NUMERIC
-   | KW_DELETE
-   | KW_CLASS
-   | SYM_COMMA
-   | OP_ASSIGN
-   | OP_ADDASSIGN
-   | OP_SUBASSIGN
-   | DIRECTIVE_MODE
-   | DIRECTIVE_CONCAT
-   | comment
-   | directive
-   | macro
-   | statement
-)
-
-
+//private helpers
+private macroArgument ::= !(SYM_COMMA | SYM_RPARENTHESIS)
+private sqfTail ::= SYM_LPARENTHESIS !(SYM_RPARENTHESIS) SYM_RPARENTHESIS {pin=1}
 private normalOperator ::= OP_ASSIGN
-
 private arrayOperator ::= normalOperator | OP_ADDASSIGN | OP_SUBASSIGN
-
-private arraySquare ::= SYM_LSQUARE SYM_RSQUARE
-
-private defaultMacro ::= MACRO_MODE (
-     lineMacro
-   | fileMacro
-   | evaluateMacro
-)
-
+private arraySquare ::= SYM_LSQUARE SYM_RSQUARE {pin=1}
+private universalMacro ::= executeMacro | customMacro
+private proceduralTextureRightArgs ::= (SYM_LPARENTHESIS
+    (PROCEDURAL_TEXTURE_FILTER SYM_COMMA numericLiteral SYM_COMMA numericLiteral SYM_COMMA numericLiteral)
+SYM_RPARENTHESIS) {pin(".*")=1}
 
 
 

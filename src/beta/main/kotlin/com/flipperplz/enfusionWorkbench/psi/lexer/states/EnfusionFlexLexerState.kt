@@ -34,6 +34,12 @@ open class EnfusionFlexLexerState(
         return currentState
     }
 
+    fun overrideState(id: Int) {
+        stateDeque.removeLast();
+        stateDeque.addLast(id)
+        currentState = id
+    }
+
     fun popStateAndReturn(ret: IElementType): IElementType {
         popState()
         return ret

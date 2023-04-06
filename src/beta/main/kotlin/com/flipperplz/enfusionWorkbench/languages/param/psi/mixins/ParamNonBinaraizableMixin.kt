@@ -1,9 +1,9 @@
-package com.flipperplz.enfusionWorkbench.languages.param.psi.mixins.impl
+package com.flipperplz.enfusionWorkbench.languages.param.psi.mixins
 
 import com.flipperplz.enfusionWorkbench.languages.param.psi.impl.ParamPsiElementImpl
 import com.intellij.lang.ASTNode
 
-abstract class ParamNonBinaraizableMixinImpl(
+abstract class ParamNonBinaraizableMixin(
     node: ASTNode
 ) : ParamPsiElementImpl(
     node
