@@ -9,10 +9,10 @@ import com.intellij.psi.PsiElement
 
 class TextureStringAnnotator : Annotator {
     override fun annotate(element: PsiElement, holder: AnnotationHolder) {
-        if(element is ParamStringLiteralImpl) {
-            val stringContents = element.stringContents
-            if(!stringContents.startsWith('#')) return
+        //if(element is ParamStringLiteralImpl) {
+            //val stringContents = element.stringContents
+            //if(!stringContents.startsWith('#')) return
 
-        }
+        //}
     }
 }

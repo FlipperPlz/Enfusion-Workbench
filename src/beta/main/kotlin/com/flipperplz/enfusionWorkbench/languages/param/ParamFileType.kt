@@ -5,10 +5,15 @@ import com.intellij.icons.AllIcons
 import com.intellij.openapi.fileTypes.LanguageFileType
 import javax.swing.Icon
 
-object ParamFileType : EnfusionLanguageFileType(ParamLanguage){
+class ParamFileType : EnfusionLanguageFileType(ParamLanguage) {
+    companion object {
+        val instance: ParamFileType = ParamFileType();
+    }
+
     override fun getName(): String = "Param"
     override fun getDescription(): String = "A type of configuration file used by Bohemias RV/Enforce engine (Pre-Enfusion)"
     override fun getDefaultExtension(): String = "cpp"
+
     override fun getIcon(): Icon = AllIcons.FileTypes.Config
 
 }

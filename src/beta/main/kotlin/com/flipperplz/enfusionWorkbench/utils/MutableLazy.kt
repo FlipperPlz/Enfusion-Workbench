@@ -7,5 +7,7 @@ class BisErasableLazy<T>(private val initializer: () -> T) : Lazy<T> {
         get() = cached ?: initializer().also { cached = it } as T
 
     fun reset() { cached = null }
+
+    fun reset(initial: T) { cached = initial }
     override fun isInitialized(): Boolean = cached != null
 }

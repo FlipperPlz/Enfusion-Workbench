@@ -25,8 +25,16 @@ dependencies {
     implementation("com.code-disaster.steamworks4j:steamworks4j-server:1.9.0-SNAPSHOT")
 }
 
-java.targetCompatibility=JavaVersion.VERSION_17
-java.sourceCompatibility=JavaVersion.VERSION_17
+java {
+    targetCompatibility=JavaVersion.VERSION_17
+    sourceCompatibility=JavaVersion.VERSION_17
+    sourceSets.main {
+        java.srcDirs(
+            "src/${sourceBranch}/main/gen",
+            "src/${sourceBranch}/main/java"
+        )
+    }
+}
 
 group = "com.flipperplz"
 version = "1.0-${sourceBranch}"
@@ -42,15 +50,21 @@ intellij {
     plugins.set(listOf(/* Plugin Dependencies */))
 }
 
+
 idea {
     module {
+        sourceDirs.add(file("src/${sourceBranch}/main/java"))
+        sourceDirs.add(file("src/${sourceBranch}/main/kotlin"))
         generatedSourceDirs.add(file("src/${sourceBranch}/main/gen"))
+        resourceDirs.add(file("src/${sourceBranch}/main/resources"))
     }
 }
 
 sourceSets {
     main {
-        java.srcDirs("src/${sourceBranch}/main/gen")
+        java.srcDirs(
+            "src/${sourceBranch}/main/gen",
+            "src/${sourceBranch}/main/java")
         resources.srcDirs("src/${sourceBranch}/main/resources")
     }
 }
@@ -62,13 +76,6 @@ kotlin {
         }
     }
 }
-
-idea {
-    module {
-        generatedSourceDirs.add(file("src/${sourceBranch}/main/gen"))
-    }
-}
-
 
 configure<JavaPluginExtension> {
     sourceCompatibility = JavaVersion.VERSION_17
@@ -82,6 +89,7 @@ tasks {
         targetRoot.set("src/${sourceBranch}/main/gen/")
         pathToParser.set("/com/flipperplz/enfusionWorkbench/languages/param/parser/ParamParser.java")
         pathToPsiRoot.set("/com/flipperplz/enfusionWorkbench/languages/param/psi/")
+
         purgeOldFiles.set(true)
     }
 

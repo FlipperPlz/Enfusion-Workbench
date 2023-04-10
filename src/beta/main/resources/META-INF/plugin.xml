@@ -44,26 +44,8 @@
                 language="Param"
                 implementationClass="com.flipperplz.enfusionWorkbench.languages.param.highlighting.ParamSyntaxHighlighterFactory"
         />
-        <!--<fileType
-                name="ParamC"
-                implementationClass="com.flipperplz.enfusionWorkbench.languages.param.binarization.ParamBinFileType"
-                language="Param"
-                extensions="bin;cpp;rvmat"
+        <inspectionToolProvider
+                implementation="com.flipperplz.enfusionWorkbench.languages.param.inspection.ParamInspectionFactory"
         />
-
-        <lang.foldingBuilder
-            language="Param"
-            implementationClass="com.flipperplz.enfusionWorkbench.languages.param.sugar.folding.ParamFoldingBuilder"
-        />
-        <lang.syntaxHighlighterFactory
-            language="Param"
-            implementationClass="com.flipperplz.enfusionWorkbench.languages.param.sugar.highlighting.ParamSyntaxHighlighterFactory"
-        />
-        <colorSettingsPage
-            implementation="com.flipperplz.enfusionWorkbench.languages.param.sugar.highlighting.settings.ParamColorSettingsPage"
-        />-->
-<!--        <codeStyleSettingsProvider-->
-<!--            implementation="com.flipperplz.enfusionWorkbench.languages.param.sugar.codeStyle.ParamCodeStyleSettingsProvider"-->
-<!--        />-->
     </extensions>
 </idea-plugin>

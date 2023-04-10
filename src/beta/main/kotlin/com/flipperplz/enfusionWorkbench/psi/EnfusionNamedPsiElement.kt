@@ -1,6 +1,6 @@
 package com.flipperplz.enfusionWorkbench.psi
 
+import com.intellij.navigation.NavigationItem
 import com.intellij.psi.PsiNameIdentifierOwner
-import com.intellij.psi.PsiNamedElement
 
-interface EnfusionNamedPsiElement : EnfusionPsiElement, PsiNamedElement, PsiNameIdentifierOwner
+interface EnfusionNamedPsiElement : EnfusionPsiElement, PsiNameIdentifierOwner, NavigationItem

@@ -67,9 +67,9 @@
     extends("proceduralTexture")=stringContent
     extends("lineMacro|fileMacro|evaluateMacro|customMacro|executeMacro")=macro
 
+//    implements("(class|parameter|delete)Statement|universalMacro|proceduralTexture(RightArgs|Function)")="com.flipperplz.enfusionWorkbench.languages.param.psi.ParamNamedPsiElement"
     mixin("stringLiteral")="com.flipperplz.enfusionWorkbench.languages.param.psi.mixins.ParamStringMixin"
-    mixin(".*Macro")="com.flipperplz.enfusionWorkbench.languages.param.psi.mixins.ParamNonBinaraizableMixin"
-    mixin("parameterReference")="com.flipperplz.enfusionWorkbench.languages.param.psi.mixins.ParamNonBinaraizableMixin"
+    mixin(".*Macro|parameterReference")="com.flipperplz.enfusionWorkbench.languages.param.psi.mixins.ParamNonBinaraizableMixin"
 }
 
 file ::= statement+ enumDeclaration?
@@ -96,7 +96,7 @@ macro ::= (
 
 proceduralTexture ::= PROCEDURAL_TEXTURE_START proceduralTextureRightArgs proceduralTextureFunction {pin=1};
 proceduralTextureFunction ::=
-    PROCEDURAL_FUNCTION_TYPE SYM_LPARENTHESIS [literal (SYM_COMMA literal)*] SYM_RPARENTHESIS
+    identifier SYM_LPARENTHESIS [literal (SYM_COMMA literal)*] SYM_RPARENTHESIS
  {pin(".*")=1};
 
 arrayElement ::= arrayLiteral | literal
@@ -141,8 +141,5 @@ private arrayOperator ::= normalOperator | OP_ADDASSIGN | OP_SUBASSIGN
 private arraySquare ::= SYM_LSQUARE SYM_RSQUARE {pin=1}
 private universalMacro ::= executeMacro | customMacro
 private proceduralTextureRightArgs ::= (SYM_LPARENTHESIS
-    (PROCEDURAL_TEXTURE_FILTER SYM_COMMA numericLiteral SYM_COMMA numericLiteral SYM_COMMA numericLiteral)
+    (identifier SYM_COMMA numericLiteral SYM_COMMA numericLiteral SYM_COMMA numericLiteral)
 SYM_RPARENTHESIS) {pin(".*")=1}
-
-
-

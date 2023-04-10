@@ -1,31 +1,25 @@
 package com.flipperplz.enfusionWorkbench.languages.param.lexer;
 
 import com.flipperplz.enfusionWorkbench.languages.param.psi.ParamTypes;
-import com.flipperplz.enfusionWorkbench.languages.param.utils.ParamLexerState;
 import com.flipperplz.enfusionWorkbench.languages.param.utils.ParamStringType;
-import com.flipperplz.enfusionWorkbench.psi.lexer.EnfusionFlexLexer;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.TokenType;
 import org.jetbrains.annotations.NotNull;
+import com.intellij.lexer.FlexLexer;
+
 
 %%
 
 %{
-    private final @NotNull ParamLexerState currentState = new ParamLexerState(
-            this,
-            this.YYINITIAL,
-            this.STRING_MODE
-        );
+    private ParamStringType xxStringType = ParamStringType.NOT_STRING;
+    private int xxCurrentCounter = 0;
 
-        public ParamLexer() { this((java.io.Reader)null); }
-
-        @Override
-        public @NotNull ParamLexerState getLexerState() { return this.currentState; }
+    public ParamLexer() { this((java.io.Reader)null); }
 %}
 
 %public
 %class ParamLexer
-%implements EnfusionFlexLexer<ParamLexerState>
+%implements FlexLexer
 %function advance
 %type IElementType
 %unicode
@@ -73,45 +67,45 @@ SIMPLE_NUMERIC=(0|[1-9]\d*)(\.\d+)?
 
   "@"                            { return ParamTypes.REFERENCE_MODE; }
 
-  "<"                            { this.currentState.enterStringMode(ParamStringType.INCLUDE); }
+  "<"                            {
+          xxStringType = ParamStringType.INCLUDE;
+          yybegin(STRING_MODE);
+          return ParamTypes.STRING_INCLUDE_START;
+       }
 
   "__LINE__"                     { return ParamTypes.MACRO_LINE; }
 
   "__FILE__"                     { return ParamTypes.MACRO_FILE; }
 
-  "{"                            { return this.currentState.enterLeftCurly(); }
+  "{"                            { return ParamTypes.SYM_LCURLY; }
 
-  "}"                            { return this.currentState.enterRightCurly(); }
+  "}"                            { return ParamTypes.SYM_RCURLY; }
 
   "["                            { return ParamTypes.SYM_LSQUARE; }
 
   "]"                            { return ParamTypes.SYM_RSQUARE; }
 
-  ";"                            {
-          this.currentState.setAssumeInProperty(false);
-          return ParamTypes.SYM_SEMI;
-      }
+  ";"                            { return ParamTypes.SYM_SEMI; }
 
   ":"                            { return ParamTypes.SYM_COLON; }
 
-  "="                            {
-          this.currentState.setAssumeInProperty(true);
-          return ParamTypes.OP_ASSIGN;
-      }
+  "="                            { return ParamTypes.OP_ASSIGN; }
 
-  "+="                           {
-          this.currentState.setAssumeInProperty(true);
-          return ParamTypes.OP_ADDASSIGN;
-      }
+  "+="                           { return ParamTypes.OP_ADDASSIGN; }
 
-  "-="                           {
-          this.currentState.setAssumeInProperty(true);
-          return ParamTypes.OP_SUBASSIGN;
-      }
+  "-="                           { return ParamTypes.OP_SUBASSIGN; }
 
-  "\""                           { return this.currentState.enterStringMode(ParamStringType.DOUBLE); }
+  "\""                            {
+                xxStringType = ParamStringType.DOUBLE;
+                yybegin(STRING_MODE);
+                return ParamTypes.STRING_DOUBLE_START;
+             }
 
-  "'"                            { return this.currentState.enterStringMode(ParamStringType.SINGLE); }
+  "'"                            {
+               xxStringType = ParamStringType.SINGLE;
+               yybegin(STRING_MODE);
+               return ParamTypes.STRING_SINGLE_START;
+            }
 
   "("                            { return ParamTypes.SYM_LPARENTHESIS; }
 
@@ -127,7 +121,12 @@ SIMPLE_NUMERIC=(0|[1-9]\d*)(\.\d+)?
 
   { SYM_SHARPSHARP }             { /*return this.enterConcatMode();*/ }
 
-  [^]                            { return this.currentState.enterStringMode(ParamStringType.SINGLE); }
+  [^]                            {
+          xxStringType = ParamStringType.AMBIGUOUS;
+          yybegin(this.STRING_MODE);
+          yypushback(1);
+          return ParamTypes.STRING_AMBIGUOUS_START;
+      }
 }
 
 <STRING_MODE> {
@@ -136,43 +135,79 @@ SIMPLE_NUMERIC=(0|[1-9]\d*)(\.\d+)?
   { LOCALIZED_STRING }           { return ParamTypes.LOCALIZED_STRING; }
 
   "#("                           {
-          this.currentState.setCurrentParenthesisLevel(2);
-          this.yypushback(1);
-          return this.currentState.pushStateAndReturn(this.PROCEDURAL_TEXTURE_MODE, ParamTypes.PROCEDURAL_TEXTURE_START);
+          xxCurrentCounter = 2;
+          yybegin(PROCEDURAL_TEXTURE_MODE);
+          yypushback(1);
+          return ParamTypes.PROCEDURAL_TEXTURE_START;
       }
 
-  "\""                           { return this.currentState.handleStringEnd(ParamStringType.DOUBLE); }
+  "\""                           {
+          if (xxStringType == ParamStringType.DOUBLE) {
+              xxStringType = ParamStringType.NOT_STRING;
+              yybegin(YYINITIAL);
+              return ParamTypes.STRING_DOUBLE_END;
+          } else return ParamTypes.STRING_CONTENTS;
+      }
 
-  "'"                            { return this.currentState.handleStringEnd(ParamStringType.SINGLE); }
+  "'"                            {
+          if (xxStringType == ParamStringType.SINGLE) {
+              xxStringType = ParamStringType.NOT_STRING;
+              yybegin(YYINITIAL);
+              return ParamTypes.STRING_SINGLE_END;
+          } else return ParamTypes.STRING_CONTENTS;
+      }
 
-  ">"                            { return this.currentState.handleStringEnd(ParamStringType.INCLUDE); }
+  ">"                            {
+          if (xxStringType == ParamStringType.SINGLE) {
+              xxStringType = ParamStringType.NOT_STRING;
+              yybegin(YYINITIAL);
+              return ParamTypes.STRING_INCLUDE_END;
+          } else return ParamTypes.STRING_CONTENTS;
+       }
 
-  ";"                            { return this.currentState.handleStringEnd(ParamStringType.AMBIGUOUS); }
+  ";"                            {
+          if (xxStringType == ParamStringType.AMBIGUOUS) {
+              xxStringType = ParamStringType.NOT_STRING;
+              yybegin(YYINITIAL);
+              return ParamTypes.STRING_AMBIGUOUS_END;
+          } else return ParamTypes.STRING_CONTENTS;
+       }
 
-  ","                            { return this.currentState.handleStringEnd(ParamStringType.AMBIGUOUS); }
+  ","                            {
+          if (xxStringType == ParamStringType.AMBIGUOUS) {
+              xxStringType = ParamStringType.NOT_STRING;
+              yybegin(YYINITIAL);
+              return ParamTypes.STRING_AMBIGUOUS_END;
+          } else return ParamTypes.STRING_CONTENTS;
+       }
 
-  "}"                            { return this.currentState.handleStringEnd(ParamStringType.AMBIGUOUS); }
+  "}"                            {
+          if (xxStringType == ParamStringType.AMBIGUOUS) {
+              xxStringType = ParamStringType.NOT_STRING;
+              yybegin(YYINITIAL);
+              return ParamTypes.STRING_AMBIGUOUS_END;
+          } else return ParamTypes.STRING_CONTENTS;
+      }
 
-  { LINE_TERMINATOR }            { return this.currentState.handleStringEnd(ParamStringType.AMBIGUOUS); }
+  { LINE_TERMINATOR }            {
+          if (xxStringType == ParamStringType.AMBIGUOUS) {
+              xxStringType = ParamStringType.NOT_STRING;
+              yybegin(YYINITIAL);
+              return ParamTypes.STRING_AMBIGUOUS_END;
+          } else return ParamTypes.STRING_CONTENTS;
+      }
 
   [^\"]                          { return ParamTypes.STRING_CONTENTS; }
 }
 
 <PROCEDURAL_TEXTURE_MODE> {
     ")"                          {
-          this.currentState.popParenthesisLevel();
-          if(this.currentState.getCurrentParenthesisLevel() == 0) this.currentState.popState();
+          xxCurrentCounter--;
+          if(xxCurrentCounter == 0) yybegin(STRING_MODE);
 
           return ParamTypes.SYM_RPARENTHESIS;
-          }
+       }
     "("                          { return ParamTypes.SYM_LPARENTHESIS; }
-
-    "rgb"|"argb"|"ai"|"a"|"i"    { return ParamTypes.PROCEDURAL_TEXTURE_FILTER; }
-
-    "color"|"r2t"|"perlinNoise"|"irradiance"|"Fresnel"|"fresnelGlass"|"text"|
-    "waterIrradiance"|"treeCrown"|"treeCrownAmb"|"point"|"dither"|"ui"   {
-          return ParamTypes.PROCEDURAL_FUNCTION_TYPE;
-    }
 
     ","                          { return ParamTypes.SYM_COMMA; }
 
@@ -184,5 +219,5 @@ SIMPLE_NUMERIC=(0|[1-9]\d*)(\.\d+)?
 
     { ABS_IDENTIFIER }           { return ParamTypes.ABS_IDENTIFIER; }
 
-    [^]                          { return this.currentState.popStateAndReturn(ParamTypes.STRING_CONTENT); }
+    [^]                          { yybegin(STRING_MODE); return ParamTypes.STRING_CONTENTS; }
 }
