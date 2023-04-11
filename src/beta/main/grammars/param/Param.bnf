@@ -14,6 +14,7 @@
 
     tokens = [
         PROCEDURAL_TEXTURE_START = '#';
+        DIRECTIVE_START          = '#';
         SYM_SEMI                 = ';';
         SYM_LPARENTHESIS         = '(';
         SYM_RPARENTHESIS         = ')';
@@ -30,6 +31,9 @@
         KW_CLASS                 = 'class';
         KW_ENUM                  = 'enum';
         KW_DELETE                = 'delete';
+        KW_INCLUDE               = 'include';
+        KW_DEFINE                = 'define';
+        KW_UNDEFINE              = 'undef';
         MACRO_LINE               = '__LINE__';
         MACRO_FILE               = '__FILE__';
         OP_ASSIGN                = '=';
@@ -43,6 +47,8 @@
         ABS_IDENTIFIER           = 'regexp:[a-zA-Z_][a-zA-Z0-9_]*';
         ABS_NUMERIC              = 'regexp:(-?[0-9]+(.[0-9]+)?([eE][-+]?[0-9]+)?|0x[a-fA-F0-9]+)';
         WHITESPACE               = 'regexp:[\s\t\r\n]';
+        DIRECTIVE_NEWLINE        = 'regexp:\\[\r\n]'
+        EOL                      = 'regexp:[\r\n]'
     ]
     generate=[tokenAccessors="yes"]
 
@@ -50,20 +56,25 @@
     extends("literal|arrayLiteral")=arrayElement
     extends(".*Statement|universalMacro")=statement
     extends("proceduralTexture")=stringContent
-    extends("lineMacro|fileMacro|evaluateMacro|customMacro|executeMacro")=macro
-
-//    implements("(class|parameter|delete)Statement|universalMacro|proceduralTexture(RightArgs|Function)")="com.flipperplz.enfusionWorkbench.languages.param.psi.ParamNamedPsiElement"
+    extends("lineMacro|fileMacro|evaluateMacro|customMacro|executeMacro|directive")=macro
+    extends("includeDirective|defineDirective|undefineDirective")=directive
     mixin("stringLiteral")="com.flipperplz.enfusionWorkbench.languages.param.psi.mixins.ParamStringMixin"
-    mixin(".*Macro|parameterReference")="com.flipperplz.enfusionWorkbench.languages.param.psi.mixins.ParamNonBinaraizableMixin"
+    mixin(".*Macro|parameterReference|.*Directive|directive|macro")="com.flipperplz.enfusionWorkbench.languages.param.psi.mixins.ParamNonBinaraizableMixin"
 }
 
 file ::= statement* enumDeclaration?
 
-statement ::= ((
+directive ::= (
+    includeDirective |
+    defineDirective |
+    undefineDirective
+) {pin=1}
+
+statement ::= (
     deleteStatement |
     classStatement |
     parameterStatement //VERY AMBIGUOUS (STRING) LEAVE LAST
-)   SYM_SEMI) | (universalMacro [SYM_SEMI]) {pin(".*")=1};
+) SYM_SEMI | universalMacro [SYM_SEMI] {pin(".*")=1};
 
 literal ::= {
     numericLiteral |
@@ -78,6 +89,12 @@ macro ::= (
     evaluateMacro |
     universalMacro
 )
+
+defineDirective ::= DIRECTIVE_START KW_DEFINE macroDefine !EOL {pin=2}
+
+undefineDirective ::= DIRECTIVE_START KW_UNDEFINE identifier {pin=2}
+
+includeDirective ::= DIRECTIVE_START KW_INCLUDE (stringLiteral | includeString) {pin=2}
 
 proceduralTexture ::= PROCEDURAL_TEXTURE_START proceduralTextureRightArgs proceduralTextureFunction {pin=1};
 proceduralTextureFunction ::=
@@ -109,7 +126,7 @@ parameterStatement ::= identifier (
     (normalOperator literal)
 ) {pin=1}
 
-enumDeclaration ::= KW_ENUM SYM_LCURLY (enumValue ((SYM_COMMA | NEWLINE | SYM_SEMI) enumValue)*) SYM_RCURLY SYM_SEMI {pin(".*")=1}
+enumDeclaration ::= KW_ENUM SYM_LCURLY (enumValue ((SYM_COMMA | EOL | SYM_SEMI) enumValue)*) SYM_RCURLY SYM_SEMI {pin(".*")=1}
 //helpers
 enumValue ::= identifier [OP_ASSIGN numericLiteral] {pin=1}
 identifier ::= ABS_IDENTIFIER
@@ -126,7 +143,8 @@ private sqfTail ::= SYM_LPARENTHESIS !(SYM_RPARENTHESIS) SYM_RPARENTHESIS {pin=1
 private normalOperator ::= OP_ASSIGN
 private arrayOperator ::= normalOperator | OP_ADDASSIGN | OP_SUBASSIGN
 private arraySquare ::= SYM_LSQUARE SYM_RSQUARE {pin=1}
-private universalMacro ::= executeMacro | customMacro
+private universalMacro ::= executeMacro | customMacro | directive
+private macroDefine ::= identifier [SYM_LPARENTHESIS (identifier (SYM_COMMA identifier)) SYM_RPARENTHESIS]
 private proceduralTextureRightArgs ::= (SYM_LPARENTHESIS
     (identifier SYM_COMMA numericLiteral SYM_COMMA numericLiteral SYM_COMMA numericLiteral)
 SYM_RPARENTHESIS) {pin(".*")=1}

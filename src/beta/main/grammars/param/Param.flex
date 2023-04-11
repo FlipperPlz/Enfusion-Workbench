@@ -49,7 +49,7 @@ SIMPLE_NUMERIC=(0|[1-9]\d*)(\.\d+)?
 { DIRECTIVE_NEWLINE }            {  }
 
 <YYINITIAL> {
-  { LINE_TERMINATOR }            { return TokenType.WHITE_SPACE; }
+  { LINE_TERMINATOR }            { return ParamTypes.EOL; }
 
   { WHITE_SPACES }               { return TokenType.WHITE_SPACE; }
 
@@ -117,16 +117,15 @@ SIMPLE_NUMERIC=(0|[1-9]\d*)(\.\d+)?
 
   { ABS_NUMERIC }                { return ParamTypes.ABS_NUMERIC; }
 
-  { SYM_SHARP }                  { /*return this.enterDirectiveMode();*/}
+  { SYM_SHARP }                  { return ParamTypes.DIRECTIVE_START; }
 
   { SYM_SHARPSHARP }             { /*return this.enterConcatMode();*/ }
 
   [^]                            {
-          return TokenType.BAD_CHARACTER;
-//          xxStringType = ParamStringType.AMBIGUOUS;
-//          yybegin(this.STRING_MODE);
-//          yypushback(1);
-//          return ParamTypes.STRING_AMBIGUOUS_START;
+          xxStringType = ParamStringType.AMBIGUOUS;
+          yybegin(this.STRING_MODE);
+          yypushback(1);
+          return ParamTypes.STRING_AMBIGUOUS_START;
       }
 }
 
