@@ -44,8 +44,11 @@
                 language="Param"
                 implementationClass="com.flipperplz.enfusionWorkbench.languages.param.highlighting.ParamSyntaxHighlighterFactory"
         />
-        <inspectionToolProvider
-                implementation="com.flipperplz.enfusionWorkbench.languages.param.inspection.ParamInspectionFactory"
-        />
+<!--        <localInspection-->
+<!--            displayName="Ambiguous string"-->
+<!--            language="Param"-->
+<!--            groupName="Param\\Warnings"-->
+<!--            implementationClass="com.flipperplz.enfusionWorkbench.languages.param.inspection.ParamAmbiguousStringInspection"-->
+<!--        />-->
     </extensions>
 </idea-plugin>

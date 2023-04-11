@@ -65,6 +65,12 @@ SIMPLE_NUMERIC=(0|[1-9]\d*)(\.\d+)?
 
   "enum"                         { return ParamTypes.KW_ENUM; }
 
+  "__LINE__"                     { return ParamTypes.MACRO_LINE; }
+
+  "__FILE__"                     { return ParamTypes.MACRO_FILE; }
+
+  { ABS_IDENTIFIER }             { return ParamTypes.ABS_IDENTIFIER; }
+
   "@"                            { return ParamTypes.REFERENCE_MODE; }
 
   "<"                            {
@@ -72,10 +78,6 @@ SIMPLE_NUMERIC=(0|[1-9]\d*)(\.\d+)?
           yybegin(STRING_MODE);
           return ParamTypes.STRING_INCLUDE_START;
        }
-
-  "__LINE__"                     { return ParamTypes.MACRO_LINE; }
-
-  "__FILE__"                     { return ParamTypes.MACRO_FILE; }
 
   "{"                            { return ParamTypes.SYM_LCURLY; }
 
@@ -113,8 +115,6 @@ SIMPLE_NUMERIC=(0|[1-9]\d*)(\.\d+)?
 
   ","                            { return ParamTypes.SYM_COMMA; }
 
-  { ABS_IDENTIFIER }             { return ParamTypes.ABS_IDENTIFIER; }
-
   { ABS_NUMERIC }                { return ParamTypes.ABS_NUMERIC; }
 
   { SYM_SHARP }                  { /*return this.enterDirectiveMode();*/}
@@ -122,10 +122,11 @@ SIMPLE_NUMERIC=(0|[1-9]\d*)(\.\d+)?
   { SYM_SHARPSHARP }             { /*return this.enterConcatMode();*/ }
 
   [^]                            {
-          xxStringType = ParamStringType.AMBIGUOUS;
-          yybegin(this.STRING_MODE);
-          yypushback(1);
-          return ParamTypes.STRING_AMBIGUOUS_START;
+          return TokenType.BAD_CHARACTER;
+//          xxStringType = ParamStringType.AMBIGUOUS;
+//          yybegin(this.STRING_MODE);
+//          yypushback(1);
+//          return ParamTypes.STRING_AMBIGUOUS_START;
       }
 }
 
@@ -169,6 +170,7 @@ SIMPLE_NUMERIC=(0|[1-9]\d*)(\.\d+)?
           if (xxStringType == ParamStringType.AMBIGUOUS) {
               xxStringType = ParamStringType.NOT_STRING;
               yybegin(YYINITIAL);
+              yypushback(1);
               return ParamTypes.STRING_AMBIGUOUS_END;
           } else return ParamTypes.STRING_CONTENTS;
        }
@@ -177,6 +179,7 @@ SIMPLE_NUMERIC=(0|[1-9]\d*)(\.\d+)?
           if (xxStringType == ParamStringType.AMBIGUOUS) {
               xxStringType = ParamStringType.NOT_STRING;
               yybegin(YYINITIAL);
+              yypushback(1);
               return ParamTypes.STRING_AMBIGUOUS_END;
           } else return ParamTypes.STRING_CONTENTS;
        }
@@ -185,6 +188,7 @@ SIMPLE_NUMERIC=(0|[1-9]\d*)(\.\d+)?
           if (xxStringType == ParamStringType.AMBIGUOUS) {
               xxStringType = ParamStringType.NOT_STRING;
               yybegin(YYINITIAL);
+              yypushback(1);
               return ParamTypes.STRING_AMBIGUOUS_END;
           } else return ParamTypes.STRING_CONTENTS;
       }
@@ -193,6 +197,7 @@ SIMPLE_NUMERIC=(0|[1-9]\d*)(\.\d+)?
           if (xxStringType == ParamStringType.AMBIGUOUS) {
               xxStringType = ParamStringType.NOT_STRING;
               yybegin(YYINITIAL);
+              yypushback(1);
               return ParamTypes.STRING_AMBIGUOUS_END;
           } else return ParamTypes.STRING_CONTENTS;
       }

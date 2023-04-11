@@ -65,6 +65,7 @@ class ParamSyntaxHighlighter : SyntaxHighlighterBase() {
         ParamTypes.KW_CLASS -> KEYWORD_KEYS
         ParamTypes.KW_ENUM -> KEYWORD_KEYS
         ParamTypes.KW_DELETE -> KEYWORD_KEYS
+        ParamTypes.PROCEDURAL_TEXTURE -> LOCALIZED_STRINGS
         ParamTypes.STRING_AMBIGUOUS_START -> STRING_KEYS
         ParamTypes.STRING_SINGLE_START -> STRING_KEYS
         ParamTypes.STRING_DOUBLE_START -> STRING_KEYS
