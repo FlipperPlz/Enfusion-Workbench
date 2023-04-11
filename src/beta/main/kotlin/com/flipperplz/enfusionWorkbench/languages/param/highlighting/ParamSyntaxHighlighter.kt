@@ -76,13 +76,16 @@ class ParamSyntaxHighlighter : SyntaxHighlighterBase() {
         ParamTypes.STRING_INCLUDE_END -> STRING_KEYS
         ParamTypes.STRING_CONTENT -> STRING_KEYS
         ParamTypes.STRING_ESCAPE -> STRING_ESCAPES
+        ParamTypes.DEFINE_VALUE -> STRING_KEYS
         ParamTypes.LOCALIZED_STRING -> LOCALIZED_STRINGS
         ParamTypes.ABS_IDENTIFIER -> IDENTIFIER_KEYS
+        ParamTypes.MACRO_SIGNATURE -> IDENTIFIER_KEYS
         ParamTypes.SYM_COMMA -> COMMA_KEYS
         ParamTypes.SYM_LCURLY -> BRACES_KEYS
         ParamTypes.SYM_RCURLY -> BRACES_KEYS
         ParamTypes.SYM_LSQUARE -> BRACKETS_KEYS
         ParamTypes.SYM_RSQUARE -> BRACKETS_KEYS
+        ParamTypes.DIRECTIVE_START -> LOCALIZED_STRINGS
         ParamTypes.ABS_NUMERIC -> NUMBER_KEYS
         ParamTypes.SYM_SEMI -> SEMICOLON_KEYS
         TokenType.BAD_CHARACTER -> BAD_CHAR_KEYS

@@ -78,9 +78,9 @@ statement ::= (
 
 literal ::= {
     numericLiteral |
+    stringLiteral | //VERY AMBIGUOUS LEAVE LAST
     macro |
     parameterReference |
-    stringLiteral //VERY AMBIGUOUS LEAVE LAST
 }
 
 macro ::= (
@@ -90,16 +90,17 @@ macro ::= (
     universalMacro
 )
 
-defineDirective ::= DIRECTIVE_START KW_DEFINE macroDefine !EOL {pin=2}
+macroSignature ::= identifier [SYM_LPARENTHESIS identifier (SYM_COMMA identifier)* SYM_RPARENTHESIS] {pin=1}
+
+defineDirective ::=  DIRECTIVE_START KW_DEFINE macroSignature DEFINE_VALUE {pin=2}
 
 undefineDirective ::= DIRECTIVE_START KW_UNDEFINE identifier {pin=2}
 
 includeDirective ::= DIRECTIVE_START KW_INCLUDE (stringLiteral | includeString) {pin=2}
 
 proceduralTexture ::= PROCEDURAL_TEXTURE_START proceduralTextureRightArgs proceduralTextureFunction {pin=1};
-proceduralTextureFunction ::=
-    identifier SYM_LPARENTHESIS [literal (SYM_COMMA literal)*] SYM_RPARENTHESIS
- {pin(".*")=1};
+
+proceduralTextureFunction ::= identifier SYM_LPARENTHESIS [literal (SYM_COMMA literal)*] SYM_RPARENTHESIS {pin(".*")=1};
 
 arrayElement ::= arrayLiteral | literal
 
@@ -127,24 +128,35 @@ parameterStatement ::= identifier (
 ) {pin=1}
 
 enumDeclaration ::= KW_ENUM SYM_LCURLY (enumValue ((SYM_COMMA | EOL | SYM_SEMI) enumValue)*) SYM_RCURLY SYM_SEMI {pin(".*")=1}
+
 //helpers
 enumValue ::= identifier [OP_ASSIGN numericLiteral] {pin=1}
+
 identifier ::= ABS_IDENTIFIER
-stringContent ::= proceduralTexture | (STRING_CONTENTS | LOCALIZED_STRING | STRING_ESCAPE)*;
+
+stringContent ::= proceduralTexture | (STRING_CONTENTS | LOCALIZED_STRING | STRING_ESCAPE)* ;
 
 numericLiteral ::= ABS_NUMERIC
+
 lineMacro ::= MACRO_LINE
+
 fileMacro ::= MACRO_FILE
+
 customMacro ::= identifier [SYM_LPARENTHESIS macroArgument (SYM_COMMA macroArgument)* SYM_RPARENTHESIS] {pin(".*")=1}
 
 //private helpers
 private macroArgument ::= !(SYM_COMMA | SYM_RPARENTHESIS)
+
 private sqfTail ::= SYM_LPARENTHESIS !(SYM_RPARENTHESIS) SYM_RPARENTHESIS {pin=1}
+
 private normalOperator ::= OP_ASSIGN
+
 private arrayOperator ::= normalOperator | OP_ADDASSIGN | OP_SUBASSIGN
+
 private arraySquare ::= SYM_LSQUARE SYM_RSQUARE {pin=1}
+
 private universalMacro ::= executeMacro | customMacro | directive
-private macroDefine ::= identifier [SYM_LPARENTHESIS (identifier (SYM_COMMA identifier)) SYM_RPARENTHESIS]
+
 private proceduralTextureRightArgs ::= (SYM_LPARENTHESIS
     (identifier SYM_COMMA numericLiteral SYM_COMMA numericLiteral SYM_COMMA numericLiteral)
 SYM_RPARENTHESIS) {pin(".*")=1}

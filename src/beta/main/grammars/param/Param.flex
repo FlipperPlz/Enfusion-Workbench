@@ -43,7 +43,7 @@ ABS_IDENTIFIER=[a-zA-Z_][a-zA-Z0-9_]*
 ABS_STRING=\"((\"\"|[^\"])+)\"
 ABS_NUMERIC=(-?[0-9]+(.[0-9]+)?([eE][-+]?[0-9]+)?|0x[a-fA-F0-9]+)
 SIMPLE_NUMERIC=(0|[1-9]\d*)(\.\d+)?
-%state STRING_MODE, PROCEDURAL_TEXTURE_MODE
+%state STRING_MODE, PROCEDURAL_TEXTURE_MODE, DEFINE_MODE
 
 %%
 { DIRECTIVE_NEWLINE }            {  }
@@ -68,6 +68,15 @@ SIMPLE_NUMERIC=(0|[1-9]\d*)(\.\d+)?
   "__LINE__"                     { return ParamTypes.MACRO_LINE; }
 
   "__FILE__"                     { return ParamTypes.MACRO_FILE; }
+
+  "include"                      { return ParamTypes.KW_INCLUDE; }
+
+  "define"                       {
+          yybegin(DEFINE_MODE);
+          return ParamTypes.KW_DEFINE;
+      }
+
+  "undef"                        { return ParamTypes.KW_UNDEFINE; }
 
   { ABS_IDENTIFIER }             { return ParamTypes.ABS_IDENTIFIER; }
 
@@ -124,7 +133,6 @@ SIMPLE_NUMERIC=(0|[1-9]\d*)(\.\d+)?
   [^]                            {
           xxStringType = ParamStringType.AMBIGUOUS;
           yybegin(this.STRING_MODE);
-          yypushback(1);
           return ParamTypes.STRING_AMBIGUOUS_START;
       }
 }
@@ -169,7 +177,6 @@ SIMPLE_NUMERIC=(0|[1-9]\d*)(\.\d+)?
           if (xxStringType == ParamStringType.AMBIGUOUS) {
               xxStringType = ParamStringType.NOT_STRING;
               yybegin(YYINITIAL);
-              yypushback(1);
               return ParamTypes.STRING_AMBIGUOUS_END;
           } else return ParamTypes.STRING_CONTENTS;
        }
@@ -178,7 +185,6 @@ SIMPLE_NUMERIC=(0|[1-9]\d*)(\.\d+)?
           if (xxStringType == ParamStringType.AMBIGUOUS) {
               xxStringType = ParamStringType.NOT_STRING;
               yybegin(YYINITIAL);
-              yypushback(1);
               return ParamTypes.STRING_AMBIGUOUS_END;
           } else return ParamTypes.STRING_CONTENTS;
        }
@@ -187,7 +193,6 @@ SIMPLE_NUMERIC=(0|[1-9]\d*)(\.\d+)?
           if (xxStringType == ParamStringType.AMBIGUOUS) {
               xxStringType = ParamStringType.NOT_STRING;
               yybegin(YYINITIAL);
-              yypushback(1);
               return ParamTypes.STRING_AMBIGUOUS_END;
           } else return ParamTypes.STRING_CONTENTS;
       }
@@ -196,7 +201,6 @@ SIMPLE_NUMERIC=(0|[1-9]\d*)(\.\d+)?
           if (xxStringType == ParamStringType.AMBIGUOUS) {
               xxStringType = ParamStringType.NOT_STRING;
               yybegin(YYINITIAL);
-              yypushback(1);
               return ParamTypes.STRING_AMBIGUOUS_END;
           } else return ParamTypes.STRING_CONTENTS;
       }

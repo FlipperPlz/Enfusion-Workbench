@@ -37,18 +37,22 @@
             extensions="cpp;rvmat"
         />
         <lang.parserDefinition
-                language="Param"
-                implementationClass="com.flipperplz.enfusionWorkbench.languages.param.parser.ParamParserDefinition"
+            language="Param"
+            implementationClass="com.flipperplz.enfusionWorkbench.languages.param.parser.ParamParserDefinition"
         />
         <lang.syntaxHighlighterFactory
-                language="Param"
-                implementationClass="com.flipperplz.enfusionWorkbench.languages.param.highlighting.ParamSyntaxHighlighterFactory"
+            language="Param"
+            implementationClass="com.flipperplz.enfusionWorkbench.languages.param.highlighting.ParamSyntaxHighlighterFactory"
         />
-<!--        <localInspection-->
-<!--            displayName="Ambiguous string"-->
-<!--            language="Param"-->
-<!--            groupName="Param\\Warnings"-->
-<!--            implementationClass="com.flipperplz.enfusionWorkbench.languages.param.inspection.ParamAmbiguousStringInspection"-->
-<!--        />-->
+        <localInspection
+            language="Param"
+            shortName="AmbiguousStringUsage"
+            displayName="Ambiguous string usage"
+            groupName="Param"
+            enabledByDefault="true"
+            level="WARNING"
+            implementationClass="com.flipperplz.enfusionWorkbench.languages.param.inspections.AmbiguousStringUsageInspection"
+        />
+
     </extensions>
 </idea-plugin>
