@@ -46,18 +46,18 @@ SIMPLE_NUMERIC=(0|[1-9]\d*)(\.\d+)?
 %state STRING_MODE, PROCEDURAL_TEXTURE_MODE
 
 %%
-{ SINGLE_LINE_COMMENT }          { return ParamTypes.SINGLE_LINE_COMMENT; }
-
-{ EMPTY_DELIMITED_COMMENT }      { return ParamTypes.EMPTY_DELIMITED_COMMENT; }
-
-{ DELIMITED_COMMENT }            { return ParamTypes.DELIMITED_COMMENT; }
-
 { DIRECTIVE_NEWLINE }            {  }
 
 <YYINITIAL> {
   { LINE_TERMINATOR }            { return TokenType.WHITE_SPACE; }
 
   { WHITE_SPACES }               { return TokenType.WHITE_SPACE; }
+
+  { SINGLE_LINE_COMMENT }        { return ParamTypes.SINGLE_LINE_COMMENT; }
+
+  { EMPTY_DELIMITED_COMMENT }    { return ParamTypes.EMPTY_DELIMITED_COMMENT; }
+
+  { DELIMITED_COMMENT }          { return ParamTypes.DELIMITED_COMMENT; }
 
   "class"                        { return ParamTypes.KW_CLASS; }
 
