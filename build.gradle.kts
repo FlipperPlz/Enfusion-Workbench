@@ -50,8 +50,11 @@ java {
   }
 }
 
-kotlin.sourceSets.main {
-  kotlin.srcDirs("src/${sourceBranch}/main/kotlin")
+
+kotlin {
+  sourceSets.main {
+    kotlin.srcDirs("src/${sourceBranch}/main/kotlin")
+  }
 }
 
 sourceSets {
@@ -105,7 +108,7 @@ tasks {
 
   withType<KotlinCompile>().configureEach {
     kotlinOptions {
-      jvmTarget = JavaVersion.VERSION_11.toString()
+      jvmTarget = JavaVersion.VERSION_17.toString()
       languageVersion = "1.8"
       apiVersion = "1.7"
       freeCompilerArgs = listOf("-Xjvm-default=all")

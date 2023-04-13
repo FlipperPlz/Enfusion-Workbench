@@ -58,8 +58,28 @@
     extends("proceduralTexture")=stringContent
     extends("lineMacro|fileMacro|evaluateMacro|customMacro|executeMacro|directive")=macro
     extends("includeDirective|defineDirective|undefineDirective")=directive
-    mixin("stringLiteral")="com.flipperplz.enfusionWorkbench.languages.param.psi.mixins.ParamStringMixin"
     mixin(".*Macro|parameterReference|.*Directive|directive|macro")="com.flipperplz.enfusionWorkbench.languages.param.psi.mixins.ParamNonBinaraizableMixin"
+
+    mixin("stringLiteral")="com.flipperplz.enfusionWorkbench.languages.param.psi.mixins.ParamStringMixin"
+    mixin("identifier")="com.flipperplz.enfusionWorkbench.languages.param.psi.mixins.ParamIdentifierMixin"
+    mixin("parameterStatement")="com.flipperplz.enfusionWorkbench.languages.param.psi.mixins.ParamParameterStatementMixin"
+
+    methods("classStatement")=[
+      classname="/identifier[0]"
+      parentName="/identifier[1]"
+    ]
+
+    methods("parameterStatement")=[
+      parameterName="/identifier"
+    ]
+
+    methods("proceduralTextureFunction")=[
+      functionName="/identifier"
+    ]
+
+    methods("proceduralTexture")=[
+      textureType="/identifier"
+    ]
 }
 
 file ::= statement* enumDeclaration?
