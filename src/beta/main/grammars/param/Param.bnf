@@ -64,6 +64,8 @@
     mixin(".*Macro|parameterReference|.*Directive|directive|macro")="com.flipperplz.enfusionWorkbench.languages.param.psi.mixins.ParamNonBinaraizableMixin"
     implements("identifier")="com.intellij.psi.PsiNameIdentifierOwner"
     implements("classStatement")="com.flipperplz.enfusionWorkbench.languages.param.psi.interfaces.ParamPsiClass"
+    implements("classStatement")="com.intellij.psi.PsiNameIdentifierOwner"
+
 
     mixin("stringLiteral")="com.flipperplz.enfusionWorkbench.languages.param.psi.mixins.ParamStringMixin"
     mixin("identifier")="com.flipperplz.enfusionWorkbench.languages.param.psi.mixins.ParamIdentifierMixin"

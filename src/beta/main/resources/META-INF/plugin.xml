@@ -25,10 +25,10 @@
     <depends>com.intellij.modules.platform</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <notificationGroup
-            displayType="BALLOON"
-            id="Enfusion-Workbench"
-        />
+<!--        <notificationGroup-->
+<!--            displayType="BALLOON"-->
+<!--            id="Enfusion-Workbench"-->
+<!--        />-->
         <fileType
             name="Param"
             implementationClass="com.flipperplz.enfusionWorkbench.languages.param.ParamFileType"

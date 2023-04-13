@@ -20,8 +20,7 @@ class ParamFileImpl(
 
     override val enfusionFileType: EnfusionLanguageFileType = ParamFileType.instance
 
-    override val classnameIdentifier: ParamIdentifier = ParamElementFactory.createIdentifier(project, virtualFile.nameWithoutExtension)
-    override fun getNameIdentifier(): PsiElement = classnameIdentifier
+    override val classnameText: String = virtualFile.nameWithoutExtension
 
     override val parentClassnameIdentifier: ParamIdentifier? = null
     override val statements: List<ParamStatement>

@@ -4,19 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95a600cf-338e-4de1-9f0f-d35cc7c98090" name="Changes" comment="feat(param): Add mixins for ParameterStatements and Identifiers">
-      <change afterPath="$PROJECT_DIR$/.idea/conventionalCommit.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/interfaces/ParamPsiClass.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/interfaces/ParamPsiElement.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/interfaces/ParamPsiNameIdentifierOwner.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/mixins/ParamClassMixin.kt" afterDir="false" />
+    <list default="true" id="95a600cf-338e-4de1-9f0f-d35cc7c98090" name="Changes" comment="feat(param): Add mixins for ParamClassStatement&#10;&#10;- ParamFileImpl now extends ParamPsiClass&#10;- All rules with names now implement PsiNameIdentifierOwner either directly or indirectly.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/beta/main/grammars/param/Param.bnf" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/grammars/param/Param.bnf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/inspections/AmbiguousStringUsageInspection.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/inspections/warnings/strings/AmbiguousStringUsageInspection.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/ParamNamedPsiElement.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/ParamPsiElement.kt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/impl/ParamFileImpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/impl/ParamFileImpl.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/impl/ParamPsiElementImpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/impl/ParamPsiElementImpl.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/interfaces/ParamPsiClass.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/interfaces/ParamPsiClass.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/mixins/ParamClassMixin.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/mixins/ParamClassMixin.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/beta/main/resources/META-INF/plugin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/resources/META-INF/plugin.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,6 +56,12 @@
                 <item name="Tasks" type="e4a08cd1:TasksNode" />
                 <item name="grammarkit" type="c8890929:TasksNode$1" />
               </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Enfusion-Workbench" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="intellij" type="c8890929:TasksNode$1" />
+              </path>
             </expand>
             <select />
           </tree_state>
@@ -78,6 +78,13 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="LogFilters">
+    <option name="FILTER_ERRORS" value="false" />
+    <option name="FILTER_WARNINGS" value="false" />
+    <option name="FILTER_INFO" value="true" />
+    <option name="FILTER_DEBUG" value="true" />
+    <option name="CUSTOM_FILTER" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -176,7 +183,7 @@
       <option name="presentableId" value="Default" />
       <updated>1681397675952</updated>
       <workItem from="1681397677029" duration="1175000" />
-      <workItem from="1681399767844" duration="7295000" />
+      <workItem from="1681399767844" duration="8021000" />
     </task>
     <task id="LOCAL-00001" summary="feat(param): Add mixins for ParameterStatements and Identifiers">
       <created>1681403215238</created>
@@ -185,7 +192,14 @@
       <option name="project" value="LOCAL" />
       <updated>1681403215238</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="feat(param): Add mixins for ParamClassStatement&#10;&#10;- ParamFileImpl now extends ParamPsiClass&#10;- All rules with names now implement PsiNameIdentifierOwner either directly or indirectly.">
+      <created>1681407256359</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1681407256359</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -193,6 +207,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="feat(param): Add mixins for ParameterStatements and Identifiers" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat(param): Add mixins for ParameterStatements and Identifiers" />
+    <MESSAGE value="feat(param): Add mixins for ParamClassStatement&#10;&#10;- ParamFileImpl now extends ParamPsiClass&#10;- All rules with names now implement PsiNameIdentifierOwner either directly or indirectly." />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(param): Add mixins for ParamClassStatement&#10;&#10;- ParamFileImpl now extends ParamPsiClass&#10;- All rules with names now implement PsiNameIdentifierOwner either directly or indirectly." />
   </component>
 </project>

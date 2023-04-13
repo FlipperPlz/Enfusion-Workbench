@@ -5,8 +5,8 @@ import com.flipperplz.enfusionWorkbench.languages.param.psi.ParamStatement
 import com.intellij.psi.PsiNameIdentifierOwner
 import com.intellij.psi.util.parentOfType
 
-interface ParamPsiClass : ParamPsiElement, PsiNameIdentifierOwner {
-    val classnameIdentifier: ParamIdentifier?
+interface ParamPsiClass : ParamPsiElement {
+    val classnameText: String
     val parentClassnameIdentifier: ParamIdentifier?
     val isExternal: Boolean
     val statements: List<ParamStatement>

@@ -11,14 +11,15 @@ import com.intellij.psi.PsiNameIdentifierOwner
 
 abstract class ParamClassMixin(node: ASTNode) : ParamStatementImpl(node), PsiNameIdentifierOwner, ParamClassStatement,
     ParamPsiClass {
-    override val classnameIdentifier: ParamIdentifier? = classname
+
+    override val classnameText: String = classname?.name ?: " "
     override val parentClassnameIdentifier: ParamIdentifier? = parentName
     override val isExternal: Boolean = symLcurly == null
     override val statements: List<ParamStatement> = statementList
     override val paramElementName: String
         get() = if (parentClassnameIdentifier != null) {
-            "${classnameIdentifier?.name ?: "unidentified"}#${parentClassnameIdentifier?.name ?: "unidentified"}"
-        } else classnameIdentifier?.name ?: "unidentified"
+            "${classname?.name ?: "unidentified"}#${parentClassnameIdentifier?.name ?: "unidentified"}"
+        } else classname?.name ?: "unidentified"
 
     override fun setName(p0: String): PsiElement? = classname?.setName(p0)
 
