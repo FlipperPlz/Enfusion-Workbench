@@ -1,7 +1,7 @@
 {
     parserClass="com.flipperplz.enfusionWorkbench.languages.param.parser.ParamParser"
     extends="com.flipperplz.enfusionWorkbench.languages.param.psi.impl.ParamPsiElementImpl"
-    implements="com.flipperplz.enfusionWorkbench.languages.param.psi.ParamPsiElement"
+    implements="com.flipperplz.enfusionWorkbench.languages.param.psi.interfaces.ParamPsiElement"
 
     psiClassPrefix="Param"
     psiImplClassSuffix="Impl"
@@ -52,6 +52,9 @@
     ]
     generate=[tokenAccessors="yes"]
 
+    pin("macroSignature|proceduralTexture|classStatement|evaluateMacro|executeMacro")=1
+    pin("deleteStatement|parameterReference|sqfTail|arraySquare")=1
+
     extends("numericLiteral|macro|parameterReference|stringLiteral")=literal
     extends("literal|arrayLiteral")=arrayElement
     extends(".*Statement|universalMacro")=statement
@@ -59,10 +62,13 @@
     extends("lineMacro|fileMacro|evaluateMacro|customMacro|executeMacro|directive")=macro
     extends("includeDirective|defineDirective|undefineDirective")=directive
     mixin(".*Macro|parameterReference|.*Directive|directive|macro")="com.flipperplz.enfusionWorkbench.languages.param.psi.mixins.ParamNonBinaraizableMixin"
+    implements("identifier")="com.intellij.psi.PsiNameIdentifierOwner"
+    implements("classStatement")="com.flipperplz.enfusionWorkbench.languages.param.psi.interfaces.ParamPsiClass"
 
     mixin("stringLiteral")="com.flipperplz.enfusionWorkbench.languages.param.psi.mixins.ParamStringMixin"
     mixin("identifier")="com.flipperplz.enfusionWorkbench.languages.param.psi.mixins.ParamIdentifierMixin"
     mixin("parameterStatement")="com.flipperplz.enfusionWorkbench.languages.param.psi.mixins.ParamParameterStatementMixin"
+    mixin("classStatement")="com.flipperplz.enfusionWorkbench.languages.param.psi.mixins.ParamClassMixin"
 
     methods("classStatement")=[
       classname="/identifier[0]"
@@ -88,7 +94,7 @@ directive ::= (
     includeDirective |
     defineDirective |
     undefineDirective
-) {pin=1}
+)
 
 statement ::= (
     deleteStatement |
@@ -100,7 +106,7 @@ literal ::= {
     numericLiteral |
     stringLiteral | //VERY AMBIGUOUS LEAVE LAST
     macro |
-    parameterReference |
+    parameterReference
 }
 
 macro ::= (
@@ -110,7 +116,7 @@ macro ::= (
     universalMacro
 )
 
-macroSignature ::= identifier [SYM_LPARENTHESIS identifier (SYM_COMMA identifier)* SYM_RPARENTHESIS] {pin=1}
+macroSignature ::= identifier [SYM_LPARENTHESIS identifier (SYM_COMMA identifier)* SYM_RPARENTHESIS]
 
 defineDirective ::=  DIRECTIVE_START KW_DEFINE macroSignature DEFINE_VALUE {pin=2}
 
@@ -118,7 +124,7 @@ undefineDirective ::= DIRECTIVE_START KW_UNDEFINE identifier {pin=2}
 
 includeDirective ::= DIRECTIVE_START KW_INCLUDE (stringLiteral | includeString) {pin=2}
 
-proceduralTexture ::= PROCEDURAL_TEXTURE_START proceduralTextureRightArgs proceduralTextureFunction {pin=1};
+proceduralTexture ::= PROCEDURAL_TEXTURE_START proceduralTextureRightArgs proceduralTextureFunction
 
 proceduralTextureFunction ::= identifier SYM_LPARENTHESIS [literal (SYM_COMMA literal)*] SYM_RPARENTHESIS {pin(".*")=1};
 
@@ -132,25 +138,25 @@ stringLiteral ::= (STRING_DOUBLE_START stringContent STRING_DOUBLE_END) |
 
 includeString ::= (STRING_INCLUDE_START stringContent STRING_INCLUDE_END) { pin(".*")=1 extends=stringLiteral }
 
-evaluateMacro ::= MACRO_EVAL sqfTail {pin=1}
+evaluateMacro ::= MACRO_EVAL sqfTail
 
-executeMacro ::= MACRO_EXEC sqfTail {pin=1}
+executeMacro ::= MACRO_EXEC sqfTail
 
-classStatement ::= KW_CLASS identifier [[SYM_COLON identifier] SYM_LCURLY statement* SYM_RCURLY] {pin=1}
+classStatement ::= KW_CLASS identifier [[SYM_COLON identifier] SYM_LCURLY statement* SYM_RCURLY]
 
-deleteStatement ::= KW_DELETE identifier {pin=1}
+deleteStatement ::= KW_DELETE identifier
 
-parameterReference ::= REFERENCE_MODE stringLiteral {pin=1}
+parameterReference ::= REFERENCE_MODE stringLiteral
 
 parameterStatement ::= identifier (
     (arraySquare arrayOperator arrayLiteral) |
     (normalOperator literal)
-) {pin=1}
+) { pin(".*")=1 }
 
 enumDeclaration ::= KW_ENUM SYM_LCURLY (enumValue ((SYM_COMMA | EOL | SYM_SEMI) enumValue)*) SYM_RCURLY SYM_SEMI {pin(".*")=1}
 
 //helpers
-enumValue ::= identifier [OP_ASSIGN numericLiteral] {pin=1}
+enumValue ::= identifier [OP_ASSIGN numericLiteral] {pin(".*")=1}
 
 identifier ::= ABS_IDENTIFIER
 
@@ -167,13 +173,13 @@ customMacro ::= identifier [SYM_LPARENTHESIS macroArgument (SYM_COMMA macroArgum
 //private helpers
 private macroArgument ::= !(SYM_COMMA | SYM_RPARENTHESIS)
 
-private sqfTail ::= SYM_LPARENTHESIS !(SYM_RPARENTHESIS) SYM_RPARENTHESIS {pin=1}
+private sqfTail ::= SYM_LPARENTHESIS !(SYM_RPARENTHESIS) SYM_RPARENTHESIS
 
 private normalOperator ::= OP_ASSIGN
 
 private arrayOperator ::= normalOperator | OP_ADDASSIGN | OP_SUBASSIGN
 
-private arraySquare ::= SYM_LSQUARE SYM_RSQUARE {pin=1}
+private arraySquare ::= SYM_LSQUARE SYM_RSQUARE
 
 private universalMacro ::= executeMacro | customMacro | directive
 
