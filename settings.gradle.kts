@@ -1,1 +1,1 @@
-rootProject.name = "enfusion-workbench"
+rootProject.name = "Enfusion-Workbench"

@@ -4,129 +4,127 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 val sourceBranch = "beta"
 
-plugins {
-    id("org.jetbrains.kotlin.jvm") version "1.8.10"
-    id("org.jetbrains.intellij") version "1.13.2"
-    id("org.jetbrains.grammarkit") version "2022.3.1"
-}
-
-apply {
-    plugin("kotlin")
-}
-
-repositories {
-    mavenCentral()
-    maven("https://oss.sonatype.org/content/repositories/snapshots/")
-}
-
-dependencies {
-    compileOnly(kotlin("stdlib-jdk8"))
-    implementation("com.code-disaster.steamworks4j:steamworks4j:1.9.0-SNAPSHOT")
-    implementation("com.code-disaster.steamworks4j:steamworks4j-server:1.9.0-SNAPSHOT")
-}
-
-java {
-    targetCompatibility=JavaVersion.VERSION_17
-    sourceCompatibility=JavaVersion.VERSION_17
-    sourceSets.main {
-        java.srcDirs(
-            "src/${sourceBranch}/main/gen",
-            "src/${sourceBranch}/main/java"
-        )
-    }
-}
-
 group = "com.flipperplz"
 version = "1.0-${sourceBranch}"
 
+plugins {
+  id("java")
+  id("org.jetbrains.kotlin.jvm") version "1.8.10"
+  id("org.jetbrains.intellij") version "1.13.2"
+  id("org.jetbrains.grammarkit") version "2022.3.1"
+}
 
-
-// Configure Gradle IntelliJ Plugin
-// Read more: https://plugins.jetbrains.com/docs/intellij/tools-gradle-intellij-plugin.html
 intellij {
-    version.set("2022.3.3")
-    type.set("IC") // Target IDE Platform
+  version.set("2022.3.3")
+  type.set("IC")
 
-    plugins.set(listOf(/* Plugin Dependencies */))
+  plugins.set(listOf(
+
+  ))
 }
 
-
-idea {
-    module {
-        sourceDirs.add(file("src/${sourceBranch}/main/java"))
-        sourceDirs.add(file("src/${sourceBranch}/main/kotlin"))
-        generatedSourceDirs.add(file("src/${sourceBranch}/main/gen"))
-        resourceDirs.add(file("src/${sourceBranch}/main/resources"))
-    }
+repositories {
+  mavenCentral()
+  maven("https://oss.sonatype.org/content/repositories/snapshots/")
 }
 
-sourceSets {
-    main {
-        java.srcDirs(
-            "src/${sourceBranch}/main/gen",
-            "src/${sourceBranch}/main/java")
-        resources.srcDirs("src/${sourceBranch}/main/resources")
-    }
-}
-
-kotlin {
-    sourceSets {
-        main {
-            kotlin.srcDirs("src/${sourceBranch}/main/kotlin")
-        }
-    }
+dependencies {
+  compileOnly(kotlin("stdlib-jdk8"))
+  implementation("com.code-disaster.steamworks4j:steamworks4j:1.9.0-SNAPSHOT")
+  implementation("com.code-disaster.steamworks4j:steamworks4j-server:1.9.0-SNAPSHOT")
 }
 
 configure<JavaPluginExtension> {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
+  sourceCompatibility = JavaVersion.VERSION_17
+  targetCompatibility = JavaVersion.VERSION_17
 }
 
+java {
+  targetCompatibility=JavaVersion.VERSION_17
+  sourceCompatibility=JavaVersion.VERSION_17
+  sourceSets.main {
+    java.srcDirs(
+      "src/${sourceBranch}/main/gen",
+      "src/${sourceBranch}/main/java"
+    )
+  }
+}
+
+kotlin.sourceSets.main {
+  kotlin.srcDirs("src/${sourceBranch}/main/kotlin")
+}
+
+sourceSets {
+  main {
+    kotlin {
+      srcDirs(
+        "src/${sourceBranch}/main/kotlin"
+      )
+    }
+
+    java {
+      srcDirs(
+        "src/${sourceBranch}/main/gen",
+        "src/${sourceBranch}/main/java"
+      )
+    }
+
+    resources {
+      srcDirs(
+        "src/${sourceBranch}/main/resources"
+      )
+    }
+  }
+}
+
+val generateParamParser = tasks.register<GenerateParserTask>("generateParamParser") {
+  sourceFile.set(file("src/${sourceBranch}/main/grammars/param/Param.bnf"))
+  targetRoot.set("src/${sourceBranch}/main/gen/")
+  pathToParser.set("/com/flipperplz/enfusionWorkbench/languages/param/parser/ParamParser.java")
+  pathToPsiRoot.set("/com/flipperplz/enfusionWorkbench/languages/param/psi/")
+
+  purgeOldFiles.set(true)
+}
+val generateParamLexer = tasks.register<GenerateLexerTask>("generateParamLexer") {
+  sourceFile.set(file("src/${sourceBranch}/main/grammars/param/Param.flex"))
+  targetDir.set("src/${sourceBranch}/main/gen/com/flipperplz/enfusionWorkbench/languages/param/lexer/")
+  targetClass.set("ParamLexer")
+  purgeOldFiles.set(true)
+}
 
 tasks {
-    val generateParamParser = register<GenerateParserTask>("generateParamParser") {
-        sourceFile.set(file("src/${sourceBranch}/main/grammars/param/Param.bnf"))
-        targetRoot.set("src/${sourceBranch}/main/gen/")
-        pathToParser.set("/com/flipperplz/enfusionWorkbench/languages/param/parser/ParamParser.java")
-        pathToPsiRoot.set("/com/flipperplz/enfusionWorkbench/languages/param/psi/")
+  val cleanupGenerated = register("cleanupGenerated") {
+    delete("src/${sourceBranch}/main/gen")
+  }
 
-        purgeOldFiles.set(true)
-    }
+  val createGenerated = register("generateCode") {
+    dependsOn(cleanupGenerated)
+    dependsOn(generateParamParser, generateParamLexer)
+  }
 
-    val generateParamLexer = register<GenerateLexerTask>("generateParamLexer") {
-        sourceFile.set(file("src/${sourceBranch}/main/grammars/param/Param.flex"))
-        targetDir.set("src/${sourceBranch}/main/gen/com/flipperplz/enfusionWorkbench/languages/param/lexer/")
-        targetClass.set("ParamLexer")
-        purgeOldFiles.set(true)
-    }
 
-    withType<KotlinCompile>().configureEach {
-        kotlinOptions {
-            jvmTarget = JavaVersion.VERSION_11.toString()
-            languageVersion = "1.8"
-            // see https://plugins.jetbrains.com/docs/intellij/using-kotlin.html#kotlin-standard-library
-            apiVersion = "1.7"
-            freeCompilerArgs = listOf("-Xjvm-default=all")
-        }
-        dependsOn(generateParamParser, generateParamLexer)
+  withType<KotlinCompile>().configureEach {
+    kotlinOptions {
+      jvmTarget = JavaVersion.VERSION_11.toString()
+      languageVersion = "1.8"
+      apiVersion = "1.7"
+      freeCompilerArgs = listOf("-Xjvm-default=all")
     }
+    dependsOn(createGenerated)
+  }
 
-    patchPluginXml {
-        sinceBuild.set("221")
-        untilBuild.set("231.*")
-    }
+  patchPluginXml {
+    sinceBuild.set("222")
+    untilBuild.set("232.*")
+  }
 
-    signPlugin {
-        certificateChain.set(System.getenv("CERTIFICATE_CHAIN"))
-        privateKey.set(System.getenv("PRIVATE_KEY"))
-        password.set(System.getenv("PRIVATE_KEY_PASSWORD"))
-    }
+  signPlugin {
+    certificateChain.set(System.getenv("CERTIFICATE_CHAIN"))
+    privateKey.set(System.getenv("PRIVATE_KEY"))
+    password.set(System.getenv("PRIVATE_KEY_PASSWORD"))
+  }
 
-    publishPlugin {
-        token.set(System.getenv("PUBLISH_TOKEN"))
-    }
-
-    clean {
-        delete(file("/src/${sourceBranch}/main/gen"))
-    }
+  publishPlugin {
+    token.set(System.getenv("PUBLISH_TOKEN"))
+  }
 }
