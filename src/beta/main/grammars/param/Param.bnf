@@ -53,41 +53,46 @@
     generate=[tokenAccessors="yes"]
 
     pin("macroSignature|proceduralTexture|classStatement|evaluateMacro|executeMacro")=1
-    pin("deleteStatement|parameterReference|sqfTail|arraySquare")=1
+    pin("deleteStatement|parameterReference|sqfTail|arraySquare|includeString")=1
 
     extends("numericLiteral|macro|parameterReference|stringLiteral")=literal
     extends("literal|arrayLiteral")=arrayElement
     extends(".*Statement|universalMacro")=statement
     extends("proceduralTexture")=stringContent
+    extends("includeString")=stringLiteral
     extends("lineMacro|fileMacro|evaluateMacro|customMacro|executeMacro|directive")=macro
     extends("includeDirective|defineDirective|undefineDirective")=directive
+
     mixin(".*Macro|parameterReference|.*Directive|directive|macro")="com.flipperplz.enfusionWorkbench.languages.param.psi.mixins.ParamNonBinaraizableMixin"
-    implements("identifier")="com.intellij.psi.PsiNameIdentifierOwner"
-    implements("classStatement")="com.flipperplz.enfusionWorkbench.languages.param.psi.interfaces.ParamPsiClass"
-    implements("classStatement")="com.intellij.psi.PsiNameIdentifierOwner"
-
-
     mixin("stringLiteral")="com.flipperplz.enfusionWorkbench.languages.param.psi.mixins.ParamStringMixin"
+
+    implements("identifier")="com.intellij.psi.PsiNameIdentifierOwner"
     mixin("identifier")="com.flipperplz.enfusionWorkbench.languages.param.psi.mixins.ParamIdentifierMixin"
+
     mixin("parameterStatement")="com.flipperplz.enfusionWorkbench.languages.param.psi.mixins.ParamParameterStatementMixin"
+    methods("parameterStatement")=[ parameterName="/identifier" ]
+
     mixin("classStatement")="com.flipperplz.enfusionWorkbench.languages.param.psi.mixins.ParamClassMixin"
+    implements("classStatement")="com.flipperplz.enfusionWorkbench.languages.param.psi.interfaces.ParamPsiStatementScope"
+    methods("classStatement")=[ classname="/identifier[0]" parentName="/identifier[1]" ]
 
-    methods("classStatement")=[
-      classname="/identifier[0]"
-      parentName="/identifier[1]"
-    ]
+    implements("deleteStatement")="com.flipperplz.enfusionWorkbench.languages.param.psi.interfaces.ParamPsiIdentifiable"
+    methods("deleteStatement")=[ nameIdentifier="/identifier" ]
 
-    methods("parameterStatement")=[
-      parameterName="/identifier"
-    ]
+    implements("macroSignature")="com.flipperplz.enfusionWorkbench.languages.param.psi.interfaces.ParamPsiIdentifiable"
+    methods("macroSignature")=[ macroName="/identifier[0]" ]
 
-    methods("proceduralTextureFunction")=[
-      functionName="/identifier"
-    ]
+    implements("enumValue")="com.flipperplz.enfusionWorkbench.languages.param.psi.interfaces.ParamPsiIdentifiable"
+    methods("enumValue")=[ enumerationName="/identifier" enumerationValue="/numericLiteral"]
 
-    methods("proceduralTexture")=[
-      textureType="/identifier"
-    ]
+    methods("proceduralTextureFunction")=[ functionName="/identifier" ]
+    methods("proceduralTexture")=[ textureType="/identifier" ]
+
+    implements("customMacro")="com.flipperplz.enfusionWorkbench.languages.param.psi.interfaces.ParamPsiIdentifiable"
+
+    methods("undefineDirective")=[ macroName="/identifier[0]" ]
+
+    methods("parameterReference")=[ referenceName="/stringLiteral" ]
 }
 
 file ::= statement* enumDeclaration?
@@ -138,7 +143,7 @@ stringLiteral ::= (STRING_DOUBLE_START stringContent STRING_DOUBLE_END) |
                   (STRING_SINGLE_START stringContent STRING_SINGLE_END) |
                   (STRING_AMBIGUOUS_START stringContent STRING_AMBIGUOUS_END) {pin(".*")=1}
 
-includeString ::= (STRING_INCLUDE_START stringContent STRING_INCLUDE_END) { pin(".*")=1 extends=stringLiteral }
+includeString ::= (STRING_INCLUDE_START stringContent STRING_INCLUDE_END) {  }
 
 evaluateMacro ::= MACRO_EVAL sqfTail
 
