@@ -16,7 +16,7 @@ abstract class ParamIdentifierMixin(
 ) {
     override fun getName(): String? = text
     override fun setName(name: String): PsiElement {
-        val newIdentifier = ParamElementFactory.createIdentifier(project, name).node.firstChildNode
+        val newIdentifier = ParamElementFactory.createIdentifier(project, name).node
 
         node.replaceChild(node.firstChildNode, newIdentifier.firstChildNode)
 

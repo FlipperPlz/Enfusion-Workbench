@@ -4,16 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95a600cf-338e-4de1-9f0f-d35cc7c98090" name="Changes" comment="feat(param): Add mixins for ParamClassStatement&#10;&#10;- ParamFileImpl now extends ParamPsiClass&#10;- All rules with names now implement PsiNameIdentifierOwner either directly or indirectly.">
-      <change afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/interfaces/ParamPsiIdentifiable.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/utils/ObservableCollection.kt" afterDir="false" />
+    <list default="true" id="95a600cf-338e-4de1-9f0f-d35cc7c98090" name="Changes" comment="feat(param): Neaten Up PSI Structure">
+      <change afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/inspections/errors/textures/AbstractBaseParamTextureLocalInspectionTool.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/inspections/errors/textures/ParamIncorrectPowerInspection.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/ParamPsiUtils.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/quickfixes/ReplaceNumericLiteralQuickFix.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/beta/main/resources/inspectionDescriptions/InvalidTextureDimension.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/beta/main/grammars/param/Param.bnf" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/grammars/param/Param.bnf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/impl/ParamFileImpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/impl/ParamFileImpl.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/interfaces/ParamPsiClass.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/interfaces/ParamPsiStatementScope.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/interfaces/ParamPsiElement.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/interfaces/ParamPsiElement.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/interfaces/ParamPsiNameIdentifierOwner.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/mixins/ParamClassMixin.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/mixins/ParamClassMixin.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/mixins/ParamIdentifierMixin.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/mixins/ParamIdentifierMixin.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/beta/main/resources/META-INF/plugin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/resources/META-INF/plugin.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/beta/main/resources/inspectionDescriptions/ParamAmbiguousString.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/resources/inspectionDescriptions/ParamAmbiguousString.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,8 +76,10 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Kotlin Class" />
         <option value="Kotlin Interface" />
+        <option value="Kotlin File" />
+        <option value="Kotlin Class" />
+        <option value="InspectionDescription" />
       </list>
     </option>
   </component>
@@ -126,7 +129,7 @@
       <recent name="com.flipperplz.enfusionWorkbench.languages.param.psi.interfaces" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.Enfusion-Workbench [build]">
+  <component name="RunManager" selected="Gradle.Run Plugin">
     <configuration name="Enfusion-Workbench [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -188,7 +191,7 @@
       <updated>1681397675952</updated>
       <workItem from="1681397677029" duration="1175000" />
       <workItem from="1681399767844" duration="8021000" />
-      <workItem from="1681481454289" duration="4647000" />
+      <workItem from="1681481454289" duration="13276000" />
     </task>
     <task id="LOCAL-00001" summary="feat(param): Add mixins for ParameterStatements and Identifiers">
       <created>1681403215238</created>
@@ -204,7 +207,14 @@
       <option name="project" value="LOCAL" />
       <updated>1681407256359</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="feat(param): Neaten Up PSI Structure">
+      <created>1681486344739</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1681486344739</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -213,6 +223,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="feat(param): Add mixins for ParameterStatements and Identifiers" />
     <MESSAGE value="feat(param): Add mixins for ParamClassStatement&#10;&#10;- ParamFileImpl now extends ParamPsiClass&#10;- All rules with names now implement PsiNameIdentifierOwner either directly or indirectly." />
-    <option name="LAST_COMMIT_MESSAGE" value="feat(param): Add mixins for ParamClassStatement&#10;&#10;- ParamFileImpl now extends ParamPsiClass&#10;- All rules with names now implement PsiNameIdentifierOwner either directly or indirectly." />
+    <MESSAGE value="feat(param): Neaten Up PSI Structure" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(param): Neaten Up PSI Structure" />
   </component>
 </project>

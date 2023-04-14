@@ -45,5 +45,14 @@
             implementationClass="com.flipperplz.enfusionWorkbench.languages.param.highlighting.ParamSyntaxHighlighterFactory"
         />
 
+        <localInspection
+            implementationClass="com.flipperplz.enfusionWorkbench.languages.param.inspections.errors.textures.ParamIncorrectPowerInspection"
+            groupName="Param"
+            level="ERROR"
+            language="Param"
+            displayName="Invalid Texture Dimensions"
+            enabledByDefault="true"
+        />
+
     </extensions>
 </idea-plugin>

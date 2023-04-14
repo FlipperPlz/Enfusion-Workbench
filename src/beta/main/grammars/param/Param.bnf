@@ -86,7 +86,7 @@
     methods("enumValue")=[ enumerationName="/identifier" enumerationValue="/numericLiteral"]
 
     methods("proceduralTextureFunction")=[ functionName="/identifier" ]
-    methods("proceduralTexture")=[ textureType="/identifier" ]
+    methods("proceduralTexture")=[ format="/identifier" width="/numericLiteral[0]" height="/numericLiteral[1]" mipmapCount="/numericLiteral[2]" ]
 
     implements("customMacro")="com.flipperplz.enfusionWorkbench.languages.param.psi.interfaces.ParamPsiIdentifiable"
 
