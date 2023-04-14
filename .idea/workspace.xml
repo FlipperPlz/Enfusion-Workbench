@@ -4,18 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95a600cf-338e-4de1-9f0f-d35cc7c98090" name="Changes" comment="feat(param): Add Inspection For Texture Dimensions&#10;&#10;- add extension class ParamPsiUtils">
-      <change afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/inspections/errors/textures/ParamIncorrectFormatException.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/quickfixes/ReplaceIdentifierLiteralQuickFix.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/utils/ParamProceduralTextureFormat.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/beta/main/resources/inspectionDescriptions/ParamIncorrectFormat.html" afterDir="false" />
+    <list default="true" id="95a600cf-338e-4de1-9f0f-d35cc7c98090" name="Changes" comment="feat(param): Add Inspection For Invalid Texture Format">
+      <change afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/inlayHints/ParamInlayHintsCollector.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/inlayHints/ParamInlayHintsProvider.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/inspections/errors/textures/ParamIncorrectPowerInspection.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/inspections/errors/textures/ParamIncorrectPowerInspection.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/ParamElementFactory.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/ParamElementFactory.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/ParamPsiUtils.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/ParamPsiUtils.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/impl/ParamFileImpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/impl/ParamFileImpl.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/resources/META-INF/plugin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/resources/META-INF/plugin.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/resources/inspectionDescriptions/InvalidTextureDimension.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/resources/inspectionDescriptions/ParamIncorrectPower.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,8 +72,8 @@
         <option value="Kotlin Interface" />
         <option value="Kotlin File" />
         <option value="InspectionDescription" />
-        <option value="Kotlin Class" />
         <option value="HTML File" />
+        <option value="Kotlin Class" />
       </list>
     </option>
   </component>
@@ -195,7 +187,7 @@
       <workItem from="1681397677029" duration="1175000" />
       <workItem from="1681399767844" duration="8021000" />
       <workItem from="1681481454289" duration="15348000" />
-      <workItem from="1681506934412" duration="3389000" />
+      <workItem from="1681506934412" duration="5139000" />
     </task>
     <task id="LOCAL-00001" summary="feat(param): Add mixins for ParameterStatements and Identifiers">
       <created>1681403215238</created>
@@ -225,7 +217,14 @@
       <option name="project" value="LOCAL" />
       <updated>1681500866072</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="feat(param): Add Inspection For Invalid Texture Format">
+      <created>1681510521054</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1681510521054</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -236,7 +235,8 @@
     <MESSAGE value="feat(param): Add mixins for ParamClassStatement&#10;&#10;- ParamFileImpl now extends ParamPsiClass&#10;- All rules with names now implement PsiNameIdentifierOwner either directly or indirectly." />
     <MESSAGE value="feat(param): Neaten Up PSI Structure" />
     <MESSAGE value="feat(param): Add Inspection For Texture Dimensions&#10;&#10;- add extension class ParamPsiUtils" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat(param): Add Inspection For Texture Dimensions&#10;&#10;- add extension class ParamPsiUtils" />
+    <MESSAGE value="feat(param): Add Inspection For Invalid Texture Format" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(param): Add Inspection For Invalid Texture Format" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>
