@@ -50,8 +50,17 @@
             groupName="Param"
             level="ERROR"
             language="Param"
-            displayName="Invalid Texture Dimensions"
+            displayName="ParamIncorrectPower"
             enabledByDefault="true"
+        />
+
+        <localInspection
+                implementationClass="com.flipperplz.enfusionWorkbench.languages.param.inspections.errors.textures.ParamIncorrectFormatException"
+                groupName="Param"
+                level="ERROR"
+                language="Param"
+                displayName="ParamIncorrectFormat"
+                enabledByDefault="true"
         />
 
     </extensions>

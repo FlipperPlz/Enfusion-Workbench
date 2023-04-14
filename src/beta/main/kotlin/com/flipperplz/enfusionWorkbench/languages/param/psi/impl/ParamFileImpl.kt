@@ -9,6 +9,7 @@ import com.flipperplz.enfusionWorkbench.languages.param.psi.mixins.ParamNonBinar
 import com.flipperplz.enfusionWorkbench.psi.impl.EnfusionPsiFileImpl
 import com.intellij.psi.FileViewProvider
 import com.intellij.psi.PsiElement
+import com.intellij.psi.PsiElementVisitor
 import com.intellij.psi.util.childrenOfType
 
 class ParamFileImpl(
@@ -22,4 +23,8 @@ class ParamFileImpl(
         get() = children.any { it is ParamNonBinaraizableMixin }
 
     override fun getNameIdentifier(): PsiElement? = null
+
+    override fun acceptChildren(visitor: PsiElementVisitor) {
+
+    }
 }

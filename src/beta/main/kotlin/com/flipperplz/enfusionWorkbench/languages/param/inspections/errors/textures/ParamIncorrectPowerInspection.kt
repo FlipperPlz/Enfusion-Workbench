@@ -14,8 +14,8 @@ import com.intellij.psi.PsiFile
 class ParamIncorrectPowerInspection : AbstractBaseParamTextureLocalInspectionTool() {
 
 
-    override fun getDescriptionFileName(): String = "InvalidTextureDimension.html"
-    override fun getShortName(): String = "Texture Dimensions Must Be A Power Of 2"
+    override fun getDescriptionFileName(): String = "ParamIncorrectPower.html"
+    override fun getShortName(): String = "ParamIncorrectPower"
     override fun isEnabledByDefault(): Boolean = true
     override fun checkTexture(
         texture: ParamProceduralTexture,

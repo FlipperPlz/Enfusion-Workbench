@@ -2,6 +2,7 @@ package com.flipperplz.enfusionWorkbench.languages.param.psi
 
 import com.flipperplz.enfusionWorkbench.languages.param.psi.interfaces.ParamPsiStatementScope
 import com.intellij.psi.PsiNamedElement
+import io.ktor.util.reflect.*
 import kotlin.reflect.full.isSuperclassOf
 
 
@@ -20,10 +21,11 @@ inline fun <reified T: ParamStatement> List<ParamStatement>.getStatementNamed(st
 
 inline fun <reified T: ParamStatement> ParamPsiStatementScope.getStatementNamed(name: String) =
     statements.getStatementNamed<T>(statements, name)
-inline fun <reified T: ParamStatement> ParamPsiStatementScope.filterStatements(): List<T> =
-    statements.filterStatements();
-fun ParamNumericLiteral.toNumber(): Number? = text.toIntOrNull() ?: text.toFloatOrNull() ?: text.toDoubleOrNull()
+inline fun <reified T: ParamStatement> ParamPsiStatementScope.filterStatements(): List<T> = statements.filterStatements();
 
+fun ParamPsiStatementScope.firstStatement(): ParamStatement? = statements.firstOrNull()
+inline fun <reified T: ParamStatement> ParamPsiStatementScope.firstStatementOfType(): T? = statements.filterIsInstance<T>().firstOrNull()
+fun ParamNumericLiteral.toNumber(): Number? = text.toIntOrNull() ?: text.toFloatOrNull() ?: text.toDoubleOrNull()
 inline fun <reified T: ParamStatement> ParamPsiStatementScope.locateStatementInScope( name: String): T? {
     var i: ParamPsiStatementScope? = this
     var found: T? = null
