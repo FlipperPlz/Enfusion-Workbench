@@ -95,6 +95,21 @@ val generateParamLexer = tasks.register<GenerateLexerTask>("generateParamLexer")
   purgeOldFiles.set(true)
 }
 
+val generateEnforceParser = tasks.register<GenerateParserTask>("generateEnforceParser") {
+  sourceFile.set(file("src/${sourceBranch}/main/grammars/enforce/Enforce.bnf"))
+  targetRoot.set("src/${sourceBranch}/main/gen/")
+  pathToParser.set("/com/flipperplz/enfusionWorkbench/languages/enforce/parser/EnforceParser.java")
+  pathToPsiRoot.set("/com/flipperplz/enfusionWorkbench/languages/enforce/psi/")
+
+  purgeOldFiles.set(true)
+}
+val generateEnforceLexer = tasks.register<GenerateLexerTask>("generateEnforceLexer") {
+  sourceFile.set(file("src/${sourceBranch}/main/grammars/enforce/Enforce.flex"))
+  targetDir.set("src/${sourceBranch}/main/gen/com/flipperplz/enfusionWorkbench/languages/enforce/lexer/")
+  targetClass.set("EnforceLexer")
+  purgeOldFiles.set(true)
+}
+
 tasks {
   val cleanupGenerated = register("cleanupGenerated") {
     delete("src/${sourceBranch}/main/gen")
@@ -103,6 +118,7 @@ tasks {
   val createGenerated = register("generateCode") {
     dependsOn(cleanupGenerated)
     dependsOn(generateParamParser, generateParamLexer)
+    dependsOn(generateEnforceParser, generateEnforceLexer)
   }
 
 

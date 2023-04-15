@@ -1,0 +1,78 @@
+{
+    parserClass="com.flipperplz.enfusionWorkbench.languages.enforce.parser.EnforceParser"
+    extends="com.flipperplz.enfusionWorkbench.languages.enforce.psi.impl.EnforcePsiElementImpl"
+    implements="com.flipperplz.enfusionWorkbench.languages.enforce.psi.interfaces.EnforcePsiElement"
+
+    psiClassPrefix="Enforce"
+    psiImplClassSuffix="Impl"
+    psiPackage="com.flipperplz.enfusionWorkbench.languages.enforce.psi"
+    psiImplPackage="com.flipperplz.enfusionWorkbench.languages.enforce.psi.impl"
+
+    elementTypeHolderClass="com.flipperplz.enfusionWorkbench.languages.enforce.psi.EnforceTypes"
+    elementTypeClass="com.flipperplz.enfusionWorkbench.languages.enforce.psi.required.EnforceElementType"
+    tokenTypeClass="com.flipperplz.enfusionWorkbench.languages.enforce.psi.required.EnforceTokenType"
+
+    tokens=[
+        KW_CLASS='class';
+        KW_ENUM='enum';
+        KW_MODDED='modded';
+        KW_SEALED='sealed';
+        KW_PRIVATE="private";
+        KW_EXTERNAL="external";
+        KW_STATIC="static";
+        KW_VOID="void";
+        KW_EXTENDS="regexp:extends|:";
+        OP_ASSIGN="=";
+        SYM_LANGLE="<";
+        SYM_RANGLE=">";
+        SYM_COMMA=",";
+        SYM_TILDE="~";
+        SYM_LSQUARE="[";
+        SYM_RSQUARE="]";
+        SYM_LCURLY="{";
+        SYM_RCURLY="}";
+        SYM_LPAREN="(";
+        SYM_RPAREN=")";
+    ]
+
+}
+
+script ::= (
+    topLevelDeclaration
+  | classLevelDeclaration
+  | typeDeclaration
+)* EOF
+
+typeDeclaration ::= typeModifier (
+    classDeclaration
+  | enumDeclaration
+)
+
+classLevelDeclaration ::= (
+    functionDeclaration
+  | variableDeclaration
+)
+
+expression ::= KW_CLASS KW_CLASS KW_CLASS KW_CLASS KW_CLASS // lazy
+topLevelDeclaration ::= "lolthisshitnotgonnaeverparse"//typedef aliases and shit like that
+
+variableDeclaration ::= variableModifier* type variableAtom (SYM_COMMA variableAtom) {extends=classLevelDeclaration}
+classDeclaration ::= KW_CLASS typeCreator <<singleOrCompound (classLevelDeclaration | classDestructorDeclaration)>> {extends=typeDeclaration}
+enumDeclaration ::= KW_ENUM {pin=1 extends=typeDeclaration}
+
+functionDeclaration ::= functionModifier* type identifier functionParameterList <<singleOrCompound statement>> {pin=3 extends=classLevelDeclaration}
+
+classDestructorDeclaration ::= type SYM_TILDE identifier functionParameterList <<singleOrCompound statement>> {extends=functionDeclaration pin=1}
+
+type ::= KW_VOID | identifier [SYM_LANGLE type (SYM_COMMA type) SYM_RANGLE] [SYM_LSQUARE SYM_RSQUARE] {pin(".*")=1}
+identifier ::= ABS_IDENTIFIER
+
+private meta singleOrCompound ::= <<param1>> | SYM_LCURLY <<param1>>* SYM_RCURLY {pin=1}
+private typeCreator ::= identifier [SYM_LANGLE typeDeclarationAtom (SYM_COMMA typeDeclarationAtom)* SYM_RANGLE] {pin(".*")=1};
+private typeModifier ::= KW_SEALED | KW_MODDED
+private typeDeclarationAtom ::= type identifier {pin=1};
+private functionParameterList ::='(' functionParameter (SYM_COMMA functionParameter) ')' {pin=1};
+private functionParameter ::= variableModifier* type variableAtom {pin=1}
+private functionModifier ::= KW_PRIVATE | KW_EXTERNAL
+private variableModifier ::= KW_PRIVATE | KW_STATIC
+private variableAtom ::= identifier [OP_ASSIGN expression];

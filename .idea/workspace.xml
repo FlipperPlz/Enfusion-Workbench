@@ -5,9 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="95a600cf-338e-4de1-9f0f-d35cc7c98090" name="Changes" comment="feat(param): Add Inspection For Invalid Texture Format">
-      <change afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/inlayHints/ParamInlayHintsCollector.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/inlayHints/ParamInlayHintsProvider.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/beta/main/grammars/enforce/Enforce.bnf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/languages/enforce/EnforceFileType.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/languages/enforce/psi/impl/EnforcePsiElementImpl.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/languages/enforce/psi/interfaces/EnforcePsiElement.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/languages/enforce/psi/required/EnforceElementType.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/languages/enforce/psi/required/EnforceTokenType.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,10 +74,11 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Kotlin Interface" />
         <option value="Kotlin File" />
         <option value="InspectionDescription" />
         <option value="HTML File" />
+        <option value="Kotlin Object" />
+        <option value="Kotlin Interface" />
         <option value="Kotlin Class" />
       </list>
     </option>
@@ -94,38 +100,39 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultHtmlFileTemplate": "HTML File",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "master",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "project.kotlinCompiler",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.kotlinCompiler&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="E:\projects\kotlin\intellij-plugins\Enfusion-Workbench\src" />
     </key>
     <key name="MoveKotlinTopLevelDeclarationsDialog.RECENTS_KEY">
+      <recent name="com.flipperplz.enfusionWorkbench.languages.enforce" />
       <recent name="com.flipperplz.enfusionWorkbench.languages.param.inspections.warnings.strings" />
       <recent name="com.flipperplz.enfusionWorkbench.languages.param.inspections.warnings" />
       <recent name="com.flipperplz.enfusionWorkbench.languages.param.psi.interfaces" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.Run Plugin">
-    <configuration name="Enfusion-Workbench [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+  <component name="RunManager" selected="Gradle.Enfusion-Workbench [generateEnforceLexer]">
+    <configuration name="Enfusion-Workbench [generateEnforceLexer]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -136,7 +143,51 @@
         </option>
         <option name="taskNames">
           <list>
-            <option value="build" />
+            <option value="generateEnforceLexer" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <ForceTestExec>false</ForceTestExec>
+      <method v="2" />
+    </configuration>
+    <configuration name="Enfusion-Workbench [generateEnforceParser]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="generateEnforceParser" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <ForceTestExec>false</ForceTestExec>
+      <method v="2" />
+    </configuration>
+    <configuration name="Enfusion-Workbench [generateParamLexer]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="generateParamLexer" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -169,10 +220,35 @@
       <ForceTestExec>false</ForceTestExec>
       <method v="2" />
     </configuration>
+    <configuration name="Enfusion-Workbench [generateParser]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="generateParser" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <ForceTestExec>false</ForceTestExec>
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.Enfusion-Workbench [build]" />
+        <item itemvalue="Gradle.Enfusion-Workbench [generateEnforceLexer]" />
+        <item itemvalue="Gradle.Enfusion-Workbench [generateEnforceParser]" />
+        <item itemvalue="Gradle.Enfusion-Workbench [generateParamLexer]" />
         <item itemvalue="Gradle.Enfusion-Workbench [generateParamParser]" />
+        <item itemvalue="Gradle.Enfusion-Workbench [generateParser]" />
       </list>
     </recent_temporary>
   </component>
@@ -188,6 +264,7 @@
       <workItem from="1681399767844" duration="8021000" />
       <workItem from="1681481454289" duration="15348000" />
       <workItem from="1681506934412" duration="5139000" />
+      <workItem from="1681520792163" duration="3589000" />
     </task>
     <task id="LOCAL-00001" summary="feat(param): Add mixins for ParameterStatements and Identifiers">
       <created>1681403215238</created>
