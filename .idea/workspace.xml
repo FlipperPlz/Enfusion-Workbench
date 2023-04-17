@@ -4,15 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95a600cf-338e-4de1-9f0f-d35cc7c98090" name="Changes" comment="feat(param): Add Inspection For Invalid Texture Format">
-      <change afterPath="$PROJECT_DIR$/src/beta/main/grammars/enforce/Enforce.bnf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/languages/enforce/EnforceFileType.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/languages/enforce/psi/impl/EnforcePsiElementImpl.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/languages/enforce/psi/interfaces/EnforcePsiElement.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/languages/enforce/psi/required/EnforceElementType.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/languages/enforce/psi/required/EnforceTokenType.kt" afterDir="false" />
+    <list default="true" id="95a600cf-338e-4de1-9f0f-d35cc7c98090" name="Changes" comment="feat(enforce): Start To Implement Enforce Script">
+      <change afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/formats/pbo/PboFileFormat.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/formats/pbo/vfs/PboFileSystem.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/formats/pbo/vfs/PboHandler.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/beta/main/grammars/enforce/Enforce.bnf" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/grammars/enforce/Enforce.bnf" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -264,7 +261,8 @@
       <workItem from="1681399767844" duration="8021000" />
       <workItem from="1681481454289" duration="15348000" />
       <workItem from="1681506934412" duration="5139000" />
-      <workItem from="1681520792163" duration="3589000" />
+      <workItem from="1681520792163" duration="4926000" />
+      <workItem from="1681748004888" duration="985000" />
     </task>
     <task id="LOCAL-00001" summary="feat(param): Add mixins for ParameterStatements and Identifiers">
       <created>1681403215238</created>
@@ -301,7 +299,14 @@
       <option name="project" value="LOCAL" />
       <updated>1681510521054</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="feat(enforce): Start To Implement Enforce Script">
+      <created>1681524614616</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1681524614616</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -313,7 +318,8 @@
     <MESSAGE value="feat(param): Neaten Up PSI Structure" />
     <MESSAGE value="feat(param): Add Inspection For Texture Dimensions&#10;&#10;- add extension class ParamPsiUtils" />
     <MESSAGE value="feat(param): Add Inspection For Invalid Texture Format" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat(param): Add Inspection For Invalid Texture Format" />
+    <MESSAGE value="feat(enforce): Start To Implement Enforce Script" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(enforce): Start To Implement Enforce Script" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>
