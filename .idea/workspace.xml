@@ -5,14 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="95a600cf-338e-4de1-9f0f-d35cc7c98090" name="Changes" comment="feat(pbo): Start To Implement Pbo Archive Files">
-      <change afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/bisutils/pbo/BisPboFile.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/bisutils/pbo/entries/BisPboEntry.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/bisutils/pbo/entries/EntryMimeType.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/bisutils/core/io/RandomAccessFileUtils.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/bisutils/pbo/BisPboManager.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/bisutils/pbo/PboIoUtils.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/bisutils/pbo/entries/BisPBOProperty.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/formats/pbo/PboFileFormat.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/languages/pbo/PboFileFormat.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/formats/pbo/vfs/PboFileSystem.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/languages/pbo/vfs/PboFileSystem.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/formats/pbo/vfs/PboHandler.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/languages/pbo/vfs/PboHandler.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/bisutils/pbo/BisPboFile.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/bisutils/pbo/BisPboFile.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/bisutils/pbo/entries/BisPboEntry.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/bisutils/pbo/entries/BisPboEntry.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/bisutils/pbo/entries/EntryMimeType.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/bisutils/pbo/entries/EntryMimeType.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,11 +74,11 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Kotlin File" />
         <option value="InspectionDescription" />
         <option value="HTML File" />
         <option value="Kotlin Object" />
         <option value="Kotlin Interface" />
+        <option value="Kotlin File" />
         <option value="Kotlin Class" />
       </list>
     </option>
@@ -97,32 +97,34 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2ONOfF0wnveiWCezcghD9sHrf8P" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/developer/Downloads/featenforce__Start_To_Implement_Enforce_Script.patch&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;project.kotlinCompiler&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "C:/Users/developer/Downloads/featpbo__Add_More_Pbo_Stuffs.patch",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "project.kotlinCompiler",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\projects\kotlin\intellij-plugins\Enfusion-Workbench\src\beta\main\kotlin\com\flipperplz\bisutils\pbo" />
       <recent name="E:\projects\kotlin\intellij-plugins\Enfusion-Workbench\src" />
     </key>
     <key name="CreateKotlinClassDialog.RecentsKey">
@@ -271,6 +273,7 @@
       <workItem from="1681520792163" duration="4926000" />
       <workItem from="1681748004888" duration="5058000" />
       <workItem from="1681778611276" duration="1033000" />
+      <workItem from="1681843059423" duration="10224000" />
     </task>
     <task id="LOCAL-00001" summary="feat(param): Add mixins for ParameterStatements and Identifiers">
       <created>1681403215238</created>
