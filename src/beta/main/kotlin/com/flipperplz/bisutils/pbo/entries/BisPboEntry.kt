@@ -23,7 +23,7 @@ sealed class BisPboEntry<T> protected constructor(
     init {
         metadataLength += fileName.length
     }
-    open fun getMetadataLength(): Long = metadataLength
+    open fun retrieveMetadataLength(): Long = metadataLength
 
     open fun initializeBlock(reader: RandomAccessFile) {
         if(blockStart == -1L) throw Exception("already initialized")
@@ -119,7 +119,7 @@ sealed class BisPboEntry<T> protected constructor(
 
         override fun readBlock(reader: RandomAccessFile, keepRaw: Boolean): List<BisPBOProperty> = reader.readPboProperties(keepRaw = keepRaw)
 
-        override fun getMetadataLength(): Long = metadataLength + blockLength
+        override fun retrieveMetadataLength(): Long = metadataLength + blockLength
 
     }
 
