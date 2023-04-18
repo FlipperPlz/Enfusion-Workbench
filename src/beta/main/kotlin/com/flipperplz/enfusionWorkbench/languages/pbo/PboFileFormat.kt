@@ -1,9 +1,6 @@
-package com.flipperplz.enfusionWorkbench.formats.pbo
+package com.flipperplz.enfusionWorkbench.languages.pbo
 
-import com.flipperplz.enfusionWorkbench.languages.param.ParamFileType
-import com.intellij.icons.AllIcons
 import com.intellij.ide.highlighter.ArchiveFileType
-import javax.swing.Icon
 
 class PboFileFormat : ArchiveFileType() {
     companion object {

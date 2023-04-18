@@ -1,4 +1,4 @@
-package com.flipperplz.enfusionWorkbench.formats.pbo.vfs
+package com.flipperplz.enfusionWorkbench.languages.pbo.vfs
 
 import com.intellij.openapi.vfs.impl.ArchiveHandler
 

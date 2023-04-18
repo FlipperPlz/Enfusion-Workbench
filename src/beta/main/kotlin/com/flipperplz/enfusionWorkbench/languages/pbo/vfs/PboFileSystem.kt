@@ -1,6 +1,5 @@
-package com.flipperplz.enfusionWorkbench.formats.pbo.vfs
+package com.flipperplz.enfusionWorkbench.languages.pbo.vfs
 
-import com.flipperplz.enfusionWorkbench.formats.pbo.PboFileFormat
 import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.openapi.vfs.VirtualFileManager
 import com.intellij.openapi.vfs.impl.ArchiveHandler
