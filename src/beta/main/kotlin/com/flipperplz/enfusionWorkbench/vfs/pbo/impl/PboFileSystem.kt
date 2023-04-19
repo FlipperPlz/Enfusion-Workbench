@@ -1,4 +1,4 @@
-package com.flipperplz.enfusionWorkbench.vfs.pbo.archive
+package com.flipperplz.enfusionWorkbench.vfs.pbo.impl
 
 import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.openapi.vfs.VirtualFileManager

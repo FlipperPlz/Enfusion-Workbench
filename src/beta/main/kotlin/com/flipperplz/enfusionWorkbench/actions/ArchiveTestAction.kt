@@ -1,13 +1,11 @@
 package com.flipperplz.enfusionWorkbench.actions
 
-import com.flipperplz.enfusionWorkbench.vfs.pbo.archive.PboFileSystem
-import com.flipperplz.enfusionWorkbench.vfs.pbo.archive.PboHandler
+import com.flipperplz.enfusionWorkbench.vfs.pbo.impl.PboFileSystem
+import com.flipperplz.enfusionWorkbench.vfs.pbo.impl.PboHandler
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
-import com.intellij.openapi.vfs.JarFileSystem
 import com.intellij.openapi.vfs.LocalFileSystem
 import com.intellij.openapi.vfs.VirtualFile
-import com.intellij.openapi.vfs.impl.ZipHandler
 import com.intellij.openapi.vfs.newvfs.VfsImplUtil
 
 class ArchiveTestAction : AnAction() {
@@ -19,10 +17,9 @@ class ArchiveTestAction : AnAction() {
 
         val fs = PboFileSystem.instance
         val rootEntry = PboFileSystem.instance.getRootByLocal(findFileByPath)!!
-        val root = VfsImplUtil.getHandler(fs, rootEntry) { PboHandler(it) }
 
-
-
-        println()
+        val configFile = rootEntry.children.first()
+        val i = 1
+        println("dd")
     }
 }

@@ -1,12 +1,13 @@
-package com.flipperplz.enfusionWorkbench.vfs.pbo.archive
+package com.flipperplz.enfusionWorkbench.vfs.pbo.impl
 
 import com.flipperplz.bisutils.BisPboManager
 import com.flipperplz.bisutils.pbo.BisPboEntry
 import com.flipperplz.bisutils.pbo.BisPboFile
+import com.google.common.io.Files
 import java.io.Closeable
 import java.io.File
 
-class PboArchiveHolder(file: File) : Closeable {
+class PboArchiveHolder(private val file: File) : Closeable {
     val archive: BisPboFile = BisPboFile.parse(file, keepManaged = true, keepRaw = true)
     val entries: List<BisPboEntry.BisPboDataEntry> by lazy {
         archive.entries.filterIsInstance<BisPboEntry.BisPboDataEntry>()
@@ -20,9 +21,11 @@ class PboArchiveHolder(file: File) : Closeable {
         }
     }
 
+    fun retrievePrefix(): String = archive.pboPrefix?.lowercase() ?: file.nameWithoutExtension
+
+    operator fun iterator(): Iterator<BisPboEntry.BisPboDataEntry> = entries.iterator()
+
     fun contentsFromName(name: String, caseSensitive: Boolean = false): ByteArray? = entryFromName(name, caseSensitive)?.cachedBlock
 
-    override fun close() {
-        archive.close()
-    }
+    override fun close() = archive.close()
 }

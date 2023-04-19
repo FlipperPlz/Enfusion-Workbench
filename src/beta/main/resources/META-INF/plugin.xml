@@ -57,7 +57,7 @@
 
         <virtualFileSystem
             key="pbo"
-            implementationClass="com.flipperplz.enfusionWorkbench.vfs.pbo.archive.PboFileSystem"
+            implementationClass="com.flipperplz.enfusionWorkbench.vfs.pbo.impl.PboFileSystem"
             physical="true"
         />
         <fileType
