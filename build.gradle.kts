@@ -118,7 +118,7 @@ tasks {
   val createGenerated = register("generateCode") {
     dependsOn(cleanupGenerated)
     dependsOn(generateParamParser, generateParamLexer)
-    dependsOn(generateEnforceParser, generateEnforceLexer)
+    dependsOn(generateEnforceParser, /*generateEnforceLexer*/)
   }
 
 

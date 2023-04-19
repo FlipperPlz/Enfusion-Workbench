@@ -1,4 +1,4 @@
-package com.flipperplz.bisutils.pbo.utils.objects
+package com.flipperplz.bisutils.pbo.misc
 
 enum class EntryMimeType(
     val mime: Int
@@ -8,10 +8,11 @@ enum class EntryMimeType(
     ENCRYPTED_DATA(0x456e6372),
     DUMMY(0x00000000);
 
-
     companion object {
 
-        fun fromMime(mime: Int): EntryMimeType? = values().firstOrNull { it.mime == mime }
+        fun fromMime(mime: Int): EntryMimeType? {
+            return values().firstOrNull { it.mime == mime }
+        }
     }
 
 

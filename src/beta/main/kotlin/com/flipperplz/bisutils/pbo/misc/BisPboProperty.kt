@@ -1,6 +1,6 @@
-package com.flipperplz.bisutils.pbo.utils.objects
+package com.flipperplz.bisutils.pbo.misc
 
-data class BisPBOProperty(
+data class BisPboProperty(
     val propertyName: String,
     val propertyValue: String
 ) {

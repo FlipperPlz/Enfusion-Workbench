@@ -3,6 +3,7 @@ package com.flipperplz.bisutils.utils
 import java.io.IOException
 import java.io.RandomAccessFile
 import java.nio.ByteBuffer
+import java.nio.ByteOrder
 import java.nio.charset.Charset
 
 fun RandomAccessFile.readAsciiZ(charset: Charset = Charsets.UTF_8): String = generateSequence { read() }
@@ -25,13 +26,7 @@ fun RandomAccessFile.peekInt(offset: Int): Int {
     return peekInt().also { seek(filePointer - offset) }
 }
 
-fun RandomAccessFile.readBytes(count: Int): ByteArray {
-    val array = mutableListOf<Byte>()
-    repeat(count) {
-        array.add(readByte())
-    }
-    return array.toByteArray();
-}
+fun RandomAccessFile.readBytes(count: Int): ByteArray = ByteArray(count).also { readFully(it) }
 
 fun RandomAccessFile.peekAsciiZ(offset: Int): String {
     skipBytes(offset)
@@ -40,10 +35,14 @@ fun RandomAccessFile.peekAsciiZ(offset: Int): String {
 
 fun RandomAccessFile.peekBytes(count: Int, offset: Int): ByteArray {
     skipBytes(offset)
-    return readBytes(count).also { seek(filePointer - (offset + count + 1)) }
+    val bytes =  readBytes(count)
+    seek(filePointer - (offset + count))
+    return bytes
 }
 
-fun RandomAccessFile.peekInt(): Int = readInt().also { popInt() }
+fun RandomAccessFile.readInt32(endianness: ByteOrder = ByteOrder.LITTLE_ENDIAN): Int = ByteBuffer.wrap(readBytes(4)).order(endianness).int
+
+fun RandomAccessFile.peekInt(): Int = readInt32().also { popInt() }
 fun RandomAccessFile.peekAsciiZ(): String = readAsciiZ().also { seek(filePointer - (it.length + 1)) }
 
 fun RandomAccessFile.readBisLZSS(expectedSize: Int, useSignedChecksum: Boolean = true): ByteArray {
