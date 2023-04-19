@@ -1,7 +1,7 @@
 package com.flipperplz.enfusionWorkbench.psi.impl
 
-import com.flipperplz.enfusionWorkbench.languages.EnfusionLanguage
-import com.flipperplz.enfusionWorkbench.languages.EnfusionLanguageFileType
+import com.flipperplz.enfusionWorkbench.psi.EnfusionLanguage
+import com.flipperplz.enfusionWorkbench.psi.EnfusionLanguageFileType
 import com.flipperplz.enfusionWorkbench.psi.EnfusionPsiElement
 import com.intellij.extapi.psi.PsiFileBase
 import com.intellij.openapi.fileTypes.FileType

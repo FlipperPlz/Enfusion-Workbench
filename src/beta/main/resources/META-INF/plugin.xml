@@ -39,23 +39,23 @@
 <!--        />-->
         <fileType
             name="Param"
-            implementationClass="com.flipperplz.enfusionWorkbench.languages.param.ParamFileType"
+            implementationClass="com.flipperplz.enfusionWorkbench.vfs.param.ParamFileType"
             language="Param"
             fileNamesCaseInsensitive="config.cpp"
             extensions="cpp;rvmat"
         />
         <lang.parserDefinition
             language="Param"
-            implementationClass="com.flipperplz.enfusionWorkbench.languages.param.parser.ParamParserDefinition"
+            implementationClass="com.flipperplz.enfusionWorkbench.psi.languages.param.parser.ParamParserDefinition"
         />
         <lang.syntaxHighlighterFactory
             language="Param"
-            implementationClass="com.flipperplz.enfusionWorkbench.languages.param.highlighting.ParamSyntaxHighlighterFactory"
+            implementationClass="com.flipperplz.enfusionWorkbench.psi.languages.param.highlighting.ParamSyntaxHighlighterFactory"
         />
 
 
         <localInspection
-            implementationClass="com.flipperplz.enfusionWorkbench.languages.param.inspections.errors.textures.ParamIncorrectPowerInspection"
+            implementationClass="com.flipperplz.enfusionWorkbench.psi.languages.param.inspections.errors.textures.ParamIncorrectPowerInspection"
             groupName="Param"
             level="ERROR"
             language="Param"
@@ -64,7 +64,7 @@
         />
 
         <localInspection
-                implementationClass="com.flipperplz.enfusionWorkbench.languages.param.inspections.errors.textures.ParamIncorrectFormatException"
+                implementationClass="com.flipperplz.enfusionWorkbench.psi.languages.param.inspections.errors.textures.ParamIncorrectFormatException"
                 groupName="Param"
                 level="ERROR"
                 language="Param"

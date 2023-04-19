@@ -1,6 +1,6 @@
 package com.flipperplz.enfusionWorkbench.psi.sets
 
-import com.flipperplz.enfusionWorkbench.languages.param.psi.ParamTypes
+import com.flipperplz.enfusionWorkbench.psi.languages.param.psi.ParamTypes
 import com.intellij.psi.TokenType
 import com.intellij.psi.tree.TokenSet
 

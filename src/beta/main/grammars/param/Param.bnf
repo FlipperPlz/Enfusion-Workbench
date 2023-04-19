@@ -1,16 +1,16 @@
 {
-    parserClass="com.flipperplz.enfusionWorkbench.languages.param.parser.ParamParser"
-    extends="com.flipperplz.enfusionWorkbench.languages.param.psi.impl.ParamPsiElementImpl"
-    implements="com.flipperplz.enfusionWorkbench.languages.param.psi.interfaces.ParamPsiElement"
+    parserClass="com.flipperplz.enfusionWorkbench.psi.languages.param.parser.ParamParser"
+    extends="com.flipperplz.enfusionWorkbench.psi.languages.param.psi.impl.ParamPsiElementImpl"
+    implements="com.flipperplz.enfusionWorkbench.psi.languages.param.psi.interfaces.ParamPsiElement"
 
     psiClassPrefix="Param"
     psiImplClassSuffix="Impl"
-    psiPackage="com.flipperplz.enfusionWorkbench.languages.param.psi"
-    psiImplPackage="com.flipperplz.enfusionWorkbench.languages.param.psi.impl"
+    psiPackage="com.flipperplz.enfusionWorkbench.psi.languages.param.psi"
+    psiImplPackage="com.flipperplz.enfusionWorkbench.psi.languages.param.psi.impl"
 
-    elementTypeHolderClass="com.flipperplz.enfusionWorkbench.languages.param.psi.ParamTypes"
-    elementTypeClass="com.flipperplz.enfusionWorkbench.languages.param.psi.required.ParamElementType"
-    tokenTypeClass="com.flipperplz.enfusionWorkbench.languages.param.psi.required.ParamTokenType"
+    elementTypeHolderClass="com.flipperplz.enfusionWorkbench.psi.languages.param.psi.ParamTypes"
+    elementTypeClass="com.flipperplz.enfusionWorkbench.psi.languages.param.psi.required.ParamElementType"
+    tokenTypeClass="com.flipperplz.enfusionWorkbench.psi.languages.param.psi.required.ParamTokenType"
 
     tokens = [
         PROCEDURAL_TEXTURE_START = '#';
@@ -63,32 +63,32 @@
     extends("lineMacro|fileMacro|evaluateMacro|customMacro|executeMacro|directive")=macro
     extends("includeDirective|defineDirective|undefineDirective")=directive
 
-    mixin(".*Macro|parameterReference|.*Directive|directive|macro")="com.flipperplz.enfusionWorkbench.languages.param.psi.mixins.ParamNonBinaraizableMixin"
-    mixin("stringLiteral")="com.flipperplz.enfusionWorkbench.languages.param.psi.mixins.ParamStringMixin"
+    mixin(".*Macro|parameterReference|.*Directive|directive|macro")="com.flipperplz.enfusionWorkbench.psi.languages.param.psi.mixins.ParamNonBinaraizableMixin"
+    mixin("stringLiteral")="com.flipperplz.enfusionWorkbench.psi.languages.param.psi.mixins.ParamStringMixin"
 
     implements("identifier")="com.intellij.psi.PsiNameIdentifierOwner"
-    mixin("identifier")="com.flipperplz.enfusionWorkbench.languages.param.psi.mixins.ParamIdentifierMixin"
+    mixin("identifier")="com.flipperplz.enfusionWorkbench.psi.languages.param.psi.mixins.ParamIdentifierMixin"
 
-    mixin("parameterStatement")="com.flipperplz.enfusionWorkbench.languages.param.psi.mixins.ParamParameterStatementMixin"
+    mixin("parameterStatement")="com.flipperplz.enfusionWorkbench.psi.languages.param.psi.mixins.ParamParameterStatementMixin"
     methods("parameterStatement")=[ parameterName="/identifier" ]
 
-    mixin("classStatement")="com.flipperplz.enfusionWorkbench.languages.param.psi.mixins.ParamClassMixin"
-    implements("classStatement")="com.flipperplz.enfusionWorkbench.languages.param.psi.interfaces.ParamPsiStatementScope"
+    mixin("classStatement")="com.flipperplz.enfusionWorkbench.psi.languages.param.psi.mixins.ParamClassMixin"
+    implements("classStatement")="com.flipperplz.enfusionWorkbench.psi.languages.param.psi.interfaces.ParamPsiStatementScope"
     methods("classStatement")=[ classname="/identifier[0]" parentName="/identifier[1]" ]
 
-    implements("deleteStatement")="com.flipperplz.enfusionWorkbench.languages.param.psi.interfaces.ParamPsiIdentifiable"
+    implements("deleteStatement")="com.flipperplz.enfusionWorkbench.psi.languages.param.psi.interfaces.ParamPsiIdentifiable"
     methods("deleteStatement")=[ nameIdentifier="/identifier" ]
 
-    implements("macroSignature")="com.flipperplz.enfusionWorkbench.languages.param.psi.interfaces.ParamPsiIdentifiable"
+    implements("macroSignature")="com.flipperplz.enfusionWorkbench.psi.languages.param.psi.interfaces.ParamPsiIdentifiable"
     methods("macroSignature")=[ macroName="/identifier[0]" ]
 
-    implements("enumValue")="com.flipperplz.enfusionWorkbench.languages.param.psi.interfaces.ParamPsiIdentifiable"
+    implements("enumValue")="com.flipperplz.enfusionWorkbench.psi.languages.param.psi.interfaces.ParamPsiIdentifiable"
     methods("enumValue")=[ enumerationName="/identifier" enumerationValue="/numericLiteral"]
 
     methods("proceduralTextureFunction")=[ functionName="/identifier" ]
     methods("proceduralTexture")=[ format="/identifier" width="/numericLiteral[0]" height="/numericLiteral[1]" mipmapCount="/numericLiteral[2]" ]
 
-    implements("customMacro")="com.flipperplz.enfusionWorkbench.languages.param.psi.interfaces.ParamPsiIdentifiable"
+    implements("customMacro")="com.flipperplz.enfusionWorkbench.psi.languages.param.psi.interfaces.ParamPsiIdentifiable"
 
     methods("undefineDirective")=[ macroName="/identifier[0]" ]
 

@@ -1,7 +1,7 @@
 package com.flipperplz.enfusionWorkbench.languages.param.lexer;
 
-import com.flipperplz.enfusionWorkbench.languages.param.psi.ParamTypes;
-import com.flipperplz.enfusionWorkbench.languages.param.utils.ParamStringType;
+import com.flipperplz.enfusionWorkbench.psi.languages.param.psi.ParamTypes;
+import com.flipperplz.enfusionWorkbench.psi.languages.param.utils.ParamStringType;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.TokenType;
 import org.jetbrains.annotations.NotNull;

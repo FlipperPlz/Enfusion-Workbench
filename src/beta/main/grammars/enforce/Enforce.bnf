@@ -1,16 +1,16 @@
 {
-    parserClass="com.flipperplz.enfusionWorkbench.languages.enforce.parser.EnforceParser"
-    extends="com.flipperplz.enfusionWorkbench.languages.enforce.psi.impl.EnforcePsiElementImpl"
-    implements="com.flipperplz.enfusionWorkbench.languages.enforce.psi.interfaces.EnforcePsiElement"
+    parserClass="com.flipperplz.enfusionWorkbench.psi.languages.enforce.parser.EnforceParser"
+    extends="com.flipperplz.enfusionWorkbench.psi.languages.enforce.psi.impl.EnforcePsiElementImpl"
+    implements="com.flipperplz.enfusionWorkbench.psi.languages.enforce.psi.interfaces.EnforcePsiElement"
 
     psiClassPrefix="Enforce"
     psiImplClassSuffix="Impl"
-    psiPackage="com.flipperplz.enfusionWorkbench.languages.enforce.psi"
-    psiImplPackage="com.flipperplz.enfusionWorkbench.languages.enforce.psi.impl"
+    psiPackage="com.flipperplz.enfusionWorkbench.psi.languages.enforce.psi"
+    psiImplPackage="com.flipperplz.enfusionWorkbench.psi.languages.enforce.psi.impl"
 
-    elementTypeHolderClass="com.flipperplz.enfusionWorkbench.languages.enforce.psi.EnforceTypes"
-    elementTypeClass="com.flipperplz.enfusionWorkbench.languages.enforce.psi.required.EnforceElementType"
-    tokenTypeClass="com.flipperplz.enfusionWorkbench.languages.enforce.psi.required.EnforceTokenType"
+    elementTypeHolderClass="com.flipperplz.enfusionWorkbench.psi.languages.enforce.psi.EnforceTypes"
+    elementTypeClass="com.flipperplz.enfusionWorkbench.psi.languages.enforce.psi.required.EnforceElementType"
+    tokenTypeClass="com.flipperplz.enfusionWorkbench.psi.languages.enforce.psi.required.EnforceTokenType"
 
     tokens=[
         KW_CLASS='class';
