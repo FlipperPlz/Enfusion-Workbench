@@ -4,14 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95a600cf-338e-4de1-9f0f-d35cc7c98090" name="Changes" comment="feat(pbo): More PboHandler Work">
+    <list default="true" id="95a600cf-338e-4de1-9f0f-d35cc7c98090" name="Changes" comment="feat(sdk): Start Working On DayZ SDK">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/actions/ArchiveTestAction.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/actions/ArchiveTestAction.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/utils/EnfLoggableObject.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/utils/EnfLoggableObject.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/vfs/pbo/archive/PboArchiveHolder.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/vfs/pbo/impl/PboArchiveHolder.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/vfs/pbo/archive/PboFileSystem.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/vfs/pbo/impl/PboFileSystem.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/vfs/pbo/archive/PboHandler.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/vfs/pbo/impl/PboHandler.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/resources/META-INF/plugin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/resources/META-INF/plugin.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/beta/main/grammars/param/Param.flex" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/grammars/param/Param.flex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/psi/languages/param/lexer/ParamLexerAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/psi/languages/param/lexer/ParamLexerAdapter.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,31 +97,30 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/developer/Downloads/featpbo__Add_More_Pbo_Stuffs.patch&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;inlay.hints&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "Downloaded.Files.Path.Enabled": "false",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "C:/Users/developer/Downloads/featpbo__Add_More_Pbo_Stuffs.patch",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "inlay.hints",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="E:\projects\kotlin\intellij-plugins\Enfusion-Workbench\src\beta\main\kotlin\com\flipperplz\bisutils\utils" />
@@ -144,7 +140,7 @@
       <recent name="com.flipperplz.bisutils" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.Run Plugin">
+  <component name="RunManager" selected="Gradle.Enfusion-Workbench [jar]">
     <configuration name="Enfusion-Workbench [generateEnforceLexer]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -257,10 +253,10 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.Enfusion-Workbench [jar]" />
         <item itemvalue="Gradle.Enfusion-Workbench [generateEnforceParser]" />
         <item itemvalue="Gradle.Enfusion-Workbench [generateParamParser]" />
         <item itemvalue="Gradle.Enfusion-Workbench [generateParamLexer]" />
-        <item itemvalue="Gradle.Enfusion-Workbench [jar]" />
         <item itemvalue="Gradle.Enfusion-Workbench [generateEnforceLexer]" />
       </list>
     </recent_temporary>
@@ -283,7 +279,7 @@
       <workItem from="1681843059423" duration="15010000" />
       <workItem from="1681868131113" duration="1489000" />
       <workItem from="1681903144859" duration="4625000" />
-      <workItem from="1681909128437" duration="12529000" />
+      <workItem from="1681909128437" duration="17710000" />
     </task>
     <task id="LOCAL-00001" summary="feat(param): Add mixins for ParameterStatements and Identifiers">
       <created>1681403215238</created>
@@ -397,7 +393,21 @@
       <option name="project" value="LOCAL" />
       <updated>1681924173610</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="feat(pbo): Finish PBO Implementation">
+      <created>1681937113591</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1681937113591</updated>
+    </task>
+    <task id="LOCAL-00018" summary="feat(sdk): Start Working On DayZ SDK">
+      <created>1681942063585</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1681942063585</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -442,7 +452,9 @@
     <MESSAGE value="feat(pbo): Start Working On PboHandler&#10;&#10;Made properties in BisPboEntry public (previously protected)" />
     <MESSAGE value="refactor: Organize Project" />
     <MESSAGE value="feat(pbo): More PboHandler Work" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat(pbo): More PboHandler Work" />
+    <MESSAGE value="feat(pbo): Finish PBO Implementation" />
+    <MESSAGE value="feat(sdk): Start Working On DayZ SDK" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(sdk): Start Working On DayZ SDK" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

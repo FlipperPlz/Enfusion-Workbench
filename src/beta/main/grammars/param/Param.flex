@@ -1,4 +1,4 @@
-package com.flipperplz.enfusionWorkbench.languages.param.lexer;
+package com.flipperplz.enfusionWorkbench.psi.languages.param.lexer;
 
 import com.flipperplz.enfusionWorkbench.psi.languages.param.psi.ParamTypes;
 import com.flipperplz.enfusionWorkbench.psi.languages.param.utils.ParamStringType;

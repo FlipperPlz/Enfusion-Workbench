@@ -83,14 +83,14 @@ sourceSets {
 val generateParamParser = tasks.register<GenerateParserTask>("generateParamParser") {
   sourceFile.set(file("src/${sourceBranch}/main/grammars/param/Param.bnf"))
   targetRoot.set("src/${sourceBranch}/main/gen/")
-  pathToParser.set("/com/flipperplz/enfusionWorkbench/languages/param/parser/ParamParser.java")
-  pathToPsiRoot.set("/com/flipperplz/enfusionWorkbench/languages/param/psi/")
+  pathToParser.set("/com/flipperplz/enfusionWorkbench/psi/languages/param/parser/ParamParser.java")
+  pathToPsiRoot.set("/com/flipperplz/enfusionWorkbench/psi/languages/param/psi/")
 
   purgeOldFiles.set(true)
 }
 val generateParamLexer = tasks.register<GenerateLexerTask>("generateParamLexer") {
   sourceFile.set(file("src/${sourceBranch}/main/grammars/param/Param.flex"))
-  targetDir.set("src/${sourceBranch}/main/gen/com/flipperplz/enfusionWorkbench/languages/param/lexer/")
+  targetDir.set("src/${sourceBranch}/main/gen/com/flipperplz/enfusionWorkbench/psi/languages/param/lexer/")
   targetClass.set("ParamLexer")
   purgeOldFiles.set(true)
 }
@@ -98,14 +98,14 @@ val generateParamLexer = tasks.register<GenerateLexerTask>("generateParamLexer")
 val generateEnforceParser = tasks.register<GenerateParserTask>("generateEnforceParser") {
   sourceFile.set(file("src/${sourceBranch}/main/grammars/enforce/Enforce.bnf"))
   targetRoot.set("src/${sourceBranch}/main/gen/")
-  pathToParser.set("/com/flipperplz/enfusionWorkbench/languages/enforce/parser/EnforceParser.java")
-  pathToPsiRoot.set("/com/flipperplz/enfusionWorkbench/languages/enforce/psi/")
+  pathToParser.set("/com/flipperplz/enfusionWorkbench/psi/languages/enforce/parser/EnforceParser.java")
+  pathToPsiRoot.set("/com/flipperplz/enfusionWorkbench/psi/languages/enforce/psi/")
 
   purgeOldFiles.set(true)
 }
 val generateEnforceLexer = tasks.register<GenerateLexerTask>("generateEnforceLexer") {
   sourceFile.set(file("src/${sourceBranch}/main/grammars/enforce/Enforce.flex"))
-  targetDir.set("src/${sourceBranch}/main/gen/com/flipperplz/enfusionWorkbench/languages/enforce/lexer/")
+  targetDir.set("src/${sourceBranch}/main/gen/com/flipperplz/enfusionWorkbench/psi/languages/enforce/lexer/")
   targetClass.set("EnforceLexer")
   purgeOldFiles.set(true)
 }
