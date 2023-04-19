@@ -4,13 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95a600cf-338e-4de1-9f0f-d35cc7c98090" name="Changes" comment="fix(pbo): Rename Method getMetadataLength to retrieveMetadataLength">
+    <list default="true" id="95a600cf-338e-4de1-9f0f-d35cc7c98090" name="Changes" comment="fix(pbo): Fix BisPboDataEntry::compressed">
+      <change afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/bisutils/utils/BisRandomAccessFile.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/bisutils/pbo/entries/BisPboEntry.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/bisutils/pbo/entries/BisPboEntry.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/bisutils/pbo/utils/PboIoUtils.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/bisutils/pbo/utils/PboIoUtils.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/bisutils/pbo/utils/objects/BisPBOProperty.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/bisutils/pbo/misc/BisPBOProperty.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/bisutils/pbo/utils/objects/EntryMimeType.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/bisutils/pbo/misc/EntryMimeType.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/bisutils/pbo/BisPboEntry.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/bisutils/pbo/BisPboEntry.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/bisutils/pbo/BisPboFile.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/bisutils/pbo/BisPboFile.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/bisutils/pbo/BisPboManager.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/bisutils/pbo/BisPboManager.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -136,11 +135,11 @@
       <recent name="com.flipperplz.enfusionWorkbench.formats.pbo.vfs" />
     </key>
     <key name="MoveKotlinTopLevelDeclarationsDialog.RECENTS_KEY">
+      <recent name="com.flipperplz.bisutils.pbo" />
       <recent name="com.flipperplz.bisutils.pbo.utils.objects" />
       <recent name="com.flipperplz.bisutils.pbo.utils" />
       <recent name="com.flipperplz.enfusionWorkbench.languages.enforce" />
       <recent name="com.flipperplz.enfusionWorkbench.languages.param.inspections.warnings.strings" />
-      <recent name="com.flipperplz.enfusionWorkbench.languages.param.inspections.warnings" />
     </key>
   </component>
   <component name="RunManager" selected="Gradle.Enfusion-Workbench [jar]">
@@ -280,6 +279,8 @@
       <workItem from="1681748004888" duration="5058000" />
       <workItem from="1681778611276" duration="1033000" />
       <workItem from="1681843059423" duration="15010000" />
+      <workItem from="1681868131113" duration="1489000" />
+      <workItem from="1681903144859" duration="1041000" />
     </task>
     <task id="LOCAL-00001" summary="feat(param): Add mixins for ParameterStatements and Identifiers">
       <created>1681403215238</created>
@@ -344,7 +345,21 @@
       <option name="project" value="LOCAL" />
       <updated>1681854066751</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="fix(pbo): Fix &quot;All&quot; Bugs In PBO Implementation&#10;&#10;TODO: properties caching not working">
+      <created>1681868335598</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1681868335598</updated>
+    </task>
+    <task id="LOCAL-00011" summary="fix(pbo): Fix BisPboDataEntry::compressed">
+      <created>1681869608756</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1681869608756</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -360,7 +375,9 @@
     <MESSAGE value="feat(pbo): Start To Implement Pbo Archive Files" />
     <MESSAGE value="feat(pbo): Finish Up BisPboEntry Implementations" />
     <MESSAGE value="fix(pbo): Rename Method getMetadataLength to retrieveMetadataLength" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix(pbo): Rename Method getMetadataLength to retrieveMetadataLength" />
+    <MESSAGE value="fix(pbo): Fix &quot;All&quot; Bugs In PBO Implementation&#10;&#10;TODO: properties caching not working" />
+    <MESSAGE value="fix(pbo): Fix BisPboDataEntry::compressed" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix(pbo): Fix BisPboDataEntry::compressed" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>

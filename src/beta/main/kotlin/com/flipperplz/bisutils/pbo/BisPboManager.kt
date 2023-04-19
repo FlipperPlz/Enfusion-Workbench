@@ -1,12 +1,13 @@
 package com.flipperplz.bisutils.pbo
 
-import java.io.RandomAccessFile
+import com.flipperplz.bisutils.utils.BisRandomAccessFile
+import org.apache.pdfbox.io.RandomAccessFile
 import java.nio.channels.FileChannel
 
 object BisPboManager {
-    private val managedPbos = mutableMapOf<BisPboFile, RandomAccessFile>()
+    private val managedPbos = mutableMapOf<BisPboFile, BisRandomAccessFile>()
 
-    fun managePbo(file: BisPboFile, reader: RandomAccessFile) {
+    fun managePbo(file: BisPboFile, reader: BisRandomAccessFile) {
         managedPbos[file] = reader
     }
 
@@ -15,7 +16,7 @@ object BisPboManager {
         it.close()
     }
 
-    fun getRandomAccessFile(file: BisPboFile): RandomAccessFile? {
+    fun getRandomAccessFile(file: BisPboFile): BisRandomAccessFile? {
         if(!isManaged(file)) return null
         return managedPbos[file]
     }

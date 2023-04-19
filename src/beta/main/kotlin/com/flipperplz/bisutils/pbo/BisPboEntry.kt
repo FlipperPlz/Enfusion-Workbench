@@ -6,7 +6,6 @@ import com.flipperplz.bisutils.pbo.utils.seekToOffset
 import com.flipperplz.bisutils.pbo.misc.BisPboProperty
 import com.flipperplz.bisutils.pbo.misc.EntryMimeType
 import com.flipperplz.bisutils.utils.*
-import java.io.RandomAccessFile
 import kotlin.math.abs
 
 sealed class BisPboEntry<T> protected constructor(
@@ -33,12 +32,12 @@ sealed class BisPboEntry<T> protected constructor(
                 "packedSize = $packedSize$tabs"
     }
 
-    open fun initializeBlock(file: RandomAccessFile) {
+    open fun initializeBlock(file: BisRandomAccessFile) {
         blockStart = file.filePointer
         file.skipBytes(blockLength.toInt())
     }
 
-    abstract fun readBlock(reader: RandomAccessFile, keepRaw: Boolean): T
+    abstract fun readBlock(reader: BisRandomAccessFile, keepRaw: Boolean): T
 
     class BisPboDummyEntry(
         pboFile: BisPboFile,
@@ -56,9 +55,9 @@ sealed class BisPboEntry<T> protected constructor(
         override var blockLength: Long = 0
         override var cachedBlock: Unit = Unit
 
-        override fun initializeBlock(file: RandomAccessFile) { }
+        override fun initializeBlock(file: BisRandomAccessFile) { }
 
-        override fun readBlock(reader: RandomAccessFile, keepRaw: Boolean) { }
+        override fun readBlock(reader: BisRandomAccessFile, keepRaw: Boolean) { }
     }
 
     class BisPboDataEntry(
@@ -80,7 +79,7 @@ sealed class BisPboEntry<T> protected constructor(
 
         override fun getInfo(indent: Int): String = super.getInfo(indent) + ",\n${"\t".repeat(indent)}compressed = $compressed"
 
-        override fun readBlock(reader: RandomAccessFile, keepRaw: Boolean): ByteArray {
+        override fun readBlock(reader: BisRandomAccessFile, keepRaw: Boolean): ByteArray {
             reader.seekToOffset(blockStart)
 
             if(keepRaw || !compressed) return reader.readBytes(blockLength.toInt())
@@ -89,7 +88,7 @@ sealed class BisPboEntry<T> protected constructor(
         }
 
         companion object {
-            fun parse(pboFile: BisPboFile, file: RandomAccessFile, entryName: String? = null, keepRaw: Boolean = true): BisPboDataEntry? {
+            fun parse(pboFile: BisPboFile, file: BisRandomAccessFile, entryName: String? = null, keepRaw: Boolean = true): BisPboDataEntry? {
                 val parsedName = entryName ?: file.readAsciiZ()
                 val metadataStart = if(entryName != null) (file.filePointer - entryName.asciiZLength()) else file.filePointer
                 val mimeType = EntryMimeType.fromMime(file.readInt32()) ?: return null
@@ -141,23 +140,23 @@ sealed class BisPboEntry<T> protected constructor(
             ) { "\"" + it.propertyName + "\" = \"" + it.propertyValue + "\"" }
         }
 
-        override fun initializeBlock(file: RandomAccessFile) { }
+        override fun initializeBlock(file: BisRandomAccessFile) { }
 
-        constructor(pboFile: BisPboFile, file: RandomAccessFile, keepRaw: Boolean) : this(
+        constructor(pboFile: BisPboFile, file: BisRandomAccessFile, keepRaw: Boolean) : this(
             pboFile = pboFile,
             entryStart = file.filePointer,
             properties = file.readPboProperties(keepRaw = keepRaw)
         )
 
         override val cachedBlock: List<BisPboProperty>
-            get() = pboFile.getOrCreateCachedEntry(this) ?: throw Exception("Error caching $this")
+            get() = properties
 
-        override fun readBlock(reader: RandomAccessFile, keepRaw: Boolean): List<BisPboProperty> = reader.readPboProperties(keepRaw = keepRaw)
+        override fun readBlock(reader: BisRandomAccessFile, keepRaw: Boolean): List<BisPboProperty> = reader.readPboProperties(keepRaw = keepRaw)
 
     }
     //0x73726550
     companion object {
-        fun parse(file: BisPboFile, reader: RandomAccessFile, keepRaw: Boolean): BisPboEntry<*>? {
+        fun parse(file: BisPboFile, reader: BisRandomAccessFile, keepRaw: Boolean): BisPboEntry<*>? {
             val parsedName = reader.peekAsciiZ()
             val nameLength = parsedName.asciiZLength()
             val parsedMime = EntryMimeType.fromMime(reader.peekInt(nameLength)) ?: return null
