@@ -60,6 +60,7 @@
             implementationClass="com.flipperplz.enfusionWorkbench.vfs.pbo.impl.PboFileSystem"
             physical="true"
         />
+
         <fileType
             name="PBO"
             implementationClass="com.flipperplz.enfusionWorkbench.vfs.pbo.PboFileType"
