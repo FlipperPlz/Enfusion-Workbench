@@ -9,9 +9,9 @@ import com.flipperplz.bisutils.utils.*
 import kotlin.math.abs
 
 sealed class BisPboEntry<T> protected constructor(
-    val pboFile: BisPboFile, protected var metadataStart: Long, protected var mimeType: EntryMimeType,
-    protected var fileName: String, protected var originalSize: Int, protected var offset: Int,
-    protected var timestamp: Int, protected var packedSize: Int,
+    val pboFile: BisPboFile, protected var metadataStart: Long, var mimeType: EntryMimeType,
+    var fileName: String, var originalSize: Int, var offset: Int,
+    var timestamp: Int, var packedSize: Int,
 ) {
     open var metadataLength: Long = 20 + fileName.asciiZLength().toLong()
     open var blockStart: Long = -1

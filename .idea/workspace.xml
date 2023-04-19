@@ -4,15 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95a600cf-338e-4de1-9f0f-d35cc7c98090" name="Changes" comment="fix(pbo): Fix PboProperties Reading">
-      <change afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/actions/ArchiveTestAction.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/languages/pbo/vfs/PboArchiveHolder.kt" afterDir="false" />
+    <list default="true" id="95a600cf-338e-4de1-9f0f-d35cc7c98090" name="Changes" comment="feat(pbo): Add Test Action; Start Working On Idea Implementations">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/bisutils/pbo/BisPboFile.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/bisutils/pbo/BisPboFile.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/bisutils/pbo/BisPboManager.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/bisutils/BisPboManager.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/languages/pbo/vfs/PboFileSystem.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/languages/pbo/vfs/PboFileSystem.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/bisutils/pbo/BisPboEntry.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/bisutils/pbo/BisPboEntry.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/languages/pbo/vfs/PboHandler.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/languages/pbo/vfs/PboHandler.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/resources/META-INF/plugin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/resources/META-INF/plugin.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -283,7 +278,8 @@
       <workItem from="1681778611276" duration="1033000" />
       <workItem from="1681843059423" duration="15010000" />
       <workItem from="1681868131113" duration="1489000" />
-      <workItem from="1681903144859" duration="3834000" />
+      <workItem from="1681903144859" duration="4625000" />
+      <workItem from="1681909128437" duration="654000" />
     </task>
     <task id="LOCAL-00001" summary="feat(param): Add mixins for ParameterStatements and Identifiers">
       <created>1681403215238</created>
@@ -369,7 +365,14 @@
       <option name="project" value="LOCAL" />
       <updated>1681904480976</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="feat(pbo): Add Test Action; Start Working On Idea Implementations">
+      <created>1681907337585</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1681907337585</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -388,7 +391,8 @@
     <MESSAGE value="fix(pbo): Fix &quot;All&quot; Bugs In PBO Implementation&#10;&#10;TODO: properties caching not working" />
     <MESSAGE value="fix(pbo): Fix BisPboDataEntry::compressed" />
     <MESSAGE value="fix(pbo): Fix PboProperties Reading" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix(pbo): Fix PboProperties Reading" />
+    <MESSAGE value="feat(pbo): Add Test Action; Start Working On Idea Implementations" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(pbo): Add Test Action; Start Working On Idea Implementations" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>

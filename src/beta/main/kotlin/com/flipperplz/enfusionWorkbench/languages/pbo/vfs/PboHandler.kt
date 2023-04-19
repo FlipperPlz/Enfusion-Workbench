@@ -12,19 +12,27 @@ class PboHandler(path: String) : ArchiveHandler(path) {
     @Volatile
     var myFileLength: Long = DEFAULT_LENGTH
 
-    val accessorCache: FileAccessorCache<PboHandler, PboArchiveHolder> = cache;
+
+    val archiveHolder: PboArchiveHolder
+        get() = accessorCache.get(this).get()
 
     override fun createEntriesMap(): MutableMap<String, EntryInfo> {
-        TODO("Not yet implemented")
+        val map = mutableMapOf<String, EntryInfo>()
+        val root = EntryInfo(archiveHolder.archive.pboPrefix!!, true, DEFAULT_LENGTH, DEFAULT_TIMESTAMP, null)
+        map[archiveHolder.archive.pboPrefix!!] = root
+        archiveHolder.archiveItems.forEach {
+            map[it.fileName] = EntryInfo(it.fileName, false, it.blockLength, myFileStamp, root)
+        }
+        return map
     }
 
     override fun contentsToByteArray(relativePath: String): ByteArray {
-        TODO("Not yet implemented")
+        return byteArrayOf() //TODO
     }
 
     companion object  {
 
-        val cache = object : FileAccessorCache<PboHandler, PboArchiveHolder>(10, 20) {
+        val accessorCache = object : FileAccessorCache<PboHandler, PboArchiveHolder>(10, 20) {
 
             override fun createAccessor(key: PboHandler): PboArchiveHolder {
                 val attributes = FileSystemUtil.getAttributes(key.file.canonicalFile)
