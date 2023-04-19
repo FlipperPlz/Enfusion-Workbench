@@ -19,29 +19,20 @@ class BisPboFile private constructor() : AutoCloseable {
 
 
     val pboProduct: String?
-        get() = pboProperties.firstOrNull { it.propertyName == "product"}?.propertyValue
+        get() = pboProperties.firstOrNull { it.propertyName == "product" }?.propertyValue
 
     val pboVersion: String?
-        get() = pboProperties.firstOrNull { it.propertyName == "product"}?.propertyValue
+        get() = pboProperties.firstOrNull { it.propertyName == "version" }?.propertyValue
 
     @Suppress("UNCHECKED_CAST")
-    private fun <T> getCachedEntry(entry: BisPboEntry<T>): T? = when(entry) {
-        is BisPboEntry.BisPboDataEntry -> dataCache.getIfPresent(entry) as? T
-        is BisPboEntry.BisPboVersionEntry -> pboProperties as? T
-        else -> null
-    }
+    private fun  getCachedEntry(entry: BisPboEntry.BisPboDataEntry): ByteArray? = dataCache.getIfPresent(entry);
 
-    fun <T> getOrCreateCachedEntry(entry: BisPboEntry<T>, file: File? = null, managePbo: Boolean = true): T? {
+    fun getOrCreateCachedEntry(entry: BisPboEntry.BisPboDataEntry, file: File? = null, managePbo: Boolean = true): ByteArray? {
         return getCachedEntry(entry) ?: entry.readBlock(with(BisPboManager.getRandomAccessFile(this)) {
             return@with (this ?: BisRandomAccessFile(file ?: return null, "r")).also { createdFile ->
                 if(managePbo && this == null) BisPboManager.managePbo(this@BisPboFile, createdFile)
             }
-        },false).also {
-            when(it) {
-                is ByteArray -> dataCache.put(entry as BisPboEntry.BisPboDataEntry, it)
-                else -> throw Exception("Can not cache $it")
-            }
-        };
+        },false).also { dataCache.put(entry as BisPboEntry.BisPboDataEntry, it) };
     }
 
     fun getInfo(): String {

@@ -4,10 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95a600cf-338e-4de1-9f0f-d35cc7c98090" name="Changes" comment="feat(pbo): Add Test Action; Start Working On Idea Implementations">
+    <list default="true" id="95a600cf-338e-4de1-9f0f-d35cc7c98090" name="Changes" comment="refactor: Organize Project">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/bisutils/pbo/BisPboEntry.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/bisutils/pbo/BisPboEntry.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/languages/pbo/vfs/PboHandler.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/languages/pbo/vfs/PboHandler.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/bisutils/pbo/BisPboFile.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/bisutils/pbo/BisPboFile.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/actions/ArchiveTestAction.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/actions/ArchiveTestAction.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/vfs/pbo/PboFileFormat.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/vfs/pbo/PboFileType.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/vfs/pbo/vfs/PboArchiveHolder.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/vfs/pbo/archive/PboArchiveHolder.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/vfs/pbo/vfs/PboFileSystem.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/vfs/pbo/archive/PboFileSystem.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/vfs/pbo/vfs/PboHandler.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/vfs/pbo/archive/PboHandler.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/beta/main/resources/META-INF/plugin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/resources/META-INF/plugin.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -133,11 +139,11 @@
       <recent name="com.flipperplz.enfusionWorkbench.formats.pbo.vfs" />
     </key>
     <key name="MoveKotlinTopLevelDeclarationsDialog.RECENTS_KEY">
+      <recent name="com.flipperplz.enfusionWorkbench.vfs.pbo.archive" />
+      <recent name="com.flipperplz.enfusionWorkbench.psi" />
+      <recent name="com.flipperplz.enfusionWorkbench.vfs.enforce" />
+      <recent name="com.flipperplz.enfusionWorkbench.vfs.param" />
       <recent name="com.flipperplz.bisutils" />
-      <recent name="com.flipperplz.bisutils.pbo" />
-      <recent name="com.flipperplz.bisutils.pbo.utils.objects" />
-      <recent name="com.flipperplz.bisutils.pbo.utils" />
-      <recent name="com.flipperplz.enfusionWorkbench.languages.enforce" />
     </key>
   </component>
   <component name="RunManager" selected="Gradle.Run Plugin">
@@ -253,11 +259,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.Enfusion-Workbench [generateEnforceParser]" />
+        <item itemvalue="Gradle.Enfusion-Workbench [generateParamParser]" />
+        <item itemvalue="Gradle.Enfusion-Workbench [generateParamLexer]" />
         <item itemvalue="Gradle.Enfusion-Workbench [jar]" />
         <item itemvalue="Gradle.Enfusion-Workbench [generateEnforceLexer]" />
-        <item itemvalue="Gradle.Enfusion-Workbench [generateEnforceParser]" />
-        <item itemvalue="Gradle.Enfusion-Workbench [generateParamLexer]" />
-        <item itemvalue="Gradle.Enfusion-Workbench [generateParamParser]" />
       </list>
     </recent_temporary>
   </component>
@@ -279,7 +285,7 @@
       <workItem from="1681843059423" duration="15010000" />
       <workItem from="1681868131113" duration="1489000" />
       <workItem from="1681903144859" duration="4625000" />
-      <workItem from="1681909128437" duration="654000" />
+      <workItem from="1681909128437" duration="5461000" />
     </task>
     <task id="LOCAL-00001" summary="feat(param): Add mixins for ParameterStatements and Identifiers">
       <created>1681403215238</created>
@@ -372,11 +378,47 @@
       <option name="project" value="LOCAL" />
       <updated>1681907337585</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="feat(pbo): Start Working On PboHandler&#10;&#10;Made properties in BisPboEntry public (previously protected)">
+      <created>1681909978219</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1681909978219</updated>
+    </task>
+    <task id="LOCAL-00015" summary="refactor: Organize Project">
+      <created>1681921381856</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1681921381856</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ID_ORDER">
+      <list>
+        <option value="Default.Root" />
+        <option value="Default.Author" />
+        <option value="Default.Date" />
+        <option value="Default.Subject" />
+        <option value="Space.CommitStatus" />
+      </list>
+    </option>
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="feat(param): Add mixins for ParameterStatements and Identifiers" />
@@ -392,9 +434,30 @@
     <MESSAGE value="fix(pbo): Fix BisPboDataEntry::compressed" />
     <MESSAGE value="fix(pbo): Fix PboProperties Reading" />
     <MESSAGE value="feat(pbo): Add Test Action; Start Working On Idea Implementations" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat(pbo): Add Test Action; Start Working On Idea Implementations" />
+    <MESSAGE value="feat(pbo): Start Working On PboHandler&#10;&#10;Made properties in BisPboEntry public (previously protected)" />
+    <MESSAGE value="refactor: Organize Project" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor: Organize Project" />
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/vfs/pbo/archive/PboHandler.kt</url>
+          <line>37</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/actions/ArchiveTestAction.kt</url>
+          <line>25</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/vfs/pbo/archive/PboHandler.kt</url>
+          <line>24</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
         <PinnedItemInfo parentTag="com.flipperplz.enfusionWorkbench.languages.param.psi.impl.ParamFileImpl" memberName="statements" />

@@ -1,5 +1,6 @@
 import org.jetbrains.grammarkit.tasks.GenerateLexerTask
 import org.jetbrains.grammarkit.tasks.GenerateParserTask
+import org.jetbrains.intellij.tasks.RunIdeTask
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 val sourceBranch = "beta"
@@ -17,7 +18,6 @@ plugins {
 intellij {
   version.set("2022.3.3")
   type.set("IC")
-
   plugins.set(listOf(
 
   ))
@@ -142,6 +142,7 @@ tasks {
     privateKey.set(System.getenv("PRIVATE_KEY"))
     password.set(System.getenv("PRIVATE_KEY_PASSWORD"))
   }
+
 
   publishPlugin {
     token.set(System.getenv("PUBLISH_TOKEN"))

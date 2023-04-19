@@ -2,9 +2,9 @@ package com.flipperplz.enfusionWorkbench.vfs.pbo
 
 import com.intellij.ide.highlighter.ArchiveFileType
 
-class PboFileFormat : ArchiveFileType() {
+class PboFileType : ArchiveFileType() {
     companion object {
-        val instance: PboFileFormat = PboFileFormat();
+        val instance: PboFileType = PboFileType();
     }
 
     override fun getName(): String = "PBO"

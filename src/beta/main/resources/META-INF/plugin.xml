@@ -27,7 +27,7 @@
     <actions>
         <action
             class="com.flipperplz.enfusionWorkbench.actions.ArchiveTestAction"
-            description="Test Archive"
+            description="Test archive"
             text="Test Archive"
         />
     </actions>
@@ -44,15 +44,27 @@
             fileNamesCaseInsensitive="config.cpp"
             extensions="cpp;rvmat"
         />
+
         <lang.parserDefinition
             language="Param"
             implementationClass="com.flipperplz.enfusionWorkbench.psi.languages.param.parser.ParamParserDefinition"
         />
+
         <lang.syntaxHighlighterFactory
             language="Param"
             implementationClass="com.flipperplz.enfusionWorkbench.psi.languages.param.highlighting.ParamSyntaxHighlighterFactory"
         />
 
+        <virtualFileSystem
+            key="pbo"
+            implementationClass="com.flipperplz.enfusionWorkbench.vfs.pbo.archive.PboFileSystem"
+            physical="true"
+        />
+        <fileType
+            name="PBO"
+            implementationClass="com.flipperplz.enfusionWorkbench.vfs.pbo.PboFileType"
+            extensions="pbo;ebo;xbo;ifa"
+        />
 
         <localInspection
             implementationClass="com.flipperplz.enfusionWorkbench.psi.languages.param.inspections.errors.textures.ParamIncorrectPowerInspection"
@@ -64,12 +76,12 @@
         />
 
         <localInspection
-                implementationClass="com.flipperplz.enfusionWorkbench.psi.languages.param.inspections.errors.textures.ParamIncorrectFormatException"
-                groupName="Param"
-                level="ERROR"
-                language="Param"
-                displayName="ParamIncorrectFormat"
-                enabledByDefault="true"
+            implementationClass="com.flipperplz.enfusionWorkbench.psi.languages.param.inspections.errors.textures.ParamIncorrectFormatException"
+            groupName="Param"
+            level="ERROR"
+            language="Param"
+            displayName="ParamIncorrectFormat"
+            enabledByDefault="true"
         />
 
     </extensions>

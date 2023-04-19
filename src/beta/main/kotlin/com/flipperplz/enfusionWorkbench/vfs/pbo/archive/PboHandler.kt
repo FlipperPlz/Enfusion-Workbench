@@ -1,4 +1,4 @@
-package com.flipperplz.enfusionWorkbench.vfs.pbo.vfs
+package com.flipperplz.enfusionWorkbench.vfs.pbo.archive
 
 import com.intellij.openapi.util.io.FileSystemUtil
 import com.intellij.openapi.vfs.impl.ArchiveHandler
@@ -16,17 +16,25 @@ class PboHandler(path: String) : ArchiveHandler(path) {
     val archiveHolder: PboArchiveHolder
         get() = accessorCache.get(this).get()
 
+
     override fun createEntriesMap(): MutableMap<String, EntryInfo> {
         val map = mutableMapOf<String, EntryInfo>()
-        val root = EntryInfo(archiveHolder.archive.pboPrefix!!, true, DEFAULT_LENGTH, DEFAULT_TIMESTAMP, null)
+        val root = createRootEntry()
         map[archiveHolder.archive.pboPrefix!!] = root
-        archiveHolder.archiveItems.forEach {
-            map[it.fileName] = EntryInfo(it.fileName, false, it.blockLength, myFileStamp, root)
+        archiveHolder.entries.forEach {
+            var name = it.fileName
+            var count = 1
+            while (map.containsKey(name)) {
+                name = "${it.fileName.substringBeforeLast(".")}$count.${it.fileName.substringAfterLast(".")}"
+                count++
+            }
+            map[name] = EntryInfo(name, false, it.blockLength, myFileStamp, root)
         }
         return map
     }
 
     override fun contentsToByteArray(relativePath: String): ByteArray {
+
         return byteArrayOf() //TODO
     }
 
