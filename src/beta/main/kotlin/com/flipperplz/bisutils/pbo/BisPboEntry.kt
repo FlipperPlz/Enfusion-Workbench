@@ -71,7 +71,7 @@ sealed class BisPboEntry<T> protected constructor(
     ) {
 
         val compressed: Boolean
-            get() = originalSize != 0 && originalSize == packedSize
+            get() = if(originalSize == 0) false else originalSize != packedSize
 
         override var blockLength: Long = packedSize.toLong()
 
