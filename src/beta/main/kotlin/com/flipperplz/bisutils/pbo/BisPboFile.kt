@@ -1,6 +1,6 @@
 package com.flipperplz.bisutils.pbo
 
-import com.flipperplz.bisutils.pbo.misc.BisPboProperty
+import com.flipperplz.bisutils.BisPboManager
 import com.flipperplz.bisutils.utils.BisRandomAccessFile
 import com.google.common.cache.CacheBuilder
 import java.io.File
@@ -79,5 +79,6 @@ class BisPboFile private constructor() : AutoCloseable {
 
     override fun close() {
         dataCache.cleanUp()
+        BisPboManager.releasePbo(this)
     }
 }

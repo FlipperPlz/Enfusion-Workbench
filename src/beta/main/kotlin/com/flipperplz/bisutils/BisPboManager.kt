@@ -1,7 +1,7 @@
-package com.flipperplz.bisutils.pbo
+package com.flipperplz.bisutils
 
+import com.flipperplz.bisutils.pbo.BisPboFile
 import com.flipperplz.bisutils.utils.BisRandomAccessFile
-import org.apache.pdfbox.io.RandomAccessFile
 import java.nio.channels.FileChannel
 
 object BisPboManager {

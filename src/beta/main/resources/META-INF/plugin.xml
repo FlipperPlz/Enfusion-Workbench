@@ -24,6 +24,14 @@
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
     <depends>com.intellij.modules.platform</depends>
 
+    <actions>
+        <action
+            class="com.flipperplz.enfusionWorkbench.actions.ArchiveTestAction"
+            description="Test Archive"
+            text="Test Archive"
+        />
+    </actions>
+
     <extensions defaultExtensionNs="com.intellij">
 <!--        <notificationGroup-->
 <!--            displayType="BALLOON"-->
@@ -44,6 +52,7 @@
             language="Param"
             implementationClass="com.flipperplz.enfusionWorkbench.languages.param.highlighting.ParamSyntaxHighlighterFactory"
         />
+
 
         <localInspection
             implementationClass="com.flipperplz.enfusionWorkbench.languages.param.inspections.errors.textures.ParamIncorrectPowerInspection"
