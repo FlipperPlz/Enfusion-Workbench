@@ -1,4 +1,4 @@
-package com.flipperplz.enfusionWorkbench.vfs.param
+package com.flipperplz.enfusionWorkbench.vfs.paramfile.param
 
 import com.flipperplz.enfusionWorkbench.psi.EnfusionLanguageFileType
 import com.flipperplz.enfusionWorkbench.psi.languages.param.ParamLanguage

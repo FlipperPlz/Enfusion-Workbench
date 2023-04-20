@@ -1,7 +1,7 @@
 package com.flipperplz.enfusionWorkbench.psi.languages.param.psi.impl
 
 import com.flipperplz.enfusionWorkbench.psi.EnfusionLanguageFileType
-import com.flipperplz.enfusionWorkbench.vfs.param.ParamFileType
+import com.flipperplz.enfusionWorkbench.vfs.paramfile.param.ParamFileType
 import com.flipperplz.enfusionWorkbench.psi.impl.EnfusionPsiFileImpl
 import com.flipperplz.enfusionWorkbench.psi.languages.param.ParamLanguage
 import com.flipperplz.enfusionWorkbench.psi.languages.param.psi.ParamStatement

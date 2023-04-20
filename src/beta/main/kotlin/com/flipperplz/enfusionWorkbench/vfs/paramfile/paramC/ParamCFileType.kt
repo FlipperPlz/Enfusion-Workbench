@@ -1,10 +1,15 @@
-package com.flipperplz.enfusionWorkbench.vfs.paramC
+package com.flipperplz.enfusionWorkbench.vfs.paramfile.paramC
 
+import com.flipperplz.enfusionWorkbench.psi.languages.param.ParamLanguage
 import com.intellij.icons.AllIcons
-import com.intellij.openapi.fileTypes.FileType
+import com.intellij.openapi.fileTypes.LanguageFileType
 import javax.swing.Icon
 
-class CompiledParamFileType : FileType {
+class ParamCFileType : LanguageFileType(ParamLanguage, true) {
+    companion object {
+        val instance = ParamCFileType()
+    }
+
     override fun getName(): String = "Binarized ParamFile"
 
     override fun getDescription(): String = "A binarized ParamFile"
@@ -13,8 +18,7 @@ class CompiledParamFileType : FileType {
 
     override fun getIcon(): Icon = AllIcons.FileTypes.Config
 
-    override fun isBinary(): Boolean = true
-
     override fun isReadOnly(): Boolean = true
+
 
 }

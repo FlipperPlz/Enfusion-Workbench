@@ -4,13 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95a600cf-338e-4de1-9f0f-d35cc7c98090" name="Changes" comment="fix: Create ParamC FileType">
-      <change afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/sdk/dayz/DayZSdkAdditionalData.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/utils/BisVfsUtils.kt" afterDir="false" />
+    <list default="true" id="95a600cf-338e-4de1-9f0f-d35cc7c98090" name="Changes" comment="feat(DayZ-SDK): Add Master Config And Game Roots To SDKType">
+      <change afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/vfs/paramfile/ParamFileViewProvider.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/vfs/paramfile/ParamFileViewProviderFactory.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/sdk/EnfusionSDKType.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/sdk/dayz/DayZSdkType.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/sdk/dayz/DayZSdkType.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/sdk/reforger/ArmaRFSdkType.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/sdk/reforger/ArmaRFSdkType.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/psi/languages/param/parser/ParamParserDefinition.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/psi/languages/param/parser/ParamParserDefinition.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/psi/languages/param/psi/impl/ParamFileImpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/psi/languages/param/psi/impl/ParamFileImpl.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/vfs/param/ParamFileType.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/vfs/paramfile/param/ParamFileType.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/vfs/paramC/CompiledParamFileType.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/vfs/paramfile/paramC/ParamCFileType.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/beta/main/resources/META-INF/plugin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/resources/META-INF/plugin.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,9 +76,9 @@
       <list>
         <option value="InspectionDescription" />
         <option value="HTML File" />
-        <option value="Kotlin Object" />
         <option value="Kotlin Interface" />
         <option value="Kotlin File" />
+        <option value="Kotlin Object" />
         <option value="Kotlin Class" />
       </list>
     </option>
@@ -109,6 +111,7 @@
     "Repository.Attach.Sources": "false",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "TODO_SCOPE": "All Places",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "master",
     "last_opened_file_path": "C:/Users/developer/Downloads/featpbo__Add_More_Pbo_Stuffs.patch",
@@ -136,14 +139,14 @@
       <recent name="com.flipperplz.enfusionWorkbench.formats.pbo.vfs" />
     </key>
     <key name="MoveKotlinTopLevelDeclarationsDialog.RECENTS_KEY">
+      <recent name="com.flipperplz.enfusionWorkbench.vfs.paramfile" />
       <recent name="com.flipperplz.enfusionWorkbench.vfs.pbo.archive" />
       <recent name="com.flipperplz.enfusionWorkbench.psi" />
       <recent name="com.flipperplz.enfusionWorkbench.vfs.enforce" />
       <recent name="com.flipperplz.enfusionWorkbench.vfs.param" />
-      <recent name="com.flipperplz.bisutils" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.Enfusion-Workbench [jar]">
+  <component name="RunManager" selected="Gradle.Enfusion-Workbench [generateParamParser]">
     <configuration name="Enfusion-Workbench [generateEnforceLexer]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -256,9 +259,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.Enfusion-Workbench [generateParamParser]" />
         <item itemvalue="Gradle.Enfusion-Workbench [jar]" />
         <item itemvalue="Gradle.Enfusion-Workbench [generateEnforceParser]" />
-        <item itemvalue="Gradle.Enfusion-Workbench [generateParamParser]" />
         <item itemvalue="Gradle.Enfusion-Workbench [generateParamLexer]" />
         <item itemvalue="Gradle.Enfusion-Workbench [generateEnforceLexer]" />
       </list>
@@ -282,7 +285,8 @@
       <workItem from="1681843059423" duration="15010000" />
       <workItem from="1681868131113" duration="1489000" />
       <workItem from="1681903144859" duration="4625000" />
-      <workItem from="1681909128437" duration="23824000" />
+      <workItem from="1681909128437" duration="24521000" />
+      <workItem from="1681989753607" duration="5102000" />
     </task>
     <task id="LOCAL-00001" summary="feat(param): Add mixins for ParameterStatements and Identifiers">
       <created>1681403215238</created>
@@ -424,7 +428,14 @@
       <option name="project" value="LOCAL" />
       <updated>1681943633461</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="feat(DayZ-SDK): Add Master Config And Game Roots To SDKType">
+      <created>1681956657183</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1681956657183</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -473,7 +484,8 @@
     <MESSAGE value="feat(sdk): Start Working On DayZ SDK" />
     <MESSAGE value="fix: Move Generated Code To Correct Output" />
     <MESSAGE value="fix: Create ParamC FileType" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: Create ParamC FileType" />
+    <MESSAGE value="feat(DayZ-SDK): Add Master Config And Game Roots To SDKType" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(DayZ-SDK): Add Master Config And Game Roots To SDKType" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
