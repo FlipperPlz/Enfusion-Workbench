@@ -4,11 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95a600cf-338e-4de1-9f0f-d35cc7c98090" name="Changes" comment="feat(sdk): Start Working On DayZ SDK">
+    <list default="true" id="95a600cf-338e-4de1-9f0f-d35cc7c98090" name="Changes" comment="fix: Create ParamC FileType">
+      <change afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/sdk/dayz/DayZSdkAdditionalData.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/utils/BisVfsUtils.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/grammars/param/Param.flex" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/grammars/param/Param.flex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/psi/languages/param/lexer/ParamLexerAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/psi/languages/param/lexer/ParamLexerAdapter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/sdk/EnfusionSDKType.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/sdk/dayz/DayZSdkType.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/sdk/dayz/DayZSdkType.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/sdk/reforger/ArmaRFSdkType.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/sdk/reforger/ArmaRFSdkType.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,6 +83,7 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="LogFilters">
     <option name="FILTER_ERRORS" value="false" />
@@ -116,7 +119,7 @@
     "nodejs_package_manager_path": "npm",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
+    "project.structure.side.proportion": "0.09689921",
     "settings.editor.selected.configurable": "inlay.hints",
     "vue.rearranger.settings.migration": "true"
   }
@@ -279,7 +282,7 @@
       <workItem from="1681843059423" duration="15010000" />
       <workItem from="1681868131113" duration="1489000" />
       <workItem from="1681903144859" duration="4625000" />
-      <workItem from="1681909128437" duration="17710000" />
+      <workItem from="1681909128437" duration="23824000" />
     </task>
     <task id="LOCAL-00001" summary="feat(param): Add mixins for ParameterStatements and Identifiers">
       <created>1681403215238</created>
@@ -407,7 +410,21 @@
       <option name="project" value="LOCAL" />
       <updated>1681942063585</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="fix: Move Generated Code To Correct Output">
+      <created>1681943124456</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1681943124456</updated>
+    </task>
+    <task id="LOCAL-00020" summary="fix: Create ParamC FileType">
+      <created>1681943633461</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1681943633461</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -454,7 +471,9 @@
     <MESSAGE value="feat(pbo): More PboHandler Work" />
     <MESSAGE value="feat(pbo): Finish PBO Implementation" />
     <MESSAGE value="feat(sdk): Start Working On DayZ SDK" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat(sdk): Start Working On DayZ SDK" />
+    <MESSAGE value="fix: Move Generated Code To Correct Output" />
+    <MESSAGE value="fix: Create ParamC FileType" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: Create ParamC FileType" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -476,6 +495,11 @@
           <url>file://$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/actions/ArchiveTestAction.kt</url>
           <line>20</line>
           <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="kotlin-line">
+          <url>jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.idea/ideaIC/2022.3.3/a7704187ab9f0db516789b5ff236d96dcf6c6e6a/ideaIC-2022.3.3-sources.jar!/com/intellij/ui/tabs/FileColorsConfigurable.kt</url>
+          <line>159</line>
+          <option name="timeStamp" value="12" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

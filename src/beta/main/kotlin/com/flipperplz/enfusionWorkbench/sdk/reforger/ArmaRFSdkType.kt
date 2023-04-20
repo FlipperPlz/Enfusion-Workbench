@@ -1,18 +1,13 @@
 package com.flipperplz.enfusionWorkbench.sdk.reforger
 
-import com.flipperplz.enfusionWorkbench.sdk.EnfusionSDKType
 import com.intellij.openapi.projectRoots.AdditionalDataConfigurable
 import com.intellij.openapi.projectRoots.SdkAdditionalData
 import com.intellij.openapi.projectRoots.SdkModel
 import com.intellij.openapi.projectRoots.SdkModificator
+import com.intellij.openapi.projectRoots.SdkType
 import org.jdom.Element
 
-class ArmaRFSdkType : EnfusionSDKType(
-    gameName = "Arma: Reforger",
-    steamGameId = 1874880,
-    steamServerId = 1874900,
-    steamToolsId = 1874910
-) {
+class ArmaRFSdkType : SdkType("Arma Reforger"){
     override fun saveAdditionalData(additionalData: SdkAdditionalData, additional: Element) {
         TODO("Not yet implemented")
     }
