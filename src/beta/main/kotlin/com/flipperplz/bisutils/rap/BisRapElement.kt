@@ -2,6 +2,19 @@ package com.flipperplz.bisutils.rap
 
 typealias BisRapArrayElement = BisRapElement.BisRapLiteral<*>
 typealias BisRapParameterValue = BisRapElement.BisRapLiteral.BisRapParameterValue<*>
+typealias BisRapStringLiteral = BisRapElement.BisRapLiteral.BisRapParameterValue.BisRapString
+typealias BisRapIntegerLiteral = BisRapElement.BisRapLiteral.BisRapParameterValue.BisRapNumeric.BisRapInteger
+typealias BisRapFloatLiteral = BisRapElement.BisRapLiteral.BisRapParameterValue.BisRapNumeric.BisRapFloat
+typealias BisRapDoubleLiteral = BisRapElement.BisRapLiteral.BisRapParameterValue.BisRapNumeric.BisRapDouble
+typealias BisRapArrayLiteral = BisRapElement.BisRapLiteral.BisRapArray
+typealias BisRapClassStatement = BisRapElement.BisRapStatement.BisRapBaseClassStatement.BisRapRegularClassStatement
+typealias BisRapExternalClassStatement = BisRapElement.BisRapStatement.BisRapBaseClassStatement.BisRapExternalClassStatement
+typealias BisRapDeleteStatement = BisRapElement.BisRapStatement.BisRapDeleteStatement
+typealias BisRapParameterStatement = BisRapElement.BisRapStatement.BisRapTokenStatement.BisRapValueAssignStatement
+typealias BisRapArrayStatement = BisRapElement.BisRapStatement.BisRapTokenStatement.BisRapArrayStatementBase.BisRapArrayAssignStatement
+typealias BisRapArrayAddStatement = BisRapElement.BisRapStatement.BisRapTokenStatement.BisRapArrayStatementBase.BisRapArrayAddStatement
+typealias BisRapArraySubtractStatement = BisRapElement.BisRapStatement.BisRapTokenStatement.BisRapArrayStatementBase.BisRapArrayAssignStatement
+typealias BisRapFile = BisRapElement.BisRapFile
 
 sealed interface BisRapElement {
     val parentElement: BisRapElement?
@@ -25,14 +38,14 @@ sealed interface BisRapElement {
     }
 
     sealed class BisRapStatement(override val parentElement: BisRapElement?) : BisRapElement {
-        sealed class BisRapClassStatement(parentElement: BisRapElement?, val classname: String) : BisRapStatement(parentElement) {
+        sealed class BisRapBaseClassStatement(parentElement: BisRapElement?, val classname: String) : BisRapStatement(parentElement) {
             class BisRapExternalClassStatement(
                 parentElement: BisRapElement?, classname: String
-            ) : BisRapClassStatement(parentElement, classname)
+            ) : BisRapBaseClassStatement(parentElement, classname)
 
             class BisRapRegularClassStatement(
                 parentElement: BisRapElement?, classname: String, val superclass: String, override val statements: List<BisRapStatement>
-            ) : BisRapClassStatement(parentElement, classname), BisRapStatementHolder
+            ) : BisRapBaseClassStatement(parentElement, classname), BisRapStatementHolder
         }
 
         sealed class BisRapTokenStatement<T : BisRapLiteral<*>>(parentElement: BisRapElement?, val tokenName: String, val tokenValue: T) : BisRapStatement(parentElement) {

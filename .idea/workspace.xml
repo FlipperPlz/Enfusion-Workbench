@@ -4,14 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95a600cf-338e-4de1-9f0f-d35cc7c98090" name="Changes" comment="feat(DayZ-SDK): Add Master Config And Game Roots To SDKType">
-      <change afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/vfs/paramfile/ParamFileViewProvider.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/vfs/paramfile/ParamFileViewProviderFactory.kt" afterDir="false" />
+    <list default="true" id="95a600cf-338e-4de1-9f0f-d35cc7c98090" name="Changes" comment="feat(rap): Rewrite/Minimize Rap Structure">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/bisutils/rap/io/BisRapInputStream.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/psi/languages/param/parser/ParamParserDefinition.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/psi/languages/param/parser/ParamParserDefinition.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/psi/languages/param/psi/impl/ParamFileImpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/psi/languages/param/psi/impl/ParamFileImpl.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/vfs/param/ParamFileType.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/vfs/paramfile/param/ParamFileType.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/vfs/paramC/CompiledParamFileType.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/vfs/paramfile/paramC/ParamCFileType.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/bisutils/rap/BisRapElement.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/bisutils/rap/BisRapElement.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/beta/main/resources/META-INF/plugin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/resources/META-INF/plugin.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -111,6 +108,7 @@
     "Repository.Attach.Sources": "false",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "TODO_SCOPE": "All Places",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "master",
@@ -146,7 +144,7 @@
       <recent name="com.flipperplz.enfusionWorkbench.vfs.param" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.Enfusion-Workbench [generateParamParser]">
+  <component name="RunManager" selected="Gradle.Enfusion-Workbench [jar]">
     <configuration name="Enfusion-Workbench [generateEnforceLexer]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -259,8 +257,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.Enfusion-Workbench [generateParamParser]" />
         <item itemvalue="Gradle.Enfusion-Workbench [jar]" />
+        <item itemvalue="Gradle.Enfusion-Workbench [generateParamParser]" />
         <item itemvalue="Gradle.Enfusion-Workbench [generateEnforceParser]" />
         <item itemvalue="Gradle.Enfusion-Workbench [generateParamLexer]" />
         <item itemvalue="Gradle.Enfusion-Workbench [generateEnforceLexer]" />
@@ -287,6 +285,7 @@
       <workItem from="1681903144859" duration="4625000" />
       <workItem from="1681909128437" duration="24521000" />
       <workItem from="1681989753607" duration="5102000" />
+      <workItem from="1682017174177" duration="5738000" />
     </task>
     <task id="LOCAL-00001" summary="feat(param): Add mixins for ParameterStatements and Identifiers">
       <created>1681403215238</created>
@@ -435,7 +434,14 @@
       <option name="project" value="LOCAL" />
       <updated>1681956657183</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="feat(rap): Rewrite/Minimize Rap Structure">
+      <created>1682020464750</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1682020464750</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -485,7 +491,8 @@
     <MESSAGE value="fix: Move Generated Code To Correct Output" />
     <MESSAGE value="fix: Create ParamC FileType" />
     <MESSAGE value="feat(DayZ-SDK): Add Master Config And Game Roots To SDKType" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat(DayZ-SDK): Add Master Config And Game Roots To SDKType" />
+    <MESSAGE value="feat(rap): Rewrite/Minimize Rap Structure" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(rap): Rewrite/Minimize Rap Structure" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

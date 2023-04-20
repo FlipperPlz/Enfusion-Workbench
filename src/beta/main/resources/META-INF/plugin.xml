@@ -83,7 +83,6 @@
             physical="true"
         />
 
-
         <localInspection
             implementationClass="com.flipperplz.enfusionWorkbench.psi.languages.param.inspections.errors.textures.ParamIncorrectPowerInspection"
             groupName="Param"
