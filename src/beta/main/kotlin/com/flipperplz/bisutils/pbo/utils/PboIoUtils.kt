@@ -1,7 +1,7 @@
 package com.flipperplz.bisutils.pbo.utils
 
 import com.flipperplz.bisutils.pbo.misc.BisPboProperty
-import com.flipperplz.bisutils.utils.readAsciiZ
+import com.flipperplz.bisutils.utils.getAsciiZ
 import java.io.RandomAccessFile
 
 
@@ -20,8 +20,8 @@ fun RandomAccessFile.readPboProperties(offset: Long = 0, keepRaw: Boolean): List
     val properties = mutableListOf<BisPboProperty>()
 
     var propertyName: String
-    while (readAsciiZ().also { propertyName = it }.isNotEmpty()) {
-        val propertyValue: String = readAsciiZ()
+    while (getAsciiZ().also { propertyName = it }.isNotEmpty()) {
+        val propertyValue: String = getAsciiZ()
         if(!keepRaw && (propertyName != "prefix" && propertyName != "name" && propertyName != "version" && propertyName == "obfuscated")) continue
         properties.add(BisPboProperty(propertyName, propertyValue))
     }

@@ -89,7 +89,7 @@ sealed class BisPboEntry<T> protected constructor(
 
         companion object {
             fun parse(pboFile: BisPboFile, file: BisRandomAccessFile, entryName: String? = null, keepRaw: Boolean = true): BisPboDataEntry? {
-                val parsedName = entryName ?: file.readAsciiZ()
+                val parsedName = entryName ?: file.getAsciiZ()
                 val metadataStart = if(entryName != null) (file.filePointer - entryName.asciiZLength()) else file.filePointer
                 val mimeType = EntryMimeType.fromMime(file.readInt32()) ?: return null
                 val originalSize = abs(file.readInt32())

@@ -4,12 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95a600cf-338e-4de1-9f0f-d35cc7c98090" name="Changes" comment="feat(rap): Rewrite/Minimize Rap Structure">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/bisutils/rap/io/BisRapInputStream.kt" afterDir="false" />
+    <list default="true" id="95a600cf-338e-4de1-9f0f-d35cc7c98090" name="Changes" comment="feat(rap): Add Rap Text Writer And Beautifier">
+      <change afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/bisutils/rap/io/RapFormatType.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/bisutils/pbo/BisPboEntry.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/bisutils/pbo/BisPboEntry.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/bisutils/pbo/utils/PboIoUtils.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/bisutils/pbo/utils/PboIoUtils.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/bisutils/rap/BisRapElement.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/bisutils/rap/BisRapElement.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/resources/META-INF/plugin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/resources/META-INF/plugin.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/bisutils/rap/io/BisRapDebinarizer.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/bisutils/rap/io/BisRapDebinarizer.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/bisutils/utils/RandomAccessFileUtils.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/bisutils/utils/RandomAccessFileUtils.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -285,7 +287,7 @@
       <workItem from="1681903144859" duration="4625000" />
       <workItem from="1681909128437" duration="24521000" />
       <workItem from="1681989753607" duration="5102000" />
-      <workItem from="1682017174177" duration="5738000" />
+      <workItem from="1682017174177" duration="14947000" />
     </task>
     <task id="LOCAL-00001" summary="feat(param): Add mixins for ParameterStatements and Identifiers">
       <created>1681403215238</created>
@@ -441,7 +443,21 @@
       <option name="project" value="LOCAL" />
       <updated>1682020464750</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="feat(rap): Add Aliases And IO Structure">
+      <created>1682023120408</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1682023120408</updated>
+    </task>
+    <task id="LOCAL-00024" summary="feat(rap): Add Rap Text Writer And Beautifier">
+      <created>1682026510273</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1682026510273</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -492,7 +508,9 @@
     <MESSAGE value="fix: Create ParamC FileType" />
     <MESSAGE value="feat(DayZ-SDK): Add Master Config And Game Roots To SDKType" />
     <MESSAGE value="feat(rap): Rewrite/Minimize Rap Structure" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat(rap): Rewrite/Minimize Rap Structure" />
+    <MESSAGE value="feat(rap): Add Aliases And IO Structure" />
+    <MESSAGE value="feat(rap): Add Rap Text Writer And Beautifier" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(rap): Add Rap Text Writer And Beautifier" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

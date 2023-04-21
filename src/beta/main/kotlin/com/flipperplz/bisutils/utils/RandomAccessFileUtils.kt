@@ -6,7 +6,7 @@ import java.nio.ByteBuffer
 import java.nio.ByteOrder
 import java.nio.charset.Charset
 
-fun RandomAccessFile.readAsciiZ(charset: Charset = Charsets.UTF_8): String = generateSequence { read() }
+fun RandomAccessFile.getAsciiZ(charset: Charset = Charsets.UTF_8): String = generateSequence { read() }
     .takeWhile { Char(it) != '\u0000' }
     .toList()
     .map { it.toByte()}
@@ -30,7 +30,7 @@ fun RandomAccessFile.readBytes(count: Int): ByteArray = ByteArray(count).also { 
 
 fun RandomAccessFile.peekAsciiZ(offset: Int): String {
     skipBytes(offset)
-    return readAsciiZ().also { seek(filePointer - (offset + it.length + 1)) }
+    return getAsciiZ().also { seek(filePointer - (offset + it.length + 1)) }
 }
 
 fun RandomAccessFile.peekBytes(count: Int, offset: Int): ByteArray {
@@ -43,7 +43,7 @@ fun RandomAccessFile.peekBytes(count: Int, offset: Int): ByteArray {
 fun RandomAccessFile.readInt32(endianness: ByteOrder = ByteOrder.LITTLE_ENDIAN): Int = ByteBuffer.wrap(readBytes(4)).order(endianness).int
 
 fun RandomAccessFile.peekInt(): Int = readInt32().also { popInt() }
-fun RandomAccessFile.peekAsciiZ(): String = readAsciiZ().also { seek(filePointer - (it.length + 1)) }
+fun RandomAccessFile.peekAsciiZ(): String = getAsciiZ().also { seek(filePointer - (it.length + 1)) }
 
 fun RandomAccessFile.readBisLZSS(expectedSize: Int, useSignedChecksum: Boolean = true): ByteArray {
     val N = 4096
@@ -127,3 +127,37 @@ fun String.asciiZLength(): Int = length + 1
 fun DoubleArray.isArrayOfZeros(): Boolean = all { it.toDouble() == 0.0 }
 
 fun ByteArray.isArrayOfZeros(): Boolean = all { it == 0.toByte() }
+
+fun ByteBuffer.getAsciiZ(charset: Charset = Charsets.UTF_8): String {
+    val builder = StringBuilder()
+    val decoder = charset.newDecoder()
+    val terminator = ByteBuffer.allocate(1).put(0).flip()
+    while (this.hasRemaining()) {
+        val buffer = ByteBuffer.allocate(1)
+        while (this.remaining() > 0 && this.compareTo(terminator) != 0) {
+            buffer.put(this.get())
+        }
+        buffer.flip()
+        val decoded: String = decoder.decode(buffer).toString()
+        if (this.remaining() > 0) {
+            this.get() // Consume the null terminator
+        }
+        if (decoded.isEmpty()) {
+            break
+        }
+        builder.append(decoded)
+    }
+    return builder.toString()
+}
+
+fun ByteBuffer.getCompactInt(): Int {
+    var value = 0
+    for (i in 0..4) {
+        val v = get().toInt() and 0xFF
+        value = value or ((v and 0x7F) shl (7 * i))
+        if ((v and 0x80) == 0) {
+            break
+        }
+    }
+    return value
+}
