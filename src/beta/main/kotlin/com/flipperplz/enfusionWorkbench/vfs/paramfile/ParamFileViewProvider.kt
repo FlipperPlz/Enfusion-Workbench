@@ -1,5 +1,8 @@
 package com.flipperplz.enfusionWorkbench.vfs.paramfile
 
+import com.flipperplz.bisutils.rap.io.BisRapDebinarizer
+import com.flipperplz.bisutils.rap.io.BisRapWriter
+import com.flipperplz.bisutils.rap.io.formatting.BisRapBeautifier
 import com.flipperplz.enfusionWorkbench.psi.languages.param.ParamLanguage
 import com.flipperplz.enfusionWorkbench.psi.languages.param.psi.impl.ParamFileImpl
 import com.flipperplz.enfusionWorkbench.vfs.paramfile.paramC.ParamCFileType
@@ -28,7 +31,7 @@ class ParamFileViewProvider(
             if(b[0] == 0.toByte() && b[1] == 'r'.toByte() && b[2] == 'a'.toByte()&& b[3] == 'P'.toByte()) {
                 return PsiFileFactory.getInstance(manager.project).createFileFromText(
                     "binarizedCfg",
-                    ParamCFileType as FileType,
+                    ParamLanguage,
                     createStreamFromBinarizedParamFile(stream)
                 )
             }
@@ -37,8 +40,6 @@ class ParamFileViewProvider(
         return super.createFile(lang)
     }
 
-    private fun createStreamFromBinarizedParamFile(binarizedStream: InputStream): CharSequence {
-        //... binary to text
-        TODO()
-    }
+    private fun createStreamFromBinarizedParamFile(binarizedStream: InputStream): CharSequence =
+        BisRapWriter.toString(BisRapDebinarizer.debinarizeFile(binarizedStream)!!)
 }
