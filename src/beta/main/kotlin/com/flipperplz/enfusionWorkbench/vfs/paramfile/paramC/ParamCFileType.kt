@@ -5,7 +5,7 @@ import com.intellij.icons.AllIcons
 import com.intellij.openapi.fileTypes.LanguageFileType
 import javax.swing.Icon
 
-class ParamCFileType : LanguageFileType(ParamLanguage, true) {
+class ParamCFileType :  LanguageFileType(ParamLanguage, true) {
     companion object {
         val instance = ParamCFileType()
     }
@@ -19,6 +19,4 @@ class ParamCFileType : LanguageFileType(ParamLanguage, true) {
     override fun getIcon(): Icon = AllIcons.FileTypes.Config
 
     override fun isReadOnly(): Boolean = true
-
-
 }

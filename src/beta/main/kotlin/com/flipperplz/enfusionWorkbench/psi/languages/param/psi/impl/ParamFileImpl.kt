@@ -7,6 +7,8 @@ import com.flipperplz.enfusionWorkbench.psi.languages.param.ParamLanguage
 import com.flipperplz.enfusionWorkbench.psi.languages.param.psi.ParamStatement
 import com.flipperplz.enfusionWorkbench.psi.languages.param.psi.interfaces.ParamPsiStatementScope
 import com.flipperplz.enfusionWorkbench.psi.languages.param.psi.mixins.ParamNonBinaraizableMixin
+import com.flipperplz.enfusionWorkbench.vfs.paramfile.paramC.ParamCFileType
+import com.intellij.openapi.fileTypes.FileType
 import com.intellij.psi.FileViewProvider
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiElementVisitor
@@ -14,8 +16,10 @@ import com.intellij.psi.util.childrenOfType
 
 class ParamFileImpl(
     viewProvider: FileViewProvider,
-    override val isExternal: Boolean = false
+    override val isExternal: Boolean = false,
+    val isBinarizedFile: Boolean = false
 ) : EnfusionPsiFileImpl(viewProvider, ParamLanguage), ParamPsiStatementScope {
+    override fun getFileType(): FileType = if(isBinarizedFile) ParamCFileType.instance else ParamFileType.instance
 
     override val enfusionFileType: EnfusionLanguageFileType = ParamFileType.instance
     override val statements: List<ParamStatement> get() = childrenOfType<ParamStatement>()

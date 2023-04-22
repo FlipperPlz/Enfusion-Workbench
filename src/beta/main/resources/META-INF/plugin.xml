@@ -45,18 +45,14 @@
             name="ParamC"
             implementationClass="com.flipperplz.enfusionWorkbench.vfs.paramfile.paramC.ParamCFileType"
             language="Param"
-            fileNamesCaseInsensitive=""
-            extensions=""
+            fileNamesCaseInsensitive="config.bin"
+            extensions="rvmat;cpp"
         />
 
-        <fileType.fileViewProviderFactory
-                filetype="Param"
-                implementationClass="com.flipperplz.enfusionWorkbench.vfs.paramfile.ParamFileViewProviderFactory"
-        />
+        <lang.fileViewProviderFactory
+            language="Param"
 
-        <fileType.fileViewProviderFactory
-                filetype="ParamC"
-                implementationClass="com.flipperplz.enfusionWorkbench.vfs.paramfile.ParamFileViewProviderFactory"
+            implementationClass="com.flipperplz.enfusionWorkbench.vfs.paramfile.ParamFileViewProviderFactory"
         />
 
         <fileType
@@ -64,8 +60,6 @@
                 implementationClass="com.flipperplz.enfusionWorkbench.vfs.pbo.PboFileType"
                 extensions="pbo;ebo;xbo;ifa"
         />
-
-
 
         <lang.parserDefinition
             language="Param"
