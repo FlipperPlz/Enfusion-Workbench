@@ -37,8 +37,8 @@
             name="Param"
             implementationClass="com.flipperplz.enfusionWorkbench.vfs.paramfile.param.ParamFileType"
             language="Param"
-            fileNamesCaseInsensitive="config.cpp"
-            extensions="cpp;rvmat"
+            fileNamesCaseInsensitive=""
+            extensions=""
         />
 
         <fileType
@@ -51,7 +51,6 @@
 
         <lang.fileViewProviderFactory
             language="Param"
-
             implementationClass="com.flipperplz.enfusionWorkbench.vfs.paramfile.ParamFileViewProviderFactory"
         />
 
@@ -91,6 +90,7 @@
             groupName="Param"
             level="ERROR"
             language="Param"
+            shortName="ParamIncorrectFormat"
             displayName="ParamIncorrectFormat"
             enabledByDefault="true"
         />

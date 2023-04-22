@@ -8,6 +8,11 @@ import com.intellij.openapi.vfs.VirtualFile
 
 fun BisRapDebinarizer.debinarizeFile(file: VirtualFile): BisRapFile? {
     val stream = file.inputStream
+
+    if(stream.available() < 4) {
+        stream.close()
+        return null
+    }
     val rap = debinarizeFile(stream);
 
     stream.close()

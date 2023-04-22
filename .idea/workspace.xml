@@ -4,14 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95a600cf-338e-4de1-9f0f-d35cc7c98090" name="Changes" comment="fix: Update ParamFileProvider">
-      <change afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/vfs/paramfile/utils/BisRapDebinarizerUtils.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bisutils" beforeDir="false" afterPath="$PROJECT_DIR$/bisutils" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bisutils/src/main/kotlin/com/flipperplz/bisutils/rap/io/BisRapDebinarizer.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bisutils/src/main/kotlin/com/flipperplz/bisutils/rap/io/BisRapDebinarizer.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/psi/languages/param/psi/impl/ParamFileImpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/psi/languages/param/psi/impl/ParamFileImpl.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/vfs/paramfile/ParamFileViewProvider.kt" beforeDir="false" />
+    <list default="true" id="95a600cf-338e-4de1-9f0f-d35cc7c98090" name="Changes" comment="fix: Regular ParamFiles were broken in the process of adding ParamC; fixed">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/vfs/paramfile/ParamFileViewProviderFactory.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/vfs/paramfile/ParamFileViewProviderFactory.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/vfs/paramfile/paramC/ParamCFileType.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/vfs/paramfile/paramC/ParamCFileType.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/vfs/paramfile/utils/BisRapDebinarizerUtils.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/vfs/paramfile/utils/BisRapDebinarizerUtils.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/beta/main/resources/META-INF/plugin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/resources/META-INF/plugin.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -90,33 +86,33 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultHtmlFileTemplate": "HTML File",
-    "Downloaded.Files.Path.Enabled": "false",
-    "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "false",
-    "Repository.Attach.Sources": "false",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "TODO_SCOPE": "All Places",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "master",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "E:/projects/kotlin/libraries/BisUtils",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.09689921",
-    "settings.editor.selected.configurable": "inlay.hints",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;TODO_SCOPE&quot;: &quot;All Places&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;E:/projects/kotlin/libraries/BisUtils&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.09689921&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;inlay.hints&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="E:\projects\kotlin\intellij-plugins\Enfusion-Workbench\src\beta\main\kotlin\com\flipperplz\bisutils\utils" />
@@ -280,7 +276,8 @@
       <workItem from="1682017174177" duration="14947000" />
       <workItem from="1682132101878" duration="1150000" />
       <workItem from="1682134715001" duration="2056000" />
-      <workItem from="1682189849874" duration="5154000" />
+      <workItem from="1682189849874" duration="5365000" />
+      <workItem from="1682205970379" duration="1109000" />
     </task>
     <task id="LOCAL-00001" summary="feat(param): Add mixins for ParameterStatements and Identifiers">
       <created>1681403215238</created>
@@ -464,7 +461,21 @@
       <option name="project" value="LOCAL" />
       <updated>1682191388833</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="fix: Regular ParamFiles were broken in the process of adding ParamC; fixed">
+      <created>1682195913627</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1682195913627</updated>
+    </task>
+    <task id="LOCAL-00028" summary="fix: Regular ParamFiles were broken in the process of adding ParamC; fixed">
+      <created>1682195957557</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1682195957557</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -493,7 +504,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="feat(param): Neaten Up PSI Structure" />
     <MESSAGE value="feat(param): Add Inspection For Texture Dimensions&#10;&#10;- add extension class ParamPsiUtils" />
     <MESSAGE value="feat(param): Add Inspection For Invalid Texture Format" />
     <MESSAGE value="feat(enforce): Start To Implement Enforce Script" />
@@ -518,7 +528,8 @@
     <MESSAGE value="fix(pbo): Change BisPboDataEntry::filename visibility" />
     <MESSAGE value="chore: Move BisUtils out of project scope" />
     <MESSAGE value="fix: Update ParamFileProvider" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: Update ParamFileProvider" />
+    <MESSAGE value="fix: Regular ParamFiles were broken in the process of adding ParamC; fixed" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: Regular ParamFiles were broken in the process of adding ParamC; fixed" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
