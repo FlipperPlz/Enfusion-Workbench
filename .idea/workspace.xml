@@ -4,9 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95a600cf-338e-4de1-9f0f-d35cc7c98090" name="Changes" comment="chore: Move BisUtils out of project scope">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/vfs/paramfile/ParamFileViewProvider.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/vfs/paramfile/ParamFileViewProvider.kt" afterDir="false" />
+    <list default="true" id="95a600cf-338e-4de1-9f0f-d35cc7c98090" name="Changes" comment="fix: Update ParamFileProvider">
+      <change afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/vfs/paramfile/utils/BisRapDebinarizerUtils.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bisutils" beforeDir="false" afterPath="$PROJECT_DIR$/bisutils" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bisutils/src/main/kotlin/com/flipperplz/bisutils/rap/io/BisRapDebinarizer.kt" beforeDir="false" afterPath="$PROJECT_DIR$/bisutils/src/main/kotlin/com/flipperplz/bisutils/rap/io/BisRapDebinarizer.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/psi/languages/param/psi/impl/ParamFileImpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/psi/languages/param/psi/impl/ParamFileImpl.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/vfs/paramfile/ParamFileViewProvider.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/vfs/paramfile/ParamFileViewProviderFactory.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/vfs/paramfile/ParamFileViewProviderFactory.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/vfs/paramfile/paramC/ParamCFileType.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/vfs/paramfile/paramC/ParamCFileType.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/beta/main/resources/META-INF/plugin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/resources/META-INF/plugin.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,6 +45,12 @@
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="Enfusion-Workbench" type="f1a62948:ProjectNode" />
                 <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Enfusion-Workbench" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="intellij" type="c8890929:TasksNode$1" />
               </path>
             </expand>
             <select />
@@ -124,7 +136,7 @@
       <recent name="com.flipperplz.enfusionWorkbench.vfs.param" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.Enfusion-Workbench [buildPlugin]">
+  <component name="RunManager" selected="Gradle.Run Plugin">
     <configuration name="Enfusion-Workbench [buildPlugin]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -237,9 +249,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.Enfusion-Workbench [buildPlugin]" />
         <item itemvalue="Gradle.Enfusion-Workbench [clean]" />
         <item itemvalue="Gradle.Enfusion-Workbench [jar]" />
-        <item itemvalue="Gradle.Enfusion-Workbench [buildPlugin]" />
         <item itemvalue="Gradle.Enfusion-Workbench [generateParamParser]" />
         <item itemvalue="Gradle.Enfusion-Workbench [generateEnforceParser]" />
       </list>
@@ -268,7 +280,7 @@
       <workItem from="1682017174177" duration="14947000" />
       <workItem from="1682132101878" duration="1150000" />
       <workItem from="1682134715001" duration="2056000" />
-      <workItem from="1682189849874" duration="1510000" />
+      <workItem from="1682189849874" duration="5154000" />
     </task>
     <task id="LOCAL-00001" summary="feat(param): Add mixins for ParameterStatements and Identifiers">
       <created>1681403215238</created>
@@ -445,7 +457,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682134951623</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="fix: Update ParamFileProvider">
+      <created>1682191388833</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1682191388833</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -474,7 +493,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="feat(param): Add mixins for ParamClassStatement&#10;&#10;- ParamFileImpl now extends ParamPsiClass&#10;- All rules with names now implement PsiNameIdentifierOwner either directly or indirectly." />
     <MESSAGE value="feat(param): Neaten Up PSI Structure" />
     <MESSAGE value="feat(param): Add Inspection For Texture Dimensions&#10;&#10;- add extension class ParamPsiUtils" />
     <MESSAGE value="feat(param): Add Inspection For Invalid Texture Format" />
@@ -499,7 +517,8 @@
     <MESSAGE value="feat(rap): Add Rap Text Writer And Beautifier" />
     <MESSAGE value="fix(pbo): Change BisPboDataEntry::filename visibility" />
     <MESSAGE value="chore: Move BisUtils out of project scope" />
-    <option name="LAST_COMMIT_MESSAGE" value="chore: Move BisUtils out of project scope" />
+    <MESSAGE value="fix: Update ParamFileProvider" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: Update ParamFileProvider" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -539,12 +558,5 @@
         <watch expression="this.file." language="kotlin" />
       </configuration>
     </watches-manager>
-  </component>
-  <component name="com.github.lppedd.cc.CommitBuilderDialog">
-    <type>chore</type>
-    <subject>Move BisUtils out of project scope</subject>
-    <footers>
-      <entry type="" value="" />
-    </footers>
   </component>
 </project>
