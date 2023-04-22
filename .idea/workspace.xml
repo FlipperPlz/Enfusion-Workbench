@@ -4,14 +4,27 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95a600cf-338e-4de1-9f0f-d35cc7c98090" name="Changes" comment="feat(rap): Add Rap Text Writer And Beautifier">
-      <change afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/bisutils/rap/io/RapFormatType.kt" afterDir="false" />
+    <list default="true" id="95a600cf-338e-4de1-9f0f-d35cc7c98090" name="Changes" comment="chore: Move BisUtils out of project scope">
+      <change afterPath="$PROJECT_DIR$/.gitmodules" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/bisutils/pbo/BisPboEntry.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/bisutils/pbo/BisPboEntry.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/bisutils/pbo/utils/PboIoUtils.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/bisutils/pbo/utils/PboIoUtils.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/bisutils/rap/BisRapElement.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/bisutils/rap/BisRapElement.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/bisutils/rap/io/BisRapDebinarizer.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/bisutils/rap/io/BisRapDebinarizer.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/bisutils/utils/RandomAccessFileUtils.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/bisutils/utils/RandomAccessFileUtils.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/settings.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/bisutils/BisPboManager.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/bisutils/pbo/BisPboEntry.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/bisutils/pbo/BisPboFile.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/bisutils/pbo/misc/BisPboProperty.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/bisutils/pbo/misc/EntryMimeType.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/bisutils/pbo/utils/PboIoUtils.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/bisutils/rap/BisRapElement.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/bisutils/rap/io/BisRapBeautifier.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/bisutils/rap/io/BisRapDebinarizer.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/bisutils/rap/io/BisRapWriter.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/bisutils/rap/io/RapFormatType.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/bisutils/utils/BisRandomAccessFile.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/bisutils/utils/RandomAccessFileUtils.kt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,18 +63,6 @@
                 <item name="Enfusion-Workbench" type="f1a62948:ProjectNode" />
                 <item name="Tasks" type="e4a08cd1:TasksNode" />
                 <item name="build" type="c8890929:TasksNode$1" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="Enfusion-Workbench" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="grammarkit" type="c8890929:TasksNode$1" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="Enfusion-Workbench" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="intellij" type="c8890929:TasksNode$1" />
               </path>
             </expand>
             <select />
@@ -114,6 +115,7 @@
     "TODO_SCOPE": "All Places",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
     "last_opened_file_path": "C:/Users/developer/Downloads/featpbo__Add_More_Pbo_Stuffs.patch",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -146,8 +148,8 @@
       <recent name="com.flipperplz.enfusionWorkbench.vfs.param" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.Enfusion-Workbench [jar]">
-    <configuration name="Enfusion-Workbench [generateEnforceLexer]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+  <component name="RunManager" selected="Gradle.Run Plugin">
+    <configuration name="Enfusion-Workbench [buildPlugin]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -158,7 +160,29 @@
         </option>
         <option name="taskNames">
           <list>
-            <option value="generateEnforceLexer" />
+            <option value="buildPlugin" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <ForceTestExec>false</ForceTestExec>
+      <method v="2" />
+    </configuration>
+    <configuration name="Enfusion-Workbench [clean]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="clean" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -181,28 +205,6 @@
         <option name="taskNames">
           <list>
             <option value="generateEnforceParser" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <ForceTestExec>false</ForceTestExec>
-      <method v="2" />
-    </configuration>
-    <configuration name="Enfusion-Workbench [generateParamLexer]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="generateParamLexer" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -259,11 +261,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.Enfusion-Workbench [clean]" />
         <item itemvalue="Gradle.Enfusion-Workbench [jar]" />
+        <item itemvalue="Gradle.Enfusion-Workbench [buildPlugin]" />
         <item itemvalue="Gradle.Enfusion-Workbench [generateParamParser]" />
         <item itemvalue="Gradle.Enfusion-Workbench [generateEnforceParser]" />
-        <item itemvalue="Gradle.Enfusion-Workbench [generateParamLexer]" />
-        <item itemvalue="Gradle.Enfusion-Workbench [generateEnforceLexer]" />
       </list>
     </recent_temporary>
   </component>
@@ -288,6 +290,8 @@
       <workItem from="1681909128437" duration="24521000" />
       <workItem from="1681989753607" duration="5102000" />
       <workItem from="1682017174177" duration="14947000" />
+      <workItem from="1682132101878" duration="1150000" />
+      <workItem from="1682134715001" duration="2056000" />
     </task>
     <task id="LOCAL-00001" summary="feat(param): Add mixins for ParameterStatements and Identifiers">
       <created>1681403215238</created>
@@ -457,7 +461,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682026510273</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="fix(pbo): Change BisPboDataEntry::filename visibility">
+      <created>1682134951623</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1682134951623</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -486,7 +497,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="feat(param): Add mixins for ParameterStatements and Identifiers" />
     <MESSAGE value="feat(param): Add mixins for ParamClassStatement&#10;&#10;- ParamFileImpl now extends ParamPsiClass&#10;- All rules with names now implement PsiNameIdentifierOwner either directly or indirectly." />
     <MESSAGE value="feat(param): Neaten Up PSI Structure" />
     <MESSAGE value="feat(param): Add Inspection For Texture Dimensions&#10;&#10;- add extension class ParamPsiUtils" />
@@ -510,7 +520,9 @@
     <MESSAGE value="feat(rap): Rewrite/Minimize Rap Structure" />
     <MESSAGE value="feat(rap): Add Aliases And IO Structure" />
     <MESSAGE value="feat(rap): Add Rap Text Writer And Beautifier" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat(rap): Add Rap Text Writer And Beautifier" />
+    <MESSAGE value="fix(pbo): Change BisPboDataEntry::filename visibility" />
+    <MESSAGE value="chore: Move BisUtils out of project scope" />
+    <option name="LAST_COMMIT_MESSAGE" value="chore: Move BisUtils out of project scope" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -550,5 +562,12 @@
         <watch expression="this.file." language="kotlin" />
       </configuration>
     </watches-manager>
+  </component>
+  <component name="com.github.lppedd.cc.CommitBuilderDialog">
+    <type>chore</type>
+    <subject>Move BisUtils out of project scope</subject>
+    <footers>
+      <entry type="" value="" />
+    </footers>
   </component>
 </project>

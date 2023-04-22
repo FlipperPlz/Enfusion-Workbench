@@ -30,6 +30,7 @@ repositories {
 
 dependencies {
   compileOnly(kotlin("stdlib-jdk8"))
+  implementation(project(":bisutils"))
   implementation("com.code-disaster.steamworks4j:steamworks4j:1.9.0-SNAPSHOT")
   implementation("com.code-disaster.steamworks4j:steamworks4j-server:1.9.0-SNAPSHOT")
 }
@@ -143,6 +144,9 @@ tasks {
     password.set(System.getenv("PRIVATE_KEY_PASSWORD"))
   }
 
+  jar {
+    from(zipTree(project(":bisutils").tasks.getByName("jar").outputs.files.singleFile).asFileTree)
+  }
 
   publishPlugin {
     token.set(System.getenv("PUBLISH_TOKEN"))

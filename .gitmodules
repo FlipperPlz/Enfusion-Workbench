@@ -1,0 +1,3 @@
+[submodule "bisutils"]
+	path = bisutils
+	url = https://github.com/FlipperPlz/bisutils-kt/
