@@ -37,8 +37,8 @@
             name="Param"
             implementationClass="com.flipperplz.enfusionWorkbench.vfs.paramfile.param.ParamFileType"
             language="Param"
-            fileNamesCaseInsensitive=""
-            extensions=""
+            fileNamesCaseInsensitive="config.cpp"
+            extensions="rvmat;cpp"
         />
 
         <fileType
@@ -46,7 +46,7 @@
             implementationClass="com.flipperplz.enfusionWorkbench.vfs.paramfile.paramC.ParamCFileType"
             language="Param"
             fileNamesCaseInsensitive="config.bin"
-            extensions="rvmat;cpp"
+            extensions="bin"
         />
 
         <lang.fileViewProviderFactory

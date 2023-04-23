@@ -10,7 +10,9 @@ class ParamCFileType :  LanguageFileType(ParamLanguage, true) {
         val instance = ParamCFileType()
     }
 
-    override fun getName(): String = "Binarized ParamFile"
+    override fun getName(): String = "ParamC"
+
+    override fun getDisplayName(): String = "ParamC"
 
     override fun getDescription(): String = "A binarized ParamFile"
 

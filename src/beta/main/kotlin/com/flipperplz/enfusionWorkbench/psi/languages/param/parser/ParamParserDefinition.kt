@@ -27,7 +27,6 @@ class ParamParserDefinition : ParserDefinition {
 
     override fun getFileNodeType(): IFileElementType = FILE
 
-
     override fun getWhitespaceTokens(): TokenSet = ParamTokenSets.WHITESPACES
 
     override fun getCommentTokens(): TokenSet = ParamTokenSets.COMMENTS
@@ -36,5 +35,5 @@ class ParamParserDefinition : ParserDefinition {
 
     override fun createElement(node: ASTNode?): PsiElement = ParamTypes.Factory.createElement(node)
 
-    override fun createFile(viewProvider: FileViewProvider): PsiFile = ParamFileImpl(viewProvider)
+    override fun createFile(viewProvider: FileViewProvider): PsiFile = ParamFileImpl(viewProvider, false)
 }

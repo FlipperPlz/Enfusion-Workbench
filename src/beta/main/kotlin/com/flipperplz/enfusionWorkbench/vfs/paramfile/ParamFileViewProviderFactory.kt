@@ -8,6 +8,7 @@ import com.flipperplz.enfusionWorkbench.vfs.paramfile.paramC.ParamCFileType
 import com.flipperplz.enfusionWorkbench.vfs.paramfile.utils.debinarizeFile
 import com.flipperplz.enfusionWorkbench.vfs.paramfile.utils.getContents
 import com.intellij.lang.Language
+import com.intellij.lang.LanguageParserDefinitions
 import com.intellij.openapi.editor.Document
 import com.intellij.openapi.editor.EditorFactory
 import com.intellij.openapi.fileTypes.FileType
@@ -25,13 +26,21 @@ class ParamFileViewProviderFactory : FileViewProviderFactory {
     ): FileViewProvider {
         val project = manager.project;
         val rap = BisRapDebinarizer.debinarizeFile(file)
-        rap?.let {
-            //return PsiFileFactory.getInstance(project).createFileFromText(file.name + ".debin", ParamCFileType.instance, rap.getContents(BisRapBeautifier.NONE) ?: "//error").viewProvider
-        }
-        return object : SingleRootFileViewProvider(manager, file, eventSystemEnabled, language ?: ParamLanguage) {
-            override fun createFile(project: Project, file: VirtualFile, fileType: FileType): PsiFile =
-                ParamFileImpl(viewProvider = this, isExternal = true, isBinarizedFile = false)
-        }
+        val generatedFile = rap?.let {
+            val contents = rap.getContents(BisRapBeautifier.NONE) ?: "//BisUtils Failed To Write BisRapFile"
+            val psiFileFactory = PsiFileFactory.getInstance(project);
+            psiFileFactory.createFileFromText(file.name, ParamCFileType.instance, contents)
+        } ?: return ParamFileViewProvider(manager, file, eventSystemEnabled, file.fileType is ParamCFileType )
+
+
+        return generatedFile.viewProvider
     }
 
+    class ParamFileViewProvider(manager: PsiManager, file: VirtualFile, eventSystemEnabled: Boolean, val binarized: Boolean) : SingleRootFileViewProvider(manager, file, eventSystemEnabled) {
+        override fun createFile(lang: Language): PsiFile = ParamFileImpl(this, binarized)
+
+        override fun createCopy(copy: VirtualFile): SingleRootFileViewProvider {
+            return ParamFileViewProvider(manager, copy, eventSystemEnabled = false, binarized = false)
+        }
+    }
 }

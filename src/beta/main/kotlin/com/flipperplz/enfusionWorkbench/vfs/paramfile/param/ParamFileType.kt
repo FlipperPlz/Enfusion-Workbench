@@ -10,6 +10,8 @@ class ParamFileType : EnfusionLanguageFileType(ParamLanguage) {
         val instance: ParamFileType = ParamFileType();
     }
 
+    override fun getDisplayName(): String = "Param"
+
     override fun getName(): String = "Param"
     override fun getDescription(): String = "A type of configuration file used by Bohemias RV/Enforce engine (Pre-Enfusion)"
     override fun getDefaultExtension(): String = "cpp"
