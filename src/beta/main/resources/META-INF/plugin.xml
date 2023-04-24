@@ -43,6 +43,7 @@
 
         <fileType
             name="ParamC"
+            language="Param"
             implementationClass="com.flipperplz.enfusionWorkbench.vfs.paramfile.paramC.ParamCFileType"
             extensions="bin"
         />
@@ -54,6 +55,11 @@
 
         <fileTypeDetector
             implementation="com.flipperplz.enfusionWorkbench.vfs.paramfile.ParamFileTypeDetector"
+        />
+
+        <lang.fileViewProviderFactory
+            language="Param"
+            implementationClass="com.flipperplz.enfusionWorkbench.vfs.paramfile.ParamFileViewProviderFactory"
         />
 
         <fileType

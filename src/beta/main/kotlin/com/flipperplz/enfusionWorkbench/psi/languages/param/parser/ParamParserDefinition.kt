@@ -5,6 +5,7 @@ import com.flipperplz.enfusionWorkbench.psi.languages.param.lexer.ParamLexerAdap
 import com.flipperplz.enfusionWorkbench.psi.languages.param.psi.ParamFile
 import com.flipperplz.enfusionWorkbench.psi.languages.param.psi.ParamTypes
 import com.flipperplz.enfusionWorkbench.psi.sets.ParamTokenSets
+import com.flipperplz.enfusionWorkbench.vfs.paramfile.paramC.ParamCFileType
 import com.intellij.lang.ASTNode
 import com.intellij.lang.ParserDefinition
 import com.intellij.lang.PsiParser
@@ -35,5 +36,5 @@ class ParamParserDefinition : ParserDefinition {
 
     override fun createElement(node: ASTNode?): PsiElement = ParamTypes.Factory.createElement(node)
 
-    override fun createFile(viewProvider: FileViewProvider): PsiFile = ParamFile(viewProvider)
+    override fun createFile(viewProvider: FileViewProvider): PsiFile = ParamFile(viewProvider, viewProvider.fileType is ParamCFileType)
 }

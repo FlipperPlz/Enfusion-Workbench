@@ -4,14 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95a600cf-338e-4de1-9f0f-d35cc7c98090" name="Changes" comment="fix(paramC): Yet another attempt at fixing ParamC Viewing">
-      <change afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/vfs/paramfile/ParamFileDecompiler.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/vfs/paramfile/ParamFileTypeDetector.kt" afterDir="false" />
+    <list default="true" id="95a600cf-338e-4de1-9f0f-d35cc7c98090" name="Changes" comment="fix(paramC): Switch To filetype.decompiler endpoint.">
+      <change afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/vfs/paramfile/ParamFileViewProviderFactory.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/psi/languages/param/parser/ParamParserDefinition.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/psi/languages/param/parser/ParamParserDefinition.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/psi/languages/param/psi/ParamFile.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/psi/languages/param/psi/ParamFile.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/vfs/paramfile/ParamFileViewProviderFactory.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/vfs/paramfile/utils/BisRapDebinarizerUtils.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/vfs/paramfile/utils/BisRapDebinarizerUtils.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/beta/main/resources/META-INF/plugin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/beta/main/resources/META-INF/plugin.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -292,7 +289,7 @@
       <workItem from="1682134715001" duration="2056000" />
       <workItem from="1682189849874" duration="5365000" />
       <workItem from="1682205970379" duration="11353000" />
-      <workItem from="1682336465488" duration="14525000" />
+      <workItem from="1682336465488" duration="16433000" />
     </task>
     <task id="LOCAL-00001" summary="feat(param): Add mixins for ParameterStatements and Identifiers">
       <created>1681403215238</created>
@@ -511,7 +508,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682348623784</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="fix(paramC): Switch To filetype.decompiler endpoint.">
+      <created>1682356211113</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1682356211113</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -540,7 +544,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="feat(pbo): Start To Implement Pbo Archive Files" />
     <MESSAGE value="feat(pbo): Finish Up BisPboEntry Implementations" />
     <MESSAGE value="fix(pbo): Rename Method getMetadataLength to retrieveMetadataLength" />
     <MESSAGE value="fix(pbo): Fix &quot;All&quot; Bugs In PBO Implementation&#10;&#10;TODO: properties caching not working" />
@@ -565,7 +568,8 @@
     <MESSAGE value="fix: Work still needs to be done on a ViewProvider for ParamC" />
     <MESSAGE value="fix(paramC): ViewProvider Updated So The Logic Makes Sense" />
     <MESSAGE value="fix(paramC): Yet another attempt at fixing ParamC Viewing" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix(paramC): Yet another attempt at fixing ParamC Viewing" />
+    <MESSAGE value="fix(paramC): Switch To filetype.decompiler endpoint." />
+    <option name="LAST_COMMIT_MESSAGE" value="fix(paramC): Switch To filetype.decompiler endpoint." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
