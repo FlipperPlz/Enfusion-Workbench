@@ -48,6 +48,11 @@
             extensions="bin"
         />
 
+        <stubElementTypeHolder
+            class="com.flipperplz.enfusionWorkbench.psi.languages.param.stubs.ParamFileStub"
+            externalIdPrefix="ParStub"
+        />
+
         <filetype.decompiler
             filetype="ParamC"
             implementationClass="com.flipperplz.enfusionWorkbench.vfs.paramfile.ParamFileDecompiler"

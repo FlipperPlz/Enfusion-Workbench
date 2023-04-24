@@ -1,6 +1,5 @@
-package com.flipperplz.enfusionWorkbench.psi.languages.param.psi.required
+package com.flipperplz.enfusionWorkbench.psi.languages.param.psi.elements
 
-import com.flipperplz.enfusionWorkbench.psi.IEnfusionElementType
 import com.flipperplz.enfusionWorkbench.psi.languages.param.ParamLanguage
 import com.intellij.psi.tree.IElementType
 

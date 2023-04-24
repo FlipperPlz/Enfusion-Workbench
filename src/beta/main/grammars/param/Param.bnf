@@ -9,8 +9,8 @@
     psiImplPackage="com.flipperplz.enfusionWorkbench.psi.languages.param.psi.impl"
 
     elementTypeHolderClass="com.flipperplz.enfusionWorkbench.psi.languages.param.psi.ParamTypes"
-    elementTypeClass="com.flipperplz.enfusionWorkbench.psi.languages.param.psi.required.ParamElementType"
-    tokenTypeClass="com.flipperplz.enfusionWorkbench.psi.languages.param.psi.required.ParamTokenType"
+    elementTypeClass="com.flipperplz.enfusionWorkbench.psi.languages.param.psi.elements.ParamElementType"
+    tokenTypeClass="com.flipperplz.enfusionWorkbench.psi.languages.param.psi.elements.ParamTokenType"
 
     tokens = [
         PROCEDURAL_TEXTURE_START = '#';
