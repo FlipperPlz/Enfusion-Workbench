@@ -19,4 +19,6 @@ fun BisRapDebinarizer.debinarizeFile(file: VirtualFile): BisRapFile? {
     return rap
 }
 
+fun BisRapDebinarizer.dumpFile(file: VirtualFile): String? = debinarizeFile(file)?.getContents(BisRapBeautifier.NONE)
+
 fun BisRapFile?.getContents(beautifier: BisRapBeautifier): String? = if(this == null) null else BisRapWriter.toString(this, beautifier)

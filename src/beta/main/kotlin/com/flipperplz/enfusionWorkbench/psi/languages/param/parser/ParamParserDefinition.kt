@@ -35,5 +35,5 @@ class ParamParserDefinition : ParserDefinition {
 
     override fun createElement(node: ASTNode?): PsiElement = ParamTypes.Factory.createElement(node)
 
-    override fun createFile(viewProvider: FileViewProvider): PsiFile = ParamFile(viewProvider, false)
+    override fun createFile(viewProvider: FileViewProvider): PsiFile = ParamFile(viewProvider)
 }

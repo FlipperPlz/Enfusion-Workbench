@@ -45,17 +45,15 @@
             name="ParamC"
             implementationClass="com.flipperplz.enfusionWorkbench.vfs.paramfile.paramC.ParamCFileType"
             extensions="bin"
-            fileNamesCaseInsensitive="config.bin"
         />
 
-        <fileType.fileViewProviderFactory
-                filetype="ParamC"
-                implementationClass="com.flipperplz.enfusionWorkbench.vfs.paramfile.ParamFileViewProviderFactory"
+        <filetype.decompiler
+            filetype="ParamC"
+            implementationClass="com.flipperplz.enfusionWorkbench.vfs.paramfile.ParamFileDecompiler"
         />
 
-        <fileType.fileViewProviderFactory
-                filetype="Param"
-                implementationClass="com.flipperplz.enfusionWorkbench.vfs.paramfile.ParamFileViewProviderFactory"
+        <fileTypeDetector
+            implementation="com.flipperplz.enfusionWorkbench.vfs.paramfile.ParamFileTypeDetector"
         />
 
         <fileType

@@ -7,21 +7,15 @@ import com.flipperplz.enfusionWorkbench.vfs.paramfile.paramC.ParamCFileType
 import com.intellij.extapi.psi.PsiFileBase
 import com.intellij.openapi.fileTypes.FileType
 import com.intellij.psi.FileViewProvider
-import com.intellij.psi.PsiBinaryFile
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
-import com.intellij.psi.impl.PsiManagerImpl
-import com.intellij.psi.impl.file.PsiBinaryFileImpl
 import com.intellij.psi.util.childrenOfType
 
 sealed interface ParamFile : PsiFile, ParamPsiStatementScope {
     val inBinaryContext: Boolean
 
     companion object {
-        operator fun invoke(viewProvider: FileViewProvider, binary: Boolean): ParamFile = when(binary) {
-            true -> ParamBinaryFile(viewProvider)
-            false -> ParamTextFile(viewProvider)
-        }
+        operator fun invoke(viewProvider: FileViewProvider): ParamFile = ParamTextFile(viewProvider)
     }
 
     override val isExternal: Boolean
@@ -38,18 +32,7 @@ sealed interface ParamFile : PsiFile, ParamPsiStatementScope {
     class ParamTextFile(
         viewProvider: FileViewProvider
     ) : PsiFileBase(viewProvider, ParamLanguage), ParamFile {
-        override fun getFileType(): FileType = ParamFileType.instance
+        override fun getFileType(): FileType = if(inBinaryContext) ParamFileType.instance else ParamCFileType.instance
         override val inBinaryContext: Boolean = false
     }
-
-    class ParamBinaryFile(
-        viewProvider: FileViewProvider
-    ) : PsiFileBase(
-        viewProvider,
-        ParamLanguage
-    ), PsiBinaryFile, ParamFile {
-        override val inBinaryContext: Boolean = true
-        override fun getFileType(): FileType = ParamCFileType.instance
-    }
 }
-
