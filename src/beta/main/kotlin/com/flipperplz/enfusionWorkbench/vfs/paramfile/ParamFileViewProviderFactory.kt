@@ -3,18 +3,16 @@ package com.flipperplz.enfusionWorkbench.vfs.paramfile
 import com.flipperplz.bisutils.rap.io.BisRapDebinarizer
 import com.flipperplz.bisutils.rap.io.formatting.BisRapBeautifier
 import com.flipperplz.enfusionWorkbench.psi.languages.param.ParamLanguage
-import com.flipperplz.enfusionWorkbench.psi.languages.param.psi.impl.ParamFileImpl
+import com.flipperplz.enfusionWorkbench.psi.languages.param.psi.ParamFile
+import com.flipperplz.enfusionWorkbench.vfs.paramfile.param.ParamFileType
 import com.flipperplz.enfusionWorkbench.vfs.paramfile.paramC.ParamCFileType
 import com.flipperplz.enfusionWorkbench.vfs.paramfile.utils.debinarizeFile
 import com.flipperplz.enfusionWorkbench.vfs.paramfile.utils.getContents
 import com.intellij.lang.Language
-import com.intellij.lang.LanguageParserDefinitions
-import com.intellij.openapi.editor.Document
-import com.intellij.openapi.editor.EditorFactory
-import com.intellij.openapi.fileTypes.FileType
-import com.intellij.openapi.project.Project
 import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.psi.*
+import com.intellij.testFramework.LightVirtualFile
+
 
 class ParamFileViewProviderFactory : FileViewProviderFactory {
 
@@ -26,18 +24,20 @@ class ParamFileViewProviderFactory : FileViewProviderFactory {
     ): FileViewProvider {
         val project = manager.project;
         val rap = BisRapDebinarizer.debinarizeFile(file)
-        val generatedFile = rap?.let {
+        return rap?.let {
             val contents = rap.getContents(BisRapBeautifier.NONE) ?: "//BisUtils Failed To Write BisRapFile"
             val psiFileFactory = PsiFileFactory.getInstance(project);
-            psiFileFactory.createFileFromText(file.name, ParamCFileType.instance, contents)
-        } ?: return ParamFileViewProvider(manager, file, eventSystemEnabled, file.fileType is ParamCFileType )
+            //instead create a virtual fake file and pass to ParamFileViewProvider
+            val debinarizedFile = LightVirtualFile(file.nameWithoutExtension + ".temp", ParamLanguage, contents)
+            debinarizedFile.originalFile = file
+            debinarizedFile.fileType = ParamCFileType.instance
 
-
-        return generatedFile.viewProvider
+            ParamFileViewProvider(manager, debinarizedFile, eventSystemEnabled, true)
+        } ?: ParamFileViewProvider(manager, file, eventSystemEnabled, false)
     }
 
     class ParamFileViewProvider(manager: PsiManager, file: VirtualFile, eventSystemEnabled: Boolean, val binarized: Boolean) : SingleRootFileViewProvider(manager, file, eventSystemEnabled) {
-        override fun createFile(lang: Language): PsiFile = ParamFileImpl(this, binarized)
+        override fun createFile(lang: Language): PsiFile = ParamFile(this, binarized)
 
         override fun createCopy(copy: VirtualFile): SingleRootFileViewProvider {
             return ParamFileViewProvider(manager, copy, eventSystemEnabled = false, binarized = false)

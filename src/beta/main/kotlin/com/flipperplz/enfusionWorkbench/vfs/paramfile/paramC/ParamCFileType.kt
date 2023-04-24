@@ -2,10 +2,11 @@ package com.flipperplz.enfusionWorkbench.vfs.paramfile.paramC
 
 import com.flipperplz.enfusionWorkbench.psi.languages.param.ParamLanguage
 import com.intellij.icons.AllIcons
+import com.intellij.openapi.fileTypes.FileType
 import com.intellij.openapi.fileTypes.LanguageFileType
 import javax.swing.Icon
 
-class ParamCFileType :  LanguageFileType(ParamLanguage, true) {
+class ParamCFileType :  FileType{
     companion object {
         val instance = ParamCFileType()
     }
@@ -19,6 +20,8 @@ class ParamCFileType :  LanguageFileType(ParamLanguage, true) {
     override fun getDefaultExtension(): String = "bin"
 
     override fun getIcon(): Icon = AllIcons.FileTypes.Config
+
+    override fun isBinary(): Boolean = true
 
     override fun isReadOnly(): Boolean = true
 }

@@ -1,13 +1,11 @@
 package com.flipperplz.enfusionWorkbench.psi.languages.param.psi
 
 import com.flipperplz.enfusionWorkbench.psi.languages.param.ParamLanguage
-import com.flipperplz.enfusionWorkbench.psi.languages.param.psi.impl.ParamFileImpl
 import com.flipperplz.enfusionWorkbench.psi.languages.param.utils.ParamStringType
+import com.flipperplz.enfusionWorkbench.vfs.paramfile.param.ParamFileType
 import com.intellij.openapi.project.Project
 import com.intellij.psi.PsiFile
 import com.intellij.psi.PsiFileFactory
-import com.intellij.psi.tree.IElementType
-import com.intellij.psi.util.childrenOfType
 
 
 object ParamElementFactory {
@@ -21,6 +19,6 @@ object ParamElementFactory {
     fun createNumber(project: Project, number: Number): ParamNumericLiteral =
         createDummyFile(project, "dummyIdentifier=${number};").firstStatementOfType<ParamParameterStatement>()!!.arrayElement as ParamNumericLiteral
 
-    private fun createDummyFile(project: Project, content: String): ParamFileImpl = PsiFileFactory.getInstance(project)
-        .createFileFromText("__dummy-script__.cpp", ParamLanguage, content) as ParamFileImpl
+    private fun createDummyFile(project: Project, content: String): ParamFile = PsiFileFactory.getInstance(project)
+        .createFileFromText("__dummy-script__.cpp", ParamFileType.instance, content) as ParamFile
 }

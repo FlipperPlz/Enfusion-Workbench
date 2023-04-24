@@ -1,10 +1,6 @@
 package com.flipperplz.enfusionWorkbench.psi.languages.param.inspections
 
-import com.flipperplz.enfusionWorkbench.psi.languages.param.psi.ParamClassStatement
-import com.flipperplz.enfusionWorkbench.psi.languages.param.psi.ParamLiteral
-import com.flipperplz.enfusionWorkbench.psi.languages.param.psi.ParamParameterStatement
-import com.flipperplz.enfusionWorkbench.psi.languages.param.psi.ParamVisitor
-import com.flipperplz.enfusionWorkbench.psi.languages.param.psi.impl.ParamFileImpl
+import com.flipperplz.enfusionWorkbench.psi.languages.param.psi.*
 import com.intellij.codeInspection.InspectionManager
 import com.intellij.codeInspection.LocalInspectionTool
 import com.intellij.codeInspection.ProblemDescriptor
@@ -18,7 +14,7 @@ import com.intellij.psi.util.PsiTreeUtil
 abstract class AbstractBaseParamLocalInspectionTool : LocalInspectionTool() {
     companion object {
         private val PROBLEM_ELEMENT_CONDITION: Condition<PsiElement> = instanceOf(
-            ParamFileImpl::class.java,
+            ParamFile::class.java,
             ParamClassStatement::class.java,
             ParamParameterStatement::class.java
         )
@@ -33,7 +29,7 @@ abstract class AbstractBaseParamLocalInspectionTool : LocalInspectionTool() {
      * @return `null` if no problems found or not applicable at file level.
      */
     open fun checkFile(
-        paramFile: ParamFileImpl,
+        paramFile: ParamFile,
         manager: InspectionManager,
         isOnTheFly: Boolean
     ): Array<ProblemDescriptor>? {
@@ -106,7 +102,7 @@ abstract class AbstractBaseParamLocalInspectionTool : LocalInspectionTool() {
     }
 
     final override fun checkFile(file: PsiFile, manager: InspectionManager, isOnTheFly: Boolean): Array<ProblemDescriptor>? {
-        if(file !is ParamFileImpl) return super.checkFile(file, manager, isOnTheFly)
+        if(file !is ParamFile) return super.checkFile(file, manager, isOnTheFly)
         return this.checkFile(file, manager, isOnTheFly)
     }
 
