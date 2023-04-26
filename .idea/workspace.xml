@@ -4,16 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95a600cf-338e-4de1-9f0f-d35cc7c98090" name="Changes" comment="feat: Add ElementTokenType.&#10;&#10;Commit would have been bigger but I think it's time I head to sleep for the night. Looking forward to bringing this branch up to speed tomorrow">
-      <change afterPath="$PROJECT_DIR$/lang/param/src/main/grammars/Param.flex" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/bisutils/languages/param/lexer/ParamLexerAdapter.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/bisutils/languages/param/lexer/ParamTokenSets.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/bisutils/languages/param/parser/ParamParserDefinition.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/bisutils/languages/param/psi/ParamFile.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/bisutils/languages/param/psi/enumerations/ParamStringType.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/bisutils/languages/param/psi/impl/ParamTextFileImpl.kt" afterDir="false" />
+    <list default="true" id="95a600cf-338e-4de1-9f0f-d35cc7c98090" name="Changes" comment="feat(param): Add ParserDefinitions">
+      <change afterPath="$PROJECT_DIR$/idea/main/kotlin/com/flipperplz/enfusionWorkbench/WorkbenchBundle.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/idea/main/kotlin/com/flipperplz/enfusionWorkbench/WorkbenchConstants.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/idea/main/resources/messages/WorkbenchBundle.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/bisutils/languages/param/stubs/ParamFileStub.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/bisutils/languages/param/stubs/impl/ParamFileStubImpl.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/bisutils/languages/param/stubs/types/ParamFileElementType.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/idea/main/resources/META-INF/plugin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/idea/main/resources/META-INF/plugin.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lang/param/src/main/grammars/Param.bnf" beforeDir="false" afterPath="$PROJECT_DIR$/lang/param/src/main/grammars/Param.bnf" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -89,8 +88,8 @@
         <option value="HTML File" />
         <option value="Kotlin File" />
         <option value="Class" />
-        <option value="Kotlin Object" />
         <option value="Kotlin Interface" />
+        <option value="Kotlin Object" />
         <option value="Kotlin Class" />
       </list>
     </option>
@@ -122,36 +121,36 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
-    &quot;JavaClassFindUsagesOptions.isDerivedInterfaces&quot;: &quot;true&quot;,
-    &quot;JavaClassFindUsagesOptions.isImplementingClasses&quot;: &quot;true&quot;,
-    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;TODO_SCOPE&quot;: &quot;All Places&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;rewrite&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;17&quot;,
-    &quot;last_opened_file_path&quot;: &quot;E:/projects/kotlin/intellij-plugins/Enfusion-Workbench/lang/param&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.14457831&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.5&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;inlay.hints&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "Downloaded.Files.Path.Enabled": "false",
+    "JavaClassFindUsagesOptions.isDerivedInterfaces": "true",
+    "JavaClassFindUsagesOptions.isImplementingClasses": "true",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "TODO_SCOPE": "All Places",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "rewrite",
+    "ignore.virus.scanning.warn.message": "true",
+    "jdk.selected.JAVA_MODULE": "17",
+    "last_opened_file_path": "E:/projects/kotlin/intellij-plugins/Enfusion-Workbench/lang/param",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.14457831",
+    "project.structure.side.proportion": "0.5",
+    "settings.editor.selected.configurable": "AtomSelectConfig",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\projects\kotlin\intellij-plugins\Enfusion-Workbench\lang" />
@@ -176,7 +175,7 @@
       <recent name="com.flipperplz.enfusionWorkbench.vfs.enforce" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.Enfusion-Workbench:lang:param [generateLexer]">
+  <component name="RunManager" selected="Gradle.Enfusion-Workbench:lang:param [generateParser]">
     <configuration name="Enfusion-Workbench [buildPlugin]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -289,8 +288,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.Enfusion-Workbench:lang:param [generateLexer]" />
         <item itemvalue="Gradle.Enfusion-Workbench:lang:param [generateParser]" />
+        <item itemvalue="Gradle.Enfusion-Workbench:lang:param [generateLexer]" />
         <item itemvalue="Gradle.Enfusion-Workbench [build]" />
         <item itemvalue="Gradle.Enfusion-Workbench:libs:bisutils [build]" />
         <item itemvalue="Gradle.Enfusion-Workbench [buildPlugin]" />
@@ -325,7 +324,7 @@
       <workItem from="1682336465488" duration="16433000" />
       <workItem from="1682362296559" duration="3362000" />
       <workItem from="1682452674231" duration="5244000" />
-      <workItem from="1682508131462" duration="2446000" />
+      <workItem from="1682508131462" duration="4902000" />
     </task>
     <task id="LOCAL-00001" summary="feat(param): Add mixins for ParameterStatements and Identifiers">
       <created>1681403215238</created>
@@ -565,7 +564,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682475881110</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="feat(param): Add ParserDefinitions">
+      <created>1682510626527</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1682510626527</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -594,7 +600,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fix(pbo): Fix BisPboDataEntry::compressed" />
     <MESSAGE value="fix(pbo): Fix PboProperties Reading" />
     <MESSAGE value="feat(pbo): Add Test Action; Start Working On Idea Implementations" />
     <MESSAGE value="feat(pbo): Start Working On PboHandler&#10;&#10;Made properties in BisPboEntry public (previously protected)" />
@@ -619,7 +624,8 @@
     <MESSAGE value="refactor: Initial Rewrite Commit" />
     <MESSAGE value="feat: Add ParamFileType and slim param grammar&#10;&#10;-fix: jvmToolchain(11) cannot be enabled in tasks.kotlin" />
     <MESSAGE value="feat: Add ElementTokenType.&#10;&#10;Commit would have been bigger but I think it's time I head to sleep for the night. Looking forward to bringing this branch up to speed tomorrow" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: Add ElementTokenType.&#10;&#10;Commit would have been bigger but I think it's time I head to sleep for the night. Looking forward to bringing this branch up to speed tomorrow" />
+    <MESSAGE value="feat(param): Add ParserDefinitions" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(param): Add ParserDefinitions" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

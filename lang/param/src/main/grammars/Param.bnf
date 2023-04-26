@@ -50,13 +50,20 @@
         EOL                      = 'regexp:[\r\n]'
     ]
     generate=[tokenAccessors="yes"]
+
+    extends("statement|directive")=scopedStatement
+    extends("deleteStatement|classStatement|externalClassStatement|parameterStatement|executeStatement")=statement
+    extends("defineDirective|undefineDirective|includeDirective")=directive
+    extends("includeString|lineMacro|fileMacro")=stringLiteral
+    extends("numericLiteral|evaluateMacro|parameterReference|stringLiteral")=literal
 }
 
 file ::= scopedStatement* enumDeclaration?
 
 
-scopedStatement ::= statement SYM_SEMI | directive
+scopedStatement ::= statementWithSemi | directive
 
+private statementWithSemi ::= statement SYM_SEMI {pin=1}
 statement ::= (
     deleteStatement |
     classStatement |
@@ -65,19 +72,19 @@ statement ::= (
     executeStatement
 )
 
-literal ::= {
+literal ::= (
     numericLiteral |
     evaluateMacro |
     parameterReference |
 //    customMacro |
     stringLiteral
-}
+)
 
-directive ::= {
+directive ::= (
     defineDirective |
     undefineDirective |
     includeDirective
-}
+)
 
 lineMacro ::= MACRO_LINE
 fileMacro ::= MACRO_FILE
