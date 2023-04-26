@@ -51,6 +51,11 @@
     ]
     generate=[tokenAccessors="yes"]
 
+    implements("identifier")="com.intellij.psi.PsiNamedElement"
+    mixin("identifier")="com.flipperplz.bisutils.languages.param.psi.mixin.ParamIdentifierMixin"
+
+    implements("classStatement|externalClassStatement")="com.flipperplz.bisutils.languages.param.psi.ParamPsiClassBase"
+
     extends("statement|directive")=scopedStatement
     extends("deleteStatement|classStatement|externalClassStatement|parameterStatement|executeStatement")=statement
     extends("defineDirective|undefineDirective|includeDirective")=directive
