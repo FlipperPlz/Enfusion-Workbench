@@ -88,18 +88,17 @@ evaluateMacro ::= MACRO_EVAL sqfTail {pin=1}
 numericLiteral ::= ABS_NUMERIC
 stringContent ::= proceduralTexture | (STRING_CONTENTS | LOCALIZED_STRING | STRING_ESCAPE)* ;
 includeString ::= (STRING_INCLUDE_START stringContent STRING_INCLUDE_END)
-stringLiteral ::= (STRING_DOUBLE_START stringContent STRING_DOUBLE_END) |
+stringLiteral ::= fileMacro |
+                  lineMacro |
+                  (STRING_DOUBLE_START stringContent STRING_DOUBLE_END) |
                   (STRING_SINGLE_START stringContent STRING_SINGLE_END) |
-                  (STRING_AMBIGUOUS_START stringContent STRING_AMBIGUOUS_END) |
-                  fileMacro |
-                  lineMacro {pin(".*")=1}
+                  (STRING_AMBIGUOUS_START stringContent STRING_AMBIGUOUS_END) {pin(".*")=1}
 
 
 executeStatement ::= MACRO_EXEC sqfTail {pin=1}
 classStatement ::= KW_CLASS identifier [SYM_COLON identifier] SYM_LCURLY statement* SYM_RCURLY {pin(".*")=1}
 externalClassStatement ::= KW_CLASS identifier {pin(".*")=1}
 deleteStatement ::= KW_DELETE identifier {pin=1}
-
 
 parameterStatement ::= identifier (
     (arraySquare arrayOperator arrayLiteral) |

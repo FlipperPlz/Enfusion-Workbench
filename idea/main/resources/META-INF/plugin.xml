@@ -36,5 +36,10 @@
             extensions="rvmat;cpp"
         />
 
+        <lang.parserDefinition
+            language="Param"
+            implementationClass="com.flipperplz.bisutils.languages.param.parser.ParamParserDefinition"
+        />
+
     </extensions>
 </idea-plugin>

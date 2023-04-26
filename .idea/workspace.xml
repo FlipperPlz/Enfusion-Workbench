@@ -4,10 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95a600cf-338e-4de1-9f0f-d35cc7c98090" name="Changes" comment="feat: Add ParamFileType and slim param grammar&#10;&#10;-fix: jvmToolchain(11) cannot be enabled in tasks.kotlin">
-      <change afterPath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/bisutils/languages/param/lexer/ParamTokenType.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/bisutils/languages/param/parser/ParamElementType.kt" afterDir="false" />
+    <list default="true" id="95a600cf-338e-4de1-9f0f-d35cc7c98090" name="Changes" comment="feat: Add ElementTokenType.&#10;&#10;Commit would have been bigger but I think it's time I head to sleep for the night. Looking forward to bringing this branch up to speed tomorrow">
+      <change afterPath="$PROJECT_DIR$/lang/param/src/main/grammars/Param.flex" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/bisutils/languages/param/lexer/ParamLexerAdapter.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/bisutils/languages/param/lexer/ParamTokenSets.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/bisutils/languages/param/parser/ParamParserDefinition.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/bisutils/languages/param/psi/ParamFile.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/bisutils/languages/param/psi/enumerations/ParamStringType.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/bisutils/languages/param/psi/impl/ParamTextFileImpl.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/idea/main/resources/META-INF/plugin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/idea/main/resources/META-INF/plugin.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lang/param/src/main/grammars/Param.bnf" beforeDir="false" afterPath="$PROJECT_DIR$/lang/param/src/main/grammars/Param.bnf" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -33,12 +39,41 @@
         <task path="$PROJECT_DIR$/libs/bisutils">
           <activation />
         </task>
+        <task path="$PROJECT_DIR$/lang/param">
+          <activation />
+        </task>
         <projects_view>
           <tree_state>
             <expand>
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="Enfusion-Workbench" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Enfusion-Workbench" type="f1a62948:ProjectNode" />
+                <item name="lang" type="2d1252cf:ModuleNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Enfusion-Workbench" type="f1a62948:ProjectNode" />
+                <item name="lang" type="2d1252cf:ModuleNode" />
+                <item name="param" type="2d1252cf:ModuleNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Enfusion-Workbench" type="f1a62948:ProjectNode" />
+                <item name="lang" type="2d1252cf:ModuleNode" />
+                <item name="param" type="2d1252cf:ModuleNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Enfusion-Workbench" type="f1a62948:ProjectNode" />
+                <item name="lang" type="2d1252cf:ModuleNode" />
+                <item name="param" type="2d1252cf:ModuleNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="grammarkit" type="c8890929:TasksNode$1" />
               </path>
             </expand>
             <select />
@@ -52,10 +87,10 @@
       <list>
         <option value="InspectionDescription" />
         <option value="HTML File" />
-        <option value="Kotlin Interface" />
         <option value="Kotlin File" />
         <option value="Class" />
         <option value="Kotlin Object" />
+        <option value="Kotlin Interface" />
         <option value="Kotlin Class" />
       </list>
     </option>
@@ -87,36 +122,36 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultHtmlFileTemplate": "HTML File",
-    "Downloaded.Files.Path.Enabled": "false",
-    "JavaClassFindUsagesOptions.isDerivedInterfaces": "true",
-    "JavaClassFindUsagesOptions.isImplementingClasses": "true",
-    "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "false",
-    "Repository.Attach.Sources": "false",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "TODO_SCOPE": "All Places",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "rewrite",
-    "ignore.virus.scanning.warn.message": "true",
-    "jdk.selected.JAVA_MODULE": "17",
-    "last_opened_file_path": "E:/projects/kotlin/intellij-plugins/Enfusion-Workbench/lang/param",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.14457831",
-    "project.structure.side.proportion": "0.5",
-    "settings.editor.selected.configurable": "inlay.hints",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;JavaClassFindUsagesOptions.isDerivedInterfaces&quot;: &quot;true&quot;,
+    &quot;JavaClassFindUsagesOptions.isImplementingClasses&quot;: &quot;true&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;TODO_SCOPE&quot;: &quot;All Places&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;rewrite&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;17&quot;,
+    &quot;last_opened_file_path&quot;: &quot;E:/projects/kotlin/intellij-plugins/Enfusion-Workbench/lang/param&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.14457831&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.5&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;inlay.hints&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\projects\kotlin\intellij-plugins\Enfusion-Workbench\lang" />
@@ -134,14 +169,14 @@
       <recent name="com.flipperplz.enfusionWorkbench.formats.pbo.vfs" />
     </key>
     <key name="MoveKotlinTopLevelDeclarationsDialog.RECENTS_KEY">
+      <recent name="com.flipperplz.bisutils.languages.param.psi.enumerations" />
       <recent name="com.flipperplz.enfusionWorkbench.vfs.paramfile" />
       <recent name="com.flipperplz.enfusionWorkbench.vfs.pbo.archive" />
       <recent name="com.flipperplz.enfusionWorkbench.psi" />
       <recent name="com.flipperplz.enfusionWorkbench.vfs.enforce" />
-      <recent name="com.flipperplz.enfusionWorkbench.vfs.param" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.Enfusion-Workbench [build]">
+  <component name="RunManager" selected="Gradle.Enfusion-Workbench:lang:param [generateLexer]">
     <configuration name="Enfusion-Workbench [buildPlugin]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -186,10 +221,10 @@
       <ForceTestExec>false</ForceTestExec>
       <method v="2" />
     </configuration>
-    <configuration name="Enfusion-Workbench [generateParamLexer]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="Enfusion-Workbench:lang:param [generateLexer]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/lang/param" />
         <option name="externalSystemIdString" value="GRADLE" />
         <option name="scriptParameters" />
         <option name="taskDescriptions">
@@ -197,7 +232,7 @@
         </option>
         <option name="taskNames">
           <list>
-            <option value="generateParamLexer" />
+            <option value="generateLexer" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -208,10 +243,10 @@
       <ForceTestExec>false</ForceTestExec>
       <method v="2" />
     </configuration>
-    <configuration name="Enfusion-Workbench [generateParamParser]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="Enfusion-Workbench:lang:param [generateParser]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/lang/param" />
         <option name="externalSystemIdString" value="GRADLE" />
         <option name="scriptParameters" />
         <option name="taskDescriptions">
@@ -219,7 +254,7 @@
         </option>
         <option name="taskNames">
           <list>
-            <option value="generateParamParser" />
+            <option value="generateParser" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -254,11 +289,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.Enfusion-Workbench:lang:param [generateLexer]" />
+        <item itemvalue="Gradle.Enfusion-Workbench:lang:param [generateParser]" />
         <item itemvalue="Gradle.Enfusion-Workbench [build]" />
         <item itemvalue="Gradle.Enfusion-Workbench:libs:bisutils [build]" />
         <item itemvalue="Gradle.Enfusion-Workbench [buildPlugin]" />
-        <item itemvalue="Gradle.Enfusion-Workbench [generateParamParser]" />
-        <item itemvalue="Gradle.Enfusion-Workbench [generateParamLexer]" />
       </list>
     </recent_temporary>
   </component>
@@ -290,6 +325,7 @@
       <workItem from="1682336465488" duration="16433000" />
       <workItem from="1682362296559" duration="3362000" />
       <workItem from="1682452674231" duration="5244000" />
+      <workItem from="1682508131462" duration="2446000" />
     </task>
     <task id="LOCAL-00001" summary="feat(param): Add mixins for ParameterStatements and Identifiers">
       <created>1681403215238</created>
@@ -522,7 +558,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682475250641</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="feat: Add ElementTokenType.&#10;&#10;Commit would have been bigger but I think it's time I head to sleep for the night. Looking forward to bringing this branch up to speed tomorrow">
+      <created>1682475881110</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1682475881110</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -551,7 +594,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fix(pbo): Fix &quot;All&quot; Bugs In PBO Implementation&#10;&#10;TODO: properties caching not working" />
     <MESSAGE value="fix(pbo): Fix BisPboDataEntry::compressed" />
     <MESSAGE value="fix(pbo): Fix PboProperties Reading" />
     <MESSAGE value="feat(pbo): Add Test Action; Start Working On Idea Implementations" />
@@ -576,7 +618,8 @@
     <MESSAGE value="fix(paramC): Switch To filetype.decompiler endpoint." />
     <MESSAGE value="refactor: Initial Rewrite Commit" />
     <MESSAGE value="feat: Add ParamFileType and slim param grammar&#10;&#10;-fix: jvmToolchain(11) cannot be enabled in tasks.kotlin" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: Add ParamFileType and slim param grammar&#10;&#10;-fix: jvmToolchain(11) cannot be enabled in tasks.kotlin" />
+    <MESSAGE value="feat: Add ElementTokenType.&#10;&#10;Commit would have been bigger but I think it's time I head to sleep for the night. Looking forward to bringing this branch up to speed tomorrow" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: Add ElementTokenType.&#10;&#10;Commit would have been bigger but I think it's time I head to sleep for the night. Looking forward to bringing this branch up to speed tomorrow" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
