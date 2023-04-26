@@ -54,20 +54,19 @@
     implements("identifier")="com.intellij.psi.PsiNamedElement"
     mixin("identifier")="com.flipperplz.bisutils.languages.param.psi.mixin.ParamIdentifierMixin"
 
-    extends("classStatement")="com.flipperplz.bisutils.languages.param.psi.impl.ParamPsiClassImpl"
+    mixin("classStatement")="com.flipperplz.bisutils.languages.param.psi.impl.ParamPsiClassImpl"
     extends("externalClassStatement")="com.flipperplz.bisutils.languages.param.psi.impl.ParamPsiClassBaseImpl"
 
-    extends("statement|directive")=scopedStatement
     extends("deleteStatement|classStatement|externalClassStatement|parameterStatement|executeStatement")=statement
     extends("defineDirective|undefineDirective|includeDirective")=directive
     extends("includeString|lineMacro|fileMacro")=stringLiteral
     extends("numericLiteral|evaluateMacro|parameterReference|stringLiteral")=literal
 }
 
-file ::= scopedStatement* enumDeclaration?
+file ::= command* enumDeclaration?
 
 
-scopedStatement ::= statementWithSemi | directive
+command ::= statementWithSemi | directive
 
 private statementWithSemi ::= statement SYM_SEMI {pin=1}
 statement ::= (
@@ -77,6 +76,56 @@ statement ::= (
     parameterStatement |
     executeStatement
 )
+{
+    extends=command
+}
+
+executeStatement ::= MACRO_EXEC sqfTail
+{
+    pin=1
+    extends=statement
+}
+
+classStatement ::= KW_CLASS identifier [SYM_COLON identifier] SYM_LCURLY statement* SYM_RCURLY
+{
+    pin(".*")=1
+    extends=externalClassStatement
+    implements="com.flipperplz.bisutils.languages.param.psi.ParamPsiClass"
+}
+
+externalClassStatement ::= KW_CLASS identifier
+{
+    pin(".*")=1
+    extends="com.flipperplz.bisutils.languages.param.psi.impl.ParamPsiExternalClassImpl"
+    implements="com.flipperplz.bisutils.languages.param.psi.ParamPsiClassBase"
+}
+
+deleteStatement ::= KW_DELETE identifier
+{
+    pin=1
+    extends=statement
+    implements="com.flipperplz.bisutils.languages.param.psi.ParamPsiNamedElement"
+}
+
+parameterStatement ::= identifier (
+    (arraySquare arrayOperator arrayLiteral) |
+    (normalOperator literal)
+)
+{
+    pin(".*")=1
+    extends=statement
+    implements="com.flipperplz.bisutils.languages.param.psi.ParamPsiNamedElement"
+}
+
+directive ::= (
+    defineDirective |
+    undefineDirective |
+    includeDirective
+)
+{
+    extends=command
+}
+
 
 literal ::= (
     numericLiteral |
@@ -86,11 +135,6 @@ literal ::= (
     stringLiteral
 )
 
-directive ::= (
-    defineDirective |
-    undefineDirective |
-    includeDirective
-)
 
 lineMacro ::= MACRO_LINE
 fileMacro ::= MACRO_FILE
@@ -108,15 +152,7 @@ stringLiteral ::= fileMacro |
                   (STRING_AMBIGUOUS_START stringContent STRING_AMBIGUOUS_END) {pin(".*")=1}
 
 
-executeStatement ::= MACRO_EXEC sqfTail {pin=1}
-classStatement ::= KW_CLASS identifier [SYM_COLON identifier] SYM_LCURLY statement* SYM_RCURLY {pin(".*")=1}
-externalClassStatement ::= KW_CLASS identifier {pin(".*")=1}
-deleteStatement ::= KW_DELETE identifier {pin=1}
 
-parameterStatement ::= identifier (
-    (arraySquare arrayOperator arrayLiteral) |
-    (normalOperator literal)
-) { pin(".*")=1 }
 
 enumDeclaration ::= KW_ENUM SYM_LCURLY (enumValue ((SYM_COMMA | EOL | SYM_SEMI) enumValue)*) SYM_RCURLY SYM_SEMI {pin(".*")=1}
 
