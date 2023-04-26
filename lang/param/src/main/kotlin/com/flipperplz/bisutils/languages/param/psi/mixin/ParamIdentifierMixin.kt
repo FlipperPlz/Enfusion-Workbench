@@ -6,10 +6,6 @@ import com.intellij.lang.ASTNode
 import com.intellij.psi.PsiElement
 
 abstract class ParamIdentifierMixin(node: ASTNode) : ASTWrapperPsiElement(node), ParamIdentifier {
-
     override fun setName(name: String): PsiElement = TODO("Not yet implemented")
-
-
     override fun getName(): String? = text
-
 }
