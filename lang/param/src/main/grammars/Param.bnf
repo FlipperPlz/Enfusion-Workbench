@@ -1,16 +1,15 @@
 {
-//    parserClass="com.flipperplz.enfusionWorkbench.psi.languages.param.parser.ParamParser"
-//    extends="com.flipperplz.enfusionWorkbench.psi.languages.param.psi.impl.ParamPsiElementImpl"
-//    implements="com.flipperplz.enfusionWorkbench.psi.languages.param.psi.interfaces.ParamPsiElement"
+    parserClass="com.flipperplz.bisutils.languages.param.parser.ParamParser"
+    extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
 
     psiClassPrefix="Param"
     psiImplClassSuffix="Impl"
-//    psiPackage="com.flipperplz.enfusionWorkbench.psi.languages.param.psi"
-//    psiImplPackage="com.flipperplz.enfusionWorkbench.psi.languages.param.psi.impl"
+    psiPackage="com.flipperplz.bisutils.languages.param.psi"
+    psiImplPackage="com.flipperplz.bisutils.languages.param.psi.impl"
 
-//    elementTypeHolderClass="com.flipperplz.enfusionWorkbench.psi.languages.param.psi.ParamTypes"
-//    elementTypeClass="com.flipperplz.enfusionWorkbench.psi.languages.param.psi.elements.ParamElementType"
-//    tokenTypeClass="com.flipperplz.enfusionWorkbench.psi.languages.param.psi.elements.ParamTokenType"
+    elementTypeHolderClass="com.flipperplz.bisutils.languages.param.psi.ParamTypes"
+    elementTypeClass="com.flipperplz.bisutils.languages.param.parser.ParamElementType"
+    tokenTypeClass="com.flipperplz.bisutils.languages.param.lexer.ParamTokenType"
 
     tokens = [
         PROCEDURAL_TEXTURE_START = '#';

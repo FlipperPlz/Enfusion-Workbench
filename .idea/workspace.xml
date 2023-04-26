@@ -4,126 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95a600cf-338e-4de1-9f0f-d35cc7c98090" name="Changes" comment="refactor: Initial Rewrite Commit">
-      <change afterPath="$PROJECT_DIR$/lang/enforce/build.gradle.kts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/enforce/gradlew" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/enforce/gradlew.bat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/enforce/settings.gradle.kts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/param/build.gradle.kts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/param/gradlew" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/param/gradlew.bat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/param/settings.gradle.kts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libs/bisutils/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libs/bisutils/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libs/bisutils/.idea/conventionalCommit.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libs/bisutils/.idea/gradle.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libs/bisutils/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libs/bisutils/.idea/kotlinc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libs/bisutils/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libs/bisutils/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libs/bisutils/build.gradle.kts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libs/bisutils/gradle.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libs/bisutils/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libs/bisutils/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libs/bisutils/gradlew" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libs/bisutils/gradlew.bat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libs/bisutils/settings.gradle.kts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libs/bisutils/src/main/kotlin/com/flipperplz/bisutils/BisPboManager.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libs/bisutils/src/main/kotlin/com/flipperplz/bisutils/pbo/BisPboEntry.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libs/bisutils/src/main/kotlin/com/flipperplz/bisutils/pbo/BisPboFile.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libs/bisutils/src/main/kotlin/com/flipperplz/bisutils/pbo/misc/BisPboProperty.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libs/bisutils/src/main/kotlin/com/flipperplz/bisutils/pbo/misc/EntryMimeType.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libs/bisutils/src/main/kotlin/com/flipperplz/bisutils/pbo/utils/PboIoUtils.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libs/bisutils/src/main/kotlin/com/flipperplz/bisutils/rap/BisRapElement.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libs/bisutils/src/main/kotlin/com/flipperplz/bisutils/rap/io/BisRapDebinarizer.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libs/bisutils/src/main/kotlin/com/flipperplz/bisutils/rap/io/BisRapWriter.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libs/bisutils/src/main/kotlin/com/flipperplz/bisutils/rap/io/formatting/BisRapBeautifier.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libs/bisutils/src/main/kotlin/com/flipperplz/bisutils/test.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libs/bisutils/src/main/kotlin/com/flipperplz/bisutils/utils/BisRandomAccessFile.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libs/bisutils/src/main/kotlin/com/flipperplz/bisutils/utils/ByteBufferUtils.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libs/bisutils/src/main/kotlin/com/flipperplz/bisutils/utils/RandomAccessFileUtils.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitmodules" beforeDir="false" afterPath="$PROJECT_DIR$/.gitmodules" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+    <list default="true" id="95a600cf-338e-4de1-9f0f-d35cc7c98090" name="Changes" comment="feat: Add ParamFileType and slim param grammar&#10;&#10;-fix: jvmToolchain(11) cannot be enabled in tasks.kotlin">
+      <change afterPath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/bisutils/languages/param/lexer/ParamTokenType.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/bisutils/languages/param/parser/ParamElementType.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bisutils" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/grammars/enforce/Enforce.bnf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/grammars/param/Param.bnf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/grammars/param/Param.flex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/EnfusionWorkbenchConstants.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/actions/ArchiveTestAction.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/psi/EnfusionLanguage.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/psi/EnfusionLanguageFileType.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/psi/EnfusionNamedPsiElement.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/psi/EnfusionPsiElement.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/psi/EnfusionTokenType.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/psi/IEnfusionElementType.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/psi/impl/EnfusionPsiElementImpl.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/psi/impl/EnfusionPsiFileImpl.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/psi/languages/enforce/EnforceLanguage.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/psi/languages/enforce/psi/impl/EnforcePsiElementImpl.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/psi/languages/enforce/psi/interfaces/EnforcePsiElement.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/psi/languages/enforce/psi/required/EnforceElementType.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/psi/languages/enforce/psi/required/EnforceTokenType.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/psi/languages/gproj/GProjLanguage.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/psi/languages/param/ParamLanguage.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/psi/languages/param/highlighting/ParamSyntaxHighlighter.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/psi/languages/param/highlighting/ParamSyntaxHighlighterFactory.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/psi/languages/param/inlayHints/ParamInlayHintsCollector.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/psi/languages/param/inlayHints/ParamInlayHintsProvider.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/psi/languages/param/inspections/AbstractBaseParamLocalInspectionTool.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/psi/languages/param/inspections/errors/textures/AbstractBaseParamTextureLocalInspectionTool.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/psi/languages/param/inspections/errors/textures/ParamIncorrectFormatException.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/psi/languages/param/inspections/errors/textures/ParamIncorrectPowerInspection.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/psi/languages/param/inspections/warnings/strings/AmbiguousStringUsageInspection.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/psi/languages/param/lexer/ParamLexerAdapter.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/psi/languages/param/parser/ParamParserDefinition.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/psi/languages/param/psi/ParamElementFactory.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/psi/languages/param/psi/ParamFile.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/psi/languages/param/psi/ParamPsiUtils.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/psi/languages/param/psi/elements/ParamElementType.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/psi/languages/param/psi/elements/ParamTokenType.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/psi/languages/param/psi/impl/ParamPsiElementImpl.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/psi/languages/param/psi/interfaces/ParamPsiElement.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/psi/languages/param/psi/interfaces/ParamPsiIdentifiable.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/psi/languages/param/psi/interfaces/ParamPsiStatementScope.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/psi/languages/param/psi/mixins/ParamClassMixin.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/psi/languages/param/psi/mixins/ParamIdentifierMixin.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/psi/languages/param/psi/mixins/ParamNonBinaraizableMixin.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/psi/languages/param/psi/mixins/ParamParameterStatementMixin.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/psi/languages/param/psi/mixins/ParamStringMixin.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/psi/languages/param/quickfixes/ReplaceIdentifierLiteralQuickFix.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/psi/languages/param/quickfixes/ReplaceNumericLiteralQuickFix.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/psi/languages/param/stubs/ParamFileStub.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/psi/languages/param/utils/ParamProceduralTextureFormat.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/psi/languages/param/utils/ParamStringType.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/psi/sets/ParamTokenSets.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/sdk/dayz/DayZSdkAdditionalData.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/sdk/dayz/DayZSdkType.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/sdk/reforger/ArmaRFSdkType.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/steam/SteamworksStartupActivity.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/utils/BisVfsUtils.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/utils/EnfLoggableObject.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/utils/MutableLazy.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/vfs/enforce/EnforceFileType.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/vfs/gproj/GProjectFileType.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/vfs/paramfile/ParamFileDecompiler.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/vfs/paramfile/ParamFileTypeDetector.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/vfs/paramfile/ParamFileViewProviderFactory.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/vfs/paramfile/param/ParamFileType.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/vfs/paramfile/paramC/ParamCFileType.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/vfs/paramfile/utils/BisRapDebinarizerUtils.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/vfs/pbo/PboFileType.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/vfs/pbo/impl/PboArchiveHolder.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/vfs/pbo/impl/PboFileSystem.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/vfs/pbo/impl/PboHandler.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/resources/META-INF/plugin.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/resources/META-INF/pluginIcon.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/resources/inspectionDescriptions/ParamAmbiguousString.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/resources/inspectionDescriptions/ParamIncorrectFormat.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beta/main/resources/inspectionDescriptions/ParamIncorrectPower.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lang/param/src/main/grammars/Param.bnf" beforeDir="false" afterPath="$PROJECT_DIR$/lang/param/src/main/grammars/Param.bnf" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -145,17 +30,15 @@
             </after_sync>
           </activation>
         </task>
+        <task path="$PROJECT_DIR$/libs/bisutils">
+          <activation />
+        </task>
         <projects_view>
           <tree_state>
             <expand>
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="Enfusion-Workbench" type="f1a62948:ProjectNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="Enfusion-Workbench" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
               </path>
             </expand>
             <select />
@@ -171,8 +54,8 @@
         <option value="HTML File" />
         <option value="Kotlin Interface" />
         <option value="Kotlin File" />
-        <option value="Kotlin Object" />
         <option value="Class" />
+        <option value="Kotlin Object" />
         <option value="Kotlin Class" />
       </list>
     </option>
@@ -220,15 +103,16 @@
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "rewrite",
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "E:/projects/kotlin/intellij-plugins/Enfusion-Workbench/lang",
+    "jdk.selected.JAVA_MODULE": "17",
+    "last_opened_file_path": "E:/projects/kotlin/intellij-plugins/Enfusion-Workbench/lang/param",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.09689921",
+    "project.structure.proportion": "0.14457831",
+    "project.structure.side.proportion": "0.5",
     "settings.editor.selected.configurable": "inlay.hints",
     "vue.rearranger.settings.migration": "true"
   }
@@ -239,11 +123,11 @@
       <recent name="E:\projects\kotlin\intellij-plugins\Enfusion-Workbench\lang\enforce" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\projects\kotlin\intellij-plugins\Enfusion-Workbench\src\main" />
       <recent name="E:\projects\kotlin\intellij-plugins\Enfusion-Workbench\lang\enforce" />
       <recent name="E:\projects\kotlin\intellij-plugins\Enfusion-Workbench\libs" />
       <recent name="E:\projects\kotlin\intellij-plugins\Enfusion-Workbench\src\beta\main\kotlin\com\flipperplz\bisutils\utils" />
       <recent name="E:\projects\kotlin\intellij-plugins\Enfusion-Workbench\src\beta\main\kotlin\com\flipperplz\bisutils" />
-      <recent name="E:\projects\kotlin\intellij-plugins\Enfusion-Workbench\src\beta\main\kotlin\com\flipperplz\bisutils\pbo\utils" />
     </key>
     <key name="CreateKotlinClassDialog.RecentsKey">
       <recent name="com.flipperplz.enfusionWorkbench.psi.languages.param.stubs" />
@@ -257,7 +141,7 @@
       <recent name="com.flipperplz.enfusionWorkbench.vfs.param" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.Run Plugin">
+  <component name="RunManager" selected="Gradle.Enfusion-Workbench [build]">
     <configuration name="Enfusion-Workbench [buildPlugin]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -280,7 +164,7 @@
       <ForceTestExec>false</ForceTestExec>
       <method v="2" />
     </configuration>
-    <configuration name="Enfusion-Workbench [clean]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="Enfusion-Workbench [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -291,7 +175,7 @@
         </option>
         <option name="taskNames">
           <list>
-            <option value="clean" />
+            <option value="build" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -346,10 +230,10 @@
       <ForceTestExec>false</ForceTestExec>
       <method v="2" />
     </configuration>
-    <configuration name="Enfusion-Workbench [generateParser]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="Enfusion-Workbench:libs:bisutils [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/libs/bisutils" />
         <option name="externalSystemIdString" value="GRADLE" />
         <option name="scriptParameters" />
         <option name="taskDescriptions">
@@ -357,7 +241,7 @@
         </option>
         <option name="taskNames">
           <list>
-            <option value="generateParser" />
+            <option value="build" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -370,11 +254,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.Enfusion-Workbench [build]" />
+        <item itemvalue="Gradle.Enfusion-Workbench:libs:bisutils [build]" />
+        <item itemvalue="Gradle.Enfusion-Workbench [buildPlugin]" />
         <item itemvalue="Gradle.Enfusion-Workbench [generateParamParser]" />
         <item itemvalue="Gradle.Enfusion-Workbench [generateParamLexer]" />
-        <item itemvalue="Gradle.Enfusion-Workbench [generateParser]" />
-        <item itemvalue="Gradle.Enfusion-Workbench [clean]" />
-        <item itemvalue="Gradle.Enfusion-Workbench [buildPlugin]" />
       </list>
     </recent_temporary>
   </component>
@@ -631,7 +515,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682356211113</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="feat: Add ParamFileType and slim param grammar&#10;&#10;-fix: jvmToolchain(11) cannot be enabled in tasks.kotlin">
+      <created>1682475250641</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1682475250641</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -660,7 +551,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fix(pbo): Rename Method getMetadataLength to retrieveMetadataLength" />
     <MESSAGE value="fix(pbo): Fix &quot;All&quot; Bugs In PBO Implementation&#10;&#10;TODO: properties caching not working" />
     <MESSAGE value="fix(pbo): Fix BisPboDataEntry::compressed" />
     <MESSAGE value="fix(pbo): Fix PboProperties Reading" />
@@ -685,13 +575,14 @@
     <MESSAGE value="fix(paramC): Yet another attempt at fixing ParamC Viewing" />
     <MESSAGE value="fix(paramC): Switch To filetype.decompiler endpoint." />
     <MESSAGE value="refactor: Initial Rewrite Commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor: Initial Rewrite Commit" />
+    <MESSAGE value="feat: Add ParamFileType and slim param grammar&#10;&#10;-fix: jvmToolchain(11) cannot be enabled in tasks.kotlin" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: Add ParamFileType and slim param grammar&#10;&#10;-fix: jvmToolchain(11) cannot be enabled in tasks.kotlin" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/vfs/pbo/impl/PboArchiveHolder.kt</url>
+          <url>file://$PROJECT_DIR$/idea/beta/main/kotlin/com/flipperplz/enfusionWorkbench/vfs/pbo/impl/PboArchiveHolder.kt</url>
           <line>18</line>
           <properties>
             <option name="lambda-ordinal" value="-1" />
@@ -699,12 +590,12 @@
           <option name="timeStamp" value="7" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/actions/ArchiveTestAction.kt</url>
+          <url>file://$PROJECT_DIR$/idea/beta/main/kotlin/com/flipperplz/enfusionWorkbench/actions/ArchiveTestAction.kt</url>
           <line>22</line>
           <option name="timeStamp" value="8" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/src/beta/main/kotlin/com/flipperplz/enfusionWorkbench/actions/ArchiveTestAction.kt</url>
+          <url>file://$PROJECT_DIR$/idea/beta/main/kotlin/com/flipperplz/enfusionWorkbench/actions/ArchiveTestAction.kt</url>
           <line>20</line>
           <option name="timeStamp" value="11" />
         </line-breakpoint>
