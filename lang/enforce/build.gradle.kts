@@ -23,8 +23,6 @@ repositories {
 
 dependencies {
   testImplementation(kotlin("test"))
-  implementation("com.google.guava:guava:29.0-jre")
-
 }
 
 tasks.test {
@@ -32,7 +30,6 @@ tasks.test {
 }
 
 kotlin {
-  jvmToolchain(11)
 }
 
 

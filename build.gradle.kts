@@ -43,7 +43,7 @@ configure<JavaPluginExtension> {
 
 kotlin {
   sourceSets.main {
-    kotlin.srcDirs("src/main/kotlin")
+    kotlin.srcDirs("idea/main/kotlin")
   }
 }
 
@@ -51,12 +51,12 @@ sourceSets {
   main {
     kotlin {
       srcDirs(
-        "src/main/kotlin"
+        "idea/main/kotlin"
       )
     }
     resources {
       srcDirs(
-        "src/main/resources"
+        "idea/main/resources"
       )
     }
   }

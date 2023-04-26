@@ -1,0 +1,131 @@
+{
+//    parserClass="com.flipperplz.enfusionWorkbench.psi.languages.param.parser.ParamParser"
+//    extends="com.flipperplz.enfusionWorkbench.psi.languages.param.psi.impl.ParamPsiElementImpl"
+//    implements="com.flipperplz.enfusionWorkbench.psi.languages.param.psi.interfaces.ParamPsiElement"
+
+    psiClassPrefix="Param"
+    psiImplClassSuffix="Impl"
+//    psiPackage="com.flipperplz.enfusionWorkbench.psi.languages.param.psi"
+//    psiImplPackage="com.flipperplz.enfusionWorkbench.psi.languages.param.psi.impl"
+
+//    elementTypeHolderClass="com.flipperplz.enfusionWorkbench.psi.languages.param.psi.ParamTypes"
+//    elementTypeClass="com.flipperplz.enfusionWorkbench.psi.languages.param.psi.elements.ParamElementType"
+//    tokenTypeClass="com.flipperplz.enfusionWorkbench.psi.languages.param.psi.elements.ParamTokenType"
+
+    tokens = [
+        PROCEDURAL_TEXTURE_START = '#';
+        DIRECTIVE_START          = '#';
+        SYM_SEMI                 = ';';
+        SYM_LPARENTHESIS         = '(';
+        SYM_RPARENTHESIS         = ')';
+        STRING_DOUBLE_START      = '"';
+        STRING_DOUBLE_END        = '"';
+        STRING_SINGLE_END        = "'";
+        STRING_SINGLE_START      = "'";
+        SYM_COMMA                = ',';
+        SYM_LCURLY               = '{';
+        SYM_RCURLY               = '}';
+        MACRO_EVAL               = '__EVAL';
+        MACRO_EXEC               = '__EXEC';
+        REFERENCE_MODE           = '@';
+        KW_CLASS                 = 'class';
+        KW_ENUM                  = 'enum';
+        KW_DELETE                = 'delete';
+        KW_INCLUDE               = 'include';
+        KW_DEFINE                = 'define';
+        KW_UNDEFINE              = 'undef';
+        MACRO_LINE               = '__LINE__';
+        MACRO_FILE               = '__FILE__';
+        OP_ASSIGN                = '=';
+        OP_ADDASSIGN             = '+=';
+        OP_SUBASSIGN             = '-=';
+        SYM_LSQUARE              = '[';
+        SYM_RSQUARE              = ']';
+        SINGLE_LINE_COMMENT      = 'regexp://.*$';
+        EMPTY_DELIMITED_COMMENT  = 'regexp:/\*\*?/';
+        DELIMITED_COMMENT        = 'regexp:/\*([^*]|[\r\n]|(\*+([^*/]|[\r\n])))*\*+/';
+        ABS_IDENTIFIER           = 'regexp:[a-zA-Z_][a-zA-Z0-9_]*';
+        ABS_NUMERIC              = 'regexp:(-?[0-9]+(.[0-9]+)?([eE][-+]?[0-9]+)?|0x[a-fA-F0-9]+)';
+        WHITESPACE               = 'regexp:[\s\t\r\n]';
+        DIRECTIVE_NEWLINE        = 'regexp:\\[\r\n]'
+        EOL                      = 'regexp:[\r\n]'
+    ]
+    generate=[tokenAccessors="yes"]
+}
+
+file ::= scopedStatement* enumDeclaration?
+
+
+scopedStatement ::= statement SYM_SEMI | directive
+
+statement ::= (
+    deleteStatement |
+    classStatement |
+    externalClassStatement |
+    parameterStatement |
+    executeStatement
+)
+
+literal ::= {
+    numericLiteral |
+    evaluateMacro |
+    parameterReference |
+//    customMacro |
+    stringLiteral
+}
+
+directive ::= {
+    defineDirective |
+    undefineDirective |
+    includeDirective
+}
+
+lineMacro ::= MACRO_LINE
+fileMacro ::= MACRO_FILE
+arrayElement ::= arrayLiteral | literal
+arrayLiteral ::= SYM_LCURLY (arrayElement (SYM_COMMA arrayElement)*)? SYM_RCURLY {pin(".*")=1}
+parameterReference ::= REFERENCE_MODE stringLiteral {pin=1}
+evaluateMacro ::= MACRO_EVAL sqfTail {pin=1}
+numericLiteral ::= ABS_NUMERIC
+stringContent ::= proceduralTexture | (STRING_CONTENTS | LOCALIZED_STRING | STRING_ESCAPE)* ;
+includeString ::= (STRING_INCLUDE_START stringContent STRING_INCLUDE_END)
+stringLiteral ::= (STRING_DOUBLE_START stringContent STRING_DOUBLE_END) |
+                  (STRING_SINGLE_START stringContent STRING_SINGLE_END) |
+                  (STRING_AMBIGUOUS_START stringContent STRING_AMBIGUOUS_END) |
+                  fileMacro |
+                  lineMacro {pin(".*")=1}
+
+
+executeStatement ::= MACRO_EXEC sqfTail {pin=1}
+classStatement ::= KW_CLASS identifier [SYM_COLON identifier] SYM_LCURLY statement* SYM_RCURLY {pin(".*")=1}
+externalClassStatement ::= KW_CLASS identifier {pin(".*")=1}
+deleteStatement ::= KW_DELETE identifier {pin=1}
+
+
+parameterStatement ::= identifier (
+    (arraySquare arrayOperator arrayLiteral) |
+    (normalOperator literal)
+) { pin(".*")=1 }
+
+enumDeclaration ::= KW_ENUM SYM_LCURLY (enumValue ((SYM_COMMA | EOL | SYM_SEMI) enumValue)*) SYM_RCURLY SYM_SEMI {pin(".*")=1}
+
+enumValue ::= identifier [OP_ASSIGN numericLiteral] {pin(".*")=1}
+identifier ::= ABS_IDENTIFIER
+customMacro ::= identifier [SYM_LPARENTHESIS macroArgument (SYM_COMMA macroArgument)* SYM_RPARENTHESIS] {pin(".*")=1}
+defineDirective ::=  DIRECTIVE_START KW_DEFINE macroSignature DEFINE_VALUE {pin=2}
+macroSignature ::= identifier [SYM_LPARENTHESIS identifier (SYM_COMMA identifier)* SYM_RPARENTHESIS]
+
+undefineDirective ::= DIRECTIVE_START KW_UNDEFINE identifier {pin=2}
+includeDirective ::= DIRECTIVE_START KW_INCLUDE (stringLiteral | includeString) {pin=2}
+
+proceduralTexture ::= PROCEDURAL_TEXTURE_START proceduralTextureRightArgs proceduralTextureFunction
+proceduralTextureFunction ::= identifier SYM_LPARENTHESIS [literal (SYM_COMMA literal)*] SYM_RPARENTHESIS {pin(".*")=1};
+//private helpers
+private macroArgument ::= !(SYM_COMMA | SYM_RPARENTHESIS)
+private sqfTail ::= SYM_LPARENTHESIS !(SYM_RPARENTHESIS) SYM_RPARENTHESIS
+private normalOperator ::= OP_ASSIGN
+private arrayOperator ::= normalOperator | OP_ADDASSIGN | OP_SUBASSIGN
+private arraySquare ::= SYM_LSQUARE SYM_RSQUARE
+private proceduralTextureRightArgs ::= (SYM_LPARENTHESIS
+    (identifier SYM_COMMA numericLiteral SYM_COMMA numericLiteral SYM_COMMA numericLiteral)
+SYM_RPARENTHESIS) {pin(".*")=1}

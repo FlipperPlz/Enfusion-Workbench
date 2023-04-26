@@ -48,7 +48,7 @@ tasks {
       apiVersion = "1.7"
       freeCompilerArgs = listOf("-Xjvm-default=all")
     }
-    dependsOn(generateParser, generateLexer)
+    //dependsOn(generateParser, generateLexer)
   }
 
   generateLexer {
@@ -73,8 +73,6 @@ tasks.test {
 }
 
 kotlin {
-  jvmToolchain(11)
-
   sourceSets.main {
     kotlin.srcDirs("src/main/kotlin")
   }
