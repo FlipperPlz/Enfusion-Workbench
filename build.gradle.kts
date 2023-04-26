@@ -3,10 +3,8 @@ import org.jetbrains.grammarkit.tasks.GenerateParserTask
 import org.jetbrains.intellij.tasks.RunIdeTask
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
-val sourceBranch = "beta"
-
 group = "com.flipperplz"
-version = "1.0-${sourceBranch}"
+version = "1.0-beta"
 
 plugins {
   id("java")
@@ -31,6 +29,9 @@ repositories {
 dependencies {
   compileOnly(kotlin("stdlib-jdk8"))
   implementation(project(":bisutils"))
+  implementation(project(":lang:enforce"))
+  implementation(project(":lang:param"))
+
   implementation("com.code-disaster.steamworks4j:steamworks4j:1.9.0-SNAPSHOT")
   implementation("com.code-disaster.steamworks4j:steamworks4j-server:1.9.0-SNAPSHOT")
 }
@@ -40,21 +41,9 @@ configure<JavaPluginExtension> {
   targetCompatibility = JavaVersion.VERSION_17
 }
 
-java {
-  targetCompatibility=JavaVersion.VERSION_17
-  sourceCompatibility=JavaVersion.VERSION_17
-  sourceSets.main {
-    java.srcDirs(
-      "src/${sourceBranch}/main/gen",
-      "src/${sourceBranch}/main/java"
-    )
-  }
-}
-
-
 kotlin {
   sourceSets.main {
-    kotlin.srcDirs("src/${sourceBranch}/main/kotlin")
+    kotlin.srcDirs("src/main/kotlin")
   }
 }
 
@@ -62,65 +51,18 @@ sourceSets {
   main {
     kotlin {
       srcDirs(
-        "src/${sourceBranch}/main/kotlin"
+        "src/main/kotlin"
       )
     }
-
-    java {
-      srcDirs(
-        "src/${sourceBranch}/main/gen",
-        "src/${sourceBranch}/main/java"
-      )
-    }
-
     resources {
       srcDirs(
-        "src/${sourceBranch}/main/resources"
+        "src/main/resources"
       )
     }
   }
-}
-
-val generateParamParser = tasks.register<GenerateParserTask>("generateParamParser") {
-  sourceFile.set(file("src/${sourceBranch}/main/grammars/param/Param.bnf"))
-  targetRoot.set("src/${sourceBranch}/main/gen/")
-  pathToParser.set("/com/flipperplz/enfusionWorkbench/psi/languages/param/parser/ParamParser.java")
-  pathToPsiRoot.set("/com/flipperplz/enfusionWorkbench/psi/languages/param/psi/")
-
-  purgeOldFiles.set(true)
-}
-val generateParamLexer = tasks.register<GenerateLexerTask>("generateParamLexer") {
-  sourceFile.set(file("src/${sourceBranch}/main/grammars/param/Param.flex"))
-  targetDir.set("src/${sourceBranch}/main/gen/com/flipperplz/enfusionWorkbench/psi/languages/param/lexer/")
-  targetClass.set("ParamLexer")
-  purgeOldFiles.set(true)
-}
-
-val generateEnforceParser = tasks.register<GenerateParserTask>("generateEnforceParser") {
-  sourceFile.set(file("src/${sourceBranch}/main/grammars/enforce/Enforce.bnf"))
-  targetRoot.set("src/${sourceBranch}/main/gen/")
-  pathToParser.set("/com/flipperplz/enfusionWorkbench/psi/languages/enforce/parser/EnforceParser.java")
-  pathToPsiRoot.set("/com/flipperplz/enfusionWorkbench/psi/languages/enforce/psi/")
-
-  purgeOldFiles.set(true)
-}
-val generateEnforceLexer = tasks.register<GenerateLexerTask>("generateEnforceLexer") {
-  sourceFile.set(file("src/${sourceBranch}/main/grammars/enforce/Enforce.flex"))
-  targetDir.set("src/${sourceBranch}/main/gen/com/flipperplz/enfusionWorkbench/psi/languages/enforce/lexer/")
-  targetClass.set("EnforceLexer")
-  purgeOldFiles.set(true)
 }
 
 tasks {
-  val cleanupGenerated = register("cleanupGenerated") {
-    delete("src/${sourceBranch}/main/gen")
-  }
-
-  val createGenerated = register("generateCode") {
-    dependsOn(cleanupGenerated)
-    dependsOn(generateParamParser, generateParamLexer)
-    dependsOn(generateEnforceParser, /*generateEnforceLexer*/)
-  }
 
 
   withType<KotlinCompile>().configureEach {
@@ -130,7 +72,6 @@ tasks {
       apiVersion = "1.7"
       freeCompilerArgs = listOf("-Xjvm-default=all")
     }
-    dependsOn(createGenerated)
   }
 
   patchPluginXml {
@@ -146,6 +87,9 @@ tasks {
 
   jar {
     from(zipTree(project(":bisutils").tasks.getByName("jar").outputs.files.singleFile).asFileTree)
+    from(zipTree(project(":lang:param").tasks.getByName("jar").outputs.files.singleFile).asFileTree)
+    from(zipTree(project(":lang:enforce").tasks.getByName("jar").outputs.files.singleFile).asFileTree)
+
   }
 
   publishPlugin {
