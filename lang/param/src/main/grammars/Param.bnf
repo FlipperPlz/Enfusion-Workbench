@@ -57,13 +57,11 @@ file ::= command* enumDeclaration?
 command ::= statementWithSemi | directive
 
 private statementWithSemi ::= statement SYM_SEMI {pin=1}
-statement ::= (
-    deleteStatement |
-    classStatement |
-    externalClassStatement |
-    parameterStatement |
-    executeStatement
-)
+statement ::= deleteStatement        |
+              classStatement         |
+              externalClassStatement |
+              parameterStatement     |
+              executeStatement
 {
     extends=command
 }
@@ -77,8 +75,7 @@ executeStatement ::= MACRO_EXEC sqfTail
 classStatement ::= KW_CLASS identifier [SYM_COLON identifier] SYM_LCURLY command* SYM_RCURLY
 {
     pin(".*")=1
-    extends=externalClassStatement
-    mixin="com.flipperplz.bisutils.languages.param.psi.impl.ParamPsiClassImpl"
+    extends="com.flipperplz.bisutils.languages.param.psi.impl.ParamPsiClassImpl"
     implements="com.flipperplz.bisutils.languages.param.psi.ParamPsiClass"
 }
 
@@ -86,8 +83,8 @@ externalClassStatement ::= KW_CLASS identifier
 {
     pin(".*")=1
     extends=statement
-    mixin="com.flipperplz.bisutils.languages.param.psi.impl.ParamPsiExternalClassImpl"
-    implements="com.flipperplz.bisutils.languages.param.psi.ParamPsiClassBase"
+    extends="com.flipperplz.bisutils.languages.param.psi.impl.ParamPsiExternalClassImpl"
+    implements="com.flipperplz.bisutils.languages.param.psi.ParamPsiExternalClass"
 }
 
 deleteStatement ::= KW_DELETE identifier
@@ -97,21 +94,14 @@ deleteStatement ::= KW_DELETE identifier
     implements="com.flipperplz.bisutils.languages.param.psi.ParamPsiNamedElement"
 }
 
-parameterStatement ::= identifier (
-    (arraySquare arrayOperator arrayLiteral) |
-    (normalOperator literal)
-)
+parameterStatement ::= identifier ((arraySquare arrayOperator arrayLiteral) | (normalOperator literal))
 {
     pin(".*")=1
     extends=statement
     implements="com.flipperplz.bisutils.languages.param.psi.ParamPsiNamedElement"
 }
 
-directive ::= (
-    defineDirective |
-    undefineDirective |
-    pureDirective
-)
+directive ::= defineDirective | undefineDirective | pureDirective
 {
     extends=command
     implements=command
@@ -140,10 +130,7 @@ undefineDirective ::= DIRECTIVE_START KW_UNDEFINE identifier
 }
 
 
-pureDirective ::= (
-    includeDirective
- //    customMacro |
-)
+pureDirective ::= includeDirective //    customMacro |
 {
     extends=literal
 }

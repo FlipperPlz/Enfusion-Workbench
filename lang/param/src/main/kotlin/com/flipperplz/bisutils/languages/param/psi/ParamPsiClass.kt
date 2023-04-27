@@ -1,5 +1,5 @@
 package com.flipperplz.bisutils.languages.param.psi
 
-interface ParamPsiClass : ParamPsiClassBase, ParamPsiCommandsHolder {
+interface ParamPsiClass : ParamPsiExternalClass, ParamPsiCommandsHolder {
     val paramSuperClass: ParamIdentifier?
 }
