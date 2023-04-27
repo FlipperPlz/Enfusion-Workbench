@@ -43,7 +43,7 @@ ABS_IDENTIFIER=[a-zA-Z_][a-zA-Z0-9_]*
 ABS_STRING=\"((\"\"|[^\"])+)\"
 ABS_NUMERIC=(-?[0-9]+(.[0-9]+)?([eE][-+]?[0-9]+)?|0x[a-fA-F0-9]+)
 SIMPLE_NUMERIC=(0|[1-9]\d*)(\.\d+)?
-%state STRING_MODE, PROCEDURAL_TEXTURE_MODE, DEFINE_MODE
+%state STRING_MODE, DEFINE_MODE
 
 %%
 { DIRECTIVE_NEWLINE }            {  }
@@ -85,7 +85,7 @@ SIMPLE_NUMERIC=(0|[1-9]\d*)(\.\d+)?
   "<"                            {
           xxStringType = ParamStringType.INCLUDE;
           yybegin(STRING_MODE);
-          return ParamTypes.STRING_INCLUDE_START;
+          return ParamTypes.SYM_LANGLE;
        }
 
   "{"                            { return ParamTypes.SYM_LCURLY; }
@@ -109,13 +109,13 @@ SIMPLE_NUMERIC=(0|[1-9]\d*)(\.\d+)?
   "\""                            {
                 xxStringType = ParamStringType.DOUBLE;
                 yybegin(STRING_MODE);
-                return ParamTypes.STRING_DOUBLE_START;
+                return ParamTypes.SYM_DQUOTE;
              }
 
   "'"                            {
                xxStringType = ParamStringType.SINGLE;
                yybegin(STRING_MODE);
-               return ParamTypes.STRING_SINGLE_START;
+               return ParamTypes.SYM_SQUOTE;
             }
 
   "("                            { return ParamTypes.SYM_LPARENTHESIS; }
@@ -133,7 +133,7 @@ SIMPLE_NUMERIC=(0|[1-9]\d*)(\.\d+)?
   [^]                            {
           xxStringType = ParamStringType.UNQUOTED;
           yybegin(this.STRING_MODE);
-          return ParamTypes.STRING_AMBIGUOUS_START;
+          return ParamTypes.STRING_CONTENTS;
       }
 }
 
@@ -141,13 +141,6 @@ SIMPLE_NUMERIC=(0|[1-9]\d*)(\.\d+)?
   { ESCAPES }                    { return ParamTypes.STRING_ESCAPE; }
 
   { LOCALIZED_STRING }           { return ParamTypes.LOCALIZED_STRING; }
-
-  "#("                           {
-          xxCurrentCounter = 2;
-          yybegin(PROCEDURAL_TEXTURE_MODE);
-          yypushback(1);
-          return ParamTypes.PROCEDURAL_TEXTURE_START;
-      }
 
   "\""                           {
           if (xxStringType == ParamStringType.DOUBLE) {
@@ -161,15 +154,15 @@ SIMPLE_NUMERIC=(0|[1-9]\d*)(\.\d+)?
           if (xxStringType == ParamStringType.SINGLE) {
               xxStringType = null;
               yybegin(YYINITIAL);
-              return ParamTypes.STRING_SINGLE_END;
+              return ParamTypes.SYM_SQUOTE;
           } else return ParamTypes.STRING_CONTENTS;
       }
 
   ">"                            {
-          if (xxStringType == ParamStringType.SINGLE) {
+          if (xxStringType == ParamStringType.INCLUDE) {
               xxStringType = null;
               yybegin(YYINITIAL);
-              return ParamTypes.STRING_INCLUDE_END;
+              return ParamTypes.SYM_RANGLE;
           } else return ParamTypes.STRING_CONTENTS;
        }
 
@@ -177,7 +170,7 @@ SIMPLE_NUMERIC=(0|[1-9]\d*)(\.\d+)?
           if (xxStringType == ParamStringType.UNQUOTED) {
               xxStringType = null;
               yybegin(YYINITIAL);
-              return ParamTypes.STRING_AMBIGUOUS_END;
+              yypushback(1);
           } else return ParamTypes.STRING_CONTENTS;
        }
 
@@ -185,7 +178,7 @@ SIMPLE_NUMERIC=(0|[1-9]\d*)(\.\d+)?
           if (xxStringType == ParamStringType.UNQUOTED) {
               xxStringType = null;
               yybegin(YYINITIAL);
-              return ParamTypes.STRING_AMBIGUOUS_END;
+              yypushback(1);
           } else return ParamTypes.STRING_CONTENTS;
        }
 
@@ -193,7 +186,7 @@ SIMPLE_NUMERIC=(0|[1-9]\d*)(\.\d+)?
           if (xxStringType == ParamStringType.UNQUOTED) {
               xxStringType = null;
               yybegin(YYINITIAL);
-              return ParamTypes.STRING_AMBIGUOUS_END;
+              yypushback(1);
           } else return ParamTypes.STRING_CONTENTS;
       }
 
@@ -201,31 +194,9 @@ SIMPLE_NUMERIC=(0|[1-9]\d*)(\.\d+)?
           if (xxStringType == ParamStringType.UNQUOTED) {
               xxStringType = null;
               yybegin(YYINITIAL);
-              return ParamTypes.STRING_AMBIGUOUS_END;
+              yypushback(1);
           } else return ParamTypes.STRING_CONTENTS;
       }
 
   [^\"]                          { return ParamTypes.STRING_CONTENTS; }
-}
-
-<PROCEDURAL_TEXTURE_MODE> {
-    ")"                          {
-          xxCurrentCounter--;
-          if(xxCurrentCounter == 0) yybegin(STRING_MODE);
-
-          return ParamTypes.SYM_RPARENTHESIS;
-       }
-    "("                          { return ParamTypes.SYM_LPARENTHESIS; }
-
-    ","                          { return ParamTypes.SYM_COMMA; }
-
-    { WHITE_SPACES }             { return TokenType.BAD_CHARACTER; }
-
-    { SIMPLE_NUMERIC }           { return ParamTypes.ABS_NUMERIC; }
-
-    { ABS_STRING }               { return ParamTypes.STRING_LITERAL; }
-
-    { ABS_IDENTIFIER }           { return ParamTypes.ABS_IDENTIFIER; }
-
-    [^]                          { yybegin(STRING_MODE); return ParamTypes.STRING_CONTENTS; }
 }

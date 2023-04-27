@@ -4,14 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95a600cf-338e-4de1-9f0f-d35cc7c98090" name="Changes" comment="feat(param): Add ParamPsiClassBase">
-      <change afterPath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/bisutils/languages/param/psi/ParamPsiStatementsHolder.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/bisutils/languages/param/psi/impl/ParamPsiClassImpl.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/bisutils/languages/param/stubs/ParamClassStub.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/bisutils/languages/param/stubs/impl/ParamClassStubImpl.kt" afterDir="false" />
+    <list default="true" id="95a600cf-338e-4de1-9f0f-d35cc7c98090" name="Changes" comment="feat(param): Create External Class Implementation">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lang/param/src/main/grammars/Param.bnf" beforeDir="false" afterPath="$PROJECT_DIR$/lang/param/src/main/grammars/Param.bnf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/bisutils/languages/param/psi/mixin/ParamIdentifierMixin.kt" beforeDir="false" afterPath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/bisutils/languages/param/psi/mixin/ParamIdentifierMixin.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lang/param/src/main/grammars/Param.flex" beforeDir="false" afterPath="$PROJECT_DIR$/lang/param/src/main/grammars/Param.flex" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -223,7 +219,7 @@
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$/lang/param" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
+        <option name="scriptParameters" value="--stacktrace" />
         <option name="taskDescriptions">
           <list />
         </option>
@@ -322,7 +318,7 @@
       <workItem from="1682336465488" duration="16433000" />
       <workItem from="1682362296559" duration="3362000" />
       <workItem from="1682452674231" duration="5244000" />
-      <workItem from="1682508131462" duration="10235000" />
+      <workItem from="1682508131462" duration="19551000" />
     </task>
     <task id="LOCAL-00001" summary="feat(param): Add mixins for ParameterStatements and Identifiers">
       <created>1681403215238</created>
@@ -583,7 +579,21 @@
       <option name="project" value="LOCAL" />
       <updated>1682515087792</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="feat(param): Create ClassStub; Add PsiStatementsHolder">
+      <created>1682520793542</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1682520793542</updated>
+    </task>
+    <task id="LOCAL-00039" summary="feat(param): Create External Class Implementation">
+      <created>1682529747730</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1682529747730</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -612,8 +622,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="feat(pbo): Start Working On PboHandler&#10;&#10;Made properties in BisPboEntry public (previously protected)" />
-    <MESSAGE value="refactor: Organize Project" />
     <MESSAGE value="feat(pbo): More PboHandler Work" />
     <MESSAGE value="feat(pbo): Finish PBO Implementation" />
     <MESSAGE value="feat(sdk): Start Working On DayZ SDK" />
@@ -637,7 +645,9 @@
     <MESSAGE value="feat(param): Add ParserDefinitions" />
     <MESSAGE value="feat: Add Language Bundle and ParamFileStub" />
     <MESSAGE value="feat(param): Add ParamPsiClassBase" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat(param): Add ParamPsiClassBase" />
+    <MESSAGE value="feat(param): Create ClassStub; Add PsiStatementsHolder" />
+    <MESSAGE value="feat(param): Create External Class Implementation" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(param): Create External Class Implementation" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
