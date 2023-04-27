@@ -5,6 +5,6 @@ import com.flipperplz.bisutils.languages.param.stubs.ParamFileStub
 import com.flipperplz.bisutils.languages.param.stubs.types.ParamFileElementType
 import com.intellij.psi.stubs.PsiFileStubImpl
 
-class ParamFileStubImpl(file: ParamPsiFile) : PsiFileStubImpl<ParamPsiFile>(file), ParamFileStub {
+class ParamFileStubImpl(file: ParamPsiFile?, override val fileName: String) : PsiFileStubImpl<ParamPsiFile>(file), ParamFileStub {
     override fun getType(): ParamFileElementType = ParamFileElementType.instance
 }

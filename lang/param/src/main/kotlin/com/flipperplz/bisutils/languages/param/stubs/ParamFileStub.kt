@@ -4,6 +4,5 @@ import com.flipperplz.bisutils.languages.param.psi.ParamPsiFile
 import com.intellij.psi.stubs.PsiFileStub
 
 interface ParamFileStub : PsiFileStub<ParamPsiFile> {
-
-
+    val fileName: String
 }
