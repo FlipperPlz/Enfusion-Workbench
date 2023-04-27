@@ -1,7 +1,7 @@
 package com.flipperplz.bisutils.languages.param.lexer;
 
 import com.flipperplz.bisutils.languages.param.psi.ParamTypes;
-import com.flipperplz.bisutils.languages.param.psi.enumerations.ParamStringType;
+import com.flipperplz.bisutils.languages.param.parser.ParamParserUtil.ParamStringType;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.TokenType;
 import org.jetbrains.annotations.NotNull;
@@ -40,10 +40,8 @@ SYM_CASH=\$
 LOCALIZED_STRING={SYM_CASH}{ABS_IDENTIFIER}
 DIRECTIVE_NEWLINE={SYM_BACKSLASH}{LINE_TERMINATOR}
 ABS_IDENTIFIER=[a-zA-Z_][a-zA-Z0-9_]*
-ABS_STRING=\"((\"\"|[^\"])+)\"
 ABS_NUMERIC=(-?[0-9]+(.[0-9]+)?([eE][-+]?[0-9]+)?|0x[a-fA-F0-9]+)
-SIMPLE_NUMERIC=(0|[1-9]\d*)(\.\d+)?
-%state STRING_MODE, DEFINE_MODE
+%state STRING_MODE
 
 %%
 { DIRECTIVE_NEWLINE }            {  }
@@ -65,10 +63,6 @@ SIMPLE_NUMERIC=(0|[1-9]\d*)(\.\d+)?
 
   "enum"                         { return ParamTypes.KW_ENUM; }
 
-  "__LINE__"                     { return ParamTypes.MACRO_LINE; }
-
-  "__FILE__"                     { return ParamTypes.MACRO_FILE; }
-
   "include"                      { return ParamTypes.KW_INCLUDE; }
 
   "define"                       {
@@ -80,7 +74,7 @@ SIMPLE_NUMERIC=(0|[1-9]\d*)(\.\d+)?
 
   { ABS_IDENTIFIER }             { return ParamTypes.ABS_IDENTIFIER; }
 
-  "@"                            { return ParamTypes.REFERENCE_MODE; }
+  "@"                            { return ParamTypes.SYM_ASPERAND; }
 
   "<"                            {
           xxStringType = ParamStringType.INCLUDE;
@@ -106,11 +100,11 @@ SIMPLE_NUMERIC=(0|[1-9]\d*)(\.\d+)?
 
   "-="                           { return ParamTypes.OP_SUBASSIGN; }
 
-  "\""                            {
-                xxStringType = ParamStringType.DOUBLE;
-                yybegin(STRING_MODE);
-                return ParamTypes.SYM_DQUOTE;
-             }
+  "\""                           {
+               xxStringType = ParamStringType.DOUBLE;
+               yybegin(STRING_MODE);
+               return ParamTypes.SYM_DQUOTE;
+            }
 
   "'"                            {
                xxStringType = ParamStringType.SINGLE;
@@ -126,9 +120,9 @@ SIMPLE_NUMERIC=(0|[1-9]\d*)(\.\d+)?
 
   { ABS_NUMERIC }                { return ParamTypes.ABS_NUMERIC; }
 
-  { SYM_SHARP }                  { return ParamTypes.DIRECTIVE_START; }
+  { SYM_SHARP }                  { return ParamTypes.SYM_POUND; }
 
-  { SYM_SHARPSHARP }             { /*return this.enterConcatMode();*/ }
+//  { SYM_SHARPSHARP }             { /*return this.enterConcatMode();*/ }
 
   [^]                            {
           xxStringType = ParamStringType.UNQUOTED;
@@ -146,7 +140,7 @@ SIMPLE_NUMERIC=(0|[1-9]\d*)(\.\d+)?
           if (xxStringType == ParamStringType.DOUBLE) {
               xxStringType = null;
               yybegin(YYINITIAL);
-              return ParamTypes.STRING_DOUBLE_END;
+              return ParamTypes.SYM_DQUOTE;
           } else return ParamTypes.STRING_CONTENTS;
       }
 

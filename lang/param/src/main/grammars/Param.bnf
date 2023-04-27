@@ -1,5 +1,6 @@
 {
     parserClass="com.flipperplz.bisutils.languages.param.parser.ParamParser"
+    parserUtilClass="com.flipperplz.bisutils.languages.param.parser.ParamParserUtil"
     extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
 
     psiClassPrefix="Param"
@@ -12,29 +13,22 @@
     tokenTypeClass="com.flipperplz.bisutils.languages.param.lexer.ParamTokenType"
 
     tokens = [
-        PROCEDURAL_TEXTURE_START = '#';
-        DIRECTIVE_START          = '#';
+        SYM_POUND                = '#';
         SYM_SEMI                 = ';';
         SYM_LPARENTHESIS         = '(';
         SYM_RPARENTHESIS         = ')';
-        STRING_DOUBLE_START      = '"';
-        STRING_DOUBLE_END        = '"';
-        STRING_SINGLE_END        = "'";
-        STRING_SINGLE_START      = "'";
+        SYM_SQUOTE               = "regexp:'";
+        SYM_DQUOTE               = "regexp:\"";
         SYM_COMMA                = ',';
         SYM_LCURLY               = '{';
         SYM_RCURLY               = '}';
-        MACRO_EVAL               = '__EVAL';
-        MACRO_EXEC               = '__EXEC';
-        REFERENCE_MODE           = '@';
+        SYM_ASPERAND             = '@';
         KW_CLASS                 = 'class';
         KW_ENUM                  = 'enum';
         KW_DELETE                = 'delete';
         KW_INCLUDE               = 'include';
         KW_DEFINE                = 'define';
         KW_UNDEFINE              = 'undef';
-        MACRO_LINE               = '__LINE__';
-        MACRO_FILE               = '__FILE__';
         OP_ASSIGN                = '=';
         OP_ADDASSIGN             = '+=';
         OP_SUBASSIGN             = '-=';
@@ -54,22 +48,15 @@
 
 file ::= command* enumDeclaration?
 
-command ::= statementWithSemi | directive
+command ::= statementWithSemi | preprocessorStatement
 
 private statementWithSemi ::= statement SYM_SEMI {pin=1}
 statement ::= deleteStatement        |
               classStatement         |
               externalClassStatement |
-              parameterStatement     |
-              executeStatement
+              parameterStatement
 {
     extends=command
-}
-
-executeStatement ::= MACRO_EXEC sqfTail
-{
-    pin=1
-    extends=statement
 }
 
 classStatement ::= KW_CLASS identifier [SYM_COLON identifier] SYM_LCURLY command* SYM_RCURLY
@@ -101,7 +88,7 @@ parameterStatement ::= identifier ((arraySquare arrayOperator arrayLiteral) | (n
     implements="com.flipperplz.bisutils.languages.param.psi.ParamPsiNamedElement"
 }
 
-directive ::= defineDirective | undefineDirective | pureDirective
+preprocessorStatement ::= defineDirective | undefineDirective | pureDirective
 {
     extends=command
     implements=command
@@ -110,15 +97,12 @@ directive ::= defineDirective | undefineDirective | pureDirective
 defineDirective ::=  DIRECTIVE_START KW_DEFINE macroSignature DEFINE_VALUE
 {
     pin=2
-    extends=directive
+    extends=preprocessorStatement
 }
 
 literal ::= (
     numericLiteral |
     pureDirective |
-    lineMacro |
-    fileMacro |
-    evaluateSQF |
     parameterReference |
     stringLiteral
 )
@@ -126,18 +110,29 @@ literal ::= (
 undefineDirective ::= DIRECTIVE_START KW_UNDEFINE identifier
 {
     pin=2
-    extends=directive
+    extends=preprocessorStatement
 }
 
 
-pureDirective ::= includeDirective //    customMacro |
+pureDirective ::= includeDirective | customMacro
 {
     extends=literal
 }
 
-fileMacro ::= MACRO_FILE
+customMacro ::=  macroName [SYM_LPARENTHESIS macroArgument (SYM_COMMA macroArgument)* SYM_RPARENTHESIS]
 {
-    extends=stringLiteral
+    pin(".*")=1
+    extends=pureDirective
+}
+
+macroArgument ::= SYM_LPARENTHESIS macroArgument SYM_RPARENTHESIS | customMacro | (!(SYM_COMMA | SYM))+
+{
+    pin(".*")=1
+}
+
+external macroName ::= parseMacroName
+{
+    extends=identifier
 }
 
 numericLiteral ::= ABS_NUMERIC
@@ -145,23 +140,11 @@ numericLiteral ::= ABS_NUMERIC
     extends=literal
 }
 
-lineMacro ::= MACRO_LINE
-{
-    extends=numericLiteral
-}
-
-evaluateSQF ::= MACRO_EVAL sqfTail
-{
-    extends=literal
-    pin=1
-}
-
 identifier ::= ABS_IDENTIFIER
 {
     mixin="com.flipperplz.bisutils.languages.param.psi.mixin.ParamIdentifierMixin"
     implements="com.intellij.psi.PsiNamedElement"
 }
-
 
 includeDirective ::= DIRECTIVE_START KW_INCLUDE (stringLiteral | includeString)
 {
@@ -225,9 +208,6 @@ macroSignature ::= identifier [SYM_LPARENTHESIS identifier (SYM_COMMA identifier
     pin(".*")=1
 }
 
-//private helpers
-// macroArgument ::= !(SYM_COMMA | SYM_RPARENTHESIS)
-private sqfTail ::= SYM_LPARENTHESIS !(SYM_RPARENTHESIS) SYM_RPARENTHESIS
 private normalOperator ::= OP_ASSIGN
 private arrayOperator ::= normalOperator | OP_ADDASSIGN | OP_SUBASSIGN
 private arraySquare ::= SYM_LSQUARE SYM_RSQUARE

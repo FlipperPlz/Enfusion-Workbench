@@ -1,7 +1,7 @@
 package com.flipperplz.bisutils.languages.param.stubs.types
 
 import com.flipperplz.bisutils.languages.param.ParamLanguage
-import com.flipperplz.bisutils.languages.param.psi.ParamFile
+import com.flipperplz.bisutils.languages.param.psi.ParamPsiFile
 import com.flipperplz.bisutils.languages.param.stubs.ParamFileStub
 import com.flipperplz.bisutils.languages.param.stubs.impl.ParamFileStubImpl
 import com.intellij.psi.PsiFile
@@ -17,7 +17,7 @@ class ParamFileElementType : IStubFileElementType<ParamFileStub>("PARAM_FILE", P
     }
 
     override fun getBuilder(): StubBuilder = object : DefaultStubBuilder() {
-        override fun createStubForFile(file: PsiFile): StubElement<*> = if(file is ParamFile) ParamFileStubImpl(file)
+        override fun createStubForFile(file: PsiFile): StubElement<*> = if(file is ParamPsiFile) ParamFileStubImpl(file)
             else super.createStubForFile(file)
     }
 
