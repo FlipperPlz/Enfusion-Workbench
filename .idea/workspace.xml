@@ -4,19 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95a600cf-338e-4de1-9f0f-d35cc7c98090" name="Changes" comment="refactor(param): 'mixin' changed to 'extends'">
-      <change afterPath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/bisutils/languages/param/parser/ParamParserUtil.kt" afterDir="false" />
+    <list default="true" id="95a600cf-338e-4de1-9f0f-d35cc7c98090" name="Changes" comment="feat(param): Remove Class stub for reimplementation">
+      <change afterPath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/bisutils/languages/param/ParamPsiGenerator.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lang/param/src/main/grammars/Param.bnf" beforeDir="false" afterPath="$PROJECT_DIR$/lang/param/src/main/grammars/Param.bnf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lang/param/src/main/grammars/Param.flex" beforeDir="false" afterPath="$PROJECT_DIR$/lang/param/src/main/grammars/Param.flex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/bisutils/languages/param/parser/ParamParserDefinition.kt" beforeDir="false" afterPath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/bisutils/languages/param/parser/ParamParserDefinition.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/bisutils/languages/param/psi/ParamFile.kt" beforeDir="false" afterPath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/bisutils/languages/param/psi/ParamPsiFile.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/bisutils/languages/param/psi/enumerations/ParamStringType.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/bisutils/languages/param/psi/ParamPsiCommandsHolder.kt" beforeDir="false" afterPath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/bisutils/languages/param/psi/ParamPsiCommandsHolder.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/bisutils/languages/param/psi/impl/ParamPsiClassImpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/bisutils/languages/param/psi/impl/ParamPsiClassImpl.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/bisutils/languages/param/psi/impl/ParamTextFileImpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/bisutils/languages/param/psi/impl/ParamPsiFileImpl.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/bisutils/languages/param/stubs/ParamFileStub.kt" beforeDir="false" afterPath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/bisutils/languages/param/stubs/ParamFileStub.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/bisutils/languages/param/stubs/impl/ParamFileStubImpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/bisutils/languages/param/stubs/impl/ParamFileStubImpl.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/bisutils/languages/param/stubs/types/ParamFileElementType.kt" beforeDir="false" afterPath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/bisutils/languages/param/stubs/types/ParamFileElementType.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/bisutils/languages/param/psi/impl/ParamPsiFileImpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/bisutils/languages/param/psi/impl/ParamPsiFileImpl.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/bisutils/languages/param/stubs/ParamClassStub.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/bisutils/languages/param/stubs/ParamFileStub.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/bisutils/languages/param/stubs/impl/ParamFileStubImpl.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/bisutils/languages/param/stubs/types/ParamFileElementType.kt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -124,36 +121,36 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultHtmlFileTemplate": "HTML File",
-    "Downloaded.Files.Path.Enabled": "false",
-    "JavaClassFindUsagesOptions.isDerivedInterfaces": "true",
-    "JavaClassFindUsagesOptions.isImplementingClasses": "true",
-    "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "false",
-    "Repository.Attach.Sources": "false",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "TODO_SCOPE": "All Places",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "rewrite",
-    "ignore.virus.scanning.warn.message": "true",
-    "jdk.selected.JAVA_MODULE": "17",
-    "last_opened_file_path": "E:/projects/kotlin/intellij-plugins/Enfusion-Workbench/lang/param",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.14457831",
-    "project.structure.side.proportion": "0.5",
-    "settings.editor.selected.configurable": "AtomSelectConfig",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;JavaClassFindUsagesOptions.isDerivedInterfaces&quot;: &quot;true&quot;,
+    &quot;JavaClassFindUsagesOptions.isImplementingClasses&quot;: &quot;true&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;TODO_SCOPE&quot;: &quot;All Places&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;rewrite&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;17&quot;,
+    &quot;last_opened_file_path&quot;: &quot;E:/projects/kotlin/intellij-plugins/Enfusion-Workbench/lang/param&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.14457831&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.5&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;AtomSelectConfig&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\projects\kotlin\intellij-plugins\Enfusion-Workbench\lang" />
@@ -327,7 +324,8 @@
       <workItem from="1682336465488" duration="16433000" />
       <workItem from="1682362296559" duration="3362000" />
       <workItem from="1682452674231" duration="5244000" />
-      <workItem from="1682508131462" duration="25784000" />
+      <workItem from="1682508131462" duration="30481000" />
+      <workItem from="1682641535325" duration="5259000" />
     </task>
     <task id="LOCAL-00001" summary="feat(param): Add mixins for ParameterStatements and Identifiers">
       <created>1681403215238</created>
@@ -616,7 +614,21 @@
       <option name="project" value="LOCAL" />
       <updated>1682604676524</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="feat(param): Add macro support">
+      <created>1682616662121</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1682616662121</updated>
+    </task>
+    <task id="LOCAL-00043" summary="feat(param): Remove Class stub for reimplementation">
+      <created>1682618163174</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1682618163174</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -645,8 +657,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="feat(sdk): Start Working On DayZ SDK" />
-    <MESSAGE value="fix: Move Generated Code To Correct Output" />
     <MESSAGE value="fix: Create ParamC FileType" />
     <MESSAGE value="feat(DayZ-SDK): Add Master Config And Game Roots To SDKType" />
     <MESSAGE value="feat(rap): Rewrite/Minimize Rap Structure" />
@@ -670,7 +680,9 @@
     <MESSAGE value="feat(param): Create External Class Implementation" />
     <MESSAGE value="refactor(param): Huge Grammar Refactor" />
     <MESSAGE value="refactor(param): 'mixin' changed to 'extends'" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor(param): 'mixin' changed to 'extends'" />
+    <MESSAGE value="feat(param): Add macro support" />
+    <MESSAGE value="feat(param): Remove Class stub for reimplementation" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(param): Remove Class stub for reimplementation" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
