@@ -1,3 +1,3 @@
-[submodule "bisutils"]
-	path = libs/bisutils
-	url = https://github.com/FlipperPlz/BisUtils-kt
+[submodule "libs/bisutils-kt"]
+	path = libs/bisutils-kt
+	url = https://github.com/FlipperPlz/bisutils-kt.git

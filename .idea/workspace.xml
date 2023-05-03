@@ -4,16 +4,39 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95a600cf-338e-4de1-9f0f-d35cc7c98090" name="Changes" comment="feat(param): Remove Class stub for reimplementation">
-      <change afterPath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/bisutils/languages/param/ParamPsiGenerator.kt" afterDir="false" />
+    <list default="true" id="95a600cf-338e-4de1-9f0f-d35cc7c98090" name="Changes" comment="feat(param): Add PsiGenerator; Remove stubs.">
+      <change afterPath="$PROJECT_DIR$/libs/bisutils-kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitmodules" beforeDir="false" afterPath="$PROJECT_DIR$/.gitmodules" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/bisutils/languages/param/psi/ParamPsiCommandsHolder.kt" beforeDir="false" afterPath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/bisutils/languages/param/psi/ParamPsiCommandsHolder.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/bisutils/languages/param/psi/impl/ParamPsiClassImpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/bisutils/languages/param/psi/impl/ParamPsiClassImpl.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/bisutils/languages/param/psi/impl/ParamPsiFileImpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/bisutils/languages/param/psi/impl/ParamPsiFileImpl.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/bisutils/languages/param/stubs/ParamClassStub.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/bisutils/languages/param/stubs/ParamFileStub.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/bisutils/languages/param/stubs/impl/ParamFileStubImpl.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/bisutils/languages/param/stubs/types/ParamFileElementType.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/bisutils/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/bisutils/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/bisutils/.idea/conventionalCommit.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/bisutils/.idea/gradle.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/bisutils/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/bisutils/.idea/kotlinc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/bisutils/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/bisutils/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/bisutils/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/bisutils/gradle.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/bisutils/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/bisutils/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/bisutils/gradlew" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/bisutils/gradlew.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/bisutils/settings.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/bisutils/src/main/kotlin/com/flipperplz/bisutils/BisPboManager.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/bisutils/src/main/kotlin/com/flipperplz/bisutils/pbo/BisPboEntry.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/bisutils/src/main/kotlin/com/flipperplz/bisutils/pbo/BisPboFile.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/bisutils/src/main/kotlin/com/flipperplz/bisutils/pbo/misc/BisPboProperty.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/bisutils/src/main/kotlin/com/flipperplz/bisutils/pbo/misc/EntryMimeType.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/bisutils/src/main/kotlin/com/flipperplz/bisutils/pbo/utils/PboIoUtils.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/bisutils/src/main/kotlin/com/flipperplz/bisutils/rap/BisRapElement.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/bisutils/src/main/kotlin/com/flipperplz/bisutils/rap/io/BisRapDebinarizer.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/bisutils/src/main/kotlin/com/flipperplz/bisutils/rap/io/BisRapWriter.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/bisutils/src/main/kotlin/com/flipperplz/bisutils/rap/io/formatting/BisRapBeautifier.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/bisutils/src/main/kotlin/com/flipperplz/bisutils/test.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/bisutils/src/main/kotlin/com/flipperplz/bisutils/utils/BisRandomAccessFile.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/bisutils/src/main/kotlin/com/flipperplz/bisutils/utils/ByteBufferUtils.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/bisutils/src/main/kotlin/com/flipperplz/bisutils/utils/RandomAccessFileUtils.kt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,6 +45,9 @@
   </component>
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+    <projectState path="$PROJECT_DIR$/libs/bisutils-kt">
       <ProjectState />
     </projectState>
   </component>
@@ -47,32 +73,6 @@
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="Enfusion-Workbench" type="f1a62948:ProjectNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="Enfusion-Workbench" type="f1a62948:ProjectNode" />
-                <item name="lang" type="2d1252cf:ModuleNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="Enfusion-Workbench" type="f1a62948:ProjectNode" />
-                <item name="lang" type="2d1252cf:ModuleNode" />
-                <item name="param" type="2d1252cf:ModuleNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="Enfusion-Workbench" type="f1a62948:ProjectNode" />
-                <item name="lang" type="2d1252cf:ModuleNode" />
-                <item name="param" type="2d1252cf:ModuleNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="Enfusion-Workbench" type="f1a62948:ProjectNode" />
-                <item name="lang" type="2d1252cf:ModuleNode" />
-                <item name="param" type="2d1252cf:ModuleNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="grammarkit" type="c8890929:TasksNode$1" />
               </path>
             </expand>
             <select />
@@ -121,36 +121,36 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
-    &quot;JavaClassFindUsagesOptions.isDerivedInterfaces&quot;: &quot;true&quot;,
-    &quot;JavaClassFindUsagesOptions.isImplementingClasses&quot;: &quot;true&quot;,
-    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;TODO_SCOPE&quot;: &quot;All Places&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;rewrite&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;17&quot;,
-    &quot;last_opened_file_path&quot;: &quot;E:/projects/kotlin/intellij-plugins/Enfusion-Workbench/lang/param&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.14457831&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.5&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;AtomSelectConfig&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "Downloaded.Files.Path.Enabled": "false",
+    "JavaClassFindUsagesOptions.isDerivedInterfaces": "true",
+    "JavaClassFindUsagesOptions.isImplementingClasses": "true",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "TODO_SCOPE": "All Places",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "rewrite",
+    "ignore.virus.scanning.warn.message": "true",
+    "jdk.selected.JAVA_MODULE": "17",
+    "last_opened_file_path": "E:/projects/kotlin/intellij-plugins/Enfusion-Workbench/libs/bisutils-kt",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.14457831",
+    "project.structure.side.proportion": "0.5",
+    "settings.editor.selected.configurable": "AtomSelectConfig",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\projects\kotlin\intellij-plugins\Enfusion-Workbench\lang" />
@@ -175,7 +175,7 @@
       <recent name="com.flipperplz.enfusionWorkbench.vfs.enforce" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.Enfusion-Workbench:lang:param [generateParser]">
+  <component name="RunManager" selected="Gradle.Enfusion-Workbench [build]">
     <configuration name="Enfusion-Workbench [buildPlugin]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -203,7 +203,7 @@
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
+        <option name="scriptParameters" value="--info" />
         <option name="taskDescriptions">
           <list />
         </option>
@@ -288,9 +288,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.Enfusion-Workbench [build]" />
         <item itemvalue="Gradle.Enfusion-Workbench:lang:param [generateParser]" />
         <item itemvalue="Gradle.Enfusion-Workbench:lang:param [generateLexer]" />
-        <item itemvalue="Gradle.Enfusion-Workbench [build]" />
         <item itemvalue="Gradle.Enfusion-Workbench:libs:bisutils [build]" />
         <item itemvalue="Gradle.Enfusion-Workbench [buildPlugin]" />
       </list>
@@ -325,7 +325,10 @@
       <workItem from="1682362296559" duration="3362000" />
       <workItem from="1682452674231" duration="5244000" />
       <workItem from="1682508131462" duration="30481000" />
-      <workItem from="1682641535325" duration="5259000" />
+      <workItem from="1682641535325" duration="5896000" />
+      <workItem from="1682966711407" duration="15174000" />
+      <workItem from="1683027169618" duration="3427000" />
+      <workItem from="1683146808453" duration="468000" />
     </task>
     <task id="LOCAL-00001" summary="feat(param): Add mixins for ParameterStatements and Identifiers">
       <created>1681403215238</created>
@@ -628,7 +631,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682618163174</updated>
     </task>
-    <option name="localTasksCounter" value="44" />
+    <task id="LOCAL-00044" summary="feat(param): Add PsiGenerator; Remove stubs.">
+      <created>1682684274847</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1682684274847</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -657,7 +667,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fix: Create ParamC FileType" />
     <MESSAGE value="feat(DayZ-SDK): Add Master Config And Game Roots To SDKType" />
     <MESSAGE value="feat(rap): Rewrite/Minimize Rap Structure" />
     <MESSAGE value="feat(rap): Add Aliases And IO Structure" />
@@ -682,7 +691,8 @@
     <MESSAGE value="refactor(param): 'mixin' changed to 'extends'" />
     <MESSAGE value="feat(param): Add macro support" />
     <MESSAGE value="feat(param): Remove Class stub for reimplementation" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat(param): Remove Class stub for reimplementation" />
+    <MESSAGE value="feat(param): Add PsiGenerator; Remove stubs." />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(param): Add PsiGenerator; Remove stubs." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

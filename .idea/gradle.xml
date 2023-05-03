@@ -15,6 +15,14 @@
           </set>
         </option>
       </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/libs/bisutils-kt" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/libs/bisutils-kt" />
+          </set>
+        </option>
+      </GradleProjectSettings>
     </option>
   </component>
 </project>

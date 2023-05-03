@@ -1,5 +1,5 @@
 include(":bisutils")
-project(":bisutils").projectDir = File("libs/bisutils")
+project(":bisutils").projectDir = File("libs/bisutils-kt")
 
 include(":lang:param")
 project(":lang:param").projectDir = File("lang/param")
