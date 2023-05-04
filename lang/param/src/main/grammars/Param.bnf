@@ -69,7 +69,6 @@ classStatement ::= KW_CLASS identifier [SYM_COLON identifier] SYM_LCURLY command
 externalClassStatement ::= KW_CLASS identifier
 {
     pin(".*")=1
-    extends=statement
     extends="com.flipperplz.bisutils.languages.param.psi.impl.ParamPsiExternalClassImpl"
     implements="com.flipperplz.bisutils.languages.param.psi.ParamPsiExternalClass"
 }
