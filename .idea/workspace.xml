@@ -4,14 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95a600cf-338e-4de1-9f0f-d35cc7c98090" name="Changes" comment="fix(param): Remove Extra Extends From Grammar">
-      <change afterPath="$PROJECT_DIR$/lang/enforce/src/main/kotlin/com/flipperplz/enfusionWorkbench/languages/enforce/EnforceFileType.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/enforce/src/main/kotlin/com/flipperplz/enfusionWorkbench/languages/enforce/EnforceLanguage.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/enforce/src/main/kotlin/com/flipperplz/enfusionWorkbench/languages/enforce/lexer/EnforceTokenType.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/enforce/src/main/kotlin/com/flipperplz/enfusionWorkbench/languages/enforce/parser/EnforceElementType.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+    <list default="true" id="95a600cf-338e-4de1-9f0f-d35cc7c98090" name="Changes" comment="feat(enforce): Add Language, FileType, and Token/Element Type files for enforce scripts">
+      <change afterPath="$PROJECT_DIR$/sdk/dayz/build.gradle.kts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sdk/dayz/gradlew" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sdk/dayz/gradlew.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sdk/dayz/settings.gradle.kts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sdk/dayz/src/main/kotlin/com/flipperplz/enfusionWorkbench/sdk/dayz/DayZSdkAdditionalData.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sdk/dayz/src/main/kotlin/com/flipperplz/enfusionWorkbench/sdk/dayz/DayZSdkType.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/libs/bisutils-kt" beforeDir="false" afterPath="$PROJECT_DIR$/libs/bisutils-kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/settings.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vfs/pbo/settings.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/vfs/pbo/settings.gradle.kts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -146,38 +151,39 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
-    &quot;JavaClassFindUsagesOptions.isDerivedInterfaces&quot;: &quot;true&quot;,
-    &quot;JavaClassFindUsagesOptions.isImplementingClasses&quot;: &quot;true&quot;,
-    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;TODO_SCOPE&quot;: &quot;All Places&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;rewrite&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;17&quot;,
-    &quot;last_opened_file_path&quot;: &quot;E:/projects/kotlin/intellij-plugins/Enfusion-Workbench/vfs&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.14457831&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.5&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.gradle&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "Downloaded.Files.Path.Enabled": "false",
+    "JavaClassFindUsagesOptions.isDerivedInterfaces": "true",
+    "JavaClassFindUsagesOptions.isImplementingClasses": "true",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "TODO_SCOPE": "All Places",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "rewrite",
+    "ignore.virus.scanning.warn.message": "true",
+    "jdk.selected.JAVA_MODULE": "17",
+    "last_opened_file_path": "E:/projects/kotlin/intellij-plugins/Enfusion-Workbench/sdk/dayz",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.14457831",
+    "project.structure.side.proportion": "0.5",
+    "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\projects\kotlin\intellij-plugins\Enfusion-Workbench\sdk\dayz" />
       <recent name="E:\projects\kotlin\intellij-plugins\Enfusion-Workbench\vfs" />
       <recent name="E:\projects\kotlin\intellij-plugins\Enfusion-Workbench\idea\vfs" />
       <recent name="E:\projects\kotlin\intellij-plugins\Enfusion-Workbench\lang" />
@@ -191,6 +197,7 @@
       <recent name="E:\projects\kotlin\intellij-plugins\Enfusion-Workbench\src\beta\main\kotlin\com\flipperplz\bisutils\utils" />
     </key>
     <key name="CreateKotlinClassDialog.RecentsKey">
+      <recent name="com.flipperplz.enfusionWorkbench.sdk.dayz" />
       <recent name="com.flipperplz.enfusionWorkbench.psi.languages.param.stubs" />
       <recent name="com.flipperplz.enfusionWorkbench.formats.pbo.vfs" />
     </key>
@@ -358,7 +365,7 @@
       <workItem from="1683146808453" duration="468000" />
       <workItem from="1683164592881" duration="1975000" />
       <workItem from="1683199286764" duration="2952000" />
-      <workItem from="1683210629048" duration="1336000" />
+      <workItem from="1683210629048" duration="2833000" />
     </task>
     <task id="LOCAL-00001" summary="feat(param): Add mixins for ParameterStatements and Identifiers">
       <created>1681403215238</created>
@@ -696,7 +703,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683166278875</updated>
     </task>
-    <option name="localTasksCounter" value="49" />
+    <task id="LOCAL-00049" summary="feat(enforce): Add Language, FileType, and Token/Element Type files for enforce scripts">
+      <created>1683214199091</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1683214199092</updated>
+    </task>
+    <option name="localTasksCounter" value="50" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -725,7 +739,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fix(pbo): Change BisPboDataEntry::filename visibility" />
     <MESSAGE value="chore: Move BisUtils out of project scope" />
     <MESSAGE value="fix: Update ParamFileProvider" />
     <MESSAGE value="fix: Regular ParamFiles were broken in the process of adding ParamC; fixed" />
@@ -750,7 +763,8 @@
     <MESSAGE value="fix(param): Remove Define Stage" />
     <MESSAGE value="chore: Add idea Plugin To Gradle Buildscripts" />
     <MESSAGE value="fix(param): Remove Extra Extends From Grammar" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix(param): Remove Extra Extends From Grammar" />
+    <MESSAGE value="feat(enforce): Add Language, FileType, and Token/Element Type files for enforce scripts" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(enforce): Add Language, FileType, and Token/Element Type files for enforce scripts" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

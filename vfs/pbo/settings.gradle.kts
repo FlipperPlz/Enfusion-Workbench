@@ -1,4 +1,4 @@
-include(":bisutils")
-project(":bisutils").projectDir = File("../libs/bisutils-kt")
+include(":libs:bisutils")
+project(":libs:bisutils").projectDir = File("../libs/bisutils-kt")
 
 rootProject.name = "PBO-VFSKit"

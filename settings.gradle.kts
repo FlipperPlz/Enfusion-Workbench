@@ -10,4 +10,7 @@ project(":lang:enforce").projectDir = File("lang/enforce")
 include(":vfs:pbo")
 project(":vfs:pbo").projectDir = File("vfs/pbo")
 
+include(":sdk:dayz")
+project(":sdk:dayz").projectDir = File("sdk/dayz")
+
 rootProject.name = "Enfusion-Workbench"

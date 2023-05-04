@@ -29,9 +29,8 @@ dependencies {
   implementation(project(":libs:bisutils"))
   implementation(project(":lang:enforce"))
   implementation(project(":lang:param"))
-
-  implementation("com.code-disaster.steamworks4j:steamworks4j:1.9.0-SNAPSHOT")
-  implementation("com.code-disaster.steamworks4j:steamworks4j-server:1.9.0-SNAPSHOT")
+  implementation(project(":vfs:pbo"))
+  implementation(project(":sdk:dayz"))
 }
 
 configure<JavaPluginExtension> {
@@ -89,6 +88,8 @@ tasks {
       from(zipTree(project(":vfs:pbo").tasks.getByName("jar").outputs.files.singleFile).asFileTree)
       from(zipTree(project(":lang:param").tasks.getByName("jar").outputs.files.singleFile).asFileTree)
       from(zipTree(project(":lang:enforce").tasks.getByName("jar").outputs.files.singleFile).asFileTree)
+      from(zipTree(project(":sdk:dayz").tasks.getByName("jar").outputs.files.singleFile).asFileTree)
+
     }
    }
 

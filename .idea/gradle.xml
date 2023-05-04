@@ -13,6 +13,8 @@
             <option value="$PROJECT_DIR$/lang/param" />
             <option value="$PROJECT_DIR$/libs" />
             <option value="$PROJECT_DIR$/libs/bisutils-kt" />
+            <option value="$PROJECT_DIR$/sdk" />
+            <option value="$PROJECT_DIR$/sdk/dayz" />
             <option value="$PROJECT_DIR$/vfs" />
             <option value="$PROJECT_DIR$/vfs/pbo" />
           </set>
