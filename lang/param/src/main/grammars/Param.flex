@@ -65,10 +65,7 @@ ABS_NUMERIC=(-?[0-9]+(.[0-9]+)?([eE][-+]?[0-9]+)?|0x[a-fA-F0-9]+)
 
   "include"                      { return ParamTypes.KW_INCLUDE; }
 
-  "define"                       {
-          yybegin(DEFINE_MODE);
-          return ParamTypes.KW_DEFINE;
-      }
+  "define"                       { return ParamTypes.KW_DEFINE; }
 
   "undef"                        { return ParamTypes.KW_UNDEFINE; }
 
