@@ -4,20 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95a600cf-338e-4de1-9f0f-d35cc7c98090" name="Changes" comment="feat(param): Add PsiGenerator; Remove stubs.">
-      <change afterPath="$PROJECT_DIR$/lang/param/src/main/resources/META-INF/param.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vfs/pbo/build.gradle.kts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vfs/pbo/gradlew" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vfs/pbo/gradlew.bat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vfs/pbo/settings.gradle.kts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vfs/pbo/src/main/kotlin/com/flipperplz/enfusionWorkbench/vfs/pbo/PboFileType.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vfs/pbo/src/main/resources/META-INF/pbo.xml" afterDir="false" />
+    <list default="true" id="95a600cf-338e-4de1-9f0f-d35cc7c98090" name="Changes" comment="feat(pbo): Add Project For PBO Implementation">
       <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/idea/main/resources/META-INF/plugin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/idea/main/resources/META-INF/plugin.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lang/enforce/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/lang/enforce/build.gradle.kts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lang/param/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/lang/param/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vfs/pbo/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/vfs/pbo/build.gradle.kts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,6 +42,9 @@
         <task path="$PROJECT_DIR$/lang/param">
           <activation />
         </task>
+        <task path="$PROJECT_DIR$/vfs/pbo">
+          <activation />
+        </task>
         <projects_view>
           <tree_state>
             <expand>
@@ -58,7 +55,7 @@
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="Enfusion-Workbench" type="f1a62948:ProjectNode" />
-                <item name="bisutils" type="2d1252cf:ModuleNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
               </path>
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
@@ -69,6 +66,12 @@
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="Enfusion-Workbench" type="f1a62948:ProjectNode" />
                 <item name="vfs" type="2d1252cf:ModuleNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Enfusion-Workbench" type="f1a62948:ProjectNode" />
+                <item name="vfs" type="2d1252cf:ModuleNode" />
+                <item name="pbo" type="2d1252cf:ModuleNode" />
               </path>
             </expand>
             <select />
@@ -143,7 +146,7 @@
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.14457831",
     "project.structure.side.proportion": "0.5",
-    "settings.editor.selected.configurable": "AtomSelectConfig",
+    "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -173,7 +176,7 @@
       <recent name="com.flipperplz.enfusionWorkbench.vfs.enforce" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.Enfusion-Workbench [build]">
+  <component name="RunManager" selected="Gradle.Run Plugin">
     <configuration name="Enfusion-Workbench [buildPlugin]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -327,7 +330,7 @@
       <workItem from="1682966711407" duration="15174000" />
       <workItem from="1683027169618" duration="3427000" />
       <workItem from="1683146808453" duration="468000" />
-      <workItem from="1683164592881" duration="1122000" />
+      <workItem from="1683164592881" duration="1340000" />
     </task>
     <task id="LOCAL-00001" summary="feat(param): Add mixins for ParameterStatements and Identifiers">
       <created>1681403215238</created>
@@ -637,7 +640,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682684274847</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL-00045" summary="feat(pbo): Add Project For PBO Implementation">
+      <created>1683165765978</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1683165765978</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -666,7 +676,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="feat(DayZ-SDK): Add Master Config And Game Roots To SDKType" />
     <MESSAGE value="feat(rap): Rewrite/Minimize Rap Structure" />
     <MESSAGE value="feat(rap): Add Aliases And IO Structure" />
     <MESSAGE value="feat(rap): Add Rap Text Writer And Beautifier" />
@@ -691,7 +700,8 @@
     <MESSAGE value="feat(param): Add macro support" />
     <MESSAGE value="feat(param): Remove Class stub for reimplementation" />
     <MESSAGE value="feat(param): Add PsiGenerator; Remove stubs." />
-    <option name="LAST_COMMIT_MESSAGE" value="feat(param): Add PsiGenerator; Remove stubs." />
+    <MESSAGE value="feat(pbo): Add Project For PBO Implementation" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(pbo): Add Project For PBO Implementation" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
