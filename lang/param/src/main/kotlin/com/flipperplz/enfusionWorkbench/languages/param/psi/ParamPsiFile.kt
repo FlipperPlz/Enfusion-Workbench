@@ -1,4 +1,4 @@
-package com.flipperplz.bisutils.languages.param.psi
+package com.flipperplz.enfusionWorkbench.languages.param.psi
 
 import com.intellij.psi.PsiFile
 import com.intellij.psi.util.childrenOfType

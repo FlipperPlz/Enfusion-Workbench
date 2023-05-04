@@ -54,7 +54,7 @@ tasks {
 
   generateLexer {
     sourceFile.set(file("src/main/grammars/Param.flex"))
-    targetDir.set("src/main/gen/com/flipperplz/bisutils/languages/param/lexer/")
+    targetDir.set("src/main/gen/com/flipperplz/enfusionWorkbench/languages/param/lexer/")
     targetClass.set("ParamLexer")
     purgeOldFiles.set(true)
   }
@@ -62,8 +62,8 @@ tasks {
   generateParser {
     sourceFile.set(file("src/main/grammars/Param.bnf"))
     targetRoot.set("src/main/gen/")
-    pathToParser.set("/com/flipperplz/bisutils/languages/param/parser/ParamParser.java")
-    pathToPsiRoot.set("/com/flipperplz/bisutils/languages/param/psi/")
+    pathToParser.set("/com/flipperplz/enfusionWorkbench/languages/param/parser/ParamParser.java")
+    pathToPsiRoot.set("/com/flipperplz/enfusionWorkbench/languages/param/psi/")
 
     purgeOldFiles.set(true)
   }

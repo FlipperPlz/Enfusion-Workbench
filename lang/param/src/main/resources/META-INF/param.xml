@@ -1,7 +1,7 @@
 <idea-plugin>
     <extensions defaultExtensionNs="com.intellij">
         <fileType
-                implementationClass="com.flipperplz.bisutils.languages.param.ParamFileType"
+                implementationClass="com.flipperplz.enfusionWorkbench.languages.param.ParamFileType"
                 fieldName="instance"
 
                 name="Param"
@@ -12,7 +12,7 @@
 
         <lang.parserDefinition
                 language="Param"
-                implementationClass="com.flipperplz.bisutils.languages.param.parser.ParamParserDefinition"
+                implementationClass="com.flipperplz.enfusionWorkbench.languages.param.parser.ParamParserDefinition"
         />
     </extensions>
 </idea-plugin>

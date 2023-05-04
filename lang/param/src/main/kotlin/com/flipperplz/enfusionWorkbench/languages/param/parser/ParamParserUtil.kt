@@ -1,6 +1,6 @@
-package com.flipperplz.bisutils.languages.param.parser
+package com.flipperplz.enfusionWorkbench.languages.param.parser
 
-import com.flipperplz.bisutils.languages.param.psi.ParamTypes
+import com.flipperplz.enfusionWorkbench.languages.param.psi.ParamTypes
 import com.intellij.lang.PsiBuilder
 import org.intellij.grammar.parser.GeneratedParserUtilBase
 

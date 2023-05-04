@@ -1,16 +1,16 @@
 {
-    parserClass="com.flipperplz.bisutils.languages.param.parser.ParamParser"
-    parserUtilClass="com.flipperplz.bisutils.languages.param.parser.ParamParserUtil"
+    parserClass="com.flipperplz.enfusionWorkbench.languages.param.parser.ParamParser"
+    parserUtilClass="com.flipperplz.enfusionWorkbench.languages.param.parser.ParamParserUtil"
     extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
 
     psiClassPrefix="Param"
     psiImplClassSuffix="Impl"
-    psiPackage="com.flipperplz.bisutils.languages.param.psi"
-    psiImplPackage="com.flipperplz.bisutils.languages.param.psi.impl"
+    psiPackage="com.flipperplz.enfusionWorkbench.languages.param.psi"
+    psiImplPackage="com.flipperplz.enfusionWorkbench.languages.param.psi.impl"
 
-    elementTypeHolderClass="com.flipperplz.bisutils.languages.param.psi.ParamTypes"
-    elementTypeClass="com.flipperplz.bisutils.languages.param.parser.ParamElementType"
-    tokenTypeClass="com.flipperplz.bisutils.languages.param.lexer.ParamTokenType"
+    elementTypeHolderClass="com.flipperplz.enfusionWorkbench.languages.param.psi.ParamTypes"
+    elementTypeClass="com.flipperplz.enfusionWorkbench.languages.param.parser.ParamElementType"
+    tokenTypeClass="com.flipperplz.enfusionWorkbench.languages.param.lexer.ParamTokenType"
 
     tokens = [
         SYM_POUND                = '#';
@@ -62,29 +62,29 @@ statement ::= deleteStatement        |
 classStatement ::= KW_CLASS identifier [SYM_COLON identifier] SYM_LCURLY command* SYM_RCURLY
 {
     pin(".*")=1
-    extends="com.flipperplz.bisutils.languages.param.psi.impl.ParamPsiClassImpl"
-    implements="com.flipperplz.bisutils.languages.param.psi.ParamPsiClass"
+    extends="com.flipperplz.enfusionWorkbench.languages.param.psi.impl.ParamPsiClassImpl"
+    implements="com.flipperplz.enfusionWorkbench.languages.param.psi.ParamPsiClass"
 }
 
 externalClassStatement ::= KW_CLASS identifier
 {
     pin(".*")=1
-    extends="com.flipperplz.bisutils.languages.param.psi.impl.ParamPsiExternalClassImpl"
-    implements="com.flipperplz.bisutils.languages.param.psi.ParamPsiExternalClass"
+    extends="com.flipperplz.enfusionWorkbench.languages.param.psi.impl.ParamPsiExternalClassImpl"
+    implements="com.flipperplz.enfusionWorkbench.languages.param.psi.ParamPsiExternalClass"
 }
 
 deleteStatement ::= KW_DELETE identifier
 {
     pin=1
     extends=statement
-    implements="com.flipperplz.bisutils.languages.param.psi.ParamPsiNamedElement"
+    implements="com.flipperplz.enfusionWorkbench.languages.param.psi.ParamPsiNamedElement"
 }
 
 parameterStatement ::= identifier ((arraySquare arrayOperator arrayLiteral) | (normalOperator literal))
 {
     pin(".*")=1
     extends=statement
-    implements="com.flipperplz.bisutils.languages.param.psi.ParamPsiNamedElement"
+    implements="com.flipperplz.enfusionWorkbench.languages.param.psi.ParamPsiNamedElement"
 }
 
 preprocessorStatement ::= defineDirective | undefineDirective | pureDirective
@@ -141,7 +141,7 @@ numericLiteral ::= ABS_NUMERIC
 
 identifier ::= ABS_IDENTIFIER
 {
-    mixin="com.flipperplz.bisutils.languages.param.psi.mixin.ParamIdentifierMixin"
+    mixin="com.flipperplz.enfusionWorkbench.languages.param.psi.mixin.ParamIdentifierMixin"
     implements="com.intellij.psi.PsiNamedElement"
 }
 

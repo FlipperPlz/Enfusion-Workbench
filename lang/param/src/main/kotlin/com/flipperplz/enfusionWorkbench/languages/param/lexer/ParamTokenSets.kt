@@ -1,6 +1,6 @@
-package com.flipperplz.bisutils.languages.param.lexer
+package com.flipperplz.enfusionWorkbench.languages.param.lexer
 
-import com.flipperplz.bisutils.languages.param.psi.ParamTypes
+import com.flipperplz.enfusionWorkbench.languages.param.psi.ParamTypes
 import com.intellij.psi.tree.TokenSet
 
 object ParamTokenSets {

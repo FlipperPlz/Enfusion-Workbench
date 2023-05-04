@@ -1,6 +1,8 @@
-package com.flipperplz.bisutils.languages.param.psi.impl
+package com.flipperplz.enfusionWorkbench.languages.param.psi.impl
 
-import com.flipperplz.bisutils.languages.param.psi.*
+import com.flipperplz.enfusionWorkbench.languages.param.psi.*
+import com.flipperplz.enfusionWorkbench.languages.param.psi.ParamPsiClass
+import com.flipperplz.enfusionWorkbench.languages.param.psi.ParamPsiCommandsHolder
 import com.intellij.lang.ASTNode
 import com.intellij.psi.util.childrenOfType
 import com.intellij.psi.util.parentOfType

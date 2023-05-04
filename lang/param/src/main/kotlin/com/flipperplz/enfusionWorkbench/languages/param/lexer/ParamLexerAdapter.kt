@@ -1,4 +1,4 @@
-package com.flipperplz.bisutils.languages.param.lexer
+package com.flipperplz.enfusionWorkbench.languages.param.lexer
 
 import com.intellij.lexer.FlexAdapter
 

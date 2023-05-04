@@ -1,6 +1,6 @@
-package com.flipperplz.bisutils.languages.param.lexer
+package com.flipperplz.enfusionWorkbench.languages.param.lexer
 
-import com.flipperplz.bisutils.languages.param.ParamLanguage
+import com.flipperplz.enfusionWorkbench.languages.param.ParamLanguage
 import com.intellij.psi.tree.IElementType
 
 class ParamTokenType(debugName: String) : IElementType(debugName, ParamLanguage) {

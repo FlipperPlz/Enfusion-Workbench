@@ -1,4 +1,4 @@
-package com.flipperplz.bisutils.languages.param
+package com.flipperplz.enfusionWorkbench.languages.param
 
 import com.intellij.icons.AllIcons
 import com.intellij.openapi.fileTypes.LanguageFileType

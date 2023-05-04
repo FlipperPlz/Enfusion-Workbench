@@ -1,10 +1,10 @@
-package com.flipperplz.bisutils.languages.param.parser
+package com.flipperplz.enfusionWorkbench.languages.param.parser
 
-import com.flipperplz.bisutils.languages.param.ParamLanguage
-import com.flipperplz.bisutils.languages.param.lexer.ParamLexerAdapter
-import com.flipperplz.bisutils.languages.param.lexer.ParamTokenSets
-import com.flipperplz.bisutils.languages.param.psi.ParamTypes
-import com.flipperplz.bisutils.languages.param.psi.impl.ParamPsiFileImpl
+import com.flipperplz.enfusionWorkbench.languages.param.ParamLanguage
+import com.flipperplz.enfusionWorkbench.languages.param.lexer.ParamLexerAdapter
+import com.flipperplz.enfusionWorkbench.languages.param.lexer.ParamTokenSets
+import com.flipperplz.enfusionWorkbench.languages.param.psi.ParamTypes
+import com.flipperplz.enfusionWorkbench.languages.param.psi.impl.ParamPsiFileImpl
 import com.intellij.lang.ASTNode
 import com.intellij.lang.ParserDefinition
 import com.intellij.lang.PsiParser

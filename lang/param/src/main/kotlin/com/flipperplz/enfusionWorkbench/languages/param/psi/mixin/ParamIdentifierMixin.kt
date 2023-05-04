@@ -1,6 +1,6 @@
-package com.flipperplz.bisutils.languages.param.psi.mixin
+package com.flipperplz.enfusionWorkbench.languages.param.psi.mixin
 
-import com.flipperplz.bisutils.languages.param.psi.ParamIdentifier
+import com.flipperplz.enfusionWorkbench.languages.param.psi.ParamIdentifier
 import com.intellij.extapi.psi.ASTWrapperPsiElement
 import com.intellij.lang.ASTNode
 import com.intellij.psi.PsiElement

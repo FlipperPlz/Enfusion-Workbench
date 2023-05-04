@@ -1,14 +1,14 @@
-package com.flipperplz.bisutils.languages.param
+package com.flipperplz.enfusionWorkbench.languages.param
 
-import com.flipperplz.bisutils.languages.param.psi.ParamArrayLiteral
-import com.flipperplz.bisutils.languages.param.psi.ParamClassStatement
-import com.flipperplz.bisutils.languages.param.psi.ParamCommand
-import com.flipperplz.bisutils.languages.param.psi.ParamExternalClassStatement
-import com.flipperplz.bisutils.languages.param.psi.ParamIdentifier
-import com.flipperplz.bisutils.languages.param.psi.ParamLiteral
-import com.flipperplz.bisutils.languages.param.psi.ParamNumericLiteral
-import com.flipperplz.bisutils.languages.param.psi.ParamParameterStatement
-import com.flipperplz.bisutils.languages.param.psi.ParamPsiFile
+import com.flipperplz.enfusionWorkbench.languages.param.psi.ParamArrayLiteral
+import com.flipperplz.enfusionWorkbench.languages.param.psi.ParamClassStatement
+import com.flipperplz.enfusionWorkbench.languages.param.psi.ParamCommand
+import com.flipperplz.enfusionWorkbench.languages.param.psi.ParamExternalClassStatement
+import com.flipperplz.enfusionWorkbench.languages.param.psi.ParamIdentifier
+import com.flipperplz.enfusionWorkbench.languages.param.psi.ParamLiteral
+import com.flipperplz.enfusionWorkbench.languages.param.psi.ParamNumericLiteral
+import com.flipperplz.enfusionWorkbench.languages.param.psi.ParamParameterStatement
+import com.flipperplz.enfusionWorkbench.languages.param.psi.ParamPsiFile
 import com.intellij.openapi.project.Project
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFileFactory
