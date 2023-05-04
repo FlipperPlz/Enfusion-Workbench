@@ -1,6 +1,15 @@
 <idea-plugin>
-    <extensions>
-
+    <extensions defaultExtensionNs="com.intellij">
+        <fileType
+            name="PBO"
+            implementationClass="com.flipperplz.enfusionWorkbench.vfs.pbo.PboFileType"
+            extensions="pbo;ebo;xbo;ifa"
+        />
+        <virtualFileSystem
+            key="pbo"
+            implementationClass="com.flipperplz.enfusionWorkbench.vfs.pbo.PboFileSystem"
+            physical="true"
+        />
     </extensions>
 
 

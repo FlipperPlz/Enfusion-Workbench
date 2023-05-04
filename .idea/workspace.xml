@@ -4,14 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95a600cf-338e-4de1-9f0f-d35cc7c98090" name="Changes" comment="feat(pbo): Add Project For PBO Implementation">
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="95a600cf-338e-4de1-9f0f-d35cc7c98090" name="Changes" comment="fix(param): Remove Extra Extends From Grammar">
+      <change afterPath="$PROJECT_DIR$/vfs/pbo/src/main/kotlin/com/flipperplz/enfusionWorkbench/vfs/pbo/PboFileSystem.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vfs/pbo/src/main/kotlin/com/flipperplz/enfusionWorkbench/vfs/pbo/PboHandler.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lang/enforce/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/lang/enforce/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lang/param/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/lang/param/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/bisutils-kt" beforeDir="false" afterPath="$PROJECT_DIR$/libs/bisutils-kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vfs/pbo/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/vfs/pbo/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vfs/pbo/src/main/kotlin/com/flipperplz/enfusionWorkbench/vfs/pbo/PboFileType.kt" beforeDir="false" afterPath="$PROJECT_DIR$/vfs/pbo/src/main/kotlin/com/flipperplz/enfusionWorkbench/vfs/pbo/PboFileType.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vfs/pbo/src/main/resources/META-INF/pbo.xml" beforeDir="false" afterPath="$PROJECT_DIR$/vfs/pbo/src/main/resources/META-INF/pbo.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,13 +66,12 @@
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="Enfusion-Workbench" type="f1a62948:ProjectNode" />
-                <item name="vfs" type="2d1252cf:ModuleNode" />
+                <item name="libs" type="2d1252cf:ModuleNode" />
               </path>
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="Enfusion-Workbench" type="f1a62948:ProjectNode" />
                 <item name="vfs" type="2d1252cf:ModuleNode" />
-                <item name="pbo" type="2d1252cf:ModuleNode" />
               </path>
             </expand>
             <select />
@@ -120,36 +120,36 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultHtmlFileTemplate": "HTML File",
-    "Downloaded.Files.Path.Enabled": "false",
-    "JavaClassFindUsagesOptions.isDerivedInterfaces": "true",
-    "JavaClassFindUsagesOptions.isImplementingClasses": "true",
-    "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "false",
-    "Repository.Attach.Sources": "false",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "TODO_SCOPE": "All Places",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "rewrite",
-    "ignore.virus.scanning.warn.message": "true",
-    "jdk.selected.JAVA_MODULE": "17",
-    "last_opened_file_path": "E:/projects/kotlin/intellij-plugins/Enfusion-Workbench/vfs",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.14457831",
-    "project.structure.side.proportion": "0.5",
-    "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;JavaClassFindUsagesOptions.isDerivedInterfaces&quot;: &quot;true&quot;,
+    &quot;JavaClassFindUsagesOptions.isImplementingClasses&quot;: &quot;true&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;TODO_SCOPE&quot;: &quot;All Places&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;rewrite&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;17&quot;,
+    &quot;last_opened_file_path&quot;: &quot;E:/projects/kotlin/intellij-plugins/Enfusion-Workbench/vfs&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.14457831&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.5&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.gradle&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\projects\kotlin\intellij-plugins\Enfusion-Workbench\vfs" />
@@ -176,29 +176,7 @@
       <recent name="com.flipperplz.enfusionWorkbench.vfs.enforce" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.Run Plugin">
-    <configuration name="Enfusion-Workbench [buildPlugin]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="buildPlugin" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <ForceTestExec>false</ForceTestExec>
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="Gradle.Enfusion-Workbench [jar]">
     <configuration name="Enfusion-Workbench [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -211,6 +189,28 @@
         <option name="taskNames">
           <list>
             <option value="build" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <ForceTestExec>false</ForceTestExec>
+      <method v="2" />
+    </configuration>
+    <configuration name="Enfusion-Workbench [jar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="jar" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -289,11 +289,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.Enfusion-Workbench [jar]" />
         <item itemvalue="Gradle.Enfusion-Workbench [build]" />
         <item itemvalue="Gradle.Enfusion-Workbench:lang:param [generateParser]" />
         <item itemvalue="Gradle.Enfusion-Workbench:lang:param [generateLexer]" />
         <item itemvalue="Gradle.Enfusion-Workbench:libs:bisutils [build]" />
-        <item itemvalue="Gradle.Enfusion-Workbench [buildPlugin]" />
       </list>
     </recent_temporary>
   </component>
@@ -330,7 +330,8 @@
       <workItem from="1682966711407" duration="15174000" />
       <workItem from="1683027169618" duration="3427000" />
       <workItem from="1683146808453" duration="468000" />
-      <workItem from="1683164592881" duration="1340000" />
+      <workItem from="1683164592881" duration="1975000" />
+      <workItem from="1683199286764" duration="2952000" />
     </task>
     <task id="LOCAL-00001" summary="feat(param): Add mixins for ParameterStatements and Identifiers">
       <created>1681403215238</created>
@@ -647,7 +648,28 @@
       <option name="project" value="LOCAL" />
       <updated>1683165765978</updated>
     </task>
-    <option name="localTasksCounter" value="46" />
+    <task id="LOCAL-00046" summary="fix(param): Remove Define Stage">
+      <created>1683166073651</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1683166073651</updated>
+    </task>
+    <task id="LOCAL-00047" summary="chore: Add idea Plugin To Gradle Buildscripts">
+      <created>1683166108481</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1683166108481</updated>
+    </task>
+    <task id="LOCAL-00048" summary="fix(param): Remove Extra Extends From Grammar">
+      <created>1683166278875</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1683166278875</updated>
+    </task>
+    <option name="localTasksCounter" value="49" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -676,9 +698,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="feat(rap): Rewrite/Minimize Rap Structure" />
-    <MESSAGE value="feat(rap): Add Aliases And IO Structure" />
-    <MESSAGE value="feat(rap): Add Rap Text Writer And Beautifier" />
     <MESSAGE value="fix(pbo): Change BisPboDataEntry::filename visibility" />
     <MESSAGE value="chore: Move BisUtils out of project scope" />
     <MESSAGE value="fix: Update ParamFileProvider" />
@@ -701,7 +720,10 @@
     <MESSAGE value="feat(param): Remove Class stub for reimplementation" />
     <MESSAGE value="feat(param): Add PsiGenerator; Remove stubs." />
     <MESSAGE value="feat(pbo): Add Project For PBO Implementation" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat(pbo): Add Project For PBO Implementation" />
+    <MESSAGE value="fix(param): Remove Define Stage" />
+    <MESSAGE value="chore: Add idea Plugin To Gradle Buildscripts" />
+    <MESSAGE value="fix(param): Remove Extra Extends From Grammar" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix(param): Remove Extra Extends From Grammar" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
