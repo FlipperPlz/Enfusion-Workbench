@@ -24,22 +24,14 @@
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
     <depends>com.intellij.modules.platform</depends>
 
+    <!--suppress PluginXmlValidity -->
+    <depends config-file="pbo.xml"/>
+
+    <!--suppress PluginXmlValidity -->
+    <depends config-file="param.xml"/>
 
     <extensions defaultExtensionNs="com.intellij">
-        <fileType
-            implementationClass="com.flipperplz.bisutils.languages.param.ParamFileType"
-            fieldName="instance"
 
-            name="Param"
-            language="Param"
-            fileNamesCaseInsensitive="config.cpp"
-            extensions="rvmat;cpp"
-        />
-
-        <lang.parserDefinition
-            language="Param"
-            implementationClass="com.flipperplz.bisutils.languages.param.parser.ParamParserDefinition"
-        />
 
     </extensions>
 </idea-plugin>

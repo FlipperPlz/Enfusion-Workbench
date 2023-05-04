@@ -11,15 +11,9 @@
             <option value="$PROJECT_DIR$/lang" />
             <option value="$PROJECT_DIR$/lang/enforce" />
             <option value="$PROJECT_DIR$/lang/param" />
-            <option value="$PROJECT_DIR$/libs/bisutils" />
-          </set>
-        </option>
-      </GradleProjectSettings>
-      <GradleProjectSettings>
-        <option name="externalProjectPath" value="$PROJECT_DIR$/libs/bisutils-kt" />
-        <option name="modules">
-          <set>
             <option value="$PROJECT_DIR$/libs/bisutils-kt" />
+            <option value="$PROJECT_DIR$/vfs" />
+            <option value="$PROJECT_DIR$/vfs/pbo" />
           </set>
         </option>
       </GradleProjectSettings>

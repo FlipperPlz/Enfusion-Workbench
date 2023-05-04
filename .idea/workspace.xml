@@ -5,38 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="95a600cf-338e-4de1-9f0f-d35cc7c98090" name="Changes" comment="feat(param): Add PsiGenerator; Remove stubs.">
-      <change afterPath="$PROJECT_DIR$/libs/bisutils-kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitmodules" beforeDir="false" afterPath="$PROJECT_DIR$/.gitmodules" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lang/param/src/main/resources/META-INF/param.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vfs/pbo/build.gradle.kts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vfs/pbo/gradlew" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vfs/pbo/gradlew.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vfs/pbo/settings.gradle.kts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vfs/pbo/src/main/kotlin/com/flipperplz/enfusionWorkbench/vfs/pbo/PboFileType.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vfs/pbo/src/main/resources/META-INF/pbo.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/bisutils/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/bisutils/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/bisutils/.idea/conventionalCommit.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/bisutils/.idea/gradle.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/bisutils/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/bisutils/.idea/kotlinc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/bisutils/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/bisutils/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/bisutils/build.gradle.kts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/bisutils/gradle.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/bisutils/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/bisutils/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/bisutils/gradlew" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/bisutils/gradlew.bat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/bisutils/settings.gradle.kts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/bisutils/src/main/kotlin/com/flipperplz/bisutils/BisPboManager.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/bisutils/src/main/kotlin/com/flipperplz/bisutils/pbo/BisPboEntry.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/bisutils/src/main/kotlin/com/flipperplz/bisutils/pbo/BisPboFile.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/bisutils/src/main/kotlin/com/flipperplz/bisutils/pbo/misc/BisPboProperty.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/bisutils/src/main/kotlin/com/flipperplz/bisutils/pbo/misc/EntryMimeType.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/bisutils/src/main/kotlin/com/flipperplz/bisutils/pbo/utils/PboIoUtils.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/bisutils/src/main/kotlin/com/flipperplz/bisutils/rap/BisRapElement.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/bisutils/src/main/kotlin/com/flipperplz/bisutils/rap/io/BisRapDebinarizer.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/bisutils/src/main/kotlin/com/flipperplz/bisutils/rap/io/BisRapWriter.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/bisutils/src/main/kotlin/com/flipperplz/bisutils/rap/io/formatting/BisRapBeautifier.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/bisutils/src/main/kotlin/com/flipperplz/bisutils/test.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/bisutils/src/main/kotlin/com/flipperplz/bisutils/utils/BisRandomAccessFile.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/bisutils/src/main/kotlin/com/flipperplz/bisutils/utils/ByteBufferUtils.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/bisutils/src/main/kotlin/com/flipperplz/bisutils/utils/RandomAccessFileUtils.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/idea/main/resources/META-INF/plugin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/idea/main/resources/META-INF/plugin.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lang/param/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/lang/param/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/settings.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle.kts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,6 +54,21 @@
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="Enfusion-Workbench" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Enfusion-Workbench" type="f1a62948:ProjectNode" />
+                <item name="bisutils" type="2d1252cf:ModuleNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Enfusion-Workbench" type="f1a62948:ProjectNode" />
+                <item name="lang" type="2d1252cf:ModuleNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Enfusion-Workbench" type="f1a62948:ProjectNode" />
+                <item name="vfs" type="2d1252cf:ModuleNode" />
               </path>
             </expand>
             <select />
@@ -138,7 +134,7 @@
     "git-widget-placeholder": "rewrite",
     "ignore.virus.scanning.warn.message": "true",
     "jdk.selected.JAVA_MODULE": "17",
-    "last_opened_file_path": "E:/projects/kotlin/intellij-plugins/Enfusion-Workbench/libs/bisutils-kt",
+    "last_opened_file_path": "E:/projects/kotlin/intellij-plugins/Enfusion-Workbench/vfs",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -153,15 +149,17 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\projects\kotlin\intellij-plugins\Enfusion-Workbench\vfs" />
+      <recent name="E:\projects\kotlin\intellij-plugins\Enfusion-Workbench\idea\vfs" />
       <recent name="E:\projects\kotlin\intellij-plugins\Enfusion-Workbench\lang" />
       <recent name="E:\projects\kotlin\intellij-plugins\Enfusion-Workbench\lang\enforce" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\projects\kotlin\intellij-plugins\Enfusion-Workbench\vfs\pbo" />
       <recent name="E:\projects\kotlin\intellij-plugins\Enfusion-Workbench\src\main" />
       <recent name="E:\projects\kotlin\intellij-plugins\Enfusion-Workbench\lang\enforce" />
       <recent name="E:\projects\kotlin\intellij-plugins\Enfusion-Workbench\libs" />
       <recent name="E:\projects\kotlin\intellij-plugins\Enfusion-Workbench\src\beta\main\kotlin\com\flipperplz\bisutils\utils" />
-      <recent name="E:\projects\kotlin\intellij-plugins\Enfusion-Workbench\src\beta\main\kotlin\com\flipperplz\bisutils" />
     </key>
     <key name="CreateKotlinClassDialog.RecentsKey">
       <recent name="com.flipperplz.enfusionWorkbench.psi.languages.param.stubs" />
@@ -329,6 +327,7 @@
       <workItem from="1682966711407" duration="15174000" />
       <workItem from="1683027169618" duration="3427000" />
       <workItem from="1683146808453" duration="468000" />
+      <workItem from="1683164592881" duration="1122000" />
     </task>
     <task id="LOCAL-00001" summary="feat(param): Add mixins for ParameterStatements and Identifiers">
       <created>1681403215238</created>

@@ -1,6 +1,3 @@
-import org.jetbrains.grammarkit.tasks.GenerateLexerTask
-import org.jetbrains.grammarkit.tasks.GenerateParserTask
-import org.jetbrains.intellij.tasks.RunIdeTask
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 group = "com.flipperplz"
@@ -28,7 +25,7 @@ repositories {
 
 dependencies {
   compileOnly(kotlin("stdlib-jdk8"))
-  implementation(project(":bisutils"))
+  implementation(project(":libs:bisutils"))
   implementation(project(":lang:enforce"))
   implementation(project(":lang:param"))
 
@@ -86,10 +83,10 @@ tasks {
   }
 
   jar {
-    from(zipTree(project(":bisutils").tasks.getByName("jar").outputs.files.singleFile).asFileTree)
+    from(zipTree(project(":libs:bisutils").tasks.getByName("jar").outputs.files.singleFile).asFileTree)
+    from(zipTree(project(":vfs:pbo").tasks.getByName("jar").outputs.files.singleFile).asFileTree)
     from(zipTree(project(":lang:param").tasks.getByName("jar").outputs.files.singleFile).asFileTree)
     from(zipTree(project(":lang:enforce").tasks.getByName("jar").outputs.files.singleFile).asFileTree)
-
   }
 
   publishPlugin {
