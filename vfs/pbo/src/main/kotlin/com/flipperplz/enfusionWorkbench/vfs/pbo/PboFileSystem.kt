@@ -1,5 +1,6 @@
 package com.flipperplz.enfusionWorkbench.vfs.pbo
 
+import com.flipperplz.bisutils.pbo.BisPboFile
 import com.intellij.openapi.util.text.StringUtil
 import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.openapi.vfs.VirtualFileManager
@@ -31,6 +32,8 @@ class PboFileSystem() : ArchiveFileSystem() {
     override fun findFileByPathIfCached(path: String): VirtualFile? = VfsImplUtil.findFileByPathIfCached(this, path)
 
     override fun extractLocalPath(rootPath: String): String = StringUtil.trimEnd(rootPath, PBO_SEPARATOR)
+
+    override fun normalize(path: String): String = BisPboFile.normalizePath(path) ?: ""
 
     override fun extractRootPath(normalizedPath: String): String {
         val separatorIndex = normalizedPath.indexOf(PBO_SEPARATOR)

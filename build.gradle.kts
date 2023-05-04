@@ -84,11 +84,13 @@ tasks {
   }
 
   jar {
-    from(zipTree(project(":libs:bisutils").tasks.getByName("jar").outputs.files.singleFile).asFileTree)
-    from(zipTree(project(":vfs:pbo").tasks.getByName("jar").outputs.files.singleFile).asFileTree)
-    from(zipTree(project(":lang:param").tasks.getByName("jar").outputs.files.singleFile).asFileTree)
-    from(zipTree(project(":lang:enforce").tasks.getByName("jar").outputs.files.singleFile).asFileTree)
-  }
+    doFirst {
+      from(zipTree(project(":libs:bisutils").tasks.getByName("jar").outputs.files.singleFile).asFileTree)
+      from(zipTree(project(":vfs:pbo").tasks.getByName("jar").outputs.files.singleFile).asFileTree)
+      from(zipTree(project(":lang:param").tasks.getByName("jar").outputs.files.singleFile).asFileTree)
+      from(zipTree(project(":lang:enforce").tasks.getByName("jar").outputs.files.singleFile).asFileTree)
+    }
+   }
 
   publishPlugin {
     token.set(System.getenv("PUBLISH_TOKEN"))
