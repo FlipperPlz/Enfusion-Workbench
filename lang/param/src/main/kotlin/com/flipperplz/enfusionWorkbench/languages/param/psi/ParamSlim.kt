@@ -8,7 +8,7 @@ interface ParamSlimString : ParamSlimLiteral<String>
 interface ParamSlimFloat : ParamSlimNumericLiteral<Float>
 interface ParamSlimInt : ParamSlimNumericLiteral<Int>
 interface ParamSlimArray : ParamSlimLiteral<MutableList<ParamSlimLiteral<*>>>
-interface ParamSlimExternalClass : ParamSlimCommand { var name: String }
+interface ParamSlimExternalClass : ParamSlimCommand { var className: String }
 interface ParamSlimClass : ParamSlimExternalClass { var superClass: String?; val commands: MutableList<ParamSlimCommand> }
 interface ParamSlimDeleteStatement : ParamSlimCommand { var target: String }
 interface ParamSlimVariableStatement : ParamSlimCommand { var name: String; var value: ParamSlimLiteral<*> }
@@ -30,17 +30,17 @@ data class ParamSlimIntImpl(
 
 data class ParamSlimArrayImpl(
     override var parentElement: ParamSlim?,
-    override var value: MutableList<ParamSlimLiteral<*>>
+    override var value: MutableList<ParamSlimLiteral<*>> = mutableListOf()
 ) : ParamSlim, ParamSlimArray
 
 data class ParamSlimExternalClassImpl(
     override var parentElement: ParamSlim?,
-    override var name: String
+    override var className: String
 ) : ParamSlimExternalClass
 
 data class ParamSlimClassImpl(
     override var parentElement: ParamSlim?,
-    override var name: String,
+    override var className: String,
     override var superClass: String?,
     override val commands: MutableList<ParamSlimCommand>
 ): ParamSlimClass

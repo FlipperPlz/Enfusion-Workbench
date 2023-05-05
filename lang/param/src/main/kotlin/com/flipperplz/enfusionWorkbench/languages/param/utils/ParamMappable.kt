@@ -1,12 +1,13 @@
 package com.flipperplz.enfusionWorkbench.languages.param.utils
 
 import com.flipperplz.enfusionWorkbench.languages.param.psi.*
+import com.intellij.util.containers.addIfNotNull
 import kotlin.reflect.KCallable
 import kotlin.reflect.full.*
 import kotlin.reflect.typeOf
 
 abstract class ParamMappableClass(
-    override var name: String,
+    override var className: String,
     override var superClass: String?
 ): ParamSlimClass {
     private val annotatedProperties: Collection<KCallable<*>>
@@ -31,14 +32,19 @@ abstract class ParamMappableClass(
         for (property in annotatedProperties) {
             val returnType = property.returnType
             when {
-                returnType.isSubtypeOf(typeOf<ParamSlimCommand>()) -> commands.add(property.call() as ParamSlimCommand)
+                returnType.isSubtypeOf(typeOf<ParamSlimCommand>()) -> commands.addIfNotNull(property.call() as ParamSlimCommand?)
                 returnType.isSubtypeOf(typeOf<ParamSlimLiteral<*>>()) -> {
                     property.findAnnotation<PMappedVariableValue>()?.let {
-                        commands.add(ParamSlimVariableStatementImpl(
-                            this,
-                            it.name,
-                            property.call() as ParamSlimLiteral<*>
-                        ))
+                        (property.call() as ParamSlimLiteral<*>?)?.let { literal ->
+                            commands.add(
+                                ParamSlimVariableStatementImpl(
+                                    this,
+                                    it.name,
+                                    literal
+                                )
+                            )
+                        }
+
                     }
                 }
             }
