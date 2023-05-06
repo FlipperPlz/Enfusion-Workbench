@@ -1,4 +1,4 @@
-package com.flipperplz.enfusionWorkbench.languages.param.utils
+package com.flipperplz.enfusionWorkbench.sdk.param
 
 import com.flipperplz.enfusionWorkbench.languages.param.psi.*
 import com.intellij.openapi.vfs.VirtualFile

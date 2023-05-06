@@ -1,5 +1,6 @@
-package com.flipperplz.enfusionWorkbench.vfs.pbo
+package com.flipperplz.enfusionWorkbench.sdk.pbo
 
+import com.flipperplz.enfusionWorkbench.vfs.pbo.PboFileType
 import com.intellij.openapi.vfs.VirtualFile
 
 /**
