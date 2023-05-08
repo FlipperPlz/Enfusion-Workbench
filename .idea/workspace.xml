@@ -4,18 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95a600cf-338e-4de1-9f0f-d35cc7c98090" name="Changes" comment="feat(enforce): Add Language, FileType, and Token/Element Type files for enforce scripts">
-      <change afterPath="$PROJECT_DIR$/sdk/dayz/src/main/kotlin/com/flipperplz/enfusionWorkbench/sdk/param/ParamAddonDependency.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sdk/dayz/src/main/kotlin/com/flipperplz/enfusionWorkbench/sdk/param/ParamUtils.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sdk/dayz/src/main/kotlin/com/flipperplz/enfusionWorkbench/sdk/pbo/PboUtils.kt" afterDir="false" />
+    <list default="true" id="95a600cf-338e-4de1-9f0f-d35cc7c98090" name="Changes" comment="feat(sdk): Finish Param Wrapper Classes">
+      <change afterPath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/ParamPsiCommand.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/ParamPsiDeleteStatement.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/impl/ParamPsiDeleteStatementImpl.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/ParamSlim.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/utils/ParamAddonDependency.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/utils/ParamMappable.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/utils/ParamUtils.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sdk/dayz/src/main/kotlin/com/flipperplz/enfusionWorkbench/sdk/param/DZCfgMods.kt" beforeDir="false" afterPath="$PROJECT_DIR$/sdk/dayz/src/main/kotlin/com/flipperplz/enfusionWorkbench/sdk/param/wrappers/DZCfgMods.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sdk/dayz/src/main/kotlin/com/flipperplz/enfusionWorkbench/sdk/param/DZCfgPatches.kt" beforeDir="false" afterPath="$PROJECT_DIR$/sdk/dayz/src/main/kotlin/com/flipperplz/enfusionWorkbench/sdk/param/wrappers/DZCfgPatches.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vfs/pbo/src/main/kotlin/com/flipperplz/enfusionWorkbench/vfs/pbo/PboUtils.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lang/param/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/lang/param/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lang/param/settings.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/lang/param/settings.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lang/param/src/main/grammars/Param.bnf" beforeDir="false" afterPath="$PROJECT_DIR$/lang/param/src/main/grammars/Param.bnf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/ParamPsiClass.kt" beforeDir="false" afterPath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/ParamPsiClass.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/ParamPsiExternalClass.kt" beforeDir="false" afterPath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/ParamPsiExternalClass.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/impl/ParamPsiClassImpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/impl/ParamPsiClassImpl.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/impl/ParamPsiExternalClassImpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/impl/ParamPsiExternalClassImpl.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/bisutils-kt" beforeDir="false" afterPath="$PROJECT_DIR$/libs/bisutils-kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdk/dayz/src/main/kotlin/com/flipperplz/enfusionWorkbench/sdk/param/wrappers/DZCfgMods.kt" beforeDir="false" afterPath="$PROJECT_DIR$/sdk/dayz/src/main/kotlin/com/flipperplz/enfusionWorkbench/sdk/param/wrappers/DZCfgMods.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdk/dayz/src/main/kotlin/com/flipperplz/enfusionWorkbench/sdk/param/wrappers/DZCfgPatches.kt" beforeDir="false" afterPath="$PROJECT_DIR$/sdk/dayz/src/main/kotlin/com/flipperplz/enfusionWorkbench/sdk/param/wrappers/DZCfgPatches.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,19 +82,6 @@
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="Enfusion-Workbench" type="f1a62948:ProjectNode" />
                 <item name="lang" type="2d1252cf:ModuleNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="Enfusion-Workbench" type="f1a62948:ProjectNode" />
-                <item name="lang" type="2d1252cf:ModuleNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="grammarkit" type="c8890929:TasksNode$1" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="Enfusion-Workbench" type="f1a62948:ProjectNode" />
-                <item name="lang" type="2d1252cf:ModuleNode" />
                 <item name="param" type="2d1252cf:ModuleNode" />
               </path>
               <path>
@@ -108,6 +98,11 @@
                 <item name="param" type="2d1252cf:ModuleNode" />
                 <item name="Tasks" type="e4a08cd1:TasksNode" />
                 <item name="grammarkit" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Enfusion-Workbench" type="f1a62948:ProjectNode" />
+                <item name="libs" type="2d1252cf:ModuleNode" />
               </path>
             </expand>
             <select />
@@ -156,36 +151,36 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultHtmlFileTemplate": "HTML File",
-    "Downloaded.Files.Path.Enabled": "false",
-    "JavaClassFindUsagesOptions.isDerivedInterfaces": "true",
-    "JavaClassFindUsagesOptions.isImplementingClasses": "true",
-    "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "false",
-    "Repository.Attach.Sources": "false",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "TODO_SCOPE": "All Places",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "jdk.selected.JAVA_MODULE": "17",
-    "last_opened_file_path": "E:/projects/kotlin/intellij-plugins/Enfusion-Workbench/sdk/dayz",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.14457831",
-    "project.structure.side.proportion": "0.5",
-    "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;JavaClassFindUsagesOptions.isDerivedInterfaces&quot;: &quot;true&quot;,
+    &quot;JavaClassFindUsagesOptions.isImplementingClasses&quot;: &quot;true&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;TODO_SCOPE&quot;: &quot;All Places&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;17&quot;,
+    &quot;last_opened_file_path&quot;: &quot;E:/projects/kotlin/intellij-plugins/Enfusion-Workbench/sdk/dayz&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.14457831&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.5&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\projects\kotlin\intellij-plugins\Enfusion-Workbench\sdk\dayz" />
@@ -207,11 +202,11 @@
       <recent name="com.flipperplz.enfusionWorkbench.formats.pbo.vfs" />
     </key>
     <key name="MoveKotlinTopLevelDeclarationsDialog.RECENTS_KEY">
+      <recent name="com.flipperplz.enfusionWorkbench.sdk.param.wrappers" />
       <recent name="com.flipperplz.enfusionWorkbench.languages.enforce" />
       <recent name="com.flipperplz.bisutils.languages.param.psi.enumerations" />
       <recent name="com.flipperplz.enfusionWorkbench.vfs.paramfile" />
       <recent name="com.flipperplz.enfusionWorkbench.vfs.pbo.archive" />
-      <recent name="com.flipperplz.enfusionWorkbench.psi" />
     </key>
   </component>
   <component name="RunManager" selected="Gradle.Enfusion-Workbench [build]">
@@ -237,10 +232,10 @@
       <ForceTestExec>false</ForceTestExec>
       <method v="2" />
     </configuration>
-    <configuration name="Enfusion-Workbench:lang [generateLexer]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="Enfusion-Workbench [jar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/lang" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
         <option name="scriptParameters" />
         <option name="taskDescriptions">
@@ -248,7 +243,7 @@
         </option>
         <option name="taskNames">
           <list>
-            <option value="generateLexer" />
+            <option value="jar" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -329,9 +324,9 @@
       <list>
         <item itemvalue="Gradle.Enfusion-Workbench [build]" />
         <item itemvalue="Gradle.Enfusion-Workbench:lang:param [generateParser]" />
-        <item itemvalue="Gradle.Enfusion-Workbench:lang:param [generateLexer]" />
-        <item itemvalue="Gradle.Enfusion-Workbench:lang [generateLexer]" />
         <item itemvalue="Gradle.Enfusion-Workbench:lang [generateParser]" />
+        <item itemvalue="Gradle.Enfusion-Workbench [jar]" />
+        <item itemvalue="Gradle.Enfusion-Workbench:lang:param [generateLexer]" />
       </list>
     </recent_temporary>
   </component>
@@ -371,28 +366,8 @@
       <workItem from="1683164592881" duration="1975000" />
       <workItem from="1683199286764" duration="2952000" />
       <workItem from="1683210629048" duration="2833000" />
-      <workItem from="1683332934937" duration="1896000" />
-    </task>
-    <task id="LOCAL-00001" summary="feat(param): Add mixins for ParameterStatements and Identifiers">
-      <created>1681403215238</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1681403215238</updated>
-    </task>
-    <task id="LOCAL-00002" summary="feat(param): Add mixins for ParamClassStatement&#10;&#10;- ParamFileImpl now extends ParamPsiClass&#10;- All rules with names now implement PsiNameIdentifierOwner either directly or indirectly.">
-      <created>1681407256359</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1681407256359</updated>
-    </task>
-    <task id="LOCAL-00003" summary="feat(param): Neaten Up PSI Structure">
-      <created>1681486344739</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1681486344739</updated>
+      <workItem from="1683332934937" duration="6124000" />
+      <workItem from="1683545143156" duration="2992000" />
     </task>
     <task id="LOCAL-00004" summary="feat(param): Add Inspection For Texture Dimensions&#10;&#10;- add extension class ParamPsiUtils">
       <created>1681500866072</created>
@@ -716,7 +691,28 @@
       <option name="project" value="LOCAL" />
       <updated>1683214199092</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="chore: Neaten Project Structure&#10;&#10;Moved Misc Param/PBO game specific extension functions to sdk project&#10;Updated BisUtils yet again!">
+      <created>1683335385708</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1683335385709</updated>
+    </task>
+    <task id="LOCAL-00051" summary="chore: Update BisUtils yet again!">
+      <created>1683341590588</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1683341590588</updated>
+    </task>
+    <task id="LOCAL-00052" summary="feat(sdk): Finish Param Wrapper Classes">
+      <created>1683344445167</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1683344445167</updated>
+    </task>
+    <option name="localTasksCounter" value="53" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -745,9 +741,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="chore: Move BisUtils out of project scope" />
-    <MESSAGE value="fix: Update ParamFileProvider" />
-    <MESSAGE value="fix: Regular ParamFiles were broken in the process of adding ParamC; fixed" />
     <MESSAGE value="fix: Work still needs to be done on a ViewProvider for ParamC" />
     <MESSAGE value="fix(paramC): ViewProvider Updated So The Logic Makes Sense" />
     <MESSAGE value="fix(paramC): Yet another attempt at fixing ParamC Viewing" />
@@ -770,7 +763,10 @@
     <MESSAGE value="chore: Add idea Plugin To Gradle Buildscripts" />
     <MESSAGE value="fix(param): Remove Extra Extends From Grammar" />
     <MESSAGE value="feat(enforce): Add Language, FileType, and Token/Element Type files for enforce scripts" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat(enforce): Add Language, FileType, and Token/Element Type files for enforce scripts" />
+    <MESSAGE value="chore: Neaten Project Structure&#10;&#10;Moved Misc Param/PBO game specific extension functions to sdk project&#10;Updated BisUtils yet again!" />
+    <MESSAGE value="chore: Update BisUtils yet again!" />
+    <MESSAGE value="feat(sdk): Finish Param Wrapper Classes" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(sdk): Finish Param Wrapper Classes" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -49,6 +49,9 @@
 file ::= command* enumDeclaration?
 
 command ::= statementWithSemi | preprocessorStatement
+{
+    implements="com.flipperplz.enfusionWorkbench.languages.param.psi.ParamPsiCommand"
+}
 
 private statementWithSemi ::= statement SYM_SEMI {pin=1}
 statement ::= deleteStatement        |
@@ -76,8 +79,7 @@ externalClassStatement ::= KW_CLASS identifier
 deleteStatement ::= KW_DELETE identifier
 {
     pin=1
-    extends=statement
-    implements="com.flipperplz.enfusionWorkbench.languages.param.psi.ParamPsiNamedElement"
+    extends="com.flipperplz.enfusionWorkbench.languages.param.psi.impl.ParamPsiDeleteStatementImpl"
 }
 
 parameterStatement ::= identifier ((arraySquare arrayOperator arrayLiteral) | (normalOperator literal))

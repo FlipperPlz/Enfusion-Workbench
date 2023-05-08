@@ -11,7 +11,6 @@ import com.flipperplz.bisutils.param.slim.util.ParamMappableClass
 
 //TODO(bisutils-kt): Add Functions for ParamMappableClass::Serialize and ParamMappableClass::Deserialize
 class DZCfgPatches(
-    override var parentElement: ParamSlim?,
     className: String,
     @PMappedVariableValue("addonRootClass")
     val addonRootClass: ParamSlimString? = null,

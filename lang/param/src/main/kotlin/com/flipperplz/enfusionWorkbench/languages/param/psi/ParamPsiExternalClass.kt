@@ -1,7 +1,8 @@
 package com.flipperplz.enfusionWorkbench.languages.param.psi
 
-interface ParamPsiExternalClass : ParamStatement, ParamPsiNamedElement {
-    val className: String?
+import com.flipperplz.bisutils.param.slim.ParamSlimExternalClass
+
+interface ParamPsiExternalClass : ParamPsiNamedElement, ParamSlimExternalClass {
     val isExternalParamClass: Boolean
         get() = true
 }

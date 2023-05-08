@@ -7,7 +7,6 @@ import com.flipperplz.bisutils.param.slim.impl.literal.ParamSlimStringImpl
 import com.flipperplz.bisutils.param.slim.util.ParamMappableClass
 
 class DZCfgMods(
-    override var parentElement: ParamSlim?,
     className: String,
     superClass: String?,
 
@@ -30,7 +29,6 @@ class DZCfgMods(
 
 ) : ParamMappableClass(className, superClass) {
     class DZDefs(
-        override var parentElement: ParamSlim?,
         superClass: String?,
         @PMappedCommand @ParamClassnameOverrider("imageSets")
         val imageSets: FileDefinitions?,
@@ -48,7 +46,6 @@ class DZCfgMods(
         val missionScriptModule: ScriptDefinitions?
     ): ParamMappableClass("defs", superClass) {
         open class FileDefinitions(
-            override var parentElement: ParamSlim?,
             className: String,
 
             @PMappedVariableValue("files") @ParamArrayTemplate<ParamSlimString>
@@ -56,12 +53,11 @@ class DZCfgMods(
         ): ParamMappableClass(className, null)
 
         class ScriptDefinitions(
-            override var parentElement: ParamSlim?,
             className: String,
 
             @PMappedVariableValue("value")
             val entryFunction: ParamSlimString = ParamSlimStringImpl(null, ""),
             files: ParamSlimArray
-        ): FileDefinitions(parentElement, className, files)
+        ): FileDefinitions(className, files)
     }
 }
