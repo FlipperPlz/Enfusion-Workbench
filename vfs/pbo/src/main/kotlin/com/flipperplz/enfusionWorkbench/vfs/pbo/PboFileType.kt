@@ -4,7 +4,7 @@ import com.intellij.ide.highlighter.ArchiveFileType
 
 class PboFileType : ArchiveFileType() {
     companion object {
-        val instance: PboFileType = PboFileType();
+        val instance: PboFileType = PboFileType()
     }
 
     override fun getName(): String = "PBO"

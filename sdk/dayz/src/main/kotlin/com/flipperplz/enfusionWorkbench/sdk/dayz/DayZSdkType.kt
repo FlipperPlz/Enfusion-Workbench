@@ -30,7 +30,7 @@ class DayZSdkType : SdkType("DayZ") {
 
     override fun setupSdkPaths(sdk: Sdk, sdkModel: SdkModel): Boolean {
         val sdkHome = sdk.homeDirectory ?: return false
-        val modificator = sdk.sdkModificator;
+        val modificator = sdk.sdkModificator
 
         modificator.sdkAdditionalData = DayZSdkAdditionalData(
             sdkHome,

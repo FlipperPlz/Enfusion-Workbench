@@ -46,7 +46,7 @@ The convention used when commiting is heavily described over at the [Conventiona
 - Enforce PSI Library Scanner
 - Enforce Linting
 - Gradle Build System Plugin (dubbed "GradleZ")
-- Much Much More
+- Much, Much More
 
 
 

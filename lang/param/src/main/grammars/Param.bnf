@@ -7,11 +7,12 @@
     psiImplClassSuffix="Impl"
     psiPackage="com.flipperplz.enfusionWorkbench.languages.param.psi"
     psiImplPackage="com.flipperplz.enfusionWorkbench.languages.param.psi.impl"
-    psiTreeUtilClass="com.flipperplz.enfusionWorkbench.languages.param.parser.ParamParserUtil"
 
     elementTypeHolderClass="com.flipperplz.enfusionWorkbench.languages.param.psi.ParamTypes"
     elementTypeClass="com.flipperplz.enfusionWorkbench.languages.param.parser.ParamElementType"
     tokenTypeClass="com.flipperplz.enfusionWorkbench.languages.param.lexer.ParamTokenType"
+
+    implements(".*")="com.intellij.psi.PsiElement"
 
     tokens = [
         SYM_POUND                = '#';
@@ -51,13 +52,13 @@ file ::= command* enumDeclaration?
 
 command ::= statementWithSemi | preprocessorStatement
 {
+    mixin="com.flipperplz.enfusionWorkbench.languages.param.psi.mixin.ParamCommandMixin"
     implements="com.flipperplz.bisutils.param.node.RapStatement"
 }
 
 private statementWithSemi ::= statement SYM_SEMI
 {
     pin=1
-    recoverWhile=statement
 }
 statement ::= deleteStatement        |
               classStatement         |
@@ -71,6 +72,7 @@ classStatement ::= KW_CLASS identifier [SYM_COLON identifier] SYM_LCURLY command
 {
     pin(".*")=1
     extends=externalClassStatement
+    mixin="com.flipperplz.enfusionWorkbench.languages.param.psi.mixin.ParamClassStatementMixin"
     implements="com.flipperplz.bisutils.param.statement.RapClass"
 }
 
@@ -78,6 +80,7 @@ externalClassStatement ::= KW_CLASS identifier
 {
     pin(".*")=1
     extends=statement
+    mixin="com.flipperplz.enfusionWorkbench.languages.param.psi.mixin.ParamExternalClassStatementMixin"
     implements="com.flipperplz.bisutils.param.statement.RapExternalClass"
 }
 
@@ -85,6 +88,7 @@ deleteStatement ::= KW_DELETE identifier
 {
     pin=1
     extends=statement
+    mixin="com.flipperplz.enfusionWorkbench.languages.param.psi.mixin.ParamDeleteStatementMixin"
     implements="com.flipperplz.bisutils.param.statement.RapDeleteStatement"
 }
 
@@ -133,6 +137,8 @@ customMacro ::=  macroName [SYM_LPARENTHESIS macroArgument (SYM_COMMA macroArgum
 {
     pin(".*")=1
     extends=pureDirective
+    mixin="com.flipperplz.enfusionWorkbench.languages.param.psi.mixin.ParamCustomMacroMixin"
+    implements="com.flipperplz.bisutils.param.directive.RapMacro"
 }
 
 macroArgument ::= SYM_LPARENTHESIS macroArgument SYM_RPARENTHESIS | customMacro | (!(SYM_COMMA | SYM))+
@@ -149,18 +155,20 @@ numericLiteral ::= ABS_NUMERIC
 {
     extends=literal
     implements="com.flipperplz.bisutils.param.literal.RapNumerical"
+    mixin="com.flipperplz.enfusionWorkbench.languages.param.psi.mixin.ParamNumericLiteralMixin"
 }
 
 identifier ::= ABS_IDENTIFIER
 {
+    mixin="com.flipperplz.enfusionWorkbench.languages.param.psi.mixin.ParamIdentifierMixin"
     implements="com.intellij.psi.PsiNamedElement"
-    methods=[getName setName]
 }
 
 includeDirective ::= DIRECTIVE_START KW_INCLUDE (stringLiteral | includeString)
 {
     pin=2
     extends=pureDirective
+    mixin="com.flipperplz.enfusionWorkbench.languages.param.psi.mixin.ParamIncludeDirectiveMixin"
 }
 
 stringContent ::= (STRING_CONTENTS | LOCALIZED_STRING | STRING_ESCAPE)+ ;
@@ -168,6 +176,8 @@ parameterReference ::= REFERENCE_MODE stringLiteral
 {
     pin=1
     extends=literal
+    mixin="com.flipperplz.enfusionWorkbench.languages.param.psi.mixin.ParamParameterReferenceMixin"
+    implements="com.flipperplz.bisutils.param.literal.RapReference"
 }
 
 
@@ -178,10 +188,17 @@ stringLiteral ::= doubleString | singleString | unquotedString
 }
 
 arrayElement ::= arrayLiteral | literal
+{
+    mixin="com.flipperplz.enfusionWorkbench.languages.param.psi.mixin.ParamArrayElementMixin"
+    implements=literal
+}
+
 arrayLiteral ::= SYM_LCURLY (arrayElement (SYM_COMMA arrayElement)*)? SYM_RCURLY
 {
     pin(".*")=1
     extends=literal
+    mixin="com.flipperplz.enfusionWorkbench.languages.param.psi.mixin.ParamArrayLiteralMixin"
+    implements="com.flipperplz.bisutils.param.literal.RapArray"
 }
 
 private unquotedString ::= stringContent

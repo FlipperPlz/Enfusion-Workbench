@@ -2,7 +2,7 @@ package com.flipperplz.enfusionWorkbench.vfs.pbo
 
 import com.flipperplz.bisutils.pbo.BisPboDataEntry
 import com.flipperplz.bisutils.pbo.BisPboFile
-import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.diagnostic.Logger
 import com.intellij.openapi.vfs.impl.ArchiveHandler
 import com.intellij.util.io.FileAccessorCache
 import com.intellij.util.io.ResourceHandle
