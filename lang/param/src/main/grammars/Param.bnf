@@ -82,6 +82,7 @@ parameterStatement ::= identifier ((arraySquare arrayOperator arrayLiteral) | (n
 {
     pin(".*")=1
     extends=statement
+    mixin="com.flipperplz.enfusionWorkbench.languages.param.psi.mixin.ParamGParameterStatementImpl"
     implements="com.flipperplz.bisutils.param.statement.ParamVariableStatement"
 }
 
@@ -93,6 +94,7 @@ literal ::= numericLiteral | stringLiteral
 numericLiteral ::= ABS_NUMERIC
 {
     extends=literal
+    mixin="com.flipperplz.enfusionWorkbench.languages.param.psi.mixin.ParamGNumericLiteralMixin"
     implements="com.flipperplz.bisutils.param.node.ParamNumerical"
 }
 
@@ -101,11 +103,13 @@ stringLiteral ::= (SYM_DQUOTE (quoteEscape | !SYM_DQUOTE)* SYM_DQUOTE) |
 {
     pin(".*")=1
     extends=literal
+    mixin="com.flipperplz.enfusionWorkbench.languages.param.psi.mixin.ParamGStringLiteralMixin"
     implements="com.flipperplz.bisutils.param.literal.ParamString"
 }
 
 identifier ::= ABS_IDENTIFIER
 {
+    mixin="com.flipperplz.enfusionWorkbench.languages.param.psi.mixin.ParamGIdentifierMixin"
     implements="com.intellij.psi.PsiNamedElement"
 }
 
@@ -133,6 +137,7 @@ enumDeclaration ::= KW_ENUM SYM_LCURLY (enumValue ((SYM_COMMA | EOL | SYM_SEMI) 
 enumValue ::= identifier [OP_ASSIGN numericLiteral]
 {
     pin(".*")=1
+    mixin="com.flipperplz.enfusionWorkbench.languages.param.psi.mixin.ParamGEnumValueMixin"
 }
 
 private normalOperator ::= OP_ASSIGN

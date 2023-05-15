@@ -7,85 +7,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95a600cf-338e-4de1-9f0f-d35cc7c98090" name="Changes" comment="feat(param): Start Transition To BisUtils::ParamSlim">
-      <change afterPath="$PROJECT_DIR$/lang/param/src/main/gen/com/flipperplz/enfusionWorkbench/languages/param/parser/ParamParser.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/param/src/main/gen/com/flipperplz/enfusionWorkbench/languages/param/psi/ParamArrayElement.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/param/src/main/gen/com/flipperplz/enfusionWorkbench/languages/param/psi/ParamArrayLiteral.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/param/src/main/gen/com/flipperplz/enfusionWorkbench/languages/param/psi/ParamClassStatement.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/param/src/main/gen/com/flipperplz/enfusionWorkbench/languages/param/psi/ParamCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/param/src/main/gen/com/flipperplz/enfusionWorkbench/languages/param/psi/ParamCustomMacro.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/param/src/main/gen/com/flipperplz/enfusionWorkbench/languages/param/psi/ParamDefineDirective.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/param/src/main/gen/com/flipperplz/enfusionWorkbench/languages/param/psi/ParamDeleteStatement.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/param/src/main/gen/com/flipperplz/enfusionWorkbench/languages/param/psi/ParamEnumDeclaration.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/param/src/main/gen/com/flipperplz/enfusionWorkbench/languages/param/psi/ParamEnumValue.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/param/src/main/gen/com/flipperplz/enfusionWorkbench/languages/param/psi/ParamExternalClassStatement.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/param/src/main/gen/com/flipperplz/enfusionWorkbench/languages/param/psi/ParamIdentifier.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/param/src/main/gen/com/flipperplz/enfusionWorkbench/languages/param/psi/ParamIncludeDirective.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/param/src/main/gen/com/flipperplz/enfusionWorkbench/languages/param/psi/ParamIncludeString.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/param/src/main/gen/com/flipperplz/enfusionWorkbench/languages/param/psi/ParamLiteral.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/param/src/main/gen/com/flipperplz/enfusionWorkbench/languages/param/psi/ParamMacroArgument.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/param/src/main/gen/com/flipperplz/enfusionWorkbench/languages/param/psi/ParamMacroSignature.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/param/src/main/gen/com/flipperplz/enfusionWorkbench/languages/param/psi/ParamNumericLiteral.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/param/src/main/gen/com/flipperplz/enfusionWorkbench/languages/param/psi/ParamParameterReference.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/param/src/main/gen/com/flipperplz/enfusionWorkbench/languages/param/psi/ParamParameterStatement.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/param/src/main/gen/com/flipperplz/enfusionWorkbench/languages/param/psi/ParamPreprocessorStatement.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/param/src/main/gen/com/flipperplz/enfusionWorkbench/languages/param/psi/ParamPureDirective.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/param/src/main/gen/com/flipperplz/enfusionWorkbench/languages/param/psi/ParamStatement.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/param/src/main/gen/com/flipperplz/enfusionWorkbench/languages/param/psi/ParamStringContent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/param/src/main/gen/com/flipperplz/enfusionWorkbench/languages/param/psi/ParamStringLiteral.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/param/src/main/gen/com/flipperplz/enfusionWorkbench/languages/param/psi/ParamTypes.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/param/src/main/gen/com/flipperplz/enfusionWorkbench/languages/param/psi/ParamUndefineDirective.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/param/src/main/gen/com/flipperplz/enfusionWorkbench/languages/param/psi/ParamVisitor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/param/src/main/gen/com/flipperplz/enfusionWorkbench/languages/param/psi/impl/ParamArrayElementImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/param/src/main/gen/com/flipperplz/enfusionWorkbench/languages/param/psi/impl/ParamArrayLiteralImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/param/src/main/gen/com/flipperplz/enfusionWorkbench/languages/param/psi/impl/ParamClassStatementImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/param/src/main/gen/com/flipperplz/enfusionWorkbench/languages/param/psi/impl/ParamCommandImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/param/src/main/gen/com/flipperplz/enfusionWorkbench/languages/param/psi/impl/ParamCustomMacroImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/param/src/main/gen/com/flipperplz/enfusionWorkbench/languages/param/psi/impl/ParamDefineDirectiveImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/param/src/main/gen/com/flipperplz/enfusionWorkbench/languages/param/psi/impl/ParamDeleteStatementImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/param/src/main/gen/com/flipperplz/enfusionWorkbench/languages/param/psi/impl/ParamEnumDeclarationImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/param/src/main/gen/com/flipperplz/enfusionWorkbench/languages/param/psi/impl/ParamEnumValueImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/param/src/main/gen/com/flipperplz/enfusionWorkbench/languages/param/psi/impl/ParamExternalClassStatementImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/param/src/main/gen/com/flipperplz/enfusionWorkbench/languages/param/psi/impl/ParamIdentifierImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/param/src/main/gen/com/flipperplz/enfusionWorkbench/languages/param/psi/impl/ParamIncludeDirectiveImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/param/src/main/gen/com/flipperplz/enfusionWorkbench/languages/param/psi/impl/ParamIncludeStringImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/param/src/main/gen/com/flipperplz/enfusionWorkbench/languages/param/psi/impl/ParamLiteralImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/param/src/main/gen/com/flipperplz/enfusionWorkbench/languages/param/psi/impl/ParamMacroArgumentImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/param/src/main/gen/com/flipperplz/enfusionWorkbench/languages/param/psi/impl/ParamMacroSignatureImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/param/src/main/gen/com/flipperplz/enfusionWorkbench/languages/param/psi/impl/ParamNumericLiteralImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/param/src/main/gen/com/flipperplz/enfusionWorkbench/languages/param/psi/impl/ParamParameterReferenceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/param/src/main/gen/com/flipperplz/enfusionWorkbench/languages/param/psi/impl/ParamParameterStatementImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/param/src/main/gen/com/flipperplz/enfusionWorkbench/languages/param/psi/impl/ParamPreprocessorStatementImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/param/src/main/gen/com/flipperplz/enfusionWorkbench/languages/param/psi/impl/ParamPureDirectiveImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/param/src/main/gen/com/flipperplz/enfusionWorkbench/languages/param/psi/impl/ParamStatementImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/param/src/main/gen/com/flipperplz/enfusionWorkbench/languages/param/psi/impl/ParamStringContentImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/param/src/main/gen/com/flipperplz/enfusionWorkbench/languages/param/psi/impl/ParamStringLiteralImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/param/src/main/gen/com/flipperplz/enfusionWorkbench/languages/param/psi/impl/ParamUndefineDirectiveImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/mixin/ParamArrayElementMixin.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/mixin/ParamArrayLiteralMixin.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/mixin/ParamClassStatementMixin.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/mixin/ParamCommandMixin.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/mixin/ParamCustomMacroMixin.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/mixin/ParamDeleteStatementMixin.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/mixin/ParamExternalClassStatementMixin.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/mixin/ParamIdentifierMixin.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/mixin/ParamIncludeDirectiveMixin.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/mixin/ParamNumericLiteralMixin.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/mixin/ParamParameterReferenceMixin.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+    <list default="true" id="95a600cf-338e-4de1-9f0f-d35cc7c98090" name="Changes" comment="feat(param): Start Transition To new BisUtils::ParamSlim">
+      <change afterPath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/mixin/ParamGEnumValueMixin.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/mixin/ParamGIdentifierMixin.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/mixin/ParamGNumericLiteralMixin.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/mixin/ParamGParameterStatementImpl.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/mixin/ParamGStringLiteralMixin.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lang/param/src/main/grammars/Param.bnf" beforeDir="false" afterPath="$PROJECT_DIR$/lang/param/src/main/grammars/Param.bnf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/parser/ParamParserDefinition.kt" beforeDir="false" afterPath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/parser/ParamParserDefinition.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/ParamPsiFile.kt" beforeDir="false" afterPath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/ParamPsiFile.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/ParamPsiFileImpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/impl/ParamPsiFileImpl.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/bisutils-kt" beforeDir="false" afterPath="$PROJECT_DIR$/libs/bisutils-kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/bisutils-kt/src/main/kotlin/com/flipperplz/bisutils/param/literal/RapNumerical.kt" beforeDir="false" afterPath="$PROJECT_DIR$/libs/bisutils-kt/src/main/kotlin/com/flipperplz/bisutils/param/literal/RapNumerical.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sdk/dayz/src/main/kotlin/com/flipperplz/enfusionWorkbench/sdk/dayz/DayZSdkType.kt" beforeDir="false" afterPath="$PROJECT_DIR$/sdk/dayz/src/main/kotlin/com/flipperplz/enfusionWorkbench/sdk/dayz/DayZSdkType.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sdk/dayz/src/main/kotlin/com/flipperplz/enfusionWorkbench/sdk/param/wrappers/DZCfgMods.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sdk/dayz/src/main/kotlin/com/flipperplz/enfusionWorkbench/sdk/param/wrappers/DZCfgPatches.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sdk/dayz/src/main/kotlin/com/flipperplz/enfusionWorkbench/sdk/param/wrappers/ParamArrayTemplate.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sdk/dayz/src/main/kotlin/com/flipperplz/enfusionWorkbench/sdk/param/wrappers/ParamClassnameOverrider.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vfs/pbo/src/main/kotlin/com/flipperplz/enfusionWorkbench/vfs/pbo/PboFileType.kt" beforeDir="false" afterPath="$PROJECT_DIR$/vfs/pbo/src/main/kotlin/com/flipperplz/enfusionWorkbench/vfs/pbo/PboFileType.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vfs/pbo/src/main/kotlin/com/flipperplz/enfusionWorkbench/vfs/pbo/PboHandler.kt" beforeDir="false" afterPath="$PROJECT_DIR$/vfs/pbo/src/main/kotlin/com/flipperplz/enfusionWorkbench/vfs/pbo/PboHandler.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/impl/ParamPsiFileImpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/impl/ParamPsiFileImpl.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -195,6 +127,7 @@
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
         <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$/libs/bisutils-kt" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -248,7 +181,7 @@
     "project.structure.proportion": "0.14457831",
     "project.structure.side.proportion": "0.5",
     "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "settings.editor.selected.configurable": "reference.settings.ide.settings.uml",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -395,10 +328,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Gradle.Enfusion-Workbench:lang:param [generateParser]" />
+        <item itemvalue="Gradle.Enfusion-Workbench:lang:param [generateLexer]" />
         <item itemvalue="Gradle.Enfusion-Workbench [build]" />
         <item itemvalue="Gradle.Enfusion-Workbench:lang [generateParser]" />
         <item itemvalue="Gradle.Enfusion-Workbench [jar]" />
-        <item itemvalue="Gradle.Enfusion-Workbench:lang:param [generateLexer]" />
       </list>
     </recent_temporary>
   </component>
@@ -441,28 +374,14 @@
       <workItem from="1683332934937" duration="6124000" />
       <workItem from="1683545143156" duration="2992000" />
       <workItem from="1683755191636" duration="876000" />
-      <workItem from="1683756263157" duration="9056000" />
-    </task>
-    <task id="LOCAL-00005" summary="feat(param): Add Inspection For Invalid Texture Format">
-      <created>1681510521054</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1681510521054</updated>
-    </task>
-    <task id="LOCAL-00006" summary="feat(enforce): Start To Implement Enforce Script">
-      <created>1681524614616</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1681524614616</updated>
-    </task>
-    <task id="LOCAL-00007" summary="feat(pbo): Start To Implement Pbo Archive Files">
-      <created>1681749045726</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1681749045726</updated>
+      <workItem from="1683756263157" duration="10639000" />
+      <workItem from="1683772898470" duration="139000" />
+      <workItem from="1683804122971" duration="121000" />
+      <workItem from="1683804321933" duration="1325000" />
+      <workItem from="1683899852919" duration="2734000" />
+      <workItem from="1684152733158" duration="8000" />
+      <workItem from="1684176189507" duration="3684000" />
+      <workItem from="1684185062873" duration="3222000" />
     </task>
     <task id="LOCAL-00008" summary="feat(pbo): Finish Up BisPboEntry Implementations">
       <created>1681853550131</created>
@@ -786,7 +705,28 @@
       <option name="project" value="LOCAL" />
       <updated>1683759473860</updated>
     </task>
-    <option name="localTasksCounter" value="54" />
+    <task id="LOCAL-00054" summary="feat(param): Add Param Mixins">
+      <created>1683768878316</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1683768878316</updated>
+    </task>
+    <task id="LOCAL-00055" summary="feat(param): Fix Class Mixins">
+      <created>1683769074154</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1683769074154</updated>
+    </task>
+    <task id="LOCAL-00056" summary="feat(param): Start Transition To new BisUtils::ParamSlim">
+      <created>1684179923778</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1684179923778</updated>
+    </task>
+    <option name="localTasksCounter" value="57" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -815,9 +755,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fix(paramC): ViewProvider Updated So The Logic Makes Sense" />
-    <MESSAGE value="fix(paramC): Yet another attempt at fixing ParamC Viewing" />
-    <MESSAGE value="fix(paramC): Switch To filetype.decompiler endpoint." />
     <MESSAGE value="refactor: Initial Rewrite Commit" />
     <MESSAGE value="feat: Add ParamFileType and slim param grammar&#10;&#10;-fix: jvmToolchain(11) cannot be enabled in tasks.kotlin" />
     <MESSAGE value="feat: Add ElementTokenType.&#10;&#10;Commit would have been bigger but I think it's time I head to sleep for the night. Looking forward to bringing this branch up to speed tomorrow" />
@@ -840,7 +777,10 @@
     <MESSAGE value="chore: Update BisUtils yet again!" />
     <MESSAGE value="feat(sdk): Finish Param Wrapper Classes" />
     <MESSAGE value="feat(param): Start Transition To BisUtils::ParamSlim" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat(param): Start Transition To BisUtils::ParamSlim" />
+    <MESSAGE value="feat(param): Add Param Mixins" />
+    <MESSAGE value="feat(param): Fix Class Mixins" />
+    <MESSAGE value="feat(param): Start Transition To new BisUtils::ParamSlim" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(param): Start Transition To new BisUtils::ParamSlim" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -880,5 +820,9 @@
         <watch expression="this.file." language="kotlin" />
       </configuration>
     </watches-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
