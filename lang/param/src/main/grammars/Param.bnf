@@ -3,7 +3,7 @@
     parserUtilClass="com.flipperplz.enfusionWorkbench.languages.param.parser.ParamParserUtil"
     extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
 
-    psiClassPrefix="Param"
+    psiClassPrefix="ParamG"
     psiImplClassSuffix="Impl"
     psiPackage="com.flipperplz.enfusionWorkbench.languages.param.psi"
     psiImplPackage="com.flipperplz.enfusionWorkbench.languages.param.psi.impl"
@@ -12,25 +12,17 @@
     elementTypeClass="com.flipperplz.enfusionWorkbench.languages.param.parser.ParamElementType"
     tokenTypeClass="com.flipperplz.enfusionWorkbench.languages.param.lexer.ParamTokenType"
 
-    implements(".*")="com.intellij.psi.PsiElement"
+    implements(".*")="com.flipperplz.enfusionWorkbench.languages.param.psi.ParamPsiElement"
 
     tokens = [
-        SYM_POUND                = '#';
         SYM_SEMI                 = ';';
-        SYM_LPARENTHESIS         = '(';
-        SYM_RPARENTHESIS         = ')';
-        SYM_SQUOTE               = "regexp:'";
         SYM_DQUOTE               = "regexp:\"";
         SYM_COMMA                = ',';
         SYM_LCURLY               = '{';
         SYM_RCURLY               = '}';
-        SYM_ASPERAND             = '@';
         KW_CLASS                 = 'class';
         KW_ENUM                  = 'enum';
         KW_DELETE                = 'delete';
-        KW_INCLUDE               = 'include';
-        KW_DEFINE                = 'define';
-        KW_UNDEFINE              = 'undef';
         OP_ASSIGN                = '=';
         OP_ADDASSIGN             = '+=';
         OP_SUBASSIGN             = '-=';
@@ -42,19 +34,12 @@
         ABS_IDENTIFIER           = 'regexp:[a-zA-Z_][a-zA-Z0-9_]*';
         ABS_NUMERIC              = 'regexp:(-?[0-9]+(.[0-9]+)?([eE][-+]?[0-9]+)?|0x[a-fA-F0-9]+)';
         WHITESPACE               = 'regexp:[\s\t\r\n]';
-        DIRECTIVE_NEWLINE        = 'regexp:\\[\r\n]'
         EOL                      = 'regexp:[\r\n]'
     ]
     generate=[tokenAccessors="yes"]
 }
 
-file ::= command* enumDeclaration?
-
-command ::= statementWithSemi | preprocessorStatement
-{
-    mixin="com.flipperplz.enfusionWorkbench.languages.param.psi.mixin.ParamCommandMixin"
-    implements="com.flipperplz.bisutils.param.node.RapStatement"
-}
+file ::= statementWithSemi*
 
 private statementWithSemi ::= statement SYM_SEMI
 {
@@ -63,182 +48,101 @@ private statementWithSemi ::= statement SYM_SEMI
 statement ::= deleteStatement        |
               classStatement         |
               externalClassStatement |
-              parameterStatement
+              parameterStatement |
+              enumDeclaration
 {
-    extends=command
+    implements="com.flipperplz.bisutils.param.node.ParamStatement"
 }
 
-classStatement ::= KW_CLASS identifier [SYM_COLON identifier] SYM_LCURLY command* SYM_RCURLY
+classStatement ::= KW_CLASS identifier [SYM_COLON identifier] SYM_LCURLY statementWithSemi* SYM_RCURLY
 {
     pin(".*")=1
     extends=externalClassStatement
-    mixin="com.flipperplz.enfusionWorkbench.languages.param.psi.mixin.ParamClassStatementMixin"
-    implements="com.flipperplz.bisutils.param.statement.RapClass"
+    mixin="com.flipperplz.enfusionWorkbench.languages.param.psi.mixin.ParamGClassStatementMixin"
+    implements="com.flipperplz.bisutils.param.statement.ParamClass"
 }
 
 externalClassStatement ::= KW_CLASS identifier
 {
     pin(".*")=1
     extends=statement
-    mixin="com.flipperplz.enfusionWorkbench.languages.param.psi.mixin.ParamExternalClassStatementMixin"
-    implements="com.flipperplz.bisutils.param.statement.RapExternalClass"
+    mixin="com.flipperplz.enfusionWorkbench.languages.param.psi.mixin.ParamGExternalClassStatementMixin"
+    implements="com.flipperplz.bisutils.param.statement.ParamExternalClass"
 }
 
 deleteStatement ::= KW_DELETE identifier
 {
     pin=1
     extends=statement
-    mixin="com.flipperplz.enfusionWorkbench.languages.param.psi.mixin.ParamDeleteStatementMixin"
-    implements="com.flipperplz.bisutils.param.statement.RapDeleteStatement"
+    mixin="com.flipperplz.enfusionWorkbench.languages.param.psi.mixin.ParamGDeleteStatementMixin"
+    implements="com.flipperplz.bisutils.param.statement.ParamDeleteStatement"
 }
 
 parameterStatement ::= identifier ((arraySquare arrayOperator arrayLiteral) | (normalOperator literal))
 {
     pin(".*")=1
     extends=statement
-    implements="com.flipperplz.bisutils.param.statement.RapVariableStatement"
+    implements="com.flipperplz.bisutils.param.statement.ParamVariableStatement"
 }
 
-preprocessorStatement ::= defineDirective | undefineDirective | pureDirective
+literal ::= numericLiteral | stringLiteral
 {
-    extends=command
-    implements=command
-}
-
-defineDirective ::=  DIRECTIVE_START KW_DEFINE macroSignature DEFINE_VALUE
-{
-    pin=2
-    extends=preprocessorStatement
-}
-
-literal ::= (
-    numericLiteral |
-    pureDirective |
-    parameterReference |
-    stringLiteral
-)
-{
-    implements="com.flipperplz.bisutils.param.node.RapLiteralBase"
-}
-
-undefineDirective ::= DIRECTIVE_START KW_UNDEFINE identifier
-{
-    pin=2
-    extends=preprocessorStatement
-}
-
-
-pureDirective ::= includeDirective | customMacro
-{
-    extends=literal
-}
-
-customMacro ::=  macroName [SYM_LPARENTHESIS macroArgument (SYM_COMMA macroArgument)* SYM_RPARENTHESIS]
-{
-    pin(".*")=1
-    extends=pureDirective
-    mixin="com.flipperplz.enfusionWorkbench.languages.param.psi.mixin.ParamCustomMacroMixin"
-    implements="com.flipperplz.bisutils.param.directive.RapMacro"
-}
-
-macroArgument ::= SYM_LPARENTHESIS macroArgument SYM_RPARENTHESIS | customMacro | (!(SYM_COMMA | SYM))+
-{
-    pin(".*")=1
-}
-
-external macroName ::= parseMacroName
-{
-    extends=identifier
+    implements="com.flipperplz.bisutils.param.node.ParamLiteralBase"
 }
 
 numericLiteral ::= ABS_NUMERIC
 {
     extends=literal
-    implements="com.flipperplz.bisutils.param.literal.RapNumerical"
-    mixin="com.flipperplz.enfusionWorkbench.languages.param.psi.mixin.ParamNumericLiteralMixin"
+    implements="com.flipperplz.bisutils.param.node.ParamNumerical"
+}
+
+stringLiteral ::= (SYM_DQUOTE (quoteEscape | !SYM_DQUOTE)* SYM_DQUOTE) |
+                  (!(SYM_RCURLY | SYM_SEMI | EOL | EOF ))*
+{
+    pin(".*")=1
+    extends=literal
+    implements="com.flipperplz.bisutils.param.literal.ParamString"
 }
 
 identifier ::= ABS_IDENTIFIER
 {
-    mixin="com.flipperplz.enfusionWorkbench.languages.param.psi.mixin.ParamIdentifierMixin"
     implements="com.intellij.psi.PsiNamedElement"
-}
-
-includeDirective ::= DIRECTIVE_START KW_INCLUDE (stringLiteral | includeString)
-{
-    pin=2
-    extends=pureDirective
-    mixin="com.flipperplz.enfusionWorkbench.languages.param.psi.mixin.ParamIncludeDirectiveMixin"
-}
-
-stringContent ::= (STRING_CONTENTS | LOCALIZED_STRING | STRING_ESCAPE)+ ;
-parameterReference ::= REFERENCE_MODE stringLiteral
-{
-    pin=1
-    extends=literal
-    mixin="com.flipperplz.enfusionWorkbench.languages.param.psi.mixin.ParamParameterReferenceMixin"
-    implements="com.flipperplz.bisutils.param.literal.RapReference"
-}
-
-
-stringLiteral ::= doubleString | singleString | unquotedString
-{
-    extends=literal
-    implements="com.flipperplz.bisutils.param.literal.RapString"
 }
 
 arrayElement ::= arrayLiteral | literal
 {
-    mixin="com.flipperplz.enfusionWorkbench.languages.param.psi.mixin.ParamArrayElementMixin"
-    implements=literal
+    extends=literal
 }
 
 arrayLiteral ::= SYM_LCURLY (arrayElement (SYM_COMMA arrayElement)*)? SYM_RCURLY
 {
     pin(".*")=1
-    extends=literal
-    mixin="com.flipperplz.enfusionWorkbench.languages.param.psi.mixin.ParamArrayLiteralMixin"
-    implements="com.flipperplz.bisutils.param.literal.RapArray"
+    extends=arrayElement
+    mixin="com.flipperplz.enfusionWorkbench.languages.param.psi.mixin.ParamGArrayLiteralMixin"
+    implements="com.flipperplz.bisutils.param.literal.ParamArray"
 }
 
-private unquotedString ::= stringContent
-{
-    extends=stringLiteral
-}
-
-private doubleString ::= SYM_DQUOTE stringContent SYM_DQUOTE
-{
-    pin=1
-    extends=stringLiteral
-}
-
-private singleString ::= SYM_SQUOTE stringContent SYM_SQUOTE
-{
-    pin=1
-    extends=stringLiteral
-}
-
-includeString ::= SYM_LANGLE stringContent SYM_RANGLE
-{
-    pin=1
-    extends=stringLiteral
-}
-
-enumDeclaration ::= KW_ENUM SYM_LCURLY (enumValue ((SYM_COMMA | EOL | SYM_SEMI) enumValue)*) SYM_RCURLY SYM_SEMI {pin(".*")=1}
-
-enumValue ::= identifier [OP_ASSIGN numericLiteral]
+enumDeclaration ::= KW_ENUM SYM_LCURLY (enumValue ((SYM_COMMA | EOL | SYM_SEMI) enumValue)*) SYM_RCURLY SYM_SEMI
 {
     pin(".*")=1
+    extends=statement
+    mixin="com.flipperplz.enfusionWorkbench.languages.param.psi.mixin.ParamGEnumDeclarationMixin"
+    implements="com.flipperplz.bisutils.param.statement.ParamEnum"
 }
-//customMacro ::= identifier [SYM_LPARENTHESIS macroArgument (SYM_COMMA macroArgument)* SYM_RPARENTHESIS] {pin(".*")=1}
 
-macroSignature ::= identifier [SYM_LPARENTHESIS identifier (SYM_COMMA identifier)* SYM_RPARENTHESIS]
+enumValue ::= identifier [OP_ASSIGN numericLiteral]
 {
     pin(".*")=1
 }
 
 private normalOperator ::= OP_ASSIGN
 private arrayOperator ::= normalOperator | OP_ADDASSIGN | OP_SUBASSIGN
+
+private quoteEscape ::= SYM_DQUOTE SYM_DQUOTE
+{
+    pin=1
+}
+
 private arraySquare ::= SYM_LSQUARE SYM_RSQUARE
 {
     pin=1
