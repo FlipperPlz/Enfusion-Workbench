@@ -51,7 +51,8 @@ statement ::= deleteStatement        |
               parameterStatement |
               enumDeclaration
 {
-    implements="com.flipperplz.bisutils.param.node.ParamStatement"
+    mixin="com.flipperplz.enfusionWorkbench.languages.param.psi.ParamGStatementMixin"
+    implements="com.flipperplz.enfusionWorkbench.languages.param.psi.ParamGStatementExt"
 }
 
 classStatement ::= KW_CLASS identifier [SYM_COLON identifier] SYM_LCURLY statementWithSemi* SYM_RCURLY
@@ -88,7 +89,7 @@ parameterStatement ::= identifier ((arraySquare arrayOperator arrayLiteral) | (n
 
 literal ::= numericLiteral | stringLiteral
 {
-    implements="com.flipperplz.bisutils.param.node.ParamLiteralBase"
+    implements="com.flipperplz.enfusionWorkbench.languages.param.psi.ParamGLiteralExt"
 }
 
 numericLiteral ::= ABS_NUMERIC

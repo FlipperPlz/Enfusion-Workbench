@@ -1,6 +1,5 @@
 package com.flipperplz.enfusionWorkbench.languages.param.parser
 
-import com.flipperplz.enfusionWorkbench.languages.param.psi.ParamIdentifier
 import com.flipperplz.enfusionWorkbench.languages.param.psi.ParamTypes
 import com.intellij.lang.PsiBuilder
 import com.intellij.psi.PsiElement
@@ -22,13 +21,6 @@ object ParamParserUtil : GeneratedParserUtilBase() {
         exit_section_(builder, marker, ParamTypes.IDENTIFIER, result)
         return result
     }
-
-    @JvmStatic
-    fun setName(identifier: ParamIdentifier, name: String): PsiElement = TODO("Not yet implemented")
-
-    @JvmStatic
-    fun getName(identifier: ParamIdentifier): String? = identifier.text
-
 
     private fun macroExists(tokenText: String): Boolean = when(tokenText) {
         "__LINE__" -> true
