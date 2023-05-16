@@ -7,17 +7,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95a600cf-338e-4de1-9f0f-d35cc7c98090" name="Changes" comment="feat(param): Start Transition To new BisUtils::ParamSlim">
-      <change afterPath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/mixin/ParamGEnumValueMixin.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/mixin/ParamGIdentifierMixin.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/mixin/ParamGNumericLiteralMixin.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/mixin/ParamGParameterStatementImpl.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/mixin/ParamGStringLiteralMixin.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+    <list default="true" id="95a600cf-338e-4de1-9f0f-d35cc7c98090" name="Changes" comment="feat(param): Add Remaining Mixins">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lang/param/src/main/grammars/Param.bnf" beforeDir="false" afterPath="$PROJECT_DIR$/lang/param/src/main/grammars/Param.bnf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/ParamPsiFile.kt" beforeDir="false" afterPath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/ParamPsiFile.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/impl/ParamPsiFileImpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/impl/ParamPsiFileImpl.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/mixin/ParamGArrayLiteralMixin.kt" beforeDir="false" afterPath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/mixin/ParamGArrayLiteralMixin.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/mixin/ParamGClassStatementMixin.kt" beforeDir="false" afterPath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/mixin/ParamGClassStatementMixin.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/mixin/ParamGDeleteStatementMixin.kt" beforeDir="false" afterPath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/mixin/ParamGDeleteStatementMixin.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/mixin/ParamGEnumValueMixin.kt" beforeDir="false" afterPath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/mixin/ParamGEnumValueMixin.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/mixin/ParamGExternalClassStatementMixin.kt" beforeDir="false" afterPath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/mixin/ParamGExternalClassStatementMixin.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/mixin/ParamGIdentifierMixin.kt" beforeDir="false" afterPath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/mixin/ParamGIdentifierMixin.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/mixin/ParamGNumericLiteralMixin.kt" beforeDir="false" afterPath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/mixin/ParamGNumericLiteralMixin.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/mixin/ParamGParameterStatementImpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/lang/param/src/main/kotlin/com/flipperplz/enfusionWorkbench/languages/param/psi/mixin/ParamGParameterStatementImpl.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -381,14 +380,7 @@
       <workItem from="1683899852919" duration="2734000" />
       <workItem from="1684152733158" duration="8000" />
       <workItem from="1684176189507" duration="3684000" />
-      <workItem from="1684185062873" duration="3222000" />
-    </task>
-    <task id="LOCAL-00008" summary="feat(pbo): Finish Up BisPboEntry Implementations">
-      <created>1681853550131</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1681853550131</updated>
+      <workItem from="1684185062873" duration="5529000" />
     </task>
     <task id="LOCAL-00009" summary="fix(pbo): Rename Method getMetadataLength to retrieveMetadataLength">
       <created>1681854066751</created>
@@ -726,7 +718,14 @@
       <option name="project" value="LOCAL" />
       <updated>1684179923778</updated>
     </task>
-    <option name="localTasksCounter" value="57" />
+    <task id="LOCAL-00057" summary="feat(param): Add Remaining Mixins">
+      <created>1684189403167</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1684189403167</updated>
+    </task>
+    <option name="localTasksCounter" value="58" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -755,7 +754,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="refactor: Initial Rewrite Commit" />
     <MESSAGE value="feat: Add ParamFileType and slim param grammar&#10;&#10;-fix: jvmToolchain(11) cannot be enabled in tasks.kotlin" />
     <MESSAGE value="feat: Add ElementTokenType.&#10;&#10;Commit would have been bigger but I think it's time I head to sleep for the night. Looking forward to bringing this branch up to speed tomorrow" />
     <MESSAGE value="feat(param): Add ParserDefinitions" />
@@ -780,7 +778,8 @@
     <MESSAGE value="feat(param): Add Param Mixins" />
     <MESSAGE value="feat(param): Fix Class Mixins" />
     <MESSAGE value="feat(param): Start Transition To new BisUtils::ParamSlim" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat(param): Start Transition To new BisUtils::ParamSlim" />
+    <MESSAGE value="feat(param): Add Remaining Mixins" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(param): Add Remaining Mixins" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

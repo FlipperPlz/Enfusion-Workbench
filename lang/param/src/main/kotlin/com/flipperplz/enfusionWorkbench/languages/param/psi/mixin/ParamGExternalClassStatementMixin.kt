@@ -9,7 +9,6 @@ import com.intellij.lang.ASTNode
 import com.intellij.psi.util.parentOfType
 
 abstract class ParamGExternalClassStatementMixin(node: ASTNode) : ParamGStatementImpl(node), ParamGExternalClassStatement {
-
     override val slimName: String?
         get() = identifier?.name
 }
